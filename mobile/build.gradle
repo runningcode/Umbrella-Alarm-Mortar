@@ -1,0 +1,67 @@
+apply plugin: 'android-sdk-manager'
+apply plugin: 'com.android.application'
+apply plugin: 'crashlytics'
+apply plugin: 'hugo'
+
+def gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone("UTC"))
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "com.osacky.umbrella"
+        minSdkVersion 10
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField "String", "GIT_SHA", "\"${gitSha}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE.txt'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    wearApp project(':wear')
+    compile 'com.android.support:support-v4:20.0.0'
+    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.android.support:support-annotations:20.0.0'
+    compile 'com.crashlytics.android:crashlytics:1.+'
+    compile 'com.netflix.rxjava:rxjava-core:0.20.4'
+    compile 'com.netflix.rxjava:rxjava-android:0.20.4'
+    compile 'com.jakewharton:butterknife:5.1.2'
+    compile 'com.jakewharton.timber:timber:2.4.1'
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    compile 'com.squareup.picasso:picasso:2.3.4'
+    compile 'com.squareup.flow:flow:0.7'
+    compile 'com.squareup.retrofit:retrofit:1.6.1'
+    compile 'com.squareup.mortar:mortar:0.16'
+    compile 'com.squareup.dagger:dagger:1.2.2'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+    compile 'joda-time:joda-time:2.3'
+    compile 'com.google.android.gms:play-services:5.2.08'
+
+    debugCompile 'com.android.support:gridlayout-v7:20.0.0'
+    debugCompile 'com.squareup.retrofit:retrofit-mock:1.6.1'
+    debugCompile('com.jakewharton.espresso:espresso:1.1-r3') {
+        exclude group: 'com.squareup.dagger'
+    }
+}
