@@ -1,10 +1,12 @@
 package com.osacky.umbrella.data;
 
+import android.app.AlarmManager;
 import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationManagerCompat;
 
 import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.data.api.ApiModule;
@@ -24,7 +26,9 @@ import dagger.Module;
 import dagger.Provides;
 import timber.log.Timber;
 
+import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.LOCATION_SERVICE;
+import static android.location.LocationManager.NETWORK_PROVIDER;
 
 @Module(
         includes = ApiModule.class,
@@ -64,9 +68,19 @@ public class DataModule {
         return (LocationManager) application.getSystemService(LOCATION_SERVICE);
     }
 
+    @Provides @Singleton
+    NotificationManagerCompat provideNotificationManager(UmbrellaApplication application) {
+        return NotificationManagerCompat.from(application);
+    }
+
+    @Provides @Singleton
+    AlarmManager provideAlarmManager(UmbrellaApplication application) {
+        return (AlarmManager) application.getSystemService(ALARM_SERVICE);
+    }
+
     @Provides
     Location provideLocation(LocationManager locationManager) {
-        return locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        return locationManager.getLastKnownLocation(NETWORK_PROVIDER);
     }
 
     static OkHttpClient createOkHttpClient(UmbrellaApplication app) {

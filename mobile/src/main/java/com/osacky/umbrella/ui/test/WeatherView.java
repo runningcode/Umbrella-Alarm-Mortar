@@ -14,7 +14,9 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import mortar.Mortar;
+import retrofit.RetrofitError;
 import rx.Observer;
+import rx.RetrofitObserver;
 import rx.Subscription;
 import timber.log.Timber;
 
@@ -41,15 +43,20 @@ public class WeatherView extends LinearLayout {
                 mPresenter.onTimeChanged(hourOfDay, minute);
             }
         });
+        mPresenter.getSubscription(new RetrofitObserver<WeatherForecastResult>() {
+            @Override public void onRetrofitError(RetrofitError e) {
+
+            }
+
+            @Override public void onNext(WeatherForecastResult weatherForecastResult) {
+                mWeatherText.setText(weatherForecastResult.getList().get(0).getWeather().getDescription());
+            }
+        });
         mPresenter.takeView(this);
     }
 
     @Override protected void onDetachedFromWindow() {
         mPresenter.dropView(this);
         super.onDetachedFromWindow();
-    }
-
-    public void onWeatherForecast(WeatherForecastResult weatherForecastResult) {
-        mWeatherText.setText(weatherForecastResult.getList().get(0).getWeather().getDescription());
     }
 }
