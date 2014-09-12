@@ -1,6 +1,5 @@
 package com.osacky.umbrella.actionbar;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
@@ -8,13 +7,16 @@ import android.support.annotation.MenuRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
+import com.osacky.umbrella.mortar.HasScope;
+
 import mortar.Mortar;
 import mortar.MortarScope;
 import mortar.Presenter;
 import rx.functions.Action0;
 
 public class ActionBarOwner extends Presenter<ActionBarOwner.View> {
-    public interface View {
+
+    public interface View extends HasScope {
         void setShowHomeEnabled(boolean enabled);
 
         void setUpButtonEnabled(boolean enabled);
@@ -28,8 +30,6 @@ public class ActionBarOwner extends Presenter<ActionBarOwner.View> {
         void setColor(@ColorRes int color);
 
         void setClipping(boolean clip);
-
-        Context getMortarContext();
     }
 
     public static class MenuAction {

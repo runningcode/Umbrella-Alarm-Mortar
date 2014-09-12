@@ -1,6 +1,11 @@
 package com.osacky.umbrella.ui.test;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.SparseArray;
@@ -20,20 +25,26 @@ import com.osacky.umbrella.data.api.model.WeatherForecastResult;
 import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
-import com.osacky.umbrella.ui.time.TimeInfo;
+import com.osacky.umbrella.mortar.ActivityPresenter;
+import com.osacky.umbrella.mortar.ActivityResultInterface;
+import com.osacky.umbrella.mortar.ActivityResultRegistrar;
+import com.osacky.umbrella.mortar.PauseAndResumeRegistrar;
+import com.osacky.umbrella.mortar.PausesAndResumes;
+import com.osacky.umbrella.util.Play;
 
 import org.joda.time.LocalTime;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import dagger.Provides;
-import flow.Flow;
 import flow.Layout;
-import mortar.PopupPresenter;
-import rx.Observer;
+import hugo.weaving.DebugLog;
+import mortar.MortarScope;
+import retrofit.RetrofitError;
+import rx.RetrofitObserver;
 import rx.Subscription;
-import rx.subjects.PublishSubject;
 import timber.log.Timber;
 
 @Layout(R.layout.view_weather)
@@ -66,80 +77,125 @@ public class WeatherScreen extends TransitionScreen {
 
     @Singleton
     public static class Presenter extends BetterViewPresenter<WeatherView>
-        implements GooglePlayServicesClient.ConnectionCallbacks,
+        implements PausesAndResumes, ActivityResultInterface,
+            GooglePlayServicesClient.ConnectionCallbacks,
             GooglePlayServicesClient.OnConnectionFailedListener {
 
-        private final Flow mFlow;
         private final CurrentWeatherManager mWeatherManager;
-        private final PopupPresenter<TimeInfo, LocalTime> mPopupPresenter;
         private final IntPreference mTimePreference;
         private final ActionBarOwner mActionBarOwner;
         private final ActionBarConfig mActionBarConfig;
         private final LocationClient mLocationClient;
+        private final PauseAndResumeRegistrar pauseAndResumeRegistrar;
+        private final ActivityResultRegistrar mResultRegistrar;
+        private final ActivityPresenter mActivityPresenter;
+        private final Provider<Location> mLocationProvider;
 
-        private PublishSubject<WeatherForecastResult> mSubject;
+        private Subscription mSubscription;
 
         @Inject
         public Presenter(
                 SparseArray<Parcelable> viewState,
-                Flow flow,
                 ActionBarOwner actionBarOwner,
                 CurrentWeatherManager weatherManager,
                 @TimePref IntPreference timePreference,
-                UmbrellaApplication app
+                UmbrellaApplication app,
+                PauseAndResumeRegistrar resumeRegistrar,
+                ActivityResultRegistrar resultRegistrar,
+                ActivityPresenter activityPresenter,
+                Provider<Location> locationProvider
         ) {
             super(viewState);
-            mFlow = flow;
             mWeatherManager = weatherManager;
             mTimePreference = timePreference;
             mActionBarOwner = actionBarOwner;
+            pauseAndResumeRegistrar = resumeRegistrar;
+            mResultRegistrar = resultRegistrar;
+            mActivityPresenter = activityPresenter;
+            mLocationProvider = locationProvider;
             mActionBarConfig = new ActionBarConfig.Builder().build();
             mLocationClient = new LocationClient(app, this, this);
-            mSubject = PublishSubject.create();
-            mPopupPresenter = new PopupPresenter<TimeInfo, LocalTime>() {
-                @Override protected void onPopupResult(LocalTime result) {
-                    Timber.d("Time set to %s", result);
-                    mTimePreference.set(result.getMillisOfDay());
-                }
-            };
+        }
+
+        @Override protected void onEnterScope(MortarScope scope) {
+            super.onEnterScope(scope);
+            pauseAndResumeRegistrar.register(scope, this);
+            mResultRegistrar.register(scope, this);
         }
 
         @Override public void onLoad(Bundle savedInstanceState) {
             super.onLoad(savedInstanceState);
-            WeatherView view = getView();
-            if (view == null) return;
-            mPopupPresenter.takeView(view.getPopup());
             mActionBarOwner.setConfig(mActionBarConfig);
-            mLocationClient.connect();
-
         }
 
-        @Override public void dropView(WeatherView view) {
-            super.dropView(view);
-            mLocationClient.disconnect();
-            mPopupPresenter.dropView(view.getPopup());
-        }
-
-        public Subscription getSubscription(Observer<WeatherForecastResult> resultObserver) {
-            return mSubject.subscribe(resultObserver);
-        }
-
-        public void onTimeClicked() {
-            mPopupPresenter.show(new TimeInfo(LocalTime.fromMillisOfDay(mTimePreference.get())));
+        @Override protected void onExitScope() {
+            mSubscription.unsubscribe();
+            super.onExitScope();
         }
 
         @Override public void onConnected(Bundle bundle) {
             Location lastLocation = mLocationClient.getLastLocation();
-            mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude())
-                    .subscribe(mSubject);
+            Timber.i("Last location is %s", lastLocation);
+            Timber.i("Not google location is %s", mLocationProvider.get());
+            mSubscription = mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude())
+                    .subscribe(new RetrofitObserver<WeatherForecastResult>() {
+                        @Override public void onNext(WeatherForecastResult weatherForecastResult) {
+                            getView().onWeatherForecast(weatherForecastResult);
+                        }
+
+                        @Override public void onRetrofitError(RetrofitError e) {
+                        }
+                    });
         }
 
         @Override public void onDisconnected() {
-
         }
 
         @Override public void onConnectionFailed(ConnectionResult connectionResult) {
+        }
 
+        @DebugLog
+        @Override public void onResume() {
+            if (Play.servicesConnected(mActivityPresenter.getActivity())) {
+                mLocationClient.connect();
+            }
+        }
+
+        @DebugLog
+        @Override public void onPause() {
+            mLocationClient.disconnect();
+        }
+
+        @Override @DebugLog
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            switch (requestCode) {
+                case Play.CONNECTION_FAILURE_RESOLUTION_REQUEST:
+                    switch (resultCode) {
+                        case Activity.RESULT_OK:
+                            mLocationClient.connect();
+                            break;
+                        case Activity.RESULT_CANCELED:
+                            ErrorDialogFragment fragment = new ErrorDialogFragment();
+                            fragment.setDialog(new AlertDialog.Builder(getView().getContext())
+                                    .setMessage(R.string.play_error_close)
+                                    .setPositiveButton(android.R.string.ok,
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    mActivityPresenter.getActivity().finish();
+                                                }
+                                            })
+                                    .setCancelable(false)
+                                    .create());
+                            fragment.show(mActivityPresenter.getActivity().getSupportFragmentManager(), "Play Error");
+                            break;
+                    }
+            }
+        }
+
+        public void onTimeChanged(int hourOfDay, int minute) {
+            mTimePreference.set(new LocalTime(hourOfDay, minute).getMillisOfDay());
         }
     }
+
 }

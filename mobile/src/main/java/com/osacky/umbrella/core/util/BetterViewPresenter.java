@@ -19,7 +19,6 @@ public class BetterViewPresenter<V extends View> extends ViewPresenter<V> {
         this.viewState = viewState;
     }
 
-
     /**
      * Try restoring view state. It will safely no-op if state has already been restored
      */
@@ -29,26 +28,6 @@ public class BetterViewPresenter<V extends View> extends ViewPresenter<V> {
         if (viewState != null && !isViewStateRestored) {
             getView().restoreHierarchyState(viewState);
         }
-    }
-
-    /**
-     * Ping the presenter from {@link android.view.View#onAttachedToWindow()} if some changes could not be done
-     * in {@link #onLoad(android.os.Bundle)}. For example, some layout fixes after android view state restoration
-     * fails.
-     */
-    public void onReload() {
-        Timber.v("onReload");
-    }
-
-    /**
-     * A 'replacement' for {@link android.app.Activity#onPause()} and {@link android.app.Activity#onResume()}.
-     * Call this method from {@link android.view.View#onVisibilityChanged(android.view.View, int)}
-     * </p>
-     * It is called when transitioning from screen to screen and when going to background/foreground. It is not
-     * called if phone goes to 'sleep' or power button is pressed.
-     */
-    public void onVisibilityChange(boolean visible) {
-        Timber.v("onVisibilityChange: %s", visible);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.osacky.umbrella.data;
 
-import android.app.Application;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
 import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.data.api.ApiModule;
-import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
 import com.squareup.okhttp.Cache;
@@ -23,6 +23,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import timber.log.Timber;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 @Module(
         includes = ApiModule.class,
@@ -55,6 +57,16 @@ public class DataModule {
     @Provides @Singleton @TimePref
     IntPreference provideDefaultTime(SharedPreferences sharedPreferences) {
         return new IntPreference(sharedPreferences, "pref_time", 32400000);
+    }
+
+    @Provides @Singleton
+    LocationManager provideLocationManager(UmbrellaApplication application) {
+        return (LocationManager) application.getSystemService(LOCATION_SERVICE);
+    }
+
+    @Provides
+    Location provideLocation(LocationManager locationManager) {
+        return locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
     }
 
     static OkHttpClient createOkHttpClient(UmbrellaApplication app) {
