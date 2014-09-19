@@ -1,6 +1,6 @@
 package com.osacky.umbrella.data.manager;
 
-import com.osacky.umbrella.data.api.model.OpenWeatherService;
+import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,7 +2,7 @@ package com.osacky.umbrella.data.manager;
 
 import android.support.annotation.NonNull;
 
-import com.osacky.umbrella.data.api.model.OpenWeatherService;
+import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 
 import java.util.concurrent.TimeUnit;
 

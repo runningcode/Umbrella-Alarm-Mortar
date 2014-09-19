@@ -24,12 +24,13 @@ import com.osacky.umbrella.BuildConfig;
 import com.osacky.umbrella.MainActivity;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.UmbrellaApplication;
-import com.osacky.umbrella.data.AnimationSpeed;
-import com.osacky.umbrella.data.ApiEndpoint;
+import com.osacky.umbrella.data.annotations.AnimationSpeed;
+import com.osacky.umbrella.data.annotations.ApiEndpoint;
 import com.osacky.umbrella.data.ApiEndpoints;
-import com.osacky.umbrella.data.NetworkProxy;
-import com.osacky.umbrella.data.PicassoDebugging;
-import com.osacky.umbrella.data.SeenDebugDrawer;
+import com.osacky.umbrella.data.annotations.NetworkProxy;
+import com.osacky.umbrella.data.annotations.PicassoDebugging;
+import com.osacky.umbrella.data.annotations.RetrofitLogLevel;
+import com.osacky.umbrella.data.annotations.SeenDebugDrawer;
 import com.osacky.umbrella.data.prefs.BooleanPreference;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.StringPreference;
@@ -82,6 +83,7 @@ public class DebugAppContainer implements AppContainer {
     private final StringPreference networkEndpoint;
     private final StringPreference networkProxy;
     private final IntPreference animationSpeed;
+    private final StringPreference mRetrofitLogLevel;
     private final BooleanPreference picassoDebugging;
     private final BooleanPreference seenDebugDrawer;
     private final RestAdapter restAdapter;
@@ -95,6 +97,7 @@ public class DebugAppContainer implements AppContainer {
                              @ApiEndpoint StringPreference networkEndpoint,
                              @NetworkProxy StringPreference networkProxy,
                              @AnimationSpeed IntPreference animationSpeed,
+                             @RetrofitLogLevel StringPreference retrofitLogLevel,
                              @PicassoDebugging BooleanPreference picassoDebugging,
                              @SeenDebugDrawer BooleanPreference seenDebugDrawer,
                              RestAdapter restAdapter,
@@ -106,6 +109,7 @@ public class DebugAppContainer implements AppContainer {
         this.mockRestAdapter = mockRestAdapter;
         this.networkProxy = networkProxy;
         this.animationSpeed = animationSpeed;
+        mRetrofitLogLevel = retrofitLogLevel;
         this.picassoDebugging = picassoDebugging;
         this.restAdapter = restAdapter;
     }
@@ -215,13 +219,13 @@ public class DebugAppContainer implements AppContainer {
                 ApiEndpoints selected = endpointAdapter.getItem(position);
                 if (selected != currentEndpoint) {
                     if (selected == ApiEndpoints.CUSTOM) {
-                        Timber.d("Custom network endpoint selected. Prompting for URL.");
+                        Timber.v("Custom network endpoint selected. Prompting for URL.");
                         showCustomEndpointDialog(currentEndpoint.ordinal(), "http://");
                     } else {
                         setEndpointAndRelaunch(selected.url);
                     }
                 } else {
-                    Timber.d("Ignoring re-selection of network endpoint %s", selected);
+                    Timber.v("Ignoring re-selection of network endpoint %s", selected);
                 }
             }
 
@@ -240,10 +244,10 @@ public class DebugAppContainer implements AppContainer {
                                        long id) {
                 long selected = delayAdapter.getItem(position);
                 if (selected != mockRestAdapter.getDelay()) {
-                    Timber.d("Setting network delay to %sms", selected);
+                    Timber.v("Setting network delay to %sms", selected);
                     mockRestAdapter.setDelay(selected);
                 } else {
-                    Timber.d("Ignoring re-selection of network delay %sms", selected);
+                    Timber.v("Ignoring re-selection of network delay %sms", selected);
                 }
             }
 
@@ -263,10 +267,10 @@ public class DebugAppContainer implements AppContainer {
                                        long id) {
                 int selected = varianceAdapter.getItem(position);
                 if (selected != mockRestAdapter.getVariancePercentage()) {
-                    Timber.d("Setting network variance to %s%%", selected);
+                    Timber.v("Setting network variance to %s%%", selected);
                     mockRestAdapter.setVariancePercentage(selected);
                 } else {
-                    Timber.d("Ignoring re-selection of network variance %s%%", selected);
+                    Timber.v("Ignoring re-selection of network variance %s%%", selected);
                 }
             }
 
@@ -285,10 +289,10 @@ public class DebugAppContainer implements AppContainer {
                                        long id) {
                 int selected = errorAdapter.getItem(position);
                 if (selected != mockRestAdapter.getErrorPercentage()) {
-                    Timber.d("Setting network error to %s%%", selected);
+                    Timber.v("Setting network error to %s%%", selected);
                     mockRestAdapter.setErrorPercentage(selected);
                 } else {
-                    Timber.d("Ignoring re-selection of network error %s%%", selected);
+                    Timber.v("Ignoring re-selection of network error %s%%", selected);
                 }
             }
 
@@ -306,13 +310,13 @@ public class DebugAppContainer implements AppContainer {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position,
                                        long id) {
                 if (position == ProxyAdapter.NONE) {
-                    Timber.d("Clearing network proxy");
+                    Timber.v("Clearing network proxy");
                     networkProxy.delete();
                     client.setProxy(null);
                 } else if (networkProxy.isSet() && position == ProxyAdapter.PROXY) {
-                    Timber.d("Ignoring re-selection of network proxy %s", networkProxy.get());
+                    Timber.v("Ignoring re-selection of network proxy %s", networkProxy.get());
                 } else {
-                    Timber.d("New network proxy selected. Prompting for host.");
+                    Timber.v("New network proxy selected. Prompting for host.");
                     showNewNetworkProxyDialog(proxyAdapter);
                 }
             }
@@ -339,6 +343,7 @@ public class DebugAppContainer implements AppContainer {
         // We use the JSON rest adapter as the source of truth for the log level.
         final EnumAdapter<LogLevel> loggingAdapter = new EnumAdapter<>(activity, LogLevel.class);
         networkLoggingView.setAdapter(loggingAdapter);
+        restAdapter.setLogLevel(LogLevel.valueOf(mRetrofitLogLevel.get()));
         networkLoggingView.setSelection(restAdapter.getLogLevel().ordinal());
         networkLoggingView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -346,10 +351,11 @@ public class DebugAppContainer implements AppContainer {
                                        long id) {
                 LogLevel selected = loggingAdapter.getItem(position);
                 if (selected != restAdapter.getLogLevel()) {
-                    Timber.d("Setting logging level to %s", selected);
+                    Timber.v("Setting logging level to %s", selected);
                     restAdapter.setLogLevel(selected);
+                    mRetrofitLogLevel.set(selected.name());
                 } else {
-                    Timber.d("Ignoring re-selection of logging level " + selected);
+                    Timber.v("Ignoring re-selection of logging level " + selected);
                 }
             }
 
@@ -361,7 +367,7 @@ public class DebugAppContainer implements AppContainer {
 
     @OnClick(R.id.debug_network_endpoint_edit)
     void onEditEndpointClicked() {
-        Timber.d("Prompting to edit custom endpoint URL.");
+        Timber.v("Prompting to edit custom endpoint URL.");
         // Pass in the currently selected position since we are merely editing.
         showCustomEndpointDialog(endpointView.getSelectedItemPosition(), networkEndpoint.get());
     }
@@ -378,11 +384,11 @@ public class DebugAppContainer implements AppContainer {
                                        long id) {
                 int selected = speedAdapter.getItem(position);
                 if (selected != animationSpeed.get()) {
-                    Timber.d("Setting animation speed to %sx", selected);
+                    Timber.v("Setting animation speed to %sx", selected);
                     animationSpeed.set(selected);
                     applyAnimationSpeed(selected);
                 } else {
-                    Timber.d("Ignoring re-selection of animation speed %sx", selected);
+                    Timber.v("Ignoring re-selection of animation speed %sx", selected);
                 }
             }
 
@@ -405,7 +411,7 @@ public class DebugAppContainer implements AppContainer {
         uiPixelGridView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Timber.d("Setting pixel grid overlay enabled to " + isChecked);
+                Timber.v("Setting pixel grid overlay enabled to " + isChecked);
 //                pixelGridEnabled.set(isChecked);
 //        madgeFrameLayout.setOverlayEnabled(isChecked);
                 uiPixelRatioView.setEnabled(isChecked);
@@ -418,7 +424,7 @@ public class DebugAppContainer implements AppContainer {
         uiPixelRatioView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Timber.d("Setting pixel scale overlay enabled to " + isChecked);
+                Timber.v("Setting pixel scale overlay enabled to " + isChecked);
 //                pixelRatioEnabled.set(isChecked);
 //        madgeFrameLayout.setOverlayRatioEnabled(isChecked);
             }
@@ -431,7 +437,7 @@ public class DebugAppContainer implements AppContainer {
         uiScalpelView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Timber.d("Setting scalpel interaction enabled to " + isChecked);
+                Timber.v("Setting scalpel interaction enabled to " + isChecked);
 //                scalpelEnabled.set(isChecked);
 //        scalpelFrameLayout.setLayerInteractionEnabled(isChecked);
                 uiScalpelWireframeView.setEnabled(isChecked);
@@ -445,7 +451,7 @@ public class DebugAppContainer implements AppContainer {
                 .OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Timber.d("Setting scalpel wireframe enabled to " + isChecked);
+                Timber.v("Setting scalpel wireframe enabled to " + isChecked);
 //                scalpelWireframeEnabled.set(isChecked);
 //        scalpelFrameLayout.setDrawViews(!isChecked);
             }
@@ -482,14 +488,14 @@ public class DebugAppContainer implements AppContainer {
 
     private void setupPicassoSection() {
         boolean picassoDebuggingValue = picassoDebugging.get();
-        picasso.setDebugging(picassoDebuggingValue);
+        picasso.setIndicatorsEnabled(picassoDebuggingValue);
         picassoIndicatorView.setChecked(picassoDebuggingValue);
         picassoIndicatorView.setOnCheckedChangeListener(new CompoundButton
                 .OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-                Timber.d("Setting Picasso debugging to " + isChecked);
-                picasso.setDebugging(isChecked);
+                Timber.v("Setting Picasso debugging to " + isChecked);
+                picasso.setIndicatorsEnabled(isChecked);
                 picassoDebugging.set(isChecked);
             }
         });
@@ -556,7 +562,7 @@ public class DebugAppContainer implements AppContainer {
     private void showNewNetworkProxyDialog(final ProxyAdapter proxyAdapter) {
         final int originalSelection = networkProxy.isSet() ? ProxyAdapter.PROXY : ProxyAdapter.NONE;
 
-        View view = LayoutInflater.from(app).inflate(R.layout.debug_drawer_network_proxy, null);
+        View view = LayoutInflater.from(app).inflate(R.layout.debug_drawer_network_proxy, drawerLayout, false);
         final EditText host = findById(view, R.id.debug_drawer_network_proxy_host);
 
         new AlertDialog.Builder(activity) //
@@ -600,7 +606,7 @@ public class DebugAppContainer implements AppContainer {
     }
 
     private void showCustomEndpointDialog(final int originalSelection, String defaultUrl) {
-        View view = LayoutInflater.from(app).inflate(R.layout.debug_drawer_network_endpoint, null);
+        View view = LayoutInflater.from(app).inflate(R.layout.debug_drawer_network_endpoint, drawerLayout, false);
         final EditText url = findById(view, R.id.debug_drawer_network_endpoint_url);
         url.setText(defaultUrl);
         url.setSelection(url.length());
@@ -636,7 +642,7 @@ public class DebugAppContainer implements AppContainer {
     }
 
     private void setEndpointAndRelaunch(String endpoint) {
-        Timber.d("Setting network endpoint to %s", endpoint);
+        Timber.v("Setting network endpoint to %s", endpoint);
         networkEndpoint.set(endpoint);
 
         Intent newApp = new Intent(app, MainActivity.class);

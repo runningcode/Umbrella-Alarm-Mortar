@@ -8,14 +8,13 @@ import retrofit.RequestInterceptor;
 @Singleton
 public final class ApiHeaders implements RequestInterceptor {
 
-  private final String authorizationValue;
+    private final String authorizationValue;
 
-  @Inject
-  public ApiHeaders(@ApiKey String clientId) {
-    authorizationValue = clientId;
-  }
+    @Inject public ApiHeaders(@ApiKey String clientId) {
+        authorizationValue = clientId;
+    }
 
-  @Override public void intercept(RequestFacade request) {
-    request.addHeader("x-api-key", authorizationValue);
-  }
+    @Override public void intercept(RequestFacade request) {
+        request.addHeader("x-api-key", authorizationValue);
+    }
 }

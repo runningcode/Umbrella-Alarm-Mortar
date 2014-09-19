@@ -56,4 +56,8 @@ public class UmbrellaApplication extends Application {
     public static UmbrellaApplication get(Context context) {
         return (UmbrellaApplication) context.getApplicationContext();
     }
+
+    public ObjectGraph getObjectGraph() {
+        return applicationScope.getObjectGraph();
+    }
 }

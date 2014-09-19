@@ -1,9 +1,7 @@
 package com.osacky.umbrella.data.api;
 
-import android.support.v4.util.LruCache;
-
-import com.osacky.umbrella.data.api.model.OpenWeatherService;
 import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
+import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
@@ -45,8 +43,7 @@ public class ApiModule {
                 .build();
     }
 
-    @Provides @Singleton
-    OpenWeatherService provideWeatherService(RestAdapter restAdapter) {
+    @Provides @Singleton OpenWeatherService provideWeatherService(RestAdapter restAdapter) {
         return restAdapter.create(OpenWeatherService.class);
     }
 

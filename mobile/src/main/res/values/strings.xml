@@ -2,10 +2,59 @@
 <resources>
 
     <string name="app_name">Umbrella Alarm</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+
     <string name="set_time_text">Set time</string>
-    <string name="play_error_close">An error ocurred with Google Play Services and the app will now close.</string>
+    <string name="play_error_close">An error occurred with Google Play Services and the app will now close.</string>
+
     <string name="umbrella_pick_time_text">Pick a time to check if you will need an umbrella</string>
 
+    <!-- Errors -->
+    <string name="error_null_location">Error: Could not determine location</string>
+    <string name="error_network">No internet connection is available.</string>
+    <string name="error_non_network">An error occurred.</string>
+    <string name="error">Error</string>
+
+    <string name="notif_title">Umbrella Warning</string>
+
+    <string name="single_rain">There might be %1$s today from %2$s to %3$s</string>
+    <string name="multiple_rain">You might need an umbrella today:\n</string>
+    <string name="multiple_rain_item">%1$s from %2$s to %3$s\n</string>
+
+    <!--thunderstorm condition codes-->
+    <string name="cond_200_thunderstorm_light_rain">thunderstorm with light rain</string>
+    <string name="cond_201_thunderstorm_rain">thunderstorm with rain</string>
+    <string name="cond_202_thunderstorm_heavy_rain">thunderstorm with heavy rain</string>
+    <string name="cond_210_thunderstorm_light">light thunderstorm</string>
+    <string name="cond_211_thunderstorm">thunderstorm</string>
+    <string name="cond_212_thunderstorm_heavy">heavy thunderstorm</string>
+    <string name="cond_221_thunderstorm_ragged">ragged thunderstorm</string>
+    <string name="cond_230_thunderstorm_light_drizzle">thunderstorm with light drizzle</string>
+    <string name="cond_231_thunderstorm_drizzle">thunderstorm with drizzle</string>
+    <string name="cond_232_thunderstorm_heavy_drizzle">thunderstorm with heavy drizzle</string>
+
+    <!--drizzle condition codes-->
+    <string name="cond_300_drizzle_light">light drizzle</string>
+    <string name="cond_301_drizzle">drizzle</string>
+    <string name="cond_302_drizzle_heavy">heavy drizzle</string>
+    <string name="cond_310_drizzle_rain_light">light drizzle rain</string>
+    <string name="cond_311_drizzle_rain">drizzle rain</string>
+    <string name="cond_312_drizzle_rain_heavy">heavy drizzle rain</string>
+    <string name="cond_313_drizzle_shower_rain">shower rain and drizzle</string>
+    <string name="cond_314_drizzle_shower_rain_heavy">heavy shower rain and drizzle</string>
+    <string name="cond_321_drizzle_shower">shower drizzle</string>
+
+    <!--rain condition codes-->
+    <string name="cond_500_light_rain">light rain</string>
+    <string name="cond_501_moderate_rain">moderate rain</string>
+    <string name="cond_502_heavy_rain">heavy rain</string>
+    <string name="cond_503_rain_very_heavy">very heavy rain</string>
+    <string name="cond_504_extreme_rain">extreme rain</string>
+    <string name="cond_511_freezing_rain">freezing rain</string>
+    <string name="cond_520_light_showers">light showers</string>
+    <string name="cond_521_showers">showers</string>
+    <string name="cond_522_heavy">heavy showers</string>
+    <string name="cond_531_heavy">ragged shower rain</string>
+
+    <!--about section-->
+    <string name="icon_attribution">Rain designed by Eric Bird from the Noun Project</string>
 </resources>

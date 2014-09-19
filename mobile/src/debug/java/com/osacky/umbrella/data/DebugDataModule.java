@@ -1,9 +1,15 @@
 package com.osacky.umbrella.data;
 
-import android.app.Application;
 import android.content.SharedPreferences;
 
 import com.osacky.umbrella.UmbrellaApplication;
+import com.osacky.umbrella.data.annotations.AnimationSpeed;
+import com.osacky.umbrella.data.annotations.ApiEndpoint;
+import com.osacky.umbrella.data.annotations.IsMockMode;
+import com.osacky.umbrella.data.annotations.NetworkProxy;
+import com.osacky.umbrella.data.annotations.PicassoDebugging;
+import com.osacky.umbrella.data.annotations.RetrofitLogLevel;
+import com.osacky.umbrella.data.annotations.SeenDebugDrawer;
 import com.osacky.umbrella.data.api.DebugApiModule;
 import com.osacky.umbrella.data.prefs.BooleanPreference;
 import com.osacky.umbrella.data.prefs.IntPreference;
@@ -25,6 +31,7 @@ import javax.net.ssl.X509TrustManager;
 import dagger.Module;
 import dagger.Provides;
 import retrofit.MockRestAdapter;
+import retrofit.RestAdapter;
 
 @Module(
         includes = DebugApiModule.class,
@@ -36,6 +43,7 @@ import retrofit.MockRestAdapter;
         }
 )
 public final class DebugDataModule {
+    private static final String DEFAULT_LOG_LEVEL = RestAdapter.LogLevel.NONE.name();
     private static final int DEFAULT_ANIMATION_SPEED = 1; // 1x (normal) speed.
     private static final boolean DEFAULT_PICASSO_DEBUGGING = false; // Debug indicators displayed
     private static final boolean DEFAULT_SEEN_DEBUG_DRAWER = false; // Show debug drawer first time.
@@ -64,6 +72,11 @@ public final class DebugDataModule {
     @Provides @Singleton @AnimationSpeed IntPreference provideAnimationSpeed(
             SharedPreferences preferences) {
         return new IntPreference(preferences, "debug_animation_speed", DEFAULT_ANIMATION_SPEED);
+    }
+
+    @Provides @Singleton @RetrofitLogLevel StringPreference provideRetrofitLogLevel(
+            SharedPreferences preferences) {
+        return new StringPreference(preferences, "debug_retrofit_log_level", DEFAULT_LOG_LEVEL);
     }
 
     @Provides @Singleton @PicassoDebugging BooleanPreference providePicassoDebugging(

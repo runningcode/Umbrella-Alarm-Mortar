@@ -2,7 +2,6 @@ package com.osacky.umbrella.data.api.weather;
 
 import android.support.annotation.NonNull;
 
-import com.osacky.umbrella.data.api.model.OpenWeatherService;
 import com.osacky.umbrella.data.api.model.WeatherForecastResult;
 import com.osacky.umbrella.data.manager.DataManager;
 
@@ -16,7 +15,7 @@ public class CurrentWeatherManager extends DataManager<WeatherForecastResult, Do
 
     @NonNull @Override
     protected Observable<WeatherForecastResult> fetchFromResponseCache(Double key, Double... floats) {
-        return Observable.empty();
+        return getApi().getWeatherForecastFromCache(key, floats[0]);
     }
 
     @NonNull @Override

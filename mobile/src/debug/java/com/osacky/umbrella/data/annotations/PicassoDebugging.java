@@ -1,4 +1,4 @@
-package com.osacky.umbrella.data;
+package com.osacky.umbrella.data.annotations;
 
 import java.lang.annotation.Retention;
 

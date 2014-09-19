@@ -8,6 +8,7 @@ import android.util.SparseArray;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.actionbar.ActionBarConfig;
 import com.osacky.umbrella.actionbar.ActionBarOwner;
+import com.osacky.umbrella.alarm.AlarmHelper;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.anim.Transition;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
@@ -67,6 +68,7 @@ public class WeatherScreen extends TransitionScreen {
         private final ActionBarConfig mActionBarConfig;
         private final Provider<Location> mLocationProvider;
         private final Observable<WeatherForecastResult> mObservable;
+        private final AlarmHelper mAlarmHelper;
 
         @Inject
         public Presenter(
@@ -74,13 +76,16 @@ public class WeatherScreen extends TransitionScreen {
                 ActionBarOwner actionBarOwner,
                 CurrentWeatherManager weatherManager,
                 @TimePref IntPreference timePreference,
-                Provider<Location> locationProvider
+                Provider<Location> locationProvider,
+                AlarmHelper alarmHelper
+
         ) {
             super(viewState);
             mWeatherManager = weatherManager;
             mTimePreference = timePreference;
             mActionBarOwner = actionBarOwner;
             mLocationProvider = locationProvider;
+            mAlarmHelper = alarmHelper;
             mActionBarConfig = new ActionBarConfig.Builder().build();
             Location lastLocation = mLocationProvider.get();
             Timber.i("Last known location is %s", lastLocation);
@@ -92,8 +97,13 @@ public class WeatherScreen extends TransitionScreen {
             mActionBarOwner.setConfig(mActionBarConfig);
         }
 
-        public void onTimeChanged(int hourOfDay, int minute) {
+        void onTimeChanged(int hourOfDay, int minute) {
             mTimePreference.set(new LocalTime(hourOfDay, minute).getMillisOfDay());
+            mAlarmHelper.setAlarm();
+        }
+
+        LocalTime getDefaultTime() {
+            return LocalTime.fromMillisOfDay(mTimePreference.get());
         }
 
         Subscription getSubscription(Observer<WeatherForecastResult> observer) {

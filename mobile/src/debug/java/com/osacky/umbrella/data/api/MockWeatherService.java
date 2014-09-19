@@ -1,8 +1,10 @@
 package com.osacky.umbrella.data.api;
 
 import com.google.gson.Gson;
-import com.osacky.umbrella.data.api.model.OpenWeatherService;
 import com.osacky.umbrella.data.api.model.WeatherForecastResult;
+import com.osacky.umbrella.data.api.weather.OpenWeatherService;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,6 +23,11 @@ public class MockWeatherService implements OpenWeatherService {
     @Override
     public Observable<WeatherForecastResult> getWeatherForecast(
             @Query("lat") double latitude, @Query("lon") double longitude) {
+        return Observable.just(mGson.fromJson(JSON_FORECAST, WeatherForecastResult.class)).delay(1, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public Observable<WeatherForecastResult> getWeatherForecastFromCache(@Query("lat") double latitude, @Query("lon") double longitude) {
         return Observable.just(mGson.fromJson(JSON_FORECAST, WeatherForecastResult.class));
     }
 

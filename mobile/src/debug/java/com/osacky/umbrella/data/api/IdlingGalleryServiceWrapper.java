@@ -1,10 +1,8 @@
 package com.osacky.umbrella.data.api;
 
-import android.app.Application;
-
 import com.google.android.apps.common.testing.ui.espresso.IdlingResource;
-import com.osacky.umbrella.data.api.model.OpenWeatherService;
 import com.osacky.umbrella.data.api.model.WeatherForecastResult;
+import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +29,7 @@ public class IdlingGalleryServiceWrapper implements OpenWeatherService, IdlingRe
 
     private final List<ResourceCallback> callbacks;
 
-    @Inject public IdlingGalleryServiceWrapper(Application app, OpenWeatherService api) {
+    @Inject public IdlingGalleryServiceWrapper(OpenWeatherService api) {
         this.api = api;
         this.callbacks = new ArrayList<>();
         this.counter = new AtomicInteger(0);
@@ -58,9 +56,17 @@ public class IdlingGalleryServiceWrapper implements OpenWeatherService, IdlingRe
     }
 
     @Override
-    public Observable<WeatherForecastResult> getWeatherForecast(@Query("lat") double latitude, @Query("lon") double longitude) {
+    public Observable<WeatherForecastResult> getWeatherForecast(
+            @Query("lat") double latitude, @Query("lon") double longitude) {
         counter.incrementAndGet();
         return api.getWeatherForecast(latitude, longitude).finallyDo(new IdlingAction());
+    }
+
+    @Override
+    public Observable<WeatherForecastResult> getWeatherForecastFromCache(
+            @Query("lat") double latitude, @Query("lon") double longitude) {
+        counter.incrementAndGet();
+        return api.getWeatherForecastFromCache(latitude, longitude).finallyDo(new IdlingAction());
     }
 
     private class IdlingAction implements Action0 {

@@ -3,7 +3,7 @@ package com.osacky.umbrella.data;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.SystemClock;
-import android.util.LruCache;
+import android.support.v4.util.LruCache;
 
 import com.squareup.picasso.Downloader;
 
@@ -23,7 +23,7 @@ public final class MockDownloader implements Downloader {
 
   /** Emulate the disk cache by storing the URLs in an LRU using its size as the value. */
   private final LruCache<String, Long> emulatedDiskCache =
-      new LruCache<String, Long>(DataModule.DISK_CACHE_SIZE) {
+      new LruCache<String, Long>(50) {
         @Override protected int sizeOf(String key, Long value) {
           return (int) Math.min(value.longValue(), Integer.MAX_VALUE);
         }

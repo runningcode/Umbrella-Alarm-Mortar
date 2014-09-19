@@ -1,11 +1,7 @@
 package com.osacky.umbrella.core;
 
-import android.app.Application;
-import android.app.Dialog;
 import android.content.Context;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.UmbrellaModule;
 import com.osacky.umbrella.actionbar.ActionBarOwner;
@@ -19,7 +15,6 @@ import dagger.Provides;
 import flow.Flow;
 import flow.Parcer;
 import mortar.Blueprint;
-import timber.log.Timber;
 
 public class CorePresenter implements Blueprint {
 
