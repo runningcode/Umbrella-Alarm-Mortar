@@ -5,6 +5,7 @@ import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 import java.util.HashMap;
 import java.util.Map;
 
+import hugo.weaving.DebugLog;
 import rx.Observable;
 
 public abstract class BaseManager<Result, ARG> {
@@ -24,14 +25,17 @@ public abstract class BaseManager<Result, ARG> {
         return mApi;
     }
 
+    @DebugLog
     protected void putInRequestCache(ARG key, Observable<Result> value) {
         mRequestCache.put(key, value);
     }
 
+    @DebugLog
     protected Observable<Result> getFromRequestCache(ARG key) {
         return mRequestCache.get(key);
     }
 
+    @DebugLog
     protected void removeFromRequestCache(ARG key) {
         mRequestCache.remove(key);
     }

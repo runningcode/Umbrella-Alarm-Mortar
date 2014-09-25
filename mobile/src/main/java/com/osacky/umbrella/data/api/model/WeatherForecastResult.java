@@ -17,6 +17,10 @@ public class WeatherForecastResult {
         return city.getName();
     }
 
+    public String getCode() {
+        return cod;
+    }
+
     @Override public String toString() {
         return "WeatherForecastResult{" +
                 "cod='" + cod + '\'' +

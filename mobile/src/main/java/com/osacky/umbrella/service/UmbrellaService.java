@@ -24,6 +24,9 @@ public class UmbrellaService extends IntentService {
     @Inject Provider<Location> mLocationProvider;
     @Inject CurrentWeatherManager mWeatherManager;
     @Inject Provider<NotificationCompat.Builder> mBuilderProvider;
+    @Inject WeatherToPeriods mWeatherToPeriods;
+    @Inject PeriodsToNotification mPeriodsToNotification;
+    @Inject ErrorToNotification mErrorToNotification;
 
     private static final int NOTIF_WEATHER_ID = 0;
     private static final int NOTIF_LOCATION_ERROR_ID = 1;
@@ -47,60 +50,34 @@ public class UmbrellaService extends IntentService {
     }
 
     @Override protected void onHandleIntent(Intent intent) {
+        mNotificationManager.cancelAll();
         Location lastLocation = mLocationProvider.get();
         if (lastLocation == null) {
-            mNotificationManager.notify(NOTIF_LOCATION_ERROR_ID, createErrorNotification
-                    (getString(R.string.error_null_location)));
+            String contentText = getString(R.string.error_null_location);
+            Notification notification = mBuilderProvider.get()
+                    .setTicker(contentText)
+                    .setContentTitle(getString(R.string.error))
+                    .setContentText(contentText)
+                    .addAction(android.R.drawable.ic_media_rew, "Retry", null)
+                    .build();
+            mNotificationManager.notify(NOTIF_LOCATION_ERROR_ID,notification);
             return;
         }
 
         mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude())
-                .map(ProcessWeather.getInstance())
-                .map(new ProcessPeriods(this))
-                .subscribe(new RetrofitObserver<CharSequence>() {
+                .map(mWeatherToPeriods)
+                .map(mPeriodsToNotification)
+                .subscribe(new RetrofitObserver<Notification>() {
                     @Override public void onRetrofitError(RetrofitError e) {
-                        mNotificationManager
-                                .notify(NOTIF_RETROFIT_ERROR_ID,
-                                        createRetrofitErrorNotification(e));
+                        Notification notification = mErrorToNotification.call(e);
+                        mNotificationManager.notify(NOTIF_RETROFIT_ERROR_ID, notification);
                     }
 
                     @Override
-                    public void onNext(CharSequence notificationText) {
-                        if (notificationText == null) return;
-                        NotificationCompat.WearableExtender wearableExtender = new NotificationCompat.WearableExtender();
-                        Notification notification = mBuilderProvider.get()
-                                .setTicker(notificationText)
-                                .setContentTitle(getString(R.string.notif_title))
-                                .setContentText(notificationText)
-                                .setSmallIcon(R.drawable.ic_stat_rain)
-                                .setStyle(
-                                        new NotificationCompat.BigTextStyle()
-                                                .bigText(notificationText)
-                                                .setSummaryText("Mountain View"))
-                                .extend(wearableExtender)
-                                .build();
+                    public void onNext(Notification notification) {
+                        if (notification == null) return;
                         mNotificationManager.notify(NOTIF_WEATHER_ID, notification);
                     }
                 });
-    }
-
-    private Notification createRetrofitErrorNotification(RetrofitError e) {
-        String contentText;
-        if (e.isNetworkError()) {
-            contentText = getString(R.string.error_network);
-        } else {
-            contentText = getString(R.string.error_non_network);
-        }
-        return createErrorNotification(contentText);
-    }
-
-    private Notification createErrorNotification(String contentText) {
-        return mBuilderProvider.get()
-                .setTicker(contentText)
-                .setContentTitle(getString(R.string.error))
-                .setContentText(contentText)
-                .addAction(android.R.drawable.ic_media_rew, "Retry", null)
-                .build();
-
     }
 }

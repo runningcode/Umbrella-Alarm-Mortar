@@ -57,4 +57,7 @@
 
     <!--about section-->
     <string name="icon_attribution">Rain designed by Eric Bird from the Noun Project</string>
+    <string name="about">About</string>
+    <string name="current_weather_conditions_header">Current weather conditions for %1$s</string>
+    <string name="ic_notif_action_retry">Retry</string>
 </resources>

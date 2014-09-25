@@ -2,12 +2,14 @@ package com.osacky.umbrella;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.MenuRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
@@ -22,14 +24,17 @@ import com.osacky.umbrella.mortar.PauseAndResumePresenter;
 import com.osacky.umbrella.ui.AppContainer;
 
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import flow.Flow;
+import hugo.weaving.DebugLog;
 import mortar.Mortar;
 import mortar.MortarActivityScope;
 import mortar.MortarScope;
+import timber.log.Timber;
 
 import static android.content.Intent.ACTION_MAIN;
 import static android.content.Intent.CATEGORY_LAUNCHER;
@@ -37,16 +42,14 @@ import static android.content.Intent.CATEGORY_LAUNCHER;
 public class MainActivity extends ActionBarActivity
         implements ActionBarOwner.View, PauseAndResumeActivity, HasActivity {
 
-    @Inject ActionBarOwner actionBarPresenter;
-    @Inject ActivityPresenter mActivityPresenter;
-    @Inject AppContainer appContainer;
-    @Inject PauseAndResumePresenter pauseNarcPresenter;
-    @Inject ActivityResultPresenter mResultPresenter;
+    @Inject protected ActionBarOwner mActionBarOwner;
+    @Inject protected ActivityPresenter mActivityPresenter;
+    @Inject protected AppContainer appContainer;
+    @Inject protected PauseAndResumePresenter pauseNarcPresenter;
+    @Inject protected ActivityResultPresenter mResultPresenter;
 
-    private ActionBarOwner.MenuAction actionBarMenuAction;
-    private MenuItem                      menuItem;
+    private @MenuRes int mScreenMenu;
     private MortarActivityScope activityScope;
-    private CoreView coreView;
     private Flow flow;
     private ActionBar mActionBar;
 
@@ -71,14 +74,14 @@ public class MainActivity extends ActionBarActivity
 
         mActionBar = getSupportActionBar();
 
-        actionBarPresenter.takeView(this);
+        mActionBarOwner.takeView(this);
         mActivityPresenter.takeView(this);
         pauseNarcPresenter.takeView(this);
         mResultPresenter.takeView(this);
         ViewGroup container = appContainer.get(this, UmbrellaApplication.get(this));
 
         getLayoutInflater().inflate(R.layout.core, container);
-        coreView = ButterKnife.findById(this, R.id.core_layout);
+        CoreView coreView = ButterKnife.findById(container, R.id.core_layout);
 
         flow = coreView.getFlow();
     }
@@ -98,8 +101,8 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (actionBarPresenter != null) {
-            actionBarPresenter.dropView(this);
+        if (mActionBarOwner != null) {
+            mActionBarOwner.dropView(this);
         }
         if (mActivityPresenter != null) {
             mActivityPresenter.dropView(this);
@@ -125,6 +128,12 @@ public class MainActivity extends ActionBarActivity
         return activityScope.getName();
     }
 
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        if (mScreenMenu > 0) {
+            getMenuInflater().inflate(mScreenMenu, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -132,7 +141,8 @@ public class MainActivity extends ActionBarActivity
             case android.R.id.home:
                 return flow.goUp();
             default:
-                return super.onOptionsItemSelected(item);
+                return mActionBarOwner.handleMenuClick(item.getItemId()) ||
+                        super.onOptionsItemSelected(item);
         }
     }
 
@@ -190,7 +200,11 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void setMenu(@MenuRes int menu) {
+    public void setMenu(@MenuRes int menuResId) {
+        if (menuResId != mScreenMenu) {
+            mScreenMenu = menuResId;
+        }
+        supportInvalidateOptionsMenu();
     }
 
     @Override
@@ -204,10 +218,12 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void setColor(@ColorRes int color) {
+        mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
     }
 
     @Override
     public void setClipping(boolean clip) {
+        // TODO
     }
 
     @Override public boolean isRunning() {

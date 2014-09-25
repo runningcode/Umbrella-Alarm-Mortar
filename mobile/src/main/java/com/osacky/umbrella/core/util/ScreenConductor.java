@@ -155,10 +155,10 @@ public class ScreenConductor<S extends Blueprint> implements CanShowScreen<S> {
      * the backstack of Flow
      */
     protected void storeViewState(View view, S screen) {
-        if (screen != null && screen instanceof TransitionScreen) {
+        if (screen != null && screen instanceof StateBlueprint) {
             SparseArray<Parcelable> state = new SparseArray<>();
             view.saveHierarchyState(state);
-            ((TransitionScreen) screen).setViewState(state);
+            ((StateBlueprint) screen).setViewState(state);
             Timber.i("Storing view state %s", state);
         }
     }

@@ -2,7 +2,7 @@ package com.osacky.umbrella;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.osacky.umbrella.core.util.ScreenParcer;
+import com.osacky.umbrella.core.util.GsonParcer;
 import com.osacky.umbrella.data.DataModule;
 import com.osacky.umbrella.ui.UIModule;
 
@@ -40,7 +40,7 @@ public class UmbrellaModule {
     }
 
     @Provides @Singleton
-    Parcer<Object> provideParcer() {
-        return new ScreenParcer<>();
+    Parcer<Object> provideParcer(Gson gson) {
+        return new GsonParcer<>(gson);
     }
 }

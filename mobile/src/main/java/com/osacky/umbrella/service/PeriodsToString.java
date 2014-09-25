@@ -1,24 +1,33 @@
 package com.osacky.umbrella.service;
 
+import android.app.Notification;
 import android.content.Context;
+import android.support.v4.app.NotificationCompat;
 
 import com.osacky.umbrella.R;
+import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.data.api.model.CondUtils;
 import com.osacky.umbrella.data.api.model.RainPeriod;
+import com.osacky.umbrella.data.api.model.RainPeriodResult;
 
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import rx.functions.Func1;
 
-public class ProcessPeriods implements Func1<List<RainPeriod>, CharSequence> {
+@Singleton
+public class PeriodsToString implements Func1<List<RainPeriod>, CharSequence> {
 
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormat.shortTime();
     private final Context mContext;
 
-    public ProcessPeriods(Context context) {
+    @Inject
+    public PeriodsToString(UmbrellaApplication context) {
         mContext = context;
     }
 

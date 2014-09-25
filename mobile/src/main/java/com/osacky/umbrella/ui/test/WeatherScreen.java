@@ -12,6 +12,7 @@ import com.osacky.umbrella.alarm.AlarmHelper;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.anim.Transition;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
+import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.api.model.WeatherForecastResult;
 import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
@@ -29,17 +30,25 @@ import flow.Layout;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.functions.Action0;
 import timber.log.Timber;
 
 @Layout(R.layout.view_weather)
 @Transition({R.animator.slide_in_right, R.animator.slide_out_left, R.animator.slide_in_left, R.animator.slide_out_right})
-public class WeatherScreen extends TransitionScreen {
+public class WeatherScreen extends TransitionScreen implements StateBlueprint {
+
+    private SparseArray<Parcelable> mViewState;
+
     @Override public String getMortarScopeName() {
         return WeatherScreen.class.getName();
     }
 
     @Override public Object getDaggerModule() {
-        return new Module(getViewState());
+        return new Module(mViewState);
+    }
+
+    @Override public void setViewState(SparseArray<Parcelable> viewState) {
+        mViewState = viewState;
     }
 
     @dagger.Module(
@@ -78,7 +87,6 @@ public class WeatherScreen extends TransitionScreen {
                 @TimePref IntPreference timePreference,
                 Provider<Location> locationProvider,
                 AlarmHelper alarmHelper
-
         ) {
             super(viewState);
             mWeatherManager = weatherManager;
@@ -86,7 +94,13 @@ public class WeatherScreen extends TransitionScreen {
             mActionBarOwner = actionBarOwner;
             mLocationProvider = locationProvider;
             mAlarmHelper = alarmHelper;
-            mActionBarConfig = new ActionBarConfig.Builder().build();
+            mActionBarConfig = new ActionBarConfig.Builder()
+                    .menu(R.menu.about, new ActionBarOwner.MenuAction(R.id.about, new Action0() {
+                        @Override public void call() {
+                            // TODO show popup
+                        }
+                    }))
+                    .build();
             Location lastLocation = mLocationProvider.get();
             Timber.i("Last known location is %s", lastLocation);
             mObservable = mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude());

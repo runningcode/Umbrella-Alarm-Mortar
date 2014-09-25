@@ -27,12 +27,9 @@ public class WeatherView extends LinearLayout {
     @Inject
     WeatherScreen.Presenter mPresenter;
 
-    @InjectView(R.id.text_current_weather)
-    TextView mWeatherText;
-    @InjectView(R.id.time_picker)
-    TimePicker mTimePicker;
-    @InjectView(R.id.weather_image)
-    ImageView mWeatherImage;
+    @InjectView(R.id.text_current_weather) TextView mWeatherText;
+    @InjectView(R.id.time_picker) TimePicker mTimePicker;
+    @InjectView(R.id.weather_image) ImageView mWeatherImage;
 
     public WeatherView(Context context, AttributeSet attrs) {
         super(context, attrs);

@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 
-import java.util.concurrent.TimeUnit;
-
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -19,7 +17,7 @@ public abstract class DataManager<T, ARG> extends BaseManager<T, ARG> {
 
     // Does this need to be thread safe?
     @SafeVarargs
-    public final Observable<T> get(final ARG key, ARG... args) {
+    public final synchronized Observable<T> get(final ARG key, ARG... args) {
         // if we are already requesting an object, return the the in-flight request
         final Observable<T> immediateReturn = getFromRequestCache(key);
         if (immediateReturn != null) {
@@ -27,10 +25,8 @@ public abstract class DataManager<T, ARG> extends BaseManager<T, ARG> {
         }
         final ConnectableObservable<T> observable = Observable.merge(
                 fetchFromResponseCache(key, args).onExceptionResumeNext(Observable.<T>empty()),
-                // TODO only retry network errors
-                fetchFromInternet(key, args)
-                        .onExceptionResumeNext(fetchFromInternet(key, args)
-                                .delaySubscription(500, TimeUnit.MILLISECONDS)))
+                // TODO retry network errors
+                fetchFromInternet(key, args))
                 .distinct()
                 .doOnTerminate(new Action0() {
                     @Override public void call() {
@@ -39,8 +35,8 @@ public abstract class DataManager<T, ARG> extends BaseManager<T, ARG> {
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .replay(1);
-        observable.connect();
         putInRequestCache(key, observable);
+        observable.connect();
         return observable;
     }
 
