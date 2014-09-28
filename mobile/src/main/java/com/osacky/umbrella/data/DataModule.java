@@ -2,6 +2,7 @@ package com.osacky.umbrella.data;
 
 import android.app.AlarmManager;
 import android.content.SharedPreferences;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -17,8 +18,6 @@ import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
-
-import org.joda.time.DateTimeConstants;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,6 +82,11 @@ public class DataModule {
     @Provides
     Location provideLocation(LocationManager locationManager) {
         return locationManager.getLastKnownLocation(NETWORK_PROVIDER);
+    }
+
+    @Provides
+    Geocoder provideGeocoder(UmbrellaApplication application) {
+        return new Geocoder(application);
     }
 
     static OkHttpClient createOkHttpClient(UmbrellaApplication app) {

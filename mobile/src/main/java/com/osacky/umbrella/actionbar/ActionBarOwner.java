@@ -23,6 +23,8 @@ public class ActionBarOwner extends Presenter<ActionBarOwner.View> {
 
         void setTitle(@StringRes int titleId);
 
+        void setTitle(CharSequence titleString);
+
         void setMenu(@MenuRes int menu);
 
         void setVisibility(boolean visible);
@@ -79,7 +81,11 @@ public class ActionBarOwner extends Presenter<ActionBarOwner.View> {
 
         view.setShowHomeEnabled(config.showHomeEnabled);
         view.setUpButtonEnabled(config.upButtonEnabled);
-        view.setTitle(config.titleId);
+        if (config.titleString != null) {
+            view.setTitle(config.titleString);
+        } else {
+            view.setTitle(config.titleId);
+        }
         view.setVisibility(config.visible);
         view.setColor(config.colorId);
         view.setClipping(config.clipToActionBar);

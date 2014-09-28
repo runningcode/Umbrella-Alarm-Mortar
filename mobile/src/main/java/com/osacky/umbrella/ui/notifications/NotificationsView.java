@@ -1,7 +1,6 @@
-package com.osacky.umbrella.ui.test;
+package com.osacky.umbrella.ui.notifications;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -9,8 +8,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.osacky.umbrella.R;
-import com.osacky.umbrella.data.api.model.WeatherForecastResult;
-import com.osacky.umbrella.service.UmbrellaService;
+import com.osacky.umbrella.data.api.model.RainSummary;
+import com.osacky.umbrella.util.Strings;
 
 import org.joda.time.LocalTime;
 
@@ -22,16 +21,13 @@ import mortar.Mortar;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
 
-public class WeatherView extends LinearLayout {
+public class NotificationsView extends LinearLayout {
 
-    @Inject
-    WeatherScreen.Presenter mPresenter;
+    @Inject NotificationsScreen.Presenter mPresenter;
 
-    @InjectView(R.id.text_current_weather) TextView mWeatherText;
     @InjectView(R.id.time_picker) TimePicker mTimePicker;
-    @InjectView(R.id.weather_image) ImageView mWeatherImage;
 
-    public WeatherView(Context context, AttributeSet attrs) {
+    public NotificationsView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
             Mortar.inject(context, this);
@@ -50,17 +46,6 @@ public class WeatherView extends LinearLayout {
                 mPresenter.onTimeChanged(hourOfDay, minute);
             }
         });
-        mPresenter.getSubscription(new RetrofitObserver<WeatherForecastResult>() {
-            @Override public void onRetrofitError(RetrofitError e) {
-
-            }
-
-            @Override public void onNext(WeatherForecastResult weatherForecastResult) {
-                mWeatherText.setText(
-                        weatherForecastResult.getList().get(0).getWeather().getDescription());
-            }
-        });
-        getContext().startService(new Intent(getContext(), UmbrellaService.class));
         mPresenter.takeView(this);
     }
 

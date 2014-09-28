@@ -1,6 +1,6 @@
 package com.osacky.umbrella.data.manager;
 
-import com.osacky.umbrella.data.api.weather.OpenWeatherService;
+import com.osacky.umbrella.data.api.WeatherService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,17 +11,17 @@ import rx.Observable;
 public abstract class BaseManager<Result, ARG> {
 
     private final Map<ARG, Observable<Result>> mRequestCache = new HashMap<>();
-    private final OpenWeatherService mApi;
+    private final WeatherService mApi;
 
     /**
      * Construct a new Fetcher instance
      * @param api the api to make calls on
      */
-    public BaseManager(OpenWeatherService api) {
+    public BaseManager(WeatherService api) {
         mApi = api;
     }
 
-    protected OpenWeatherService getApi() {
+    protected WeatherService getApi() {
         return mApi;
     }
 

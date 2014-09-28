@@ -1,6 +1,5 @@
-package com.osacky.umbrella.ui.test;
+package com.osacky.umbrella.ui.notifications;
 
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.SparseArray;
@@ -14,33 +13,25 @@ import com.osacky.umbrella.core.anim.Transition;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
 import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.core.util.TransitionScreen;
-import com.osacky.umbrella.data.api.model.WeatherForecastResult;
-import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
 
 import org.joda.time.LocalTime;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import dagger.Provides;
 import flow.Layout;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscription;
-import rx.functions.Action0;
-import timber.log.Timber;
 
-@Layout(R.layout.view_weather)
+@Layout(R.layout.view_notifications)
 @Transition({R.animator.slide_in_right, R.animator.slide_out_left, R.animator.slide_in_left, R.animator.slide_out_right})
-public class WeatherScreen extends TransitionScreen implements StateBlueprint {
+public class NotificationsScreen extends TransitionScreen implements StateBlueprint {
 
     private SparseArray<Parcelable> mViewState;
 
     @Override public String getMortarScopeName() {
-        return WeatherScreen.class.getName();
+        return NotificationsScreen.class.getName();
     }
 
     @Override public Object getDaggerModule() {
@@ -52,9 +43,8 @@ public class WeatherScreen extends TransitionScreen implements StateBlueprint {
     }
 
     @dagger.Module(
-            injects = WeatherView.class,
-            addsTo = CorePresenter.Module.class,
-            library = true
+            injects = NotificationsView.class,
+            addsTo = CorePresenter.Module.class
     )
     static class Module {
         private final SparseArray<Parcelable> viewState;
@@ -69,41 +59,28 @@ public class WeatherScreen extends TransitionScreen implements StateBlueprint {
     }
 
     @Singleton
-    public static class Presenter extends BetterViewPresenter<WeatherView> {
+    public static class Presenter extends BetterViewPresenter<NotificationsView> {
 
-        private final CurrentWeatherManager mWeatherManager;
-        private final IntPreference mTimePreference;
         private final ActionBarOwner mActionBarOwner;
         private final ActionBarConfig mActionBarConfig;
-        private final Provider<Location> mLocationProvider;
-        private final Observable<WeatherForecastResult> mObservable;
+        private final IntPreference mTimePreference;
         private final AlarmHelper mAlarmHelper;
 
         @Inject
         public Presenter(
                 SparseArray<Parcelable> viewState,
-                ActionBarOwner actionBarOwner,
-                CurrentWeatherManager weatherManager,
                 @TimePref IntPreference timePreference,
-                Provider<Location> locationProvider,
-                AlarmHelper alarmHelper
+                AlarmHelper alarmHelper,
+                ActionBarOwner actionBarOwner
         ) {
             super(viewState);
-            mWeatherManager = weatherManager;
-            mTimePreference = timePreference;
             mActionBarOwner = actionBarOwner;
-            mLocationProvider = locationProvider;
+            mTimePreference = timePreference;
             mAlarmHelper = alarmHelper;
             mActionBarConfig = new ActionBarConfig.Builder()
-                    .menu(R.menu.about, new ActionBarOwner.MenuAction(R.id.about, new Action0() {
-                        @Override public void call() {
-                            // TODO show popup
-                        }
-                    }))
+                    .title(R.string.menu_title_notifications)
                     .build();
-            Location lastLocation = mLocationProvider.get();
-            Timber.i("Last known location is %s", lastLocation);
-            mObservable = mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude());
+
         }
 
         @Override public void onLoad(Bundle savedInstanceState) {
@@ -118,10 +95,6 @@ public class WeatherScreen extends TransitionScreen implements StateBlueprint {
 
         LocalTime getDefaultTime() {
             return LocalTime.fromMillisOfDay(mTimePreference.get());
-        }
-
-        Subscription getSubscription(Observer<WeatherForecastResult> observer) {
-            return mObservable.subscribe(observer);
         }
     }
 

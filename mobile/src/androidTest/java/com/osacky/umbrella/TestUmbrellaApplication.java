@@ -34,7 +34,6 @@ public class TestUmbrellaApplication extends UmbrellaApplication implements Test
 
     @Override public void prepareTest(Object o) {
         Timber.i("prepare test");
-        getObjectGraph().inject(o);
     }
 
     @Override public void afterTest(Method method) {

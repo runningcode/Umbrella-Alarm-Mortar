@@ -5,9 +5,11 @@ import android.location.Location;
 
 import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.alarm.AlarmHelper;
-import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
+import com.osacky.umbrella.data.api.ForecastWeatherManager;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
+import com.osacky.umbrella.service.WeatherToSummary;
+import com.osacky.umbrella.ui.now.NowScreen;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -23,19 +25,21 @@ import javax.inject.Provider;
 @Config(manifest = Config.NONE)
 public class WeatherPresenterTest {
 
-    @Inject CurrentWeatherManager mWeatherManager;
+    @Inject ForecastWeatherManager mWeatherManager;
     @Inject ActionBarOwner mActionBarOwner;
     @Inject @TimePref IntPreference mTimePreference;
     @Inject Provider<Location> mLocationProvider;
     @Inject AlarmHelper mAlarmHelper;
+    @Inject
+    WeatherToSummary mWeatherToSummary;
 
-    private WeatherScreen.Presenter presenter;
+    private NowScreen.Presenter presenter;
 
     @Before
     public void setUp() throws Exception {
         System.out.println("LocationProvider is " + mLocationProvider);
 
-        presenter = new WeatherScreen.Presenter(null, mActionBarOwner, mWeatherManager, mTimePreference, mLocationProvider, mAlarmHelper);
+        presenter = new NowScreen.Presenter(null, mActionBarOwner, mWeatherManager, mTimePreference, mLocationProvider, mAlarmHelper, mWeatherToSummary);
     }
 
     @Test

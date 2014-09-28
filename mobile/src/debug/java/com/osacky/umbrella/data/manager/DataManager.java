@@ -2,7 +2,7 @@ package com.osacky.umbrella.data.manager;
 
 import android.support.annotation.NonNull;
 
-import com.osacky.umbrella.data.api.weather.OpenWeatherService;
+import com.osacky.umbrella.data.api.WeatherService;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -11,7 +11,7 @@ import rx.observables.ConnectableObservable;
 
 public abstract class DataManager<T, ARG> extends BaseManager<T, ARG> {
 
-    public DataManager(OpenWeatherService api) {
+    public DataManager(WeatherService api) {
         super(api);
     }
 

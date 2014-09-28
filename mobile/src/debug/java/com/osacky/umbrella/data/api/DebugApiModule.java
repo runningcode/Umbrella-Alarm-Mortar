@@ -2,10 +2,8 @@ package com.osacky.umbrella.data.api;
 
 import android.content.SharedPreferences;
 
-import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.data.annotations.ApiEndpoint;
 import com.osacky.umbrella.data.annotations.IsMockMode;
-import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 import com.osacky.umbrella.data.prefs.StringPreference;
 
 import javax.inject.Singleton;
@@ -37,7 +35,7 @@ public final class DebugApiModule {
     }
 
     @Provides
-    @Singleton OpenWeatherService provideGalleryService(IdlingGalleryServiceWrapper idlingWrapper) {
+    @Singleton WeatherService provideGalleryService(IdlingGalleryServiceWrapper idlingWrapper) {
         return idlingWrapper;
     }
 
@@ -49,8 +47,8 @@ public final class DebugApiModule {
             MockWeatherService mockService) {
         return new IdlingGalleryServiceWrapper((
                 isMockMode
-                        ? mockRestAdapter.create(OpenWeatherService.class, mockService)
-                        : restAdapter.create(OpenWeatherService.class)
+                        ? mockRestAdapter.create(WeatherService.class, mockService)
+                        : restAdapter.create(WeatherService.class)
         ));
     }
 }

@@ -3,14 +3,12 @@ package com.osacky.umbrella.data.api.model;
 import org.joda.time.DateTime;
 
 public class RainPeriod {
-
     private final DateTime start;
     private DateTime end;
-    private int condition;
+    private final String condition;
 
-    public RainPeriod(DateTime start, int condition) {
+    public RainPeriod(DateTime start, String condition) {
         this.start = start;
-        this.end = start.plusHours(3);
         this.condition = condition;
     }
 
@@ -26,7 +24,7 @@ public class RainPeriod {
         return end;
     }
 
-    public int getCondition() {
+    public String getCondition() {
         return condition;
     }
 
@@ -34,7 +32,7 @@ public class RainPeriod {
         return "RainPeriod{" +
                 "start=" + start +
                 ", end=" + end +
-                ", condition=" + condition +
+                ", condition='" + condition + '\'' +
                 '}';
     }
 
@@ -45,8 +43,8 @@ public class RainPeriod {
 
         RainPeriod period = (RainPeriod) o;
 
-        return condition == period.condition && end.equals(period.end) && start.equals(period
-                .start);
+        return condition.equals(period.condition) && end.equals(period.end) && start.equals
+                (period.start);
 
     }
 
@@ -54,7 +52,7 @@ public class RainPeriod {
     public int hashCode() {
         int result = start.hashCode();
         result = 31 * result + end.hashCode();
-        result = 31 * result + condition;
+        result = 31 * result + condition.hashCode();
         return result;
     }
 }

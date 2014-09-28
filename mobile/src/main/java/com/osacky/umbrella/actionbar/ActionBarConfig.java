@@ -16,6 +16,7 @@ public class ActionBarConfig {
     protected final boolean showHomeEnabled;
     protected final boolean upButtonEnabled;
     @StringRes protected final int titleId;
+    protected final CharSequence titleString;
     @ColorRes protected final int colorId;
     @MenuRes protected final int menuId;
     protected final boolean visible;
@@ -25,6 +26,7 @@ public class ActionBarConfig {
     private ActionBarConfig(Builder builder) {
         showHomeEnabled = builder.showHomeEnabled;
         upButtonEnabled = builder.upButtonEnabled;
+        titleString = builder.mTitleString;
         titleId = builder.mTitleId;
         visible = builder.visible;
         colorId = builder.mColorId;
@@ -38,7 +40,8 @@ public class ActionBarConfig {
         private boolean upButtonEnabled = false;
         // we need a default string for this or the app will crash
         @StringRes private int mTitleId = R.string.app_name;
-        @ColorRes private int mColorId = android.R.color.darker_gray;
+        private CharSequence mTitleString = null;
+        @ColorRes private int mColorId = R.color.theme_primary;
         // 0 is an invalid id
         @MenuRes private int mMenuId = 0;
         private boolean visible = true;
@@ -57,6 +60,11 @@ public class ActionBarConfig {
 
         public Builder title(@StringRes int titleId) {
             mTitleId = titleId;
+            return this;
+        }
+
+        public Builder title(CharSequence title) {
+            mTitleString = title;
             return this;
         }
 

@@ -6,7 +6,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.UmbrellaApplication;
-import com.osacky.umbrella.data.api.model.RainPeriodResult;
+import com.osacky.umbrella.data.api.model.RainSummary;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -15,38 +15,32 @@ import javax.inject.Singleton;
 import rx.functions.Func1;
 
 @Singleton
-public class PeriodsToNotification implements Func1<RainPeriodResult, Notification> {
+public class PeriodsToNotification implements Func1<RainSummary, Notification> {
 
     private final Provider<NotificationCompat.Builder> mBuilderProvider;
-    private final PeriodsToString mPeriodsToString;
     private final Context mContext;
 
     @Inject
     public PeriodsToNotification(
             Provider<NotificationCompat.Builder> builderProvider,
-            PeriodsToString periodsToString,
             UmbrellaApplication app
     ) {
         mBuilderProvider = builderProvider;
-        mPeriodsToString = periodsToString;
         mContext = app;
     }
 
-    @Override public Notification call(RainPeriodResult rainPeriodResult) {
-        CharSequence rainText = mPeriodsToString.call(rainPeriodResult.getRainPeriods());
-        if (rainText == null) {
-            // it is not going to rain anytime soon;
+    @Override public Notification call(RainSummary rainPeriodResult) {
+        if (rainPeriodResult == null) {
             return null;
         }
-
         return mBuilderProvider.get()
-                .setTicker(rainText)
+                .setTicker(rainPeriodResult.getSummary())
                 .setContentTitle(mContext.getString(R.string.notif_title))
-                .setContentText(rainText)
+                .setContentText(rainPeriodResult.getSummary())
                 .setSmallIcon(R.drawable.ic_stat_rain)
                 .setStyle(
                         new NotificationCompat.BigTextStyle()
-                                .bigText(rainText)
+                                .bigText(rainPeriodResult.getSummary())
                                 .setSummaryText(rainPeriodResult.getCityName()))
                 .build();
     }

@@ -1,7 +1,5 @@
 package com.osacky.umbrella.data.api;
 
-import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
-import com.osacky.umbrella.data.api.weather.OpenWeatherService;
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
@@ -20,12 +18,7 @@ import retrofit.client.OkClient;
 )
 public class ApiModule {
 
-    public static final String PRODUCTION_API_URL = "http://api.openweathermap.org/data/2.5/";
-    private static final String API_KEY = "223d662502eca4f5904881633eca5dce";
-
-    @Provides @Singleton @ApiKey String provideClientId() {
-        return API_KEY;
-    }
+    public static final String PRODUCTION_API_URL = "https://api.forecast.io";
 
     @Provides @Singleton Endpoint provideEndpoint() {
         return Endpoints.newFixedEndpoint(PRODUCTION_API_URL);
@@ -35,21 +28,20 @@ public class ApiModule {
         return new OkClient(client);
     }
 
-    @Provides @Singleton RestAdapter provideRestAdapter(Endpoint endpoint, Client client, ApiHeaders headers) {
-        return new RestAdapter.Builder() //
-                .setClient(client) //
-                .setEndpoint(endpoint) //
-                .setRequestInterceptor(headers) //
+    @Provides @Singleton RestAdapter provideRestAdapter(Endpoint endpoint, Client client) {
+        return new RestAdapter.Builder()
+                .setClient(client)
+                .setEndpoint(endpoint)
                 .build();
     }
 
-    @Provides @Singleton OpenWeatherService provideWeatherService(RestAdapter restAdapter) {
-        return restAdapter.create(OpenWeatherService.class);
+    @Provides @Singleton WeatherService provideWeatherService(RestAdapter restAdapter) {
+        return restAdapter.create(WeatherService.class);
     }
 
     @Provides @Singleton
-    CurrentWeatherManager provideCurrentWeatherManager(OpenWeatherService service) {
-        return new CurrentWeatherManager(service);
+    ForecastWeatherManager provideCurrentWeatherManager(WeatherService service) {
+        return new ForecastWeatherManager(service);
 
     }
 

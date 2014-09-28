@@ -25,12 +25,11 @@ public class UmbrellaApplication extends Application {
     }
 
     protected void setup() {
-        Crashlytics.start(this);
-        Crashlytics.setString("locale", Locale.getDefault().toString());
-
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         } else {
+            Crashlytics.start(this);
+            Crashlytics.setString("locale", Locale.getDefault().toString());
             Timber.plant(new CrashlyticsTree());
         }
     }

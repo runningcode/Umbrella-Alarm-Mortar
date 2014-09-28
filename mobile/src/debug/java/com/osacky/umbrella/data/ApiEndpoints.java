@@ -1,9 +1,9 @@
 package com.osacky.umbrella.data;
 
-import com.osacky.umbrella.data.api.ApiModule;
+import static com.osacky.umbrella.data.api.ApiModule.PRODUCTION_API_URL;
 
 public enum ApiEndpoints {
-    PRODUCTION("Production", ApiModule.PRODUCTION_API_URL),
+    PRODUCTION("Production", PRODUCTION_API_URL),
     // STAGING("Staging", "https://api.staging.imgur.com/3/"),
     MOCK_MODE("Mock Mode", "mock://"),
     CUSTOM("Custom", null);

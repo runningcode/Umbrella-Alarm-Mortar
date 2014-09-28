@@ -24,7 +24,6 @@ import com.osacky.umbrella.mortar.PauseAndResumePresenter;
 import com.osacky.umbrella.ui.AppContainer;
 
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -34,7 +33,6 @@ import hugo.weaving.DebugLog;
 import mortar.Mortar;
 import mortar.MortarActivityScope;
 import mortar.MortarScope;
-import timber.log.Timber;
 
 import static android.content.Intent.ACTION_MAIN;
 import static android.content.Intent.CATEGORY_LAUNCHER;
@@ -128,7 +126,7 @@ public class MainActivity extends ActionBarActivity
         return activityScope.getName();
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override @DebugLog public boolean onCreateOptionsMenu(Menu menu) {
         if (mScreenMenu > 0) {
             getMenuInflater().inflate(mScreenMenu, menu);
         }
@@ -199,7 +197,7 @@ public class MainActivity extends ActionBarActivity
         mActionBar.setDisplayHomeAsUpEnabled(enabled);
     }
 
-    @Override
+    @Override @DebugLog
     public void setMenu(@MenuRes int menuResId) {
         if (menuResId != mScreenMenu) {
             mScreenMenu = menuResId;

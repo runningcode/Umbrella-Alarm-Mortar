@@ -9,7 +9,7 @@ import android.support.v4.app.NotificationManagerCompat;
 
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.UmbrellaApplication;
-import com.osacky.umbrella.data.api.weather.CurrentWeatherManager;
+import com.osacky.umbrella.data.api.ForecastWeatherManager;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -22,9 +22,10 @@ public class UmbrellaService extends IntentService {
 
     @Inject NotificationManagerCompat mNotificationManager;
     @Inject Provider<Location> mLocationProvider;
-    @Inject CurrentWeatherManager mWeatherManager;
+    @Inject ForecastWeatherManager mWeatherManager;
     @Inject Provider<NotificationCompat.Builder> mBuilderProvider;
-    @Inject WeatherToPeriods mWeatherToPeriods;
+    @Inject
+    WeatherToSummary mWeatherToSummary;
     @Inject PeriodsToNotification mPeriodsToNotification;
     @Inject ErrorToNotification mErrorToNotification;
 
@@ -65,7 +66,7 @@ public class UmbrellaService extends IntentService {
         }
 
         mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude())
-                .map(mWeatherToPeriods)
+                .map(mWeatherToSummary)
                 .map(mPeriodsToNotification)
                 .subscribe(new RetrofitObserver<Notification>() {
                     @Override public void onRetrofitError(RetrofitError e) {

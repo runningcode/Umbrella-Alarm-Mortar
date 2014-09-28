@@ -6,7 +6,7 @@ import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.UmbrellaModule;
 import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.core.util.FlowOwner;
-import com.osacky.umbrella.ui.test.WeatherScreen;
+import com.osacky.umbrella.ui.base.BaseTabScreen;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -71,7 +71,7 @@ public class CorePresenter implements Blueprint {
 
         @Override
         protected Blueprint getFirstScreen() {
-            return new WeatherScreen();
+            return new BaseTabScreen();
         }
     }
 }
