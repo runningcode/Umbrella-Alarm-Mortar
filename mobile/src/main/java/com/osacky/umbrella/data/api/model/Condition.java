@@ -31,6 +31,14 @@ public class Condition {
     private float pressure;
     private float ozone;
 
+    public float getTemperatureMin() {
+        return temperatureMin;
+    }
+
+    public float getTemperatureMax() {
+        return temperatureMax;
+    }
+
     public float getTemperature() {
         return temperature;
     }
@@ -45,6 +53,10 @@ public class Condition {
 
     public String getIcon() {
         return icon;
+    }
+
+    public float getPrecipIntensity() {
+        return precipIntensity;
     }
 
     public int getPrecipProbability() {

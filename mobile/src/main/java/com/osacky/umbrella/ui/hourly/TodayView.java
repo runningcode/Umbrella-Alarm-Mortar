@@ -1,11 +1,10 @@
-package com.osacky.umbrella.ui.now;
+package com.osacky.umbrella.ui.hourly;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.echo.holographlibrary.LineGraph;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.util.Strings;
 
@@ -17,16 +16,16 @@ import mortar.Mortar;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
 
-public class NowView extends LinearLayout {
+public class TodayView extends LinearLayout {
 
-    @Inject NowScreen.Presenter mPresenter;
+    @Inject TodayScreen.Presenter mPresenter;
 
     @InjectView(R.id.current_temp) TextView mCurrentTemp;
     @InjectView(R.id.text_current_weather) TextView mWeatherText;
+    @InjectView(R.id.chance_of_rain) TextView mChanceOfRain;
     @InjectView(R.id.attribution) TextView mAttribution;
-    @InjectView(R.id.graph) LineGraph mLineGraph;
 
-    public NowView(Context context, AttributeSet attrs) {
+    public TodayView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
             Mortar.inject(context, this);
@@ -39,17 +38,19 @@ public class NowView extends LinearLayout {
         ButterKnife.inject(this);
         Strings.addLink(mAttribution, "Forecast", "http://forecast.io/");
 
-        mPresenter.getSubscription(new RetrofitObserver<NowWeatherSummary>() {
+        mPresenter.getSubscription(new RetrofitObserver<TodayWeatherSummary>() {
             @Override public void onRetrofitError(RetrofitError e) {
             }
 
-            @Override public void onNext(NowWeatherSummary rainSummary) {
-                mCurrentTemp.setText(String.format(getContext().getString(R.string.temp_current), (int) rainSummary.getCurrentTemp()));
+            @Override public void onNext(TodayWeatherSummary rainSummary) {
+                mCurrentTemp.setText(
+                        String.format(getContext().getString(R.string.temp_high_low),
+                                (int) rainSummary.getLowTemp(),
+                                (int) rainSummary.getHighTemp()
+                ));
                 mWeatherText.setText(rainSummary.getSummary());
-                mLineGraph.addLine(rainSummary.getLine());
-                mLineGraph.setLineToFill(0);
-                mLineGraph.setRangeX(0, 60);
-                mLineGraph.setRangeY(0, .5f);
+                mChanceOfRain.setText(String.format(getContext().getString(R.string
+                        .chance_of_rain), rainSummary.getChanceOfRain()));
             }
         });
         mPresenter.takeView(this);

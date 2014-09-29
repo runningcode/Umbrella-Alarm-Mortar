@@ -15,13 +15,13 @@ import javax.inject.Singleton;
 import rx.functions.Func1;
 
 @Singleton
-public class PeriodsToNotification implements Func1<RainSummary, Notification> {
+public class SummaryToNotification implements Func1<RainSummary, Notification> {
 
     private final Provider<NotificationCompat.Builder> mBuilderProvider;
     private final Context mContext;
 
     @Inject
-    public PeriodsToNotification(
+    public SummaryToNotification(
             Provider<NotificationCompat.Builder> builderProvider,
             UmbrellaApplication app
     ) {
@@ -37,7 +37,6 @@ public class PeriodsToNotification implements Func1<RainSummary, Notification> {
                 .setTicker(rainPeriodResult.getSummary())
                 .setContentTitle(mContext.getString(R.string.notif_title))
                 .setContentText(rainPeriodResult.getSummary())
-                .setSmallIcon(R.drawable.ic_stat_rain)
                 .setStyle(
                         new NotificationCompat.BigTextStyle()
                                 .bigText(rainPeriodResult.getSummary())

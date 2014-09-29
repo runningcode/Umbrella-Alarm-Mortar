@@ -7,7 +7,7 @@ import android.content.Intent;
 import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
-import com.osacky.umbrella.service.UmbrellaService;
+import com.osacky.umbrella.service.DailyCheckService;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
@@ -19,16 +19,18 @@ import static android.app.AlarmManager.RTC_WAKEUP;
 import static org.joda.time.DateTimeConstants.MILLIS_PER_DAY;
 
 @Singleton
-public class AlarmHelper {
+public class DailyAlarmHelper {
 
     private final AlarmManager mAlarmManager;
     private final IntPreference mTimePreference;
     private final PendingIntent mPendingIntent;
 
-    @Inject AlarmHelper(UmbrellaApplication app, AlarmManager alarmManager, @TimePref IntPreference timePreference) {
+    @Inject
+    DailyAlarmHelper(UmbrellaApplication app, AlarmManager alarmManager, @TimePref IntPreference
+            timePreference) {
         mAlarmManager = alarmManager;
         mTimePreference = timePreference;
-        Intent checkIntent = new Intent(app, UmbrellaService.class);
+        Intent checkIntent = new Intent(app, DailyCheckService.class);
         mPendingIntent = PendingIntent.getService(app, 0, checkIntent, 0);
     }
 

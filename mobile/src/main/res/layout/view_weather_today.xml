@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.osacky.umbrella.ui.now.NowView
+<com.osacky.umbrella.ui.hourly.TodayView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,18 +17,16 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/keyline_1"
         android:paddingLeft="@dimen/keyline_1"
-        android:textSize="112sp"
-        android:textColor="@color/text_secondary"
-        android:fontFamily="sans-serif-light"
+        style="@style/Display3"
         />
 
     <TextView
         android:id="@+id/text_current_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/keyline_2_minus_16dp"
-        android:paddingLeft="@dimen/keyline_2_minus_16dp"
-        style="?android:attr/textAppearanceMedium"
+        android:paddingStart="@dimen/keyline_1"
+        android:paddingLeft="@dimen/keyline_1"
+        style="@style/Title"
         />
 
     <TextView
@@ -54,4 +52,4 @@
         android:layout_gravity="end"
         style="?android:attr/textAppearanceSmall"/>
 
-</com.osacky.umbrella.ui.now.NowView>
+</com.osacky.umbrella.ui.hourly.TodayView>

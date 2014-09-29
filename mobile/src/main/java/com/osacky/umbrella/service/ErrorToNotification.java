@@ -36,7 +36,7 @@ public class ErrorToNotification implements Func1<RetrofitError, Notification> {
         } else {
             contentText = mContext.getString(R.string.error_non_network);
         }
-        Intent intent = new Intent(mContext, UmbrellaService.class);
+        Intent intent = new Intent(mContext, DailyCheckService.class);
         PendingIntent pendingIntent = PendingIntent.getService(mContext, 0, intent, 0);
         return mBuilderProvider.get()
                 .setTicker(contentText)

@@ -7,7 +7,7 @@ import android.util.SparseArray;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.actionbar.ActionBarConfig;
 import com.osacky.umbrella.actionbar.ActionBarOwner;
-import com.osacky.umbrella.alarm.AlarmHelper;
+import com.osacky.umbrella.alarm.DailyAlarmHelper;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.anim.Transition;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
@@ -15,6 +15,7 @@ import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
+import com.osacky.umbrella.ui.base.BaseTabScreen;
 
 import org.joda.time.LocalTime;
 
@@ -22,11 +23,12 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Provides;
+import flow.HasParent;
 import flow.Layout;
 
 @Layout(R.layout.view_notifications)
 @Transition({R.animator.slide_in_right, R.animator.slide_out_left, R.animator.slide_in_left, R.animator.slide_out_right})
-public class NotificationsScreen extends TransitionScreen implements StateBlueprint {
+public class NotificationsScreen extends TransitionScreen implements StateBlueprint, HasParent<BaseTabScreen> {
 
     private SparseArray<Parcelable> mViewState;
 
@@ -40,6 +42,10 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
 
     @Override public void setViewState(SparseArray<Parcelable> viewState) {
         mViewState = viewState;
+    }
+
+    @Override public BaseTabScreen getParent() {
+        return new BaseTabScreen();
     }
 
     @dagger.Module(
@@ -64,21 +70,22 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
         private final ActionBarOwner mActionBarOwner;
         private final ActionBarConfig mActionBarConfig;
         private final IntPreference mTimePreference;
-        private final AlarmHelper mAlarmHelper;
+        private final DailyAlarmHelper mDailyAlarmHelper;
 
         @Inject
         public Presenter(
                 SparseArray<Parcelable> viewState,
                 @TimePref IntPreference timePreference,
-                AlarmHelper alarmHelper,
+                DailyAlarmHelper dailyAlarmHelper,
                 ActionBarOwner actionBarOwner
         ) {
             super(viewState);
             mActionBarOwner = actionBarOwner;
             mTimePreference = timePreference;
-            mAlarmHelper = alarmHelper;
+            mDailyAlarmHelper = dailyAlarmHelper;
             mActionBarConfig = new ActionBarConfig.Builder()
                     .title(R.string.menu_title_notifications)
+                    .upButtonEnabled(true)
                     .build();
 
         }
@@ -90,7 +97,7 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
 
         void onTimeChanged(int hourOfDay, int minute) {
             mTimePreference.set(new LocalTime(hourOfDay, minute).getMillisOfDay());
-            mAlarmHelper.setAlarm();
+            mDailyAlarmHelper.setAlarm();
         }
 
         LocalTime getDefaultTime() {

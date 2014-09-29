@@ -30,7 +30,7 @@ import timber.log.Timber;
 
 import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.LOCATION_SERVICE;
-import static android.location.LocationManager.NETWORK_PROVIDER;
+import static android.location.LocationManager.PASSIVE_PROVIDER;
 
 @Module(
         includes = ApiModule.class,
@@ -81,7 +81,7 @@ public class DataModule {
 
     @Provides
     Location provideLocation(LocationManager locationManager) {
-        return locationManager.getLastKnownLocation(NETWORK_PROVIDER);
+        return locationManager.getLastKnownLocation(PASSIVE_PROVIDER);
     }
 
     @Provides

@@ -8,6 +8,8 @@ import android.widget.LinearLayout;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.mortar.ScreenPagerAdapter;
+import com.osacky.umbrella.ui.forecast.ForecastScreen;
+import com.osacky.umbrella.ui.hourly.TodayScreen;
 import com.osacky.umbrella.ui.now.NowScreen;
 import com.osacky.umbrella.widget.SlidingTabLayout;
 
@@ -29,12 +31,14 @@ public class BaseTabView extends LinearLayout {
     public BaseTabView(Context context, AttributeSet attrs) {
         super(context, attrs);
         Mortar.inject(context, this);
-        mAdapter.addScreen(new NowScreen(), new NowScreen());
+        mAdapter.addScreen(new NowScreen(), new TodayScreen(), new ForecastScreen());
     }
 
     @Override protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.inject(this);
+        mSlidingTabLayout.setDistributeEvenly(
+                getContext().getResources().getBoolean(R.bool.distribute_evenly));
         mViewPager.setAdapter(mAdapter);
         mSlidingTabLayout.setViewPager(mViewPager);
         mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {

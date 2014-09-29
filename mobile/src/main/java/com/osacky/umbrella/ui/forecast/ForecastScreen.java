@@ -1,4 +1,4 @@
-package com.osacky.umbrella.ui.now;
+package com.osacky.umbrella.ui.forecast;
 
 import android.os.Parcelable;
 import android.util.SparseArray;
@@ -6,7 +6,6 @@ import android.util.SparseArray;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
 import com.osacky.umbrella.core.util.StateBlueprint;
-import com.osacky.umbrella.data.api.model.WeatherResult;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
 
 import javax.inject.Inject;
@@ -17,14 +16,15 @@ import flow.Layout;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.functions.Action1;
 
-@Layout(R.layout.view_weather_now)
-public class NowScreen implements StateBlueprint {
+@Layout(R.layout.view_weather_forecast)
+public class ForecastScreen implements StateBlueprint {
 
     private SparseArray<Parcelable> mViewState;
 
     @Override public String getMortarScopeName() {
-        return NowScreen.class.getName();
+        return ForecastScreen.class.getName();
     }
 
     @Override public Object getDaggerModule() {
@@ -36,7 +36,7 @@ public class NowScreen implements StateBlueprint {
     }
 
     @dagger.Module(
-            injects = NowView.class,
+            injects = ForecastView.class,
             addsTo = BaseTabScreen.Module.class
     )
     static class Module {
@@ -52,24 +52,35 @@ public class NowScreen implements StateBlueprint {
     }
 
     @Singleton
-    public static class Presenter extends BetterViewPresenter<NowView> {
+    public static class Presenter extends BetterViewPresenter<ForecastView> {
 
-        private final Observable<WeatherResult> mObservable;
-        private final WeatherToNow mWeatherToNow;
+        private final Observable<ForecastWeatherSummary> mObservable;
+        private final ForecastAdapter mForecastAdapter;
 
         @Inject
         public Presenter(
                 SparseArray<Parcelable> viewState,
                 BaseTabScreen.Presenter basePresenter,
-                WeatherToNow weatherToNow
+                final WeatherToForecast weatherToForecast,
+                ForecastAdapter forecastAdapter
         ) {
             super(viewState);
-            mObservable = basePresenter.getObservable();
-            mWeatherToNow = weatherToNow;
+            mForecastAdapter = forecastAdapter;
+            mObservable = basePresenter.getObservable()
+                    .map(weatherToForecast)
+                    .doOnNext(new Action1<ForecastWeatherSummary>() {
+                        @Override public void call(ForecastWeatherSummary weatherSummary) {
+                            mForecastAdapter.setForecastList(weatherSummary.getDaily().getData());
+                        }
+                    });
         }
 
-        Subscription getSubscription(Observer<NowWeatherSummary> observer) {
-            return mObservable.map(mWeatherToNow).subscribe(observer);
+        Subscription getSubscription(Observer<ForecastWeatherSummary> observer) {
+            return mObservable.subscribe(observer);
+        }
+
+        public ForecastAdapter getForecastAdapter() {
+            return mForecastAdapter;
         }
     }
 

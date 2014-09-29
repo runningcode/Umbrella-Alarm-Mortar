@@ -2,14 +2,10 @@ package com.osacky.umbrella.ui.notifications;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.osacky.umbrella.R;
-import com.osacky.umbrella.data.api.model.RainSummary;
-import com.osacky.umbrella.util.Strings;
 
 import org.joda.time.LocalTime;
 
@@ -18,8 +14,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import mortar.Mortar;
-import retrofit.RetrofitError;
-import rx.RetrofitObserver;
 
 public class NotificationsView extends LinearLayout {
 

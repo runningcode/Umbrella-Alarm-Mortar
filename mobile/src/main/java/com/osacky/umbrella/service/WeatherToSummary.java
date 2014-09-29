@@ -1,7 +1,6 @@
 package com.osacky.umbrella.service;
 
 import com.osacky.umbrella.data.api.WeatherGeoCoder;
-import com.osacky.umbrella.data.api.WeatherUtils;
 import com.osacky.umbrella.data.api.model.RainSummary;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 
@@ -22,9 +21,6 @@ public class WeatherToSummary implements Func1<WeatherResult, RainSummary> {
 
     @Override public RainSummary call(WeatherResult weatherForecastResult) {
         if (weatherForecastResult == null) {
-            return null;
-        }
-        if (!WeatherUtils.isRain(weatherForecastResult.getHourly().getIcon())) {
             return null;
         }
         return new RainSummary(

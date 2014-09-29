@@ -14,16 +14,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WeatherUtilsTest {
 
     @Test public void testIsRain() throws Exception {
-        assertThat(WeatherUtils.isRain("Rain")).isTrue();
-        assertThat(WeatherUtils.isRain("rain")).isTrue();
-        assertThat(WeatherUtils.isRain("RAIN")).isTrue();
-        assertThat(WeatherUtils.isRain("sleet")).isTrue();
+        assertThat(WeatherUtils.isStringRain("Rain")).isTrue();
+        assertThat(WeatherUtils.isStringRain("rain")).isTrue();
+        assertThat(WeatherUtils.isStringRain("RAIN")).isTrue();
+        assertThat(WeatherUtils.isStringRain("sleet")).isTrue();
     }
 
     @Test public void testIsNotRain() throws Exception {
-        assertThat(WeatherUtils.isRain("clear-night")).isFalse();
-        assertThat(WeatherUtils.isRain("cloudy")).isFalse();
-        assertThat(WeatherUtils.isRain("thunderstorm")).isFalse();
-        assertThat(WeatherUtils.isRain("tornado")).isFalse();
+        assertThat(WeatherUtils.isStringRain("clear-night")).isFalse();
+        assertThat(WeatherUtils.isStringRain("cloudy")).isFalse();
+        assertThat(WeatherUtils.isStringRain("thunderstorm")).isFalse();
+        assertThat(WeatherUtils.isStringRain("tornado")).isFalse();
     }
 }

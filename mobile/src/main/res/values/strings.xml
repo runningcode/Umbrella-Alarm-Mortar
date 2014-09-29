@@ -14,21 +14,32 @@
     <string name="error_non_network">An error occurred.</string>
     <string name="error">Error</string>
 
+    <!--notifications-->
     <string name="notif_title">Umbrella Warning</string>
+
+    <string name="notif_raining_now">It is raining.</string>
+    <plurals name="notif_rain_imminent">
+        <item quantity="one">It will rain in one minute.</item>
+        <item quantity="other">It will rain in %1$d minutes.</item>
+    </plurals>
 
     <!--about section-->
     <string name="icon_attribution">Rain designed by Eric Bird from the Noun Project</string>
     <string name="about">About</string>
-    <string name="current_weather_conditions_header">Today\'s weather summary for %1$s</string>
-    <string name="chance_of_rain">%1$d%% chance of rain</string>
-    <string name="ic_notif_action_retry">Retry</string>
     <string name="powered_by_forecast">Powered by Forecast</string>
+
+    <string name="chance_of_rain">%1$d%% chance of rain</string>
+    <string name="chance_of_rain_mini">%1$d%%</string>
+    <string name="ic_notif_action_retry">Retry</string>
     <string name="menu_title_notifications">Notifications</string>
 
-    <string name="current_temperature">%1$d°</string>
+    <string name="temp_current">%1$d°</string>
+    <string name="temp_high_low">%1$d° - %2$d°</string>
 
     <!--tab titles-->
     <string name="tab_now">Now</string>
     <string name="tab_today">Today</string>
     <string name="tab_forecast">Forecast</string>
+    <string name="loading">Loading...</string>
+    <string name="empty_default">No data</string>
 </resources>

@@ -18,15 +18,14 @@ import dagger.ObjectGraph;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
 
-public class UmbrellaService extends IntentService {
+public class DailyCheckService extends IntentService {
 
     @Inject NotificationManagerCompat mNotificationManager;
     @Inject Provider<Location> mLocationProvider;
     @Inject ForecastWeatherManager mWeatherManager;
     @Inject Provider<NotificationCompat.Builder> mBuilderProvider;
-    @Inject
-    WeatherToSummary mWeatherToSummary;
-    @Inject PeriodsToNotification mPeriodsToNotification;
+    @Inject WeatherToSummary mWeatherToSummary;
+    @Inject SummaryToNotification mSummaryToNotification;
     @Inject ErrorToNotification mErrorToNotification;
 
     private static final int NOTIF_WEATHER_ID = 0;
@@ -35,8 +34,8 @@ public class UmbrellaService extends IntentService {
 
     private ObjectGraph serviceGraph;
 
-    public UmbrellaService() {
-        super(UmbrellaService.class.getSimpleName());
+    public DailyCheckService() {
+        super(DailyCheckService.class.getSimpleName());
     }
 
     @Override public void onCreate() {
@@ -67,7 +66,7 @@ public class UmbrellaService extends IntentService {
 
         mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude())
                 .map(mWeatherToSummary)
-                .map(mPeriodsToNotification)
+                .map(mSummaryToNotification)
                 .subscribe(new RetrofitObserver<Notification>() {
                     @Override public void onRetrofitError(RetrofitError e) {
                         Notification notification = mErrorToNotification.call(e);

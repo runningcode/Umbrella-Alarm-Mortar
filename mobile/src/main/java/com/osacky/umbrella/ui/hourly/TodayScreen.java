@@ -1,4 +1,4 @@
-package com.osacky.umbrella.ui.now;
+package com.osacky.umbrella.ui.hourly;
 
 import android.os.Parcelable;
 import android.util.SparseArray;
@@ -18,13 +18,13 @@ import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 
-@Layout(R.layout.view_weather_now)
-public class NowScreen implements StateBlueprint {
+@Layout(R.layout.view_weather_today)
+public class TodayScreen implements StateBlueprint {
 
     private SparseArray<Parcelable> mViewState;
 
     @Override public String getMortarScopeName() {
-        return NowScreen.class.getName();
+        return TodayScreen.class.getName();
     }
 
     @Override public Object getDaggerModule() {
@@ -36,7 +36,7 @@ public class NowScreen implements StateBlueprint {
     }
 
     @dagger.Module(
-            injects = NowView.class,
+            injects = TodayView.class,
             addsTo = BaseTabScreen.Module.class
     )
     static class Module {
@@ -52,24 +52,24 @@ public class NowScreen implements StateBlueprint {
     }
 
     @Singleton
-    public static class Presenter extends BetterViewPresenter<NowView> {
+    public static class Presenter extends BetterViewPresenter<TodayView> {
 
         private final Observable<WeatherResult> mObservable;
-        private final WeatherToNow mWeatherToNow;
+        private final WeatherToToday mWeatherToToday;
 
         @Inject
         public Presenter(
                 SparseArray<Parcelable> viewState,
                 BaseTabScreen.Presenter basePresenter,
-                WeatherToNow weatherToNow
+                WeatherToToday weatherToToday
         ) {
             super(viewState);
             mObservable = basePresenter.getObservable();
-            mWeatherToNow = weatherToNow;
+            mWeatherToToday = weatherToToday;
         }
 
-        Subscription getSubscription(Observer<NowWeatherSummary> observer) {
-            return mObservable.map(mWeatherToNow).subscribe(observer);
+        Subscription getSubscription(Observer<TodayWeatherSummary> observer) {
+            return mObservable.map(mWeatherToToday).subscribe(observer);
         }
     }
 

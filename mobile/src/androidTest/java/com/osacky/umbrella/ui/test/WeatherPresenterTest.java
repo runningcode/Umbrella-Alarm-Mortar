@@ -4,7 +4,7 @@ package com.osacky.umbrella.ui.test;
 import android.location.Location;
 
 import com.osacky.umbrella.actionbar.ActionBarOwner;
-import com.osacky.umbrella.alarm.AlarmHelper;
+import com.osacky.umbrella.alarm.DailyAlarmHelper;
 import com.osacky.umbrella.data.api.ForecastWeatherManager;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
@@ -29,7 +29,8 @@ public class WeatherPresenterTest {
     @Inject ActionBarOwner mActionBarOwner;
     @Inject @TimePref IntPreference mTimePreference;
     @Inject Provider<Location> mLocationProvider;
-    @Inject AlarmHelper mAlarmHelper;
+    @Inject
+    DailyAlarmHelper mDailyAlarmHelper;
     @Inject
     WeatherToSummary mWeatherToSummary;
 
@@ -39,7 +40,7 @@ public class WeatherPresenterTest {
     public void setUp() throws Exception {
         System.out.println("LocationProvider is " + mLocationProvider);
 
-        presenter = new NowScreen.Presenter(null, mActionBarOwner, mWeatherManager, mTimePreference, mLocationProvider, mAlarmHelper, mWeatherToSummary);
+        presenter = new NowScreen.Presenter(null, mActionBarOwner, mWeatherManager, mTimePreference, mLocationProvider, mDailyAlarmHelper, mWeatherToSummary);
     }
 
     @Test

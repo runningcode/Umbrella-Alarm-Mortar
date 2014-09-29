@@ -1,19 +1,19 @@
 package com.osacky.umbrella.ui.now;
 
-import com.osacky.umbrella.data.api.model.Ly;
+import com.echo.holographlibrary.Line;
 
 class NowWeatherSummary {
     private final float mCurrentTemp;
     private final float mFeelsLike;
     private final CharSequence mSummary;
-    private final Ly mMinutely;
+    private final Line mLine;
 
     public NowWeatherSummary(
-            float currentTemp, float feelsLike, CharSequence summary, Ly minutely) {
+            float currentTemp, float feelsLike, CharSequence summary, Line line) {
         mCurrentTemp = currentTemp;
         mFeelsLike = feelsLike;
         mSummary = summary;
-        mMinutely = minutely;
+        mLine = line;
     }
 
     public float getCurrentTemp() {
@@ -28,7 +28,7 @@ class NowWeatherSummary {
         return mSummary;
     }
 
-    public Ly getMinutely() {
-        return mMinutely;
+    public Line getLine() {
+        return mLine;
     }
 }

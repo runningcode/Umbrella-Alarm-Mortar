@@ -13,7 +13,10 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module(
-        injects = UmbrellaService.class,
+        injects = {
+                DailyCheckService.class,
+                HourlyCheckService.class
+        },
         addsTo = UmbrellaModule.class
 )
 public class ServiceModule {
@@ -39,6 +42,6 @@ public class ServiceModule {
     }
 
     @Provides @DrawableRes int provideDrawableRes() {
-        return R.drawable.ic_launcher;
+        return R.drawable.ic_stat_rain;
     }
 }

@@ -30,6 +30,7 @@ import flow.Layout;
 import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Action1;
+import timber.log.Timber;
 
 @Layout(R.layout.view_base_weather)
 @Transition({R.animator.slide_in_right, R.animator.slide_out_left, R.animator.slide_in_left, R.animator.slide_out_right})
@@ -96,10 +97,17 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
                                 }
                             }));
             Location location = locationProvider.get();
+            if (location == null) {
+                mObservable = Observable.empty();
+                // TODO do something
+                Timber.e("Location was null");
+                return;
+            }
             mObservable = weatherManager.get(location.getLatitude(), location.getLongitude());
             mObservable.map(weatherToSummary)
                     .doOnNext(new Action1<RainSummary>() {
                         @Override public void call(RainSummary rainSummary) {
+                            if (rainSummary == null) return;
                             mActionBarConfig.title(rainSummary.getCityName());
                             mActionBarOwner.setConfig(mActionBarConfig.build());
                         }
