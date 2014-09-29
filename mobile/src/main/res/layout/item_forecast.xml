@@ -3,15 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="54dp">
-
-    <TextView
-        android:id="@+id/forecast_summary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        />
+              android:layout_height="@dimen/keyline_2">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -32,6 +24,14 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/forecast_summary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        />
 
     <TextView
         android:id="@+id/forecast_hi_lo"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="graph_labels_vert">
+        <item>HEAVY</item>
+        <item>MED</item>
+        <item>LIGHT</item>
+    </string-array>
+
+    <string-array name="graph_labels_horiz">
+        <item>""</item>
+        <item>10 min</item>
+        <item>20 min</item>
+        <item>30 min</item>
+        <item>40 min</item>
+        <item>50 min</item>
+        <item>""</item>
+    </string-array>
+</resources>

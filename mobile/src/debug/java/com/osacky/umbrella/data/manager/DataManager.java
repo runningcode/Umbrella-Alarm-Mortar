@@ -33,7 +33,6 @@ public abstract class DataManager<T, ARG> extends BaseManager<T, ARG> {
                         removeFromRequestCache(key);
                     }
                 })
-                .observeOn(AndroidSchedulers.mainThread())
                 .replay(1);
         putInRequestCache(key, observable);
         observable.connect();

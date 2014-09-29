@@ -1,13 +1,19 @@
 package com.osacky.umbrella.ui.now;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.echo.holographlibrary.LineGraph;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.GraphViewStyle;
+import com.jjoe64.graphview.LineGraphView;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.util.Strings;
+import com.osacky.umbrella.widget.LineGraphHolder;
 
 import javax.inject.Inject;
 
@@ -17,14 +23,16 @@ import mortar.Mortar;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
 
-public class NowView extends LinearLayout {
+import static com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
+
+public class NowView extends ScrollView {
 
     @Inject NowScreen.Presenter mPresenter;
 
     @InjectView(R.id.current_temp) TextView mCurrentTemp;
     @InjectView(R.id.text_current_weather) TextView mWeatherText;
     @InjectView(R.id.attribution) TextView mAttribution;
-    @InjectView(R.id.graph) LineGraph mLineGraph;
+    private LineGraphView mLineGraph;
 
     public NowView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -37,6 +45,7 @@ public class NowView extends LinearLayout {
         super.onFinishInflate();
         if (isInEditMode()) return;
         ButterKnife.inject(this);
+        mLineGraph = ((LineGraphHolder)findViewById(R.id.graph)).getLineGraphView();
         Strings.addLink(mAttribution, "Forecast", "http://forecast.io/");
 
         mPresenter.getSubscription(new RetrofitObserver<NowWeatherSummary>() {
@@ -44,12 +53,26 @@ public class NowView extends LinearLayout {
             }
 
             @Override public void onNext(NowWeatherSummary rainSummary) {
-                mCurrentTemp.setText(String.format(getContext().getString(R.string.temp_current), (int) rainSummary.getCurrentTemp()));
+                Resources resources = getContext().getResources();
+                mCurrentTemp.setText(String.format(resources.getString(R.string.temp_current),
+                        (int) rainSummary.getCurrentTemp()));
                 mWeatherText.setText(rainSummary.getSummary());
-                mLineGraph.addLine(rainSummary.getLine());
-                mLineGraph.setLineToFill(0);
-                mLineGraph.setRangeX(0, 60);
-                mLineGraph.setRangeY(0, .5f);
+                GraphViewSeriesStyle style = new GraphViewSeriesStyle();
+                style.thickness = (int) resources.getDimension(R.dimen.graph_stroke_width);
+                style.color = resources.getColor(R.color.theme_accent);
+                mLineGraph.addSeries(new GraphViewSeries("Hello", style, rainSummary.getData()));
+                GraphViewStyle graphStyle = mLineGraph.getGraphViewStyle();
+                graphStyle.setGridStyle(GraphViewStyle.GridStyle.HORIZONTAL);
+                graphStyle.setHorizontalLabelsColor(resources.getColor(R.color.text_primary));
+                graphStyle.setVerticalLabelsColor(resources.getColor(R.color.text_primary));
+                graphStyle.setVerticalLabelsAlign(Paint.Align.LEFT);
+                graphStyle.setTextSize(resources.getDimension(R.dimen.text_size_xsmall));
+                mLineGraph.setVerticalLabels(resources.getStringArray(R.array.graph_labels_vert));
+                mLineGraph.setHorizontalLabels(resources.getStringArray(R.array.graph_labels_horiz));
+                mLineGraph.setManualYAxisBounds(0, 0.5);
+                mLineGraph.setDisableTouch(true);
+                mLineGraph.setBackgroundColor(resources.getColor(R.color.theme_accent_light));
+                mLineGraph.setDrawBackground(true);
             }
         });
         mPresenter.takeView(this);

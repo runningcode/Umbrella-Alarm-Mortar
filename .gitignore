@@ -13,5 +13,6 @@
 
 *.apk
 
+crashlytics-build.properties
 mobile/crashlytics.properties
 com_crashlytics_export_strings.xml

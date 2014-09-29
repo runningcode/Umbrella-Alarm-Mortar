@@ -27,7 +27,10 @@ import javax.inject.Singleton;
 import dagger.Provides;
 import flow.Flow;
 import flow.Layout;
+import retrofit.RetrofitError;
 import rx.Observable;
+import rx.RetrofitObserver;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import timber.log.Timber;
@@ -105,6 +108,7 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
             }
             mObservable = weatherManager.get(location.getLatitude(), location.getLongitude());
             mObservable.map(weatherToSummary)
+                    .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext(new Action1<RainSummary>() {
                         @Override public void call(RainSummary rainSummary) {
                             if (rainSummary == null) return;
@@ -112,7 +116,10 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
                             mActionBarOwner.setConfig(mActionBarConfig.build());
                         }
                     })
-                    .subscribe();
+                    .subscribe(new RetrofitObserver<RainSummary>() {
+                        @Override public void onRetrofitError(RetrofitError e) {}
+                        @Override public void onNext(RainSummary rainSummary) {}
+                    });
         }
 
         @Override public void onLoad(Bundle savedInstanceState) {

@@ -1,7 +1,5 @@
 package com.osacky.umbrella.ui.now;
 
-import com.echo.holographlibrary.Line;
-import com.echo.holographlibrary.LinePoint;
 import com.osacky.umbrella.data.api.model.Condition;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 
@@ -12,6 +10,8 @@ import javax.inject.Singleton;
 
 import rx.functions.Func1;
 
+import static com.jjoe64.graphview.GraphView.GraphViewData;
+
 @Singleton
 public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
 
@@ -21,23 +21,18 @@ public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
         if (weatherResult == null) {
             return null;
         }
-
-        Line l = new Line();
-        l.setUsingDips(true);
-        l.setShowingPoints(false);
         List<Condition> data = weatherResult.getMinutely().getData();
+        GraphViewData[] graphViewData = new GraphViewData[data.size()];
         for (int i = 0; i < data.size(); i++) {
             Condition condition = data.get(i);
-            LinePoint p = new LinePoint();
-            p.setX(i);
-            p.setY(condition.getPrecipIntensity());
-            l.addPoint(p);
+            GraphViewData dataPoint = new GraphViewData(i, condition.getPrecipIntensity());
+            graphViewData[i] = dataPoint;
         }
 
         return new NowWeatherSummary(
                 weatherResult.getCurrently().getTemperature(),
                 weatherResult.getCurrently().getApparentTemperature(),
                 weatherResult.getMinutely().getSummary(),
-                l);
+                graphViewData);
     }
 }

@@ -1,19 +1,19 @@
 package com.osacky.umbrella.ui.now;
 
-import com.echo.holographlibrary.Line;
+import static com.jjoe64.graphview.GraphView.GraphViewData;
 
 class NowWeatherSummary {
     private final float mCurrentTemp;
     private final float mFeelsLike;
     private final CharSequence mSummary;
-    private final Line mLine;
+    private final GraphViewData[] mData;
 
     public NowWeatherSummary(
-            float currentTemp, float feelsLike, CharSequence summary, Line line) {
+            float currentTemp, float feelsLike, CharSequence summary, GraphViewData[] data) {
         mCurrentTemp = currentTemp;
         mFeelsLike = feelsLike;
         mSummary = summary;
-        mLine = line;
+        mData = data;
     }
 
     public float getCurrentTemp() {
@@ -28,7 +28,7 @@ class NowWeatherSummary {
         return mSummary;
     }
 
-    public Line getLine() {
-        return mLine;
+    public GraphViewData[] getData() {
+        return mData;
     }
 }
