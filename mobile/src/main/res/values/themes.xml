@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.Base">
+        <!--this is for compatibility with transluscent nav/status bars-->
+    </style>
+
+    <style name="UmbrellaAppTheme" parent="AppTheme.Base">
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="actionBarStyle">@style/ActionBar</item>
+    </style>
+
+</resources>

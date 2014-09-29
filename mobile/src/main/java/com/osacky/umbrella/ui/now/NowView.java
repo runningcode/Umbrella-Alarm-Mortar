@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -46,6 +45,8 @@ public class NowView extends ScrollView {
         if (isInEditMode()) return;
         ButterKnife.inject(this);
         mLineGraph = ((LineGraphHolder)findViewById(R.id.graph)).getLineGraphView();
+        final Resources resources = getContext().getResources();
+        setUpGraph(resources);
         Strings.addLink(mAttribution, "Forecast", "http://forecast.io/");
 
         mPresenter.getSubscription(new RetrofitObserver<NowWeatherSummary>() {
@@ -53,7 +54,6 @@ public class NowView extends ScrollView {
             }
 
             @Override public void onNext(NowWeatherSummary rainSummary) {
-                Resources resources = getContext().getResources();
                 mCurrentTemp.setText(String.format(resources.getString(R.string.temp_current),
                         (int) rainSummary.getCurrentTemp()));
                 mWeatherText.setText(rainSummary.getSummary());
@@ -61,21 +61,26 @@ public class NowView extends ScrollView {
                 style.thickness = (int) resources.getDimension(R.dimen.graph_stroke_width);
                 style.color = resources.getColor(R.color.theme_accent);
                 mLineGraph.addSeries(new GraphViewSeries("Hello", style, rainSummary.getData()));
-                GraphViewStyle graphStyle = mLineGraph.getGraphViewStyle();
-                graphStyle.setGridStyle(GraphViewStyle.GridStyle.HORIZONTAL);
-                graphStyle.setHorizontalLabelsColor(resources.getColor(R.color.text_primary));
-                graphStyle.setVerticalLabelsColor(resources.getColor(R.color.text_primary));
-                graphStyle.setVerticalLabelsAlign(Paint.Align.LEFT);
-                graphStyle.setTextSize(resources.getDimension(R.dimen.text_size_xsmall));
-                mLineGraph.setVerticalLabels(resources.getStringArray(R.array.graph_labels_vert));
-                mLineGraph.setHorizontalLabels(resources.getStringArray(R.array.graph_labels_horiz));
-                mLineGraph.setManualYAxisBounds(0, 0.5);
-                mLineGraph.setDisableTouch(true);
-                mLineGraph.setBackgroundColor(resources.getColor(R.color.theme_accent_light));
-                mLineGraph.setDrawBackground(true);
+
             }
         });
         mPresenter.takeView(this);
+    }
+
+    // GraphView's api is terrible
+    private void setUpGraph(Resources resources) {
+        GraphViewStyle graphStyle = mLineGraph.getGraphViewStyle();
+        graphStyle.setGridStyle(GraphViewStyle.GridStyle.HORIZONTAL);
+        graphStyle.setHorizontalLabelsColor(resources.getColor(R.color.text_primary));
+        graphStyle.setVerticalLabelsColor(resources.getColor(R.color.text_primary));
+        graphStyle.setVerticalLabelsAlign(Paint.Align.LEFT);
+        graphStyle.setTextSize(resources.getDimension(R.dimen.text_size_xsmall));
+        mLineGraph.setVerticalLabels(resources.getStringArray(R.array.graph_labels_vert));
+        mLineGraph.setHorizontalLabels(resources.getStringArray(R.array.graph_labels_horiz));
+        mLineGraph.setManualYAxisBounds(0, 0.5);
+        mLineGraph.setDisableTouch(true);
+        mLineGraph.setBackgroundColor(resources.getColor(R.color.theme_accent_light));
+        mLineGraph.setDrawBackground(true);
     }
 
     @Override protected void onDetachedFromWindow() {

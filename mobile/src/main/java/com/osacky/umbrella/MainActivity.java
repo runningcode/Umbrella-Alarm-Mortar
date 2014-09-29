@@ -16,12 +16,14 @@ import android.view.ViewGroup;
 import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.CoreView;
+import com.osacky.umbrella.core.util.UIUtils;
 import com.osacky.umbrella.mortar.ActivityPresenter;
 import com.osacky.umbrella.mortar.ActivityResultPresenter;
 import com.osacky.umbrella.mortar.HasActivity;
 import com.osacky.umbrella.mortar.PauseAndResumeActivity;
 import com.osacky.umbrella.mortar.PauseAndResumePresenter;
 import com.osacky.umbrella.ui.AppContainer;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.UUID;
 
@@ -29,13 +31,14 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import flow.Flow;
-import hugo.weaving.DebugLog;
 import mortar.Mortar;
 import mortar.MortarActivityScope;
 import mortar.MortarScope;
 
 import static android.content.Intent.ACTION_MAIN;
 import static android.content.Intent.CATEGORY_LAUNCHER;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.GINGERBREAD_MR1;
 
 public class MainActivity extends ActionBarActivity
         implements ActionBarOwner.View, PauseAndResumeActivity, HasActivity {
@@ -50,6 +53,8 @@ public class MainActivity extends ActionBarActivity
     private MortarActivityScope activityScope;
     private Flow flow;
     private ActionBar mActionBar;
+    private SystemBarTintManager mSystemBarTintManager;
+    private CoreView mCoreView;
 
     private boolean configurationChangeIncoming;
     private String  scopeName;
@@ -72,16 +77,21 @@ public class MainActivity extends ActionBarActivity
 
         mActionBar = getSupportActionBar();
 
+        mSystemBarTintManager = new SystemBarTintManager(this);
+        mSystemBarTintManager.setStatusBarTintEnabled(true);
+        mSystemBarTintManager.setNavigationBarTintEnabled(true);
+
+        ViewGroup container = appContainer.get(this, UmbrellaApplication.get(this));
+
+        getLayoutInflater().inflate(R.layout.core, container);
+        mCoreView = ButterKnife.findById(container, R.id.core_layout);
+
+        flow = mCoreView.getFlow();
+
         mActionBarOwner.takeView(this);
         mActivityPresenter.takeView(this);
         pauseNarcPresenter.takeView(this);
         mResultPresenter.takeView(this);
-        ViewGroup container = appContainer.get(this, UmbrellaApplication.get(this));
-
-        getLayoutInflater().inflate(R.layout.core, container);
-        CoreView coreView = ButterKnife.findById(container, R.id.core_layout);
-
-        flow = coreView.getFlow();
     }
 
     @Override protected void onResume() {
@@ -126,7 +136,7 @@ public class MainActivity extends ActionBarActivity
         return activityScope.getName();
     }
 
-    @Override @DebugLog public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         if (mScreenMenu > 0) {
             getMenuInflater().inflate(mScreenMenu, menu);
         }
@@ -195,9 +205,10 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void setUpButtonEnabled(boolean enabled) {
         mActionBar.setDisplayHomeAsUpEnabled(enabled);
+        mActionBar.setHomeButtonEnabled(true);
     }
 
-    @Override @DebugLog
+    @Override
     public void setMenu(@MenuRes int menuResId) {
         if (menuResId != mScreenMenu) {
             mScreenMenu = menuResId;
@@ -217,11 +228,23 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void setColor(@ColorRes int color) {
         mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
+        mSystemBarTintManager.setStatusBarTintColor(getResources().getColor(color));
     }
 
     @Override
     public void setClipping(boolean clip) {
-        // TODO
+        if (clip) {
+            SystemBarTintManager.SystemBarConfig config = mSystemBarTintManager.getConfig();
+            if (SDK_INT <= GINGERBREAD_MR1) {
+                mCoreView.setPadding(0, UIUtils.calculateActionBarSize(this),
+                        config.getPixelInsetRight(), 0);
+            } else {
+                mCoreView.setPadding(0, config.getPixelInsetTop(true),
+                        config.getPixelInsetRight(), 0);
+            }
+        } else {
+            mCoreView.setPadding(0, 0, 0, 0);
+        }
     }
 
     @Override public boolean isRunning() {

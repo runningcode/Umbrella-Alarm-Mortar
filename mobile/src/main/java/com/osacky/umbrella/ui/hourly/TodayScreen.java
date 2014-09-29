@@ -17,6 +17,7 @@ import flow.Layout;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 
 @Layout(R.layout.view_weather_today)
 public class TodayScreen implements StateBlueprint {
@@ -69,7 +70,9 @@ public class TodayScreen implements StateBlueprint {
         }
 
         Subscription getSubscription(Observer<TodayWeatherSummary> observer) {
-            return mObservable.map(mWeatherToToday).subscribe(observer);
+            return mObservable.map(mWeatherToToday)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
         }
     }
 
