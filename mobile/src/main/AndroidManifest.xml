@@ -2,12 +2,8 @@
 <manifest
     package="com.osacky.umbrella"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:installLocation="auto"
     >
-
-    <!-- this is a hack to use cardview palette and recycleview -->
-    <uses-sdk tools:node="replace"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>

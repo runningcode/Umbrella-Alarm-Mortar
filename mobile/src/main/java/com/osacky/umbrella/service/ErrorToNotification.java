@@ -31,7 +31,7 @@ public class ErrorToNotification implements Func1<RetrofitError, Notification> {
 
     @Override public Notification call(RetrofitError retrofitError) {
         String contentText;
-        if (retrofitError.isNetworkError()) {
+        if (retrofitError.getKind() == RetrofitError.Kind.NETWORK) {
             contentText = mContext.getString(R.string.error_network);
         } else {
             contentText = mContext.getString(R.string.error_non_network);

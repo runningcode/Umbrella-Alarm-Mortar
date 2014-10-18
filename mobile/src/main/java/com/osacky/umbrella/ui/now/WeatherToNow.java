@@ -21,11 +21,15 @@ public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
         if (weatherResult == null) {
             return null;
         }
+        boolean willRain = false;
         List<Condition> data = weatherResult.getMinutely().getData();
         GraphViewData[] graphViewData = new GraphViewData[data.size()];
         for (int i = 0; i < data.size(); i++) {
-            Condition condition = data.get(i);
-            GraphViewData dataPoint = new GraphViewData(i, condition.getPrecipIntensity());
+            float intensity = data.get(i).getPrecipIntensity();
+            if (intensity > 0) {
+                willRain = true;
+            }
+            GraphViewData dataPoint = new GraphViewData(i, intensity);
             graphViewData[i] = dataPoint;
         }
 
@@ -33,6 +37,7 @@ public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
                 weatherResult.getCurrently().getTemperature(),
                 weatherResult.getCurrently().getApparentTemperature(),
                 weatherResult.getMinutely().getSummary(),
-                graphViewData);
+                graphViewData,
+                willRain);
     }
 }

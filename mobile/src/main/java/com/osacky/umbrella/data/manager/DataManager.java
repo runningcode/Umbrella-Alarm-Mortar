@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.osacky.umbrella.data.api.WeatherService;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.observables.ConnectableObservable;
 

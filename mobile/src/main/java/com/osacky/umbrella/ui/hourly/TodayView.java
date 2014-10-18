@@ -50,7 +50,7 @@ public class TodayView extends LinearLayout {
                 ));
                 mWeatherText.setText(rainSummary.getSummary());
                 mChanceOfRain.setText(String.format(getContext().getString(R.string
-                        .chance_of_rain), rainSummary.getChanceOfRain()));
+                        .chance_of_rain_today), rainSummary.getChanceOfRain()));
             }
         });
         mPresenter.takeView(this);

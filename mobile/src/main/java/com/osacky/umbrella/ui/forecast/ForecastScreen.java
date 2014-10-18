@@ -7,6 +7,7 @@ import com.osacky.umbrella.R;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
 import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
+import com.osacky.umbrella.util.ObjectUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,7 +25,7 @@ public class ForecastScreen implements StateBlueprint {
     private SparseArray<Parcelable> mViewState;
 
     @Override public String getMortarScopeName() {
-        return ForecastScreen.class.getName();
+        return ObjectUtils.getClass(this).getName();
     }
 
     @Override public Object getDaggerModule() {

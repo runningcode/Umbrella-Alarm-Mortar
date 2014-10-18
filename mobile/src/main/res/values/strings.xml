@@ -28,7 +28,7 @@
     <string name="about">About</string>
     <string name="powered_by_forecast">Powered by Forecast</string>
 
-    <string name="chance_of_rain">%1$d%% chance of rain</string>
+    <string name="chance_of_rain_today">%1$d%% chance of rain today</string>
     <string name="chance_of_rain_mini">%1$d%%</string>
     <string name="ic_notif_action_retry">Retry</string>
     <string name="menu_title_notifications">Notifications</string>
@@ -40,6 +40,6 @@
     <string name="tab_now">Now</string>
     <string name="tab_today">Today</string>
     <string name="tab_forecast">Forecast</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="empty_default">No data</string>
 </resources>

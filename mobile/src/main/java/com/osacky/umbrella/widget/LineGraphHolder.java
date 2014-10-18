@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.jjoe64.graphview.LineGraphView;
+import com.osacky.umbrella.util.Views;
 
 public class LineGraphHolder extends FrameLayout {
 
@@ -13,6 +14,8 @@ public class LineGraphHolder extends FrameLayout {
     public LineGraphHolder(Context context, AttributeSet attrs) {
         super(context, attrs);
         mLineGraphView = new LineGraphView(context, attrs);
+        mLineGraphView.setId(Views.generateViewId());
+        mLineGraphView.setVisibility(GONE);
         addView(mLineGraphView);
     }
 

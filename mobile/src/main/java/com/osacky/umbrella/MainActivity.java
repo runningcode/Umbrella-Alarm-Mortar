@@ -16,14 +16,12 @@ import android.view.ViewGroup;
 import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.CoreView;
-import com.osacky.umbrella.core.util.UIUtils;
 import com.osacky.umbrella.mortar.ActivityPresenter;
 import com.osacky.umbrella.mortar.ActivityResultPresenter;
 import com.osacky.umbrella.mortar.HasActivity;
 import com.osacky.umbrella.mortar.PauseAndResumeActivity;
 import com.osacky.umbrella.mortar.PauseAndResumePresenter;
 import com.osacky.umbrella.ui.AppContainer;
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.UUID;
 
@@ -37,8 +35,6 @@ import mortar.MortarScope;
 
 import static android.content.Intent.ACTION_MAIN;
 import static android.content.Intent.CATEGORY_LAUNCHER;
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.GINGERBREAD_MR1;
 
 public class MainActivity extends ActionBarActivity
         implements ActionBarOwner.View, PauseAndResumeActivity, HasActivity {
@@ -53,7 +49,6 @@ public class MainActivity extends ActionBarActivity
     private MortarActivityScope activityScope;
     private Flow flow;
     private ActionBar mActionBar;
-    private SystemBarTintManager mSystemBarTintManager;
     private CoreView mCoreView;
 
     private boolean configurationChangeIncoming;
@@ -76,10 +71,6 @@ public class MainActivity extends ActionBarActivity
         Mortar.inject(this, this);
 
         mActionBar = getSupportActionBar();
-
-        mSystemBarTintManager = new SystemBarTintManager(this);
-        mSystemBarTintManager.setStatusBarTintEnabled(true);
-        mSystemBarTintManager.setNavigationBarTintEnabled(true);
 
         ViewGroup container = appContainer.get(this, UmbrellaApplication.get(this));
 
@@ -228,23 +219,10 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void setColor(@ColorRes int color) {
         mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
-        mSystemBarTintManager.setStatusBarTintColor(getResources().getColor(color));
     }
 
     @Override
     public void setClipping(boolean clip) {
-        if (clip) {
-            SystemBarTintManager.SystemBarConfig config = mSystemBarTintManager.getConfig();
-            if (SDK_INT <= GINGERBREAD_MR1) {
-                mCoreView.setPadding(0, UIUtils.calculateActionBarSize(this),
-                        config.getPixelInsetRight(), 0);
-            } else {
-                mCoreView.setPadding(0, config.getPixelInsetTop(true),
-                        config.getPixelInsetRight(), 0);
-            }
-        } else {
-            mCoreView.setPadding(0, 0, 0, 0);
-        }
     }
 
     @Override public boolean isRunning() {

@@ -1,10 +1,6 @@
 package com.osacky.umbrella.core;
 
-import android.content.Context;
-
-import com.osacky.umbrella.UmbrellaApplication;
 import com.osacky.umbrella.UmbrellaModule;
-import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.core.util.FlowOwner;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
 
@@ -52,21 +48,14 @@ public class CorePresenter implements Blueprint {
         Flow provideFlow(Presenter presenter) {
             return presenter.getFlow();
         }
-
-        @Provides
-        Context providesContext(UmbrellaApplication app) {
-            return app;
-        }
     }
 
     @Singleton
     public static class Presenter extends FlowOwner<Blueprint, CoreView> {
-        private final ActionBarOwner actionBarOwner;
 
         @Inject
-        Presenter(Parcer<Object> flowParcer, ActionBarOwner actionBarOwner) {
+        Presenter(Parcer<Object> flowParcer) {
             super(flowParcer);
-            this.actionBarOwner = actionBarOwner;
         }
 
         @Override

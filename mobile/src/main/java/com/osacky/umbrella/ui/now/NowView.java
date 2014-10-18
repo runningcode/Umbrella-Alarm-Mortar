@@ -57,10 +57,15 @@ public class NowView extends ScrollView {
                 mCurrentTemp.setText(String.format(resources.getString(R.string.temp_current),
                         (int) rainSummary.getCurrentTemp()));
                 mWeatherText.setText(rainSummary.getSummary());
-                GraphViewSeriesStyle style = new GraphViewSeriesStyle();
-                style.thickness = (int) resources.getDimension(R.dimen.graph_stroke_width);
-                style.color = resources.getColor(R.color.theme_accent);
-                mLineGraph.addSeries(new GraphViewSeries("Hello", style, rainSummary.getData()));
+                if (rainSummary.isWillRain()) {
+                    GraphViewSeriesStyle style = new GraphViewSeriesStyle();
+                    style.thickness = (int) resources.getDimension(R.dimen.graph_stroke_width);
+                    style.color = resources.getColor(R.color.theme_accent);
+                    mLineGraph.addSeries(new GraphViewSeries("Hello", style, rainSummary.getData()));
+                    mLineGraph.setVisibility(VISIBLE);
+                } else {
+                    mLineGraph.setVisibility(GONE);
+                }
 
             }
         });
@@ -77,7 +82,8 @@ public class NowView extends ScrollView {
         graphStyle.setTextSize(resources.getDimension(R.dimen.text_size_xsmall));
         mLineGraph.setVerticalLabels(resources.getStringArray(R.array.graph_labels_vert));
         mLineGraph.setHorizontalLabels(resources.getStringArray(R.array.graph_labels_horiz));
-        mLineGraph.setManualYAxisBounds(0, 0.5);
+        mLineGraph.setManualYMaxBound(0.4);
+        mLineGraph.setManualYMinBound(0);
         mLineGraph.setDisableTouch(true);
         mLineGraph.setBackgroundColor(resources.getColor(R.color.theme_accent_light));
         mLineGraph.setDrawBackground(true);

@@ -56,7 +56,7 @@ public abstract class FlowOwner<S extends Blueprint, V extends View & CanShowScr
     }
 
     @Override
-    public void go(Backstack backstack, Flow.Direction flowDirection) {
+    public void go(Backstack backstack, Flow.Direction flowDirection, Flow.Callback callback) {
         //noinspection unchecked
         S newScreen = (S) backstack.current().getScreen();
 
@@ -69,6 +69,7 @@ public abstract class FlowOwner<S extends Blueprint, V extends View & CanShowScr
         }
 
         showScreen(newScreen, oldScreen, flowDirection);
+        callback.onComplete();
     }
 
     protected void showScreen(S newScreen, S oldScreen, Flow.Direction flowDirection) {

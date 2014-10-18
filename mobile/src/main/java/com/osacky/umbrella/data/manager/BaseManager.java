@@ -25,17 +25,14 @@ public abstract class BaseManager<Result, ARG> {
         return mApi;
     }
 
-    @DebugLog
     protected void putInRequestCache(ARG key, Observable<Result> value) {
         mRequestCache.put(key, value);
     }
 
-    @DebugLog
     protected Observable<Result> getFromRequestCache(ARG key) {
         return mRequestCache.get(key);
     }
 
-    @DebugLog
     protected void removeFromRequestCache(ARG key) {
         mRequestCache.remove(key);
     }

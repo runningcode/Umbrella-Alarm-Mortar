@@ -18,6 +18,7 @@ import com.osacky.umbrella.data.api.model.RainSummary;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 import com.osacky.umbrella.service.WeatherToSummary;
 import com.osacky.umbrella.ui.notifications.NotificationsScreen;
+import com.osacky.umbrella.util.ObjectUtils;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -46,7 +47,7 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
     }
 
     @Override public String getMortarScopeName() {
-        return BaseTabScreen.class.getSimpleName();
+        return ObjectUtils.getClass(this).getName();
     }
 
     @Override public Object getDaggerModule() {

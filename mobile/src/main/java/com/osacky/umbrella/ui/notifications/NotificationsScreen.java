@@ -16,6 +16,7 @@ import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
+import com.osacky.umbrella.util.ObjectUtils;
 
 import org.joda.time.LocalTime;
 
@@ -33,7 +34,7 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
     private SparseArray<Parcelable> mViewState;
 
     @Override public String getMortarScopeName() {
-        return NotificationsScreen.class.getName();
+        return ObjectUtils.getClass(this).getName();
     }
 
     @Override public Object getDaggerModule() {
@@ -87,7 +88,6 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
                     .title(R.string.menu_title_notifications)
                     .upButtonEnabled(true)
                     .build();
-
         }
 
         @Override public void onLoad(Bundle savedInstanceState) {
