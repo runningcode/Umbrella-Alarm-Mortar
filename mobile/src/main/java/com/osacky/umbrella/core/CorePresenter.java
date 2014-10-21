@@ -1,5 +1,7 @@
 package com.osacky.umbrella.core;
 
+import android.app.Activity;
+
 import com.osacky.umbrella.UmbrellaModule;
 import com.osacky.umbrella.core.util.FlowOwner;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
@@ -16,14 +18,8 @@ public class CorePresenter implements Blueprint {
 
     private final String scopeName;
 
-    /**
-     * Required for a race condition cause by Android when a new scope is created
-     * before the old one is destroyed
-     * <p/>
-     * https://github.com/square/mortar/issues/87#issuecomment-43849264
-     */
-    public CorePresenter(String scopeName) {
-        this.scopeName = scopeName;
+    public CorePresenter(Activity activity) {
+        scopeName = activity.getLocalClassName() + "-task-" + activity.getTaskId();
     }
 
     @Override public String getMortarScopeName() {
@@ -42,7 +38,9 @@ public class CorePresenter implements Blueprint {
             library = true
     )
     public final class Module {
-        public Module() {}
+
+        public Module() {
+        }
 
         @Provides
         Flow provideFlow(Presenter presenter) {

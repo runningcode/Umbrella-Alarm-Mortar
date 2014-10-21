@@ -26,7 +26,7 @@ public class ActivityResultPresenter extends Presenter<HasScope>
     }
 
     @Override protected MortarScope extractScope(HasScope view) {
-        return Mortar.getScope(view.getMortarContext());
+        return view.getScope();
     }
 
     @Override protected void onExitScope() {

@@ -10,9 +10,9 @@ import mortar.MortarScope;
 import mortar.Presenter;
 import timber.log.Timber;
 
-public class ActionBarOwner extends Presenter<ActionBarOwner.View> {
+public class ActionBarOwner extends Presenter<ActionBarOwner.Activity> {
 
-    public interface View extends HasScope {
+    public interface Activity extends HasScope {
         void setSupportActionBar(Toolbar toolbar);
     }
 
@@ -21,16 +21,16 @@ public class ActionBarOwner extends Presenter<ActionBarOwner.View> {
 
     @DebugLog
     public void setToolbar(Toolbar toolbar) {
-        View view = getView();
-        if (view != null) {
+        Activity activity = getView();
+        if (activity != null) {
             Timber.i("view was not null");
-            view.setSupportActionBar(toolbar);
+            activity.setSupportActionBar(toolbar);
         }
     }
 
     @Override
-    protected MortarScope extractScope(View view) {
-        return Mortar.getScope(view.getMortarContext());
+    protected MortarScope extractScope(Activity activity) {
+        return activity.getScope();
     }
 }
 

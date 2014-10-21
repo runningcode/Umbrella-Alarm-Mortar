@@ -1,7 +1,7 @@
 package com.osacky.umbrella.mortar;
 
-import android.content.Context;
+import mortar.MortarScope;
 
 public interface HasScope {
-    Context getMortarContext();
+    MortarScope getScope();
 }

@@ -1,6 +1,5 @@
 package com.osacky.umbrella;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,8 +17,6 @@ import com.osacky.umbrella.mortar.PauseAndResumeActivity;
 import com.osacky.umbrella.mortar.PauseAndResumePresenter;
 import com.osacky.umbrella.ui.AppContainer;
 
-import java.util.UUID;
-
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -32,7 +29,7 @@ import static android.content.Intent.ACTION_MAIN;
 import static android.content.Intent.CATEGORY_LAUNCHER;
 
 public class MainActivity extends ActionBarActivity
-        implements ActionBarOwner.View, PauseAndResumeActivity, HasActivity {
+        implements ActionBarOwner.Activity, PauseAndResumeActivity, HasActivity {
 
     @Inject protected ActionBarOwner mActionBarOwner;
     @Inject protected ActivityPresenter mActivityPresenter;
@@ -43,8 +40,6 @@ public class MainActivity extends ActionBarActivity
     private MortarActivityScope activityScope;
     private Flow flow;
 
-    private boolean configurationChangeIncoming;
-    private String  scopeName;
     private boolean resumed;
 
     @Override
@@ -57,10 +52,10 @@ public class MainActivity extends ActionBarActivity
         }
 
         MortarScope parentScope = Mortar.getScope(getApplication());
-        activityScope = Mortar.requireActivityScope(parentScope, new CorePresenter(getScopeName()));
-        activityScope.onCreate(savedInstanceState);
-
+        activityScope = Mortar.requireActivityScope(parentScope, new CorePresenter(this));
         Mortar.inject(this, this);
+
+        activityScope.onCreate(savedInstanceState);
 
         ViewGroup container = appContainer.get(this, UmbrellaApplication.get(this));
 
@@ -89,32 +84,16 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        if (mActionBarOwner != null) {
-            mActionBarOwner.dropView(this);
-        }
-        if (mActivityPresenter != null) {
-            mActivityPresenter.dropView(this);
-        }
-        if (pauseNarcPresenter != null) {
-            pauseNarcPresenter.dropView(this);
-        }
-        if (mResultPresenter != null) {
-            mResultPresenter.dropView(this);
-        }
-        if (!configurationChangeIncoming) {
-            if (!activityScope.isDestroyed()) {
-                MortarScope parentScope = Mortar.getScope(getApplication());
-                parentScope.destroyChild(activityScope);
-            }
+        mActionBarOwner.dropView(this);
+        mActivityPresenter.dropView(this);
+        pauseNarcPresenter.dropView(this);
+        mResultPresenter.dropView(this);
+        if (isFinishing() && activityScope != null) {
+            MortarScope parentScope = Mortar.getScope(getApplication());
+            parentScope.destroyChild(activityScope);
             activityScope = null;
         }
-    }
-
-    @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        configurationChangeIncoming = true;
-        return activityScope.getName();
+        super.onDestroy();
     }
 
     @Override
@@ -153,14 +132,6 @@ public class MainActivity extends ActionBarActivity
         mResultPresenter.onActivityResult(requestCode, resultCode, data);
     }
 
-    private String getScopeName() {
-        if (scopeName == null) scopeName = (String) getLastCustomNonConfigurationInstance();
-        if (scopeName == null) {
-            scopeName = MainActivity.class.getName() + "-" + UUID.randomUUID().toString();
-        }
-        return scopeName;
-    }
-
     private boolean isWrongInstance() {
         if (!isTaskRoot()) {
             Intent intent = getIntent();
@@ -174,11 +145,11 @@ public class MainActivity extends ActionBarActivity
         return resumed;
     }
 
-    @Override public Context getMortarContext() {
+    @Override public ActionBarActivity getActivity() {
         return this;
     }
 
-    @Override public ActionBarActivity getActivity() {
-        return this;
+    @Override public MortarScope getScope() {
+        return activityScope;
     }
 }

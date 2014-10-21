@@ -20,7 +20,7 @@ public class PauseAndResumePresenter extends Presenter<PauseAndResumeActivity>
     }
 
     @Override protected MortarScope extractScope(PauseAndResumeActivity view) {
-        return Mortar.getScope(view.getMortarContext());
+        return view.getScope();
     }
 
     @Override public void onExitScope() {
