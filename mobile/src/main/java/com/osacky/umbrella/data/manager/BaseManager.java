@@ -5,7 +5,6 @@ import com.osacky.umbrella.data.api.WeatherService;
 import java.util.HashMap;
 import java.util.Map;
 
-import hugo.weaving.DebugLog;
 import rx.Observable;
 
 public abstract class BaseManager<Result, ARG> {

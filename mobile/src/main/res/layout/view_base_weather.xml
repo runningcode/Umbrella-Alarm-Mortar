@@ -2,16 +2,31 @@
 
 <com.osacky.umbrella.ui.base.BaseTabView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:popupTheme="@style/AppTheme"
+        android:theme="@style/AppTheme.Dark"
+        android:elevation="@dimen/toolbar_elevation"
+        app:popupTheme="@style/AppTheme"
+        app:elevation="@dimen/toolbar_elevation"
+        />
+
     <com.osacky.umbrella.widget.SlidingTabLayout
-        android:background="@color/theme_primary"
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="?colorPrimary"
+        android:elevation="@dimen/toolbar_elevation"
+        app:elevation="@dimen/toolbar_elevation"
+        />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

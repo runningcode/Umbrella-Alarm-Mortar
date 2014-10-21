@@ -39,6 +39,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:gravity="center"
-        style="@style/Display1"/>
+        style="@style/TextAppearance.AppCompat.Display1"/>
 
 </LinearLayout>

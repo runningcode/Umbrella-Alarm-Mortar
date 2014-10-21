@@ -1,6 +1,8 @@
 package com.osacky.umbrella.ui.notifications;
 
 import android.content.Context;
+import android.support.annotation.StringRes;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
@@ -20,12 +22,17 @@ public class NotificationsView extends LinearLayout {
     @Inject NotificationsScreen.Presenter mPresenter;
 
     @InjectView(R.id.time_picker) TimePicker mTimePicker;
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
 
     public NotificationsView(Context context, AttributeSet attrs) {
         super(context, attrs);
         if (!isInEditMode()) {
             Mortar.inject(context, this);
         }
+    }
+
+    void setTitle(@StringRes int title) {
+        mToolbar.setTitle(title);
     }
 
     @Override protected void onFinishInflate() {

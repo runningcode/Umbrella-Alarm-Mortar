@@ -3,12 +3,6 @@ package com.osacky.umbrella.ui.test;
 
 import android.location.Location;
 
-import com.osacky.umbrella.actionbar.ActionBarOwner;
-import com.osacky.umbrella.alarm.DailyAlarmHelper;
-import com.osacky.umbrella.data.api.ForecastWeatherManager;
-import com.osacky.umbrella.data.prefs.IntPreference;
-import com.osacky.umbrella.data.prefs.annotations.TimePref;
-import com.osacky.umbrella.service.WeatherToSummary;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
 import com.osacky.umbrella.ui.now.NowScreen;
 import com.osacky.umbrella.ui.now.WeatherToNow;

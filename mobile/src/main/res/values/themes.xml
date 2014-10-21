@@ -2,21 +2,17 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/theme_primary</item>
         <item name="colorPrimaryDark">@color/theme_primary_dark</item>
         <item name="colorAccent">@color/theme_accent</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="AppTheme.Base">
-        <!--this is for compatibility with transluscent nav/status bars-->
-    </style>
-
-    <style name="UmbrellaAppTheme" parent="AppTheme.Base">
-        <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:textColor">@color/text_primary</item>
-        <item name="actionBarStyle">@style/ActionBar</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/theme_primary</item>
+        <item name="colorPrimaryDark">@color/theme_primary_dark</item>
+        <item name="colorAccent">@color/theme_accent</item>
     </style>
 
 </resources>

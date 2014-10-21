@@ -1,11 +1,14 @@
 package com.osacky.umbrella.ui.base;
 
 import android.content.Context;
+import android.support.annotation.MenuRes;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import com.osacky.umbrella.R;
+import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.mortar.ScreenPagerAdapter;
 import com.osacky.umbrella.ui.forecast.ForecastScreen;
@@ -22,7 +25,9 @@ import mortar.Mortar;
 public class BaseTabView extends LinearLayout {
 
     @Inject BaseTabScreen.Presenter mPresenter;
+    @Inject ActionBarOwner mActionBarOwner;
 
+    @InjectView(R.id.toolbar) Toolbar mToolbar;
     @InjectView(R.id.sliding_tabs) SlidingTabLayout mSlidingTabLayout;
     @InjectView(R.id.viewpager) ViewPager mViewPager;
 
@@ -30,8 +35,8 @@ public class BaseTabView extends LinearLayout {
 
     public BaseTabView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        Mortar.inject(context, this);
         mAdapter.addScreen(new NowScreen(), new TodayScreen(), new ForecastScreen());
+        Mortar.inject(context, this);
     }
 
     @Override protected void onFinishInflate() {
@@ -41,17 +46,22 @@ public class BaseTabView extends LinearLayout {
                 getContext().getResources().getBoolean(R.bool.distribute_evenly));
         mViewPager.setAdapter(mAdapter);
         mSlidingTabLayout.setViewPager(mViewPager);
-        mSlidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override public int getIndicatorColor(int position) {
-                return getContext().getResources().getColor(R.color.theme_accent);
-            }
-        });
         mPresenter.takeView(this);
+        mActionBarOwner.setToolbar(mToolbar);
     }
 
     @Override protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mPresenter.dropView(this);
+    }
+
+    void setTitle(CharSequence chanceOfRain) {
+        mToolbar.setTitle(chanceOfRain);
+    }
+
+    void setMenu(@MenuRes int menuId, Toolbar.OnMenuItemClickListener onMenuItemClickListener) {
+        mToolbar.inflateMenu(menuId);
+        mToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
     }
 
     class WeatherPagerAdapter extends ScreenPagerAdapter<StateBlueprint> {

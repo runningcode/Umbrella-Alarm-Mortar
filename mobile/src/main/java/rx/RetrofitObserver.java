@@ -3,10 +3,6 @@ package rx;
 import retrofit.RetrofitError;
 import timber.log.Timber;
 
-import static retrofit.RetrofitError.*;
-import static retrofit.RetrofitError.Kind.CONVERSION;
-import static retrofit.RetrofitError.Kind.HTTP;
-import static retrofit.RetrofitError.Kind.NETWORK;
 import static retrofit.RetrofitError.Kind.UNEXPECTED;
 
 public abstract class RetrofitObserver<T> implements Observer<T> {

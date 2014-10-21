@@ -17,6 +17,7 @@
 package com.osacky.umbrella.widget;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
@@ -32,6 +33,9 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.osacky.umbrella.R;
+import com.osacky.umbrella.util.Utils;
 
 /**
  * To be used with ViewPager to provide a tab indicator component which give constant feedback as to
@@ -175,10 +179,10 @@ public class SlidingTabLayout extends HorizontalScrollView {
         TextView textView = new TextView(context);
         textView.setGravity(Gravity.CENTER);
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, TAB_VIEW_TEXT_SIZE_SP);
-        textView.setTypeface(Typeface.DEFAULT_BOLD);
-        textView.setTextColor(getContext().getResources().getColor(android.R.color.white));
+        textView.setTextColor(getResources().getColorStateList(R.color.tabs_color));
         textView.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        Utils.setMediumTypeface(textView);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             // If we're running on Honeycomb or newer, then we can use the Theme's

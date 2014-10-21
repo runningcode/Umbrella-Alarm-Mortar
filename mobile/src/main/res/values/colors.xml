@@ -6,6 +6,5 @@
     <color name="theme_accent">#FF4081</color>
     <color name="theme_accent_light">#FF808B</color>
     <color name="theme_accent_dark">#F50057</color>
-    <color name="text_secondary">#757575</color>
     <color name="text_primary">#212121</color>
 </resources>

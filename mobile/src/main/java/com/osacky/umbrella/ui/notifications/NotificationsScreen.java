@@ -5,8 +5,6 @@ import android.os.Parcelable;
 import android.util.SparseArray;
 
 import com.osacky.umbrella.R;
-import com.osacky.umbrella.actionbar.ActionBarConfig;
-import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.alarm.DailyAlarmHelper;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.anim.Transition;
@@ -68,8 +66,6 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
     @Singleton
     public static class Presenter extends BetterViewPresenter<NotificationsView> {
 
-        private final ActionBarOwner mActionBarOwner;
-        private final ActionBarConfig mActionBarConfig;
         private final IntPreference mTimePreference;
         private final DailyAlarmHelper mDailyAlarmHelper;
 
@@ -77,22 +73,18 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
         public Presenter(
                 SparseArray<Parcelable> viewState,
                 @TimePref IntPreference timePreference,
-                DailyAlarmHelper dailyAlarmHelper,
-                ActionBarOwner actionBarOwner
+                DailyAlarmHelper dailyAlarmHelper
         ) {
             super(viewState);
-            mActionBarOwner = actionBarOwner;
             mTimePreference = timePreference;
             mDailyAlarmHelper = dailyAlarmHelper;
-            mActionBarConfig = new ActionBarConfig.Builder()
-                    .title(R.string.menu_title_notifications)
-                    .upButtonEnabled(true)
-                    .build();
         }
 
         @Override public void onLoad(Bundle savedInstanceState) {
             super.onLoad(savedInstanceState);
-            mActionBarOwner.setConfig(mActionBarConfig);
+            NotificationsView view = getView();
+            if (view == null) return;
+            view.setTitle(R.string.notif_title);
         }
 
         void onTimeChanged(int hourOfDay, int minute) {

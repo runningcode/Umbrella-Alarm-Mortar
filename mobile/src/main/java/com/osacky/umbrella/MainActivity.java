@@ -2,14 +2,9 @@ package com.osacky.umbrella;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.MenuRes;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
@@ -45,11 +40,8 @@ public class MainActivity extends ActionBarActivity
     @Inject protected PauseAndResumePresenter pauseNarcPresenter;
     @Inject protected ActivityResultPresenter mResultPresenter;
 
-    private @MenuRes int mScreenMenu;
     private MortarActivityScope activityScope;
     private Flow flow;
-    private ActionBar mActionBar;
-    private CoreView mCoreView;
 
     private boolean configurationChangeIncoming;
     private String  scopeName;
@@ -70,14 +62,12 @@ public class MainActivity extends ActionBarActivity
 
         Mortar.inject(this, this);
 
-        mActionBar = getSupportActionBar();
-
         ViewGroup container = appContainer.get(this, UmbrellaApplication.get(this));
 
         getLayoutInflater().inflate(R.layout.core, container);
-        mCoreView = ButterKnife.findById(container, R.id.core_layout);
+        CoreView coreView = ButterKnife.findById(container, R.id.core_layout);
 
-        flow = mCoreView.getFlow();
+        flow = coreView.getFlow();
 
         mActionBarOwner.takeView(this);
         mActivityPresenter.takeView(this);
@@ -127,21 +117,13 @@ public class MainActivity extends ActionBarActivity
         return activityScope.getName();
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        if (mScreenMenu > 0) {
-            getMenuInflater().inflate(mScreenMenu, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 return flow.goUp();
             default:
-                return mActionBarOwner.handleMenuClick(item.getItemId()) ||
-                        super.onOptionsItemSelected(item);
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -186,43 +168,6 @@ public class MainActivity extends ActionBarActivity
             return intent.hasCategory(CATEGORY_LAUNCHER) && isMainAction;
         }
         return false;
-    }
-
-    @Override
-    public void setShowHomeEnabled(boolean enabled) {
-        mActionBar.setDisplayShowHomeEnabled(enabled);
-    }
-
-    @Override
-    public void setUpButtonEnabled(boolean enabled) {
-        mActionBar.setDisplayHomeAsUpEnabled(enabled);
-        mActionBar.setHomeButtonEnabled(true);
-    }
-
-    @Override
-    public void setMenu(@MenuRes int menuResId) {
-        if (menuResId != mScreenMenu) {
-            mScreenMenu = menuResId;
-        }
-        supportInvalidateOptionsMenu();
-    }
-
-    @Override
-    public void setVisibility(boolean visible) {
-        if (visible) {
-            mActionBar.show();
-        } else {
-            mActionBar.hide();
-        }
-    }
-
-    @Override
-    public void setColor(@ColorRes int color) {
-        mActionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(color)));
-    }
-
-    @Override
-    public void setClipping(boolean clip) {
     }
 
     @Override public boolean isRunning() {

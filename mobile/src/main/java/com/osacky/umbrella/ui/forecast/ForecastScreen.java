@@ -17,6 +17,7 @@ import flow.Layout;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 @Layout(R.layout.view_weather_forecast)
@@ -77,7 +78,7 @@ public class ForecastScreen implements StateBlueprint {
         }
 
         Subscription getSubscription(Observer<ForecastWeatherSummary> observer) {
-            return mObservable.subscribe(observer);
+            return mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
         }
 
         public ForecastAdapter getForecastAdapter() {

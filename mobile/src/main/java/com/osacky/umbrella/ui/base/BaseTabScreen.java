@@ -3,11 +3,11 @@ package com.osacky.umbrella.ui.base;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
+import android.view.MenuItem;
 
 import com.osacky.umbrella.R;
-import com.osacky.umbrella.actionbar.ActionBarConfig;
-import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.anim.Transition;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
@@ -32,7 +32,6 @@ import retrofit.RetrofitError;
 import rx.Observable;
 import rx.RetrofitObserver;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.functions.Action1;
 import timber.log.Timber;
 
@@ -74,32 +73,18 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
     @Singleton
     public static class Presenter extends BetterViewPresenter<BaseTabView> {
 
-        private final ActionBarOwner mActionBarOwner;
-        private final ActionBarConfig.Builder mActionBarConfig;
+        private final Flow mFlow;
         private final Observable<WeatherResult> mObservable;
 
         @Inject
         public Presenter(@Named("tabs") SparseArray<Parcelable> viewState,
-                         ActionBarOwner actionBarOwner,
                          Provider<Location> locationProvider,
                          ForecastWeatherManager weatherManager,
                          WeatherToSummary weatherToSummary,
                          final Flow flow
         ) {
             super(viewState);
-            mActionBarOwner = actionBarOwner;
-            mActionBarConfig = new ActionBarConfig.Builder()
-                    .menu(R.menu.about,
-                            new ActionBarOwner.MenuAction(R.id.about, new Action0() {
-                                @Override public void call() {
-                                    // TODO show about popup
-                                }
-                            }),
-                            new ActionBarOwner.MenuAction(R.id.notification, new Action0() {
-                                @Override public void call() {
-                                    flow.goTo(new NotificationsScreen());
-                                }
-                            }));
+            mFlow = flow;
             Location location = locationProvider.get();
             if (location == null) {
                 mObservable = Observable.empty();
@@ -113,8 +98,7 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
                     .doOnNext(new Action1<RainSummary>() {
                         @Override public void call(RainSummary rainSummary) {
                             if (rainSummary == null) return;
-                            mActionBarConfig.title(rainSummary.getCityName());
-                            mActionBarOwner.setConfig(mActionBarConfig.build());
+                            getView().setTitle(rainSummary.getCityName());
                         }
                     })
                     .subscribe(new RetrofitObserver<RainSummary>() {
@@ -125,7 +109,18 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
 
         @Override public void onLoad(Bundle savedInstanceState) {
             super.onLoad(savedInstanceState);
-            mActionBarOwner.setConfig(mActionBarConfig.build());
+            getView().setMenu(R.menu.about, new Toolbar.OnMenuItemClickListener() {
+                @Override public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.about:
+                            return true;
+                        case R.id.notification:
+                            mFlow.goTo(new NotificationsScreen());
+                            return true;
+                    }
+                    return false;
+                }
+            });
         }
 
         public Observable<WeatherResult> getObservable(){

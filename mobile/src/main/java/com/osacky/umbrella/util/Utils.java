@@ -16,10 +16,15 @@
 
 package com.osacky.umbrella.util;
 
+import android.graphics.Typeface;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.TextView;
 
 public final class Utils {
+
+    private static Typeface sMediumTypeface;
 
     public interface OnMeasuredCallback {
         void onMeasured(View view, int width, int height);
@@ -46,6 +51,22 @@ public final class Utils {
                 return true;
             }
         });
+    }
+
+    private static boolean hasL() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    public static void setMediumTypeface(TextView textView) {
+        if (hasL()) {
+            if (sMediumTypeface == null) {
+                sMediumTypeface = Typeface.create("sans-serif-medium", Typeface.NORMAL);
+            }
+
+            textView.setTypeface(sMediumTypeface);
+        } else {
+            textView.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+        }
     }
 
     private Utils() {

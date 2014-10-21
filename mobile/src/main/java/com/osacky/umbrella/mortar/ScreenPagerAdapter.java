@@ -15,21 +15,21 @@ import mortar.Mortar;
 import mortar.MortarScope;
 
 public class ScreenPagerAdapter<S extends Blueprint> extends PagerAdapter {
-    private final List<S> screens;
+    private final List<S> mScreens;
 
     public ScreenPagerAdapter() {
-        this.screens = new ArrayList<>();
+        mScreens = new ArrayList<>();
     }
 
     @SafeVarargs
     public final void addScreen(S... newScreens) {
-        Collections.addAll(screens, newScreens);
+        Collections.addAll(mScreens, newScreens);
         notifyDataSetChanged();
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        S screen = screens.get(position);
+        S screen = mScreens.get(position);
         MortarScope myScope = Mortar.getScope(container.getContext());
         MortarScope newChildScope = myScope.requireChild(screen);
         Context childContext = newChildScope.createContext(container.getContext());
@@ -49,11 +49,11 @@ public class ScreenPagerAdapter<S extends Blueprint> extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return screens.size();
+        return mScreens.size();
     }
 
     public final S getItem(int position) {
-        return screens.get(position);
+        return mScreens.get(position);
     }
 
     @Override
