@@ -30,7 +30,7 @@ public class SummaryToNotification implements Func1<RainSummary, Notification> {
     }
 
     @Override public Notification call(RainSummary rainPeriodResult) {
-        if (rainPeriodResult == null) {
+        if (rainPeriodResult == null || rainPeriodResult.getChanceOfRain() == 0) {
             return null;
         }
         return mBuilderProvider.get()

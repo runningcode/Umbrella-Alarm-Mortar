@@ -5,7 +5,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
@@ -30,8 +29,7 @@ public class RecycleListView extends FrameLayout {
 
     public RecycleListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        LayoutInflater.from(context).inflate(R.layout.recycle_list_view, this);
+        inflate(context, R.layout.recycle_list_view, this);
 
         mRecyclerView = (RecyclerView) findViewById(android.R.id.list);
         mProgress = findViewById(android.R.id.progress);

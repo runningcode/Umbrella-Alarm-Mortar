@@ -57,7 +57,6 @@ public class BetterViewPresenter<V extends View> extends ViewPresenter<V> {
     protected void onEnterScope(MortarScope scope) {
         super.onEnterScope(scope);
         Timber.v("onEnterScope");
-
     }
 
     @Override

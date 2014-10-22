@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Provides;
+import flow.Flow;
 import flow.HasParent;
 import flow.Layout;
 
@@ -66,16 +67,19 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
     @Singleton
     public static class Presenter extends BetterViewPresenter<NotificationsView> {
 
+        private final Flow mFlow;
         private final IntPreference mTimePreference;
         private final DailyAlarmHelper mDailyAlarmHelper;
 
         @Inject
         public Presenter(
                 SparseArray<Parcelable> viewState,
+                Flow flow,
                 @TimePref IntPreference timePreference,
                 DailyAlarmHelper dailyAlarmHelper
         ) {
             super(viewState);
+            mFlow = flow;
             mTimePreference = timePreference;
             mDailyAlarmHelper = dailyAlarmHelper;
         }
@@ -94,6 +98,10 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
 
         LocalTime getDefaultTime() {
             return LocalTime.fromMillisOfDay(mTimePreference.get());
+        }
+
+        void onUpClicked() {
+            mFlow.goUp();
         }
     }
 

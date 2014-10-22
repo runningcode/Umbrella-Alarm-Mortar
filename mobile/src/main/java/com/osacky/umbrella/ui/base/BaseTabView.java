@@ -8,9 +8,8 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import com.osacky.umbrella.R;
-import com.osacky.umbrella.actionbar.ActionBarOwner;
 import com.osacky.umbrella.core.util.StateBlueprint;
-import com.osacky.umbrella.mortar.ScreenPagerAdapter;
+import com.osacky.umbrella.widget.ScreenPagerAdapter;
 import com.osacky.umbrella.ui.forecast.ForecastScreen;
 import com.osacky.umbrella.ui.hourly.TodayScreen;
 import com.osacky.umbrella.ui.now.NowScreen;
@@ -25,11 +24,10 @@ import mortar.Mortar;
 public class BaseTabView extends LinearLayout {
 
     @Inject BaseTabScreen.Presenter mPresenter;
-    @Inject ActionBarOwner mActionBarOwner;
 
-    @InjectView(R.id.toolbar) Toolbar mToolbar;
-    @InjectView(R.id.sliding_tabs) SlidingTabLayout mSlidingTabLayout;
-    @InjectView(R.id.viewpager) ViewPager mViewPager;
+    @InjectView(R.id.toolbar) protected Toolbar mToolbar;
+    @InjectView(R.id.sliding_tabs) protected SlidingTabLayout mSlidingTabLayout;
+    @InjectView(R.id.viewpager) protected ViewPager mViewPager;
 
     private final WeatherPagerAdapter mAdapter = new WeatherPagerAdapter();
 
@@ -47,7 +45,6 @@ public class BaseTabView extends LinearLayout {
         mViewPager.setAdapter(mAdapter);
         mSlidingTabLayout.setViewPager(mViewPager);
         mPresenter.takeView(this);
-        mActionBarOwner.setToolbar(mToolbar);
     }
 
     @Override protected void onDetachedFromWindow() {

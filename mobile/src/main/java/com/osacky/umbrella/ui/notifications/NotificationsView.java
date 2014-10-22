@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
@@ -39,6 +40,12 @@ public class NotificationsView extends LinearLayout {
         super.onFinishInflate();
         if (isInEditMode()) return;
         ButterKnife.inject(this);
+        mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar.setNavigationOnClickListener(new OnClickListener() {
+            @Override public void onClick(View v) {
+                mPresenter.onUpClicked();
+            }
+        });
         LocalTime defaultTime = mPresenter.getDefaultTime();
         mTimePicker.setCurrentHour(defaultTime.getHourOfDay());
         mTimePicker.setCurrentMinute(defaultTime.getMinuteOfHour());

@@ -1,4 +1,4 @@
-package com.osacky.umbrella.mortar;
+package com.osacky.umbrella.widget;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
