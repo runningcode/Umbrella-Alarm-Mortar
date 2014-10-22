@@ -3,14 +3,14 @@ package com.osacky.umbrella.ui.now;
 import com.osacky.umbrella.data.api.model.Condition;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import lecho.lib.hellocharts.model.PointValue;
 import rx.functions.Func1;
-
-import static com.jjoe64.graphview.GraphView.GraphViewData;
 
 @Singleton
 public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
@@ -23,21 +23,20 @@ public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
         }
         boolean willRain = false;
         List<Condition> data = weatherResult.getMinutely().getData();
-        GraphViewData[] graphViewData = new GraphViewData[data.size()];
+        List<PointValue> pointValues = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             float intensity = data.get(i).getPrecipIntensity();
             if (intensity > 0) {
                 willRain = true;
             }
-            GraphViewData dataPoint = new GraphViewData(i, intensity);
-            graphViewData[i] = dataPoint;
+            pointValues.add(new PointValue(i, intensity));
         }
 
         return new NowWeatherSummary(
                 weatherResult.getCurrently().getTemperature(),
                 weatherResult.getCurrently().getApparentTemperature(),
                 weatherResult.getMinutely().getSummary(),
-                graphViewData,
+                pointValues,
                 willRain);
     }
 }

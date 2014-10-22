@@ -1,16 +1,18 @@
 package com.osacky.umbrella.ui.now;
 
-import static com.jjoe64.graphview.GraphView.GraphViewData;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.PointValue;
 
 class NowWeatherSummary {
     private final float mCurrentTemp;
     private final float mFeelsLike;
     private final CharSequence mSummary;
-    private final GraphViewData[] mData;
+    private final List<PointValue> mData;
     private final boolean mWillRain;
 
     public NowWeatherSummary(
-            float currentTemp, float feelsLike, CharSequence summary, GraphViewData[] data,
+            float currentTemp, float feelsLike, CharSequence summary, List<PointValue> data,
             boolean willRain) {
         mCurrentTemp = currentTemp;
         mFeelsLike = feelsLike;
@@ -31,7 +33,7 @@ class NowWeatherSummary {
         return mSummary;
     }
 
-    public GraphViewData[] getData() {
+    public List<PointValue> getData() {
         return mData;
     }
 

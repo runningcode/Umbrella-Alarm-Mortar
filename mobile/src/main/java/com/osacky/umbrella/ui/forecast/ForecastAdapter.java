@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.data.api.model.Condition;
+import com.osacky.umbrella.util.Utils;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +42,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         final Condition condition = mForecastList.get(i);
         forecastViewHolder.mSummary.setText(condition.getIcon());
         forecastViewHolder.mDayOfWeek.setText(condition.getDateTime().dayOfWeek().getAsShortText());
+        forecastViewHolder.mMiniDate.setText(Utils.formatDate(condition.getDateTime().toDate()));
         forecastViewHolder.mChanceOfRain.setText(
                 String.format(forecastViewHolder.mContext.getString(R.string.chance_of_rain_mini),
                 condition.getPrecipProbability()));
@@ -48,7 +50,6 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
                 String.format(forecastViewHolder.mContext.getString(R.string.temp_high_low),
                         (int) condition.getTemperatureMin(),
                         (int) condition.getTemperatureMax()));
-
     }
 
     @Override public int getItemCount() {
@@ -64,6 +65,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
 
         public final TextView mSummary;
         public final TextView mDayOfWeek;
+        public final TextView mMiniDate;
         public final TextView mChanceOfRain;
         public final TextView mTempHiLo;
         public final Context mContext;
@@ -73,6 +75,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
             mContext = itemView.getContext();
             mSummary = ButterKnife.findById(itemView, R.id.forecast_summary);
             mDayOfWeek = ButterKnife.findById(itemView, R.id.forecast_day_of_week);
+            mMiniDate = ButterKnife.findById(itemView, R.id.forecast_mini_date);
             mChanceOfRain = ButterKnife.findById(itemView, R.id.forecast_chance_of_rain);
             mTempHiLo = ButterKnife.findById(itemView, R.id.forecast_hi_lo);
         }

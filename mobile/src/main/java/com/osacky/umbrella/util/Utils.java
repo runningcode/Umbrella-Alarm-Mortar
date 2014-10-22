@@ -17,14 +17,26 @@
 package com.osacky.umbrella.util;
 
 import android.graphics.Typeface;
-import android.os.Build;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
+
 public final class Utils {
 
     private static Typeface sMediumTypeface;
+
+    private static SimpleDateFormat sBetterDateFormat;
+    private static java.text.DateFormat sBackupDateFormat;
+
 
     public interface OnMeasuredCallback {
         void onMeasured(View view, int width, int height);
@@ -54,7 +66,11 @@ public final class Utils {
     }
 
     private static boolean hasL() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+        return SDK_INT >= LOLLIPOP;
+    }
+
+    private static boolean hasJB_MR2() {
+        return SDK_INT >= JELLY_BEAN_MR2;
     }
 
     public static void setMediumTypeface(TextView textView) {
@@ -66,6 +82,20 @@ public final class Utils {
             textView.setTypeface(sMediumTypeface);
         } else {
             textView.setTypeface(Typeface.SANS_SERIF, Typeface.BOLD);
+        }
+    }
+
+    public static String formatDate(Date date) {
+        if (hasJB_MR2()) {
+            if (sBetterDateFormat == null) {
+                sBetterDateFormat = new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.getDefault(), "MMM d"));
+            }
+            return sBetterDateFormat.format(date);
+        } else {
+            if (sBackupDateFormat == null) {
+                sBackupDateFormat = java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT);
+            }
+            return sBackupDateFormat.format(date);
         }
     }
 

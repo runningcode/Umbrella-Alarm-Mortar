@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.osacky.umbrella.core.util.CanShowScreen;
-import com.osacky.umbrella.core.util.ScreenConductor;
+import com.osacky.umbrella.core.util.ScreenScoper;
 
 import javax.inject.Inject;
 
@@ -17,12 +17,12 @@ public class CoreView extends FrameLayout implements CanShowScreen<Blueprint> {
 
     @Inject CorePresenter.Presenter presenter;
 
-    private final ScreenConductor<Blueprint> screenMaestro;
+    private final ScreenScoper<Blueprint> screenMaestro;
 
     public CoreView(Context context, AttributeSet attrs) {
         super(context, attrs);
         Mortar.inject(context, this);
-        screenMaestro = new ScreenConductor<>(context, this);
+        screenMaestro = new ScreenScoper<>(context, this);
     }
 
     @Override

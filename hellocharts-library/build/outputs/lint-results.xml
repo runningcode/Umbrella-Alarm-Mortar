@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 23.0.5">
+
+    <issue
+        id="OldTargetApi"
+        severity="Warning"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
+        category="Correctness"
+        priority="6"
+        summary="Checks that the manifest specifies a targetSdkVersion that is recent"
+        explanation="When your application runs on a version of Android that is more recent than your `targetSdkVersion` specifies that it has been tested with, various compatibility modes kick in. This ensures that your application continues to work, but it may look out of place. For example, if the `targetSdkVersion` is less than 14, your app may get an option button in the UI.
+
+To fix this issue, set the `targetSdkVersion` to the highest available value. Then test your app to make sure everything works correctly. You may want to consult the compatibility notes to see what changes apply to each version you are adding support for: http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        url="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        urls="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+        errorLine1="        android:targetSdkVersion=&quot;19&quot;/>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/AndroidManifest.xml"
+            line="10"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="GradleDynamicVersion"
+        severity="Warning"
+        message="Avoid using + in version numbers; can lead to unpredictable and unrepeatable builds (com.android.tools.build:gradle:0.13.+)"
+        category="Correctness"
+        priority="4"
+        summary="Looks for dependencies using a dynamic version rather than a fixed version"
+        explanation="Using `+` in dependencies lets you automatically pick up the latest available version rather than a specific, named version. However, this is not recommended; your builds are not repeatable; you may have tested with a slightly different version than what the build server used. (Using a dynamic version as the major version number is more problematic than using it in the minor version position.)"
+        errorLine1="    classpath &apos;com.android.tools.build:gradle:0.13.+&apos;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/build.gradle"
+            line="9"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleOverrides"
+        severity="Warning"
+        message="This versionCode value (1) is not used; it is always overridden by the value specified in the Gradle build script (1)"
+        category="Correctness"
+        priority="4"
+        summary="Looks for values specified in the manifest file which are overridden by values in Gradle"
+        explanation="The value of (for example) `minSdkVersion` is only used if it is not specified in the `build.gradle` build scripts. When specified in the Gradle build scripts, the manifest value is ignored and can be misleading, so should be removed to avoid ambiguity."
+        errorLine1="    android:versionCode=&quot;1&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/AndroidManifest.xml"
+            line="5"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleOverrides"
+        severity="Warning"
+        message="This versionName value (1.0) is not used; it is always overridden by the value specified in the Gradle build script (1.0)"
+        category="Correctness"
+        priority="4"
+        summary="Looks for values specified in the manifest file which are overridden by values in Gradle"
+        explanation="The value of (for example) `minSdkVersion` is only used if it is not specified in the `build.gradle` build scripts. When specified in the Gradle build scripts, the manifest value is ignored and can be misleading, so should be removed to avoid ambiguity."
+        errorLine1="    android:versionName=&quot;1.0&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/AndroidManifest.xml"
+            line="6"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleOverrides"
+        severity="Warning"
+        message="This minSdkVersion value (8) is not used; it is always overridden by the value specified in the Gradle build script (8)"
+        category="Correctness"
+        priority="4"
+        summary="Looks for values specified in the manifest file which are overridden by values in Gradle"
+        explanation="The value of (for example) `minSdkVersion` is only used if it is not specified in the `build.gradle` build scripts. When specified in the Gradle build scripts, the manifest value is ignored and can be misleading, so should be removed to avoid ambiguity."
+        errorLine1="        android:minSdkVersion=&quot;8&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/AndroidManifest.xml"
+            line="9"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="GradleOverrides"
+        severity="Warning"
+        message="This targetSdkVersion value (19) is not used; it is always overridden by the value specified in the Gradle build script (21)"
+        category="Correctness"
+        priority="4"
+        summary="Looks for values specified in the manifest file which are overridden by values in Gradle"
+        explanation="The value of (for example) `minSdkVersion` is only used if it is not specified in the `build.gradle` build scripts. When specified in the Gradle build scripts, the manifest value is ignored and can be misleading, so should be removed to avoid ambiguity."
+        errorLine1="        android:targetSdkVersion=&quot;19&quot;/>"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/AndroidManifest.xml"
+            line="10"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        severity="Warning"
+        message="Use &quot;Gravity.START&quot; instead of &quot;Gravity.LEFT&quot; to ensure correct behavior in right-to-left locales"
+        category="Bi-directional Text"
+        priority="5"
+        summary="Looks for hardcoded left/right constants which could be start/end for bidirectional text"
+        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
+For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
+(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
+        errorLine1=" private static final int LEFT = 1;"
+        errorLine2="                          ~~~~">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/src/lecho/lib/hellocharts/renderer/AxesRenderer.java"
+            line="28"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        severity="Warning"
+        message="Use &quot;Gravity.END&quot; instead of &quot;Gravity.RIGHT&quot; to ensure correct behavior in right-to-left locales"
+        category="Bi-directional Text"
+        priority="5"
+        summary="Looks for hardcoded left/right constants which could be start/end for bidirectional text"
+        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
+For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
+(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
+        errorLine1=" private static final int RIGHT = 2;"
+        errorLine2="                          ~~~~~">
+        <location
+            file="/Users/nelson/AndroidStudioProjects/hellocharts-android/hellocharts-library/src/lecho/lib/hellocharts/renderer/AxesRenderer.java"
+            line="29"
+            column="27"/>
+    </issue>
+
+</issues>

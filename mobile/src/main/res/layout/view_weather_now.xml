@@ -34,14 +34,16 @@
             android:paddingStart="@dimen/keyline_1"
             />
 
-        <com.osacky.umbrella.widget.LineGraphHolder
+
+        <lecho.lib.hellocharts.view.LineChartView
             android:id="@+id/graph"
             android:layout_width="match_parent"
             android:layout_height="136dp"
             android:layout_marginTop="@dimen/keyline_2_minus_16dp"
             android:layout_marginBottom="@dimen/keyline_1"
             android:padding="@dimen/keyline_1"
-            />
+            >
+        </lecho.lib.hellocharts.view.LineChartView>
 
         <TextView
             android:id="@+id/attribution"

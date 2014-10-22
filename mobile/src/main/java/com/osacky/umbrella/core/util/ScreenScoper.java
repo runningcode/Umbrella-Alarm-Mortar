@@ -27,7 +27,7 @@ import timber.log.Timber;
  * @param <S> the type of the screens that serve as a {@link mortar.Blueprint} for subview. Must
  *            be annotated with {@link flow.Layout}, suitable for use with {@link flow.Layouts#createView}.
  */
-public class ScreenConductor<S extends Blueprint> implements CanShowScreen<S> {
+public class ScreenScoper<S extends Blueprint> implements CanShowScreen<S> {
 
     // Using static view ids to find and replace core layouts
     private final static int contentViewId = Views.generateViewId();
@@ -43,7 +43,7 @@ public class ScreenConductor<S extends Blueprint> implements CanShowScreen<S> {
      *                  it is designed to hold two children - main content and a navigation
      *                  drawer.
      */
-    public ScreenConductor(Context context, ViewGroup container) {
+    public ScreenScoper(Context context, ViewGroup container) {
         this.context = context;
         this.container = container;
     }
