@@ -27,7 +27,7 @@ import flow.HasParent;
 import flow.Layout;
 
 @Layout(R.layout.view_notifications)
-@Transition({R.animator.slide_in_right, R.animator.slide_out_left, R.animator.slide_in_left, R.animator.slide_out_right})
+@Transition({R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right})
 public class NotificationsScreen extends TransitionScreen implements StateBlueprint, HasParent<BaseTabScreen> {
 
     private SparseArray<Parcelable> mViewState;
@@ -101,7 +101,8 @@ public class NotificationsScreen extends TransitionScreen implements StateBluepr
         }
 
         void onUpClicked() {
-            mFlow.goUp();
+            // this should be mFlow.goUp() but that causes a crash for some reason
+            mFlow.goBack();
         }
     }
 

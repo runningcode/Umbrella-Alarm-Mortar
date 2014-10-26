@@ -23,8 +23,8 @@ public class BetterViewPresenter<V extends View> extends ViewPresenter<V> {
      * Try restoring view state. It will safely no-op if state has already been restored
      */
     protected void restoreViewState() {
-        Timber.i("isViewStateRestored=%s", isViewStateRestored);
-        Timber.i("viewState=%s", viewState);
+        Timber.v("isViewStateRestored=%s", isViewStateRestored);
+        Timber.v("viewState=%s", viewState);
         if (viewState != null && !isViewStateRestored) {
             getView().restoreHierarchyState(viewState);
             isViewStateRestored = true;

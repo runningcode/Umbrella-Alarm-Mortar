@@ -31,12 +31,13 @@ import flow.Layout;
 import retrofit.RetrofitError;
 import rx.Observable;
 import rx.RetrofitObserver;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import timber.log.Timber;
 
 @Layout(R.layout.view_base_weather)
-@Transition({R.animator.slide_in_right, R.animator.slide_out_left, R.animator.slide_in_left, R.animator.slide_out_right})
+@Transition({R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right})
 public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
 
     private SparseArray<Parcelable> mViewState;
@@ -75,6 +76,7 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
 
         private final Flow mFlow;
         private final Observable<WeatherResult> mObservable;
+        private Subscription mSubscription;
 
         @Inject
         public Presenter(@Named("tabs") SparseArray<Parcelable> viewState,
@@ -93,7 +95,7 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
                 return;
             }
             mObservable = weatherManager.get(location.getLatitude(), location.getLongitude());
-            mObservable.map(weatherToSummary)
+            mSubscription = mObservable.map(weatherToSummary)
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext(new Action1<RainSummary>() {
                         @Override public void call(RainSummary rainSummary) {
@@ -109,6 +111,7 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
 
         @Override public void onLoad(Bundle savedInstanceState) {
             super.onLoad(savedInstanceState);
+            restoreViewState();
             getView().setMenu(R.menu.about, new Toolbar.OnMenuItemClickListener() {
                 @Override public boolean onMenuItemClick(MenuItem menuItem) {
                     switch (menuItem.getItemId()) {
@@ -121,6 +124,11 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
                     return false;
                 }
             });
+        }
+
+        @Override protected void onExitScope() {
+            mSubscription.unsubscribe();
+            super.onExitScope();
         }
 
         public Observable<WeatherResult> getObservable(){

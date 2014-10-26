@@ -29,7 +29,7 @@ import com.osacky.umbrella.R;
 
 class SlidingTabStrip extends LinearLayout {
 
-    private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 2;
+    private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 3;
 
     private final int mSelectedIndicatorThickness;
     private final Paint mSelectedIndicatorPaint;

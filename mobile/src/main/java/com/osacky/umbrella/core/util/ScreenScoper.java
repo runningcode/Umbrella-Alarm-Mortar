@@ -3,12 +3,14 @@ package com.osacky.umbrella.core.util;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.content.Context;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
-import com.osacky.umbrella.core.anim.SimpleAnimatorListener;
+import com.osacky.umbrella.core.anim.SimpleAnimationListener;
 import com.osacky.umbrella.core.anim.Transitions;
 import com.osacky.umbrella.util.Views;
 
@@ -50,18 +52,13 @@ public class ScreenScoper<S extends Blueprint> implements CanShowScreen<S> {
 
     public void showScreen(S newScreen, S oldScreen, final Flow.Direction direction) {
 
-        // Cancel previous transition and set end values
-        if (screenTransition != null) {
-            screenTransition.end();
-        }
-
         final View oldChild = getContentView();
 
         if (destroyOldScope(newScreen, oldChild)) {
             storeViewState(oldChild, oldScreen);
             final View newChild = createNewChildView(newScreen, contentViewId);
 
-            Transitions.Animators transitions = null;
+            Transitions.AnimPair transitions = null;
             if (oldChild != null) {
                 switch (direction) {
                     case FORWARD:
@@ -86,15 +83,20 @@ public class ScreenScoper<S extends Blueprint> implements CanShowScreen<S> {
                 // Settings animator for each view and removing the old view
                 // after animation ends
                 if (transitions != null) {
-                    transitions.out.setTarget(oldChild);
-                    transitions.in.setTarget(newChild);
-                    screenTransition = new AnimatorSet();
-                    screenTransition.playTogether(transitions.out, transitions.in);
-                    screenTransition.addListener(new SimpleAnimatorListener() {
-                        @Override public void onAnimationEnd(Animator animation) {
-                            container.removeView(oldChild);
+                    transitions.out.setAnimationListener(new SimpleAnimationListener() {
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            new Handler().post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    container.removeView(oldChild);
+                                }
+                            });
                         }
                     });
+                    oldChild.setAnimation(transitions.out);
+                    newChild.setAnimation(transitions.in);
+
                 } else {
                     // remove view immediately if no transitions to run
                     container.removeView(oldChild);
@@ -102,22 +104,6 @@ public class ScreenScoper<S extends Blueprint> implements CanShowScreen<S> {
             }
 
             container.addView(newChild, 0);
-
-            if (screenTransition != null) {
-                screenTransition.start();
-            }
-
-            // Makes the new view z-index higher than the old view
-            // for transitions forward to make feel more natural
-            if (direction == Flow.Direction.FORWARD) {
-                container.post(new Runnable() {
-                    @Override public void run() {
-                        container.bringChildToFront(newChild);
-                        container.requestLayout();
-                        container.invalidate();
-                    }
-                });
-            }
         }
 
     }
