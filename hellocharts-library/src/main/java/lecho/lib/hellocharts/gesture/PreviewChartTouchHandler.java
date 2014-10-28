@@ -1,10 +1,11 @@
 package lecho.lib.hellocharts.gesture;
 
-import lecho.lib.hellocharts.view.Chart;
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+
+import lecho.lib.hellocharts.view.Chart;
 
 /**
  * Touch Handler for preview charts. It scroll and zoom only preview area, not all preview chart data.

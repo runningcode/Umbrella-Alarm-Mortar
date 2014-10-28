@@ -1,15 +1,16 @@
 package lecho.lib.hellocharts.gesture;
 
-import lecho.lib.hellocharts.ChartComputator;
-import lecho.lib.hellocharts.gesture.ChartScroller.ScrollResult;
-import lecho.lib.hellocharts.model.SelectedValue;
-import lecho.lib.hellocharts.renderer.ChartRenderer;
-import lecho.lib.hellocharts.view.Chart;
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.ViewParent;
+
+import lecho.lib.hellocharts.ChartComputator;
+import lecho.lib.hellocharts.gesture.ChartScroller.ScrollResult;
+import lecho.lib.hellocharts.model.SelectedValue;
+import lecho.lib.hellocharts.renderer.ChartRenderer;
+import lecho.lib.hellocharts.view.Chart;
 
 /**
  * Default touch handler for most charts. Handles value touch, scroll, fling and zoom.

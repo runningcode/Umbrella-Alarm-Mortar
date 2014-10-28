@@ -1,12 +1,13 @@
 package lecho.lib.hellocharts.model;
 
+import android.graphics.Color;
+import android.graphics.Typeface;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.view.Chart;
 import lecho.lib.hellocharts.view.PieChartView;
-import android.graphics.Color;
-import android.graphics.Typeface;
 
 /**
  * Data for PieChart, by default it doesn't have axes.

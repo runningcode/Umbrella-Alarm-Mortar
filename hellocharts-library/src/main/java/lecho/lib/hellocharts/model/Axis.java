@@ -1,10 +1,10 @@
 package lecho.lib.hellocharts.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Color;
 import android.graphics.Typeface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import lecho.lib.hellocharts.util.Utils;
 

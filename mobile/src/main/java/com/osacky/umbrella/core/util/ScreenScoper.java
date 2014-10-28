@@ -1,7 +1,5 @@
 package com.osacky.umbrella.core.util;
 
-import android.animation.Animator;
-import android.animation.AnimatorSet;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Parcelable;
@@ -17,7 +15,6 @@ import com.osacky.umbrella.util.Views;
 import butterknife.ButterKnife;
 import flow.Flow;
 import flow.Layouts;
-import mortar.Blueprint;
 import mortar.Mortar;
 import mortar.MortarScope;
 import timber.log.Timber;
@@ -29,15 +26,13 @@ import timber.log.Timber;
  * @param <S> the type of the screens that serve as a {@link mortar.Blueprint} for subview. Must
  *            be annotated with {@link flow.Layout}, suitable for use with {@link flow.Layouts#createView}.
  */
-public class ScreenScoper<S extends Blueprint> implements CanShowScreen<S> {
+public class ScreenScoper<S extends Screen> implements CanShowScreen<S> {
 
     // Using static view ids to find and replace core layouts
     private final static int contentViewId = Views.generateViewId();
 
     private final Context   context;
     private final ViewGroup container;
-
-    private AnimatorSet screenTransition;
 
     /**
      * @param container the container used to host child views. Typically this is a {@link
@@ -102,7 +97,6 @@ public class ScreenScoper<S extends Blueprint> implements CanShowScreen<S> {
                     container.removeView(oldChild);
                 }
             }
-
             container.addView(newChild, 0);
         }
 
@@ -141,10 +135,10 @@ public class ScreenScoper<S extends Blueprint> implements CanShowScreen<S> {
      * the backstack of Flow
      */
     protected void storeViewState(View view, S screen) {
-        if (screen != null && screen instanceof StateBlueprint) {
+        if (screen != null) {
             SparseArray<Parcelable> state = new SparseArray<>();
             view.saveHierarchyState(state);
-            ((StateBlueprint) screen).setViewState(state);
+            screen.setViewState(state);
             Timber.i("Storing view state %s", state);
         }
     }

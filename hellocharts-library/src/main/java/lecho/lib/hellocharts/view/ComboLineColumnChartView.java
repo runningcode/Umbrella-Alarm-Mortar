@@ -1,5 +1,10 @@
 package lecho.lib.hellocharts.view;
 
+import android.content.Context;
+import android.support.v4.view.ViewCompat;
+import android.util.AttributeSet;
+import android.util.Log;
+
 import lecho.lib.hellocharts.BuildConfig;
 import lecho.lib.hellocharts.model.ChartData;
 import lecho.lib.hellocharts.model.ColumnChartData;
@@ -12,10 +17,6 @@ import lecho.lib.hellocharts.provider.ColumnChartDataProvider;
 import lecho.lib.hellocharts.provider.ComboLineColumnChartDataProvider;
 import lecho.lib.hellocharts.provider.LineChartDataProvider;
 import lecho.lib.hellocharts.renderer.ComboLineColumnChartRenderer;
-import android.content.Context;
-import android.support.v4.view.ViewCompat;
-import android.util.AttributeSet;
-import android.util.Log;
 
 /**
  * ComboChart, supports ColumnChart combined with LineChart. Lines are always drawn on top.

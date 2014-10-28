@@ -1,10 +1,11 @@
 package lecho.lib.hellocharts;
 
-import lecho.lib.hellocharts.model.Viewport;
-import lecho.lib.hellocharts.view.Chart;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.view.Chart;
 
 /**
  * Computes raw points coordinates(in pixels), holds content area dimensions and chart viewport. Note: some chart

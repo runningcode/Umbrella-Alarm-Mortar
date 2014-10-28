@@ -1,5 +1,13 @@
 package lecho.lib.hellocharts.view;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.os.Build;
+import android.support.v4.view.ViewCompat;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+
 import lecho.lib.hellocharts.ChartComputator;
 import lecho.lib.hellocharts.ViewportChangeListener;
 import lecho.lib.hellocharts.animation.ChartAnimationListener;
@@ -17,13 +25,6 @@ import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.renderer.AxesRenderer;
 import lecho.lib.hellocharts.renderer.ChartRenderer;
 import lecho.lib.hellocharts.util.Utils;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.os.Build;
-import android.support.v4.view.ViewCompat;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import android.view.View;
 
 /**
  * Abstract class for charts views.

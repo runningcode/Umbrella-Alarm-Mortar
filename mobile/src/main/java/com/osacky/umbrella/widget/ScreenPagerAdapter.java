@@ -5,16 +5,17 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.osacky.umbrella.core.util.Screen;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import flow.Layouts;
-import mortar.Blueprint;
 import mortar.Mortar;
 import mortar.MortarScope;
 
-public class ScreenPagerAdapter<S extends Blueprint> extends PagerAdapter {
+public class ScreenPagerAdapter<S extends Screen> extends PagerAdapter {
     private final List<S> mScreens;
 
     public ScreenPagerAdapter() {

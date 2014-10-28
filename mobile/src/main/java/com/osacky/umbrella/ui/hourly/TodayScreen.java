@@ -5,10 +5,9 @@ import android.util.SparseArray;
 
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
-import com.osacky.umbrella.core.util.StateBlueprint;
+import com.osacky.umbrella.core.util.Screen;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
-import com.osacky.umbrella.util.ObjectUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,20 +20,10 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 @Layout(R.layout.view_weather_today)
-public class TodayScreen implements StateBlueprint {
-
-    private SparseArray<Parcelable> mViewState;
-
-    @Override public String getMortarScopeName() {
-        return ObjectUtils.getClass(this).getName();
-    }
+public class TodayScreen extends Screen {
 
     @Override public Object getDaggerModule() {
         return new Module(mViewState);
-    }
-
-    @Override public void setViewState(SparseArray<Parcelable> viewState) {
-        mViewState = viewState;
     }
 
     @dagger.Module(

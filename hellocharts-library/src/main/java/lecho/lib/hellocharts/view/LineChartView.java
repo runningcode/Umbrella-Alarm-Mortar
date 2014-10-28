@@ -1,5 +1,10 @@
 package lecho.lib.hellocharts.view;
 
+import android.content.Context;
+import android.support.v4.view.ViewCompat;
+import android.util.AttributeSet;
+import android.util.Log;
+
 import lecho.lib.hellocharts.BuildConfig;
 import lecho.lib.hellocharts.model.ChartData;
 import lecho.lib.hellocharts.model.LineChartData;
@@ -7,10 +12,6 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.SelectedValue;
 import lecho.lib.hellocharts.provider.LineChartDataProvider;
 import lecho.lib.hellocharts.renderer.LineChartRenderer;
-import android.content.Context;
-import android.support.v4.view.ViewCompat;
-import android.util.AttributeSet;
-import android.util.Log;
 
 /**
  * LineChart, supports cubic lines, filled lines, circle and square points. Point radius and stroke width can be

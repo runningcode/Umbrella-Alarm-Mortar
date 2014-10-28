@@ -1,5 +1,13 @@
 package lecho.lib.hellocharts.view;
 
+import android.content.Context;
+import android.graphics.RectF;
+import android.os.Build;
+import android.support.v4.view.ViewCompat;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
+
 import lecho.lib.hellocharts.BuildConfig;
 import lecho.lib.hellocharts.animation.PieChartRotationAnimator;
 import lecho.lib.hellocharts.animation.PieChartRotationAnimatorV14;
@@ -11,13 +19,6 @@ import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.model.SelectedValue;
 import lecho.lib.hellocharts.provider.PieChartDataProvider;
 import lecho.lib.hellocharts.renderer.PieChartRenderer;
-import android.content.Context;
-import android.graphics.RectF;
-import android.os.Build;
-import android.support.v4.view.ViewCompat;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 
 /**
  * 

@@ -1,12 +1,13 @@
 package lecho.lib.hellocharts.gesture;
 
-import lecho.lib.hellocharts.view.PieChartView;
 import android.content.Context;
 import android.graphics.RectF;
 import android.support.v4.widget.ScrollerCompat;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
+
+import lecho.lib.hellocharts.view.PieChartView;
 
 /**
  * Touch handler for PieChart. It doesn't handle zoom and scroll like default ChartTouchHandler. Instead it uses

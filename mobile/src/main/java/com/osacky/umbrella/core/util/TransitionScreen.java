@@ -1,13 +1,16 @@
 package com.osacky.umbrella.core.util;
 
-public abstract class TransitionScreen {
+import android.support.annotation.AnimRes;
 
-    private int[] transitions;
+public abstract class TransitionScreen extends Screen {
 
-    public void setTransitions(int[] transitions) {
+    private @AnimRes int[] transitions;
+
+    public void setTransitions(@AnimRes int[] transitions) {
         this.transitions = transitions;
     }
 
+    @AnimRes
     public int[] getTransitions() {
         return transitions;
     }

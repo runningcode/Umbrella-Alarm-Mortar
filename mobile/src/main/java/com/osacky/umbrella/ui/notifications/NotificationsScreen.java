@@ -9,12 +9,10 @@ import com.osacky.umbrella.alarm.DailyAlarmHelper;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.anim.Transition;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
-import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
-import com.osacky.umbrella.util.ObjectUtils;
 
 import org.joda.time.LocalTime;
 
@@ -28,20 +26,10 @@ import flow.Layout;
 
 @Layout(R.layout.view_notifications)
 @Transition({R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right})
-public class NotificationsScreen extends TransitionScreen implements StateBlueprint, HasParent<BaseTabScreen> {
-
-    private SparseArray<Parcelable> mViewState;
-
-    @Override public String getMortarScopeName() {
-        return ObjectUtils.getClass(this).getName();
-    }
+public class NotificationsScreen extends TransitionScreen implements HasParent<BaseTabScreen> {
 
     @Override public Object getDaggerModule() {
         return new Module(mViewState);
-    }
-
-    @Override public void setViewState(SparseArray<Parcelable> viewState) {
-        mViewState = viewState;
     }
 
     @Override public BaseTabScreen getParent() {

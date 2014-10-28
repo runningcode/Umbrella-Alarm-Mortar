@@ -1,11 +1,12 @@
 package lecho.lib.hellocharts.gesture;
 
-import lecho.lib.hellocharts.ChartComputator;
-import lecho.lib.hellocharts.model.Viewport;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v4.widget.ScrollerCompat;
+
+import lecho.lib.hellocharts.ChartComputator;
+import lecho.lib.hellocharts.model.Viewport;
 
 /**
  * Encapsulates scrolling functionality.

@@ -8,11 +8,11 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import com.osacky.umbrella.R;
-import com.osacky.umbrella.core.util.StateBlueprint;
-import com.osacky.umbrella.widget.ScreenPagerAdapter;
+import com.osacky.umbrella.core.util.Screen;
 import com.osacky.umbrella.ui.forecast.ForecastScreen;
 import com.osacky.umbrella.ui.hourly.TodayScreen;
 import com.osacky.umbrella.ui.now.NowScreen;
+import com.osacky.umbrella.widget.ScreenPagerAdapter;
 import com.osacky.umbrella.widget.SlidingTabLayout;
 
 import javax.inject.Inject;
@@ -23,7 +23,7 @@ import mortar.Mortar;
 
 public class BaseTabView extends LinearLayout {
 
-    @Inject BaseTabScreen.Presenter mPresenter;
+    @Inject protected BaseTabScreen.Presenter mPresenter;
 
     @InjectView(R.id.toolbar) protected Toolbar mToolbar;
     @InjectView(R.id.sliding_tabs) protected SlidingTabLayout mSlidingTabLayout;
@@ -61,7 +61,7 @@ public class BaseTabView extends LinearLayout {
         mToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
     }
 
-    class WeatherPagerAdapter extends ScreenPagerAdapter<StateBlueprint> {
+    class WeatherPagerAdapter extends ScreenPagerAdapter<Screen> {
         @Override public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:

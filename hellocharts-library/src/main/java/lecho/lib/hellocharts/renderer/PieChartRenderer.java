@@ -1,12 +1,5 @@
 package lecho.lib.hellocharts.renderer;
 
-import lecho.lib.hellocharts.model.ArcValue;
-import lecho.lib.hellocharts.model.PieChartData;
-import lecho.lib.hellocharts.model.SelectedValue;
-import lecho.lib.hellocharts.model.ValueFormatter;
-import lecho.lib.hellocharts.provider.PieChartDataProvider;
-import lecho.lib.hellocharts.util.Utils;
-import lecho.lib.hellocharts.view.Chart;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -16,6 +9,14 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.text.TextUtils;
+
+import lecho.lib.hellocharts.model.ArcValue;
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SelectedValue;
+import lecho.lib.hellocharts.model.ValueFormatter;
+import lecho.lib.hellocharts.provider.PieChartDataProvider;
+import lecho.lib.hellocharts.util.Utils;
+import lecho.lib.hellocharts.view.Chart;
 
 /**
  * Default renderer for PieChart. PieChart doesn't use viewport concept so it a little different than others chart

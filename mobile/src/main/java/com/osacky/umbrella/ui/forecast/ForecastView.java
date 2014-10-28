@@ -14,7 +14,7 @@ import rx.RetrofitObserver;
 
 public class ForecastView extends RecycleListView {
 
-    @Inject ForecastScreen.Presenter mPresenter;
+    @Inject protected ForecastScreen.Presenter mPresenter;
 
     public ForecastView(Context context, AttributeSet attrs) {
         super(context, attrs);

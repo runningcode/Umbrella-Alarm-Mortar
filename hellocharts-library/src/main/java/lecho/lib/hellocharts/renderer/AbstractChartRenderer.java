@@ -1,11 +1,5 @@
 package lecho.lib.hellocharts.renderer;
 
-import lecho.lib.hellocharts.ChartComputator;
-import lecho.lib.hellocharts.model.ChartData;
-import lecho.lib.hellocharts.model.SelectedValue;
-import lecho.lib.hellocharts.model.Viewport;
-import lecho.lib.hellocharts.util.Utils;
-import lecho.lib.hellocharts.view.Chart;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -14,6 +8,13 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.FontMetricsInt;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+
+import lecho.lib.hellocharts.ChartComputator;
+import lecho.lib.hellocharts.model.ChartData;
+import lecho.lib.hellocharts.model.SelectedValue;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.util.Utils;
+import lecho.lib.hellocharts.view.Chart;
 
 /**
  * Abstract renderer implementation, every chart renderer extends this class(although it is not required it helps).

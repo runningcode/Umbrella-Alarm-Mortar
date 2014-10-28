@@ -14,7 +14,6 @@ import com.osacky.umbrella.data.api.ForecastWeatherManager;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import dagger.ObjectGraph;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
 

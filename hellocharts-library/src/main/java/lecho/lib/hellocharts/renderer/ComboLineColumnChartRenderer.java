@@ -1,10 +1,11 @@
 package lecho.lib.hellocharts.renderer;
 
+import android.content.Context;
+import android.graphics.Canvas;
+
 import lecho.lib.hellocharts.provider.ColumnChartDataProvider;
 import lecho.lib.hellocharts.provider.LineChartDataProvider;
 import lecho.lib.hellocharts.view.Chart;
-import android.content.Context;
-import android.graphics.Canvas;
 
 public class ComboLineColumnChartRenderer extends AbstractChartRenderer {
 	public static final int TYPE_LINE = 1;

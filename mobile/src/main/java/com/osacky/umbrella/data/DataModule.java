@@ -6,6 +6,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -91,15 +92,30 @@ public class DataModule {
 
     static OkHttpClient createOkHttpClient(UmbrellaApplication app) {
         OkHttpClient client = new OkHttpClient();
-
-        // Install an HTTP cache in the application cache directory.
-        try {
-            File cacheDir = ApiUtils.createDefaultCacheDir(app);
-            Cache cache = new Cache(cacheDir, ApiUtils.calculateDiskCacheSize(cacheDir));
-            client.setCache(cache);
-        } catch (IOException e) {
-            Timber.e(e, "Unable to install disk cache.");
-        }
+        new CreateDiskCacheTask(client, app).execute();
         return client;
+    }
+
+    static class CreateDiskCacheTask extends AsyncTask<Void, Void, Void> {
+
+        private final OkHttpClient mClient;
+        private final UmbrellaApplication mApplication;
+
+        CreateDiskCacheTask(OkHttpClient client, UmbrellaApplication application) {
+            mClient = client;
+            mApplication = application;
+        }
+
+        @Override protected Void doInBackground(Void... params) {
+            // Install an HTTP cache in the application cache directory.
+            try {
+                File cacheDir = ApiUtils.createDefaultCacheDir(mApplication);
+                Cache cache = new Cache(cacheDir, ApiUtils.calculateDiskCacheSize(cacheDir));
+                mClient.setCache(cache);
+            } catch (IOException e) {
+                Timber.e(e, "Unable to install disk cache.");
+            }
+            return null;
+        }
     }
 }

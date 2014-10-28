@@ -1,5 +1,12 @@
 package lecho.lib.hellocharts.renderer;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
+
 import lecho.lib.hellocharts.ChartComputator;
 import lecho.lib.hellocharts.model.BubbleChartData;
 import lecho.lib.hellocharts.model.BubbleValue;
@@ -9,12 +16,6 @@ import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.provider.BubbleChartDataProvider;
 import lecho.lib.hellocharts.util.Utils;
 import lecho.lib.hellocharts.view.Chart;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PointF;
-import android.graphics.Rect;
-import android.graphics.RectF;
 
 public class BubbleChartRenderer extends AbstractChartRenderer {
 	private static final int DEFAULT_TOUCH_ADDITIONAL_DP = 4;

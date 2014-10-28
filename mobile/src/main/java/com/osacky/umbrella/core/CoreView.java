@@ -5,19 +5,19 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import com.osacky.umbrella.core.util.CanShowScreen;
+import com.osacky.umbrella.core.util.Screen;
 import com.osacky.umbrella.core.util.ScreenScoper;
 
 import javax.inject.Inject;
 
 import flow.Flow;
-import mortar.Blueprint;
 import mortar.Mortar;
 
-public class CoreView extends FrameLayout implements CanShowScreen<Blueprint> {
+public class CoreView extends FrameLayout implements CanShowScreen<Screen> {
 
     @Inject CorePresenter.Presenter presenter;
 
-    private final ScreenScoper<Blueprint> screenMaestro;
+    private final ScreenScoper<Screen> screenMaestro;
 
     public CoreView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -43,7 +43,7 @@ public class CoreView extends FrameLayout implements CanShowScreen<Blueprint> {
     }
 
     @Override
-    public void showScreen(Blueprint screen, Blueprint oldScreen, Flow.Direction direction) {
+    public void showScreen(Screen screen, Screen oldScreen, Flow.Direction direction) {
         screenMaestro.showScreen(screen, oldScreen, direction);
     }
 }

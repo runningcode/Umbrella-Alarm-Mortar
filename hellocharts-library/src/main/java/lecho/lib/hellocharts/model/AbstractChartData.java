@@ -1,8 +1,9 @@
 package lecho.lib.hellocharts.model;
 
-import lecho.lib.hellocharts.util.Utils;
 import android.graphics.Color;
 import android.graphics.Typeface;
+
+import lecho.lib.hellocharts.util.Utils;
 
 /**
  * Base class for most chart data models.

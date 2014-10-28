@@ -11,14 +11,12 @@ import com.osacky.umbrella.R;
 import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.anim.Transition;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
-import com.osacky.umbrella.core.util.StateBlueprint;
 import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.api.ForecastWeatherManager;
 import com.osacky.umbrella.data.api.model.RainSummary;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 import com.osacky.umbrella.service.WeatherToSummary;
 import com.osacky.umbrella.ui.notifications.NotificationsScreen;
-import com.osacky.umbrella.util.ObjectUtils;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,17 +36,7 @@ import timber.log.Timber;
 
 @Layout(R.layout.view_base_weather)
 @Transition({R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right})
-public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
-
-    private SparseArray<Parcelable> mViewState;
-
-    @Override public void setViewState(SparseArray<Parcelable> viewState) {
-        mViewState = viewState;
-    }
-
-    @Override public String getMortarScopeName() {
-        return ObjectUtils.getClass(this).getName();
-    }
+public class BaseTabScreen extends TransitionScreen {
 
     @Override public Object getDaggerModule() {
         return new Module(mViewState);
@@ -79,11 +67,12 @@ public class BaseTabScreen extends TransitionScreen implements StateBlueprint {
         private Subscription mSubscription;
 
         @Inject
-        public Presenter(@Named("tabs") SparseArray<Parcelable> viewState,
-                         Provider<Location> locationProvider,
-                         ForecastWeatherManager weatherManager,
-                         WeatherToSummary weatherToSummary,
-                         final Flow flow
+        public Presenter(
+                @Named("tabs") SparseArray<Parcelable> viewState,
+                Provider<Location> locationProvider,
+                ForecastWeatherManager weatherManager,
+                WeatherToSummary weatherToSummary,
+                final Flow flow
         ) {
             super(viewState);
             mFlow = flow;

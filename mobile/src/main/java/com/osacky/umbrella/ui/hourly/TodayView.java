@@ -18,12 +18,12 @@ import rx.RetrofitObserver;
 
 public class TodayView extends LinearLayout {
 
-    @Inject TodayScreen.Presenter mPresenter;
+    @Inject protected TodayScreen.Presenter mPresenter;
 
-    @InjectView(R.id.current_temp) TextView mCurrentTemp;
-    @InjectView(R.id.text_current_weather) TextView mWeatherText;
-    @InjectView(R.id.chance_of_rain) TextView mChanceOfRain;
-    @InjectView(R.id.attribution) TextView mAttribution;
+    @InjectView(R.id.current_temp) protected TextView mCurrentTemp;
+    @InjectView(R.id.text_current_weather) protected TextView mWeatherText;
+    @InjectView(R.id.chance_of_rain) protected TextView mChanceOfRain;
+    @InjectView(R.id.attribution) protected TextView mAttribution;
 
     public TodayView(Context context, AttributeSet attrs) {
         super(context, attrs);

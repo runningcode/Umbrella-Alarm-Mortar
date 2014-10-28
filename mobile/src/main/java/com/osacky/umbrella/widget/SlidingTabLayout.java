@@ -17,8 +17,6 @@
 package com.osacky.umbrella.widget;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -70,7 +68,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     private static final int TITLE_OFFSET_DIPS = 24;
     private static final int TAB_VIEW_PADDING_VERTICAL_DIPS = 12;
-    private static final int TAB_VIEW_PADDING_HORIZONTAL_DIPS = 24;
+    private static final int TAB_VIEW_PADDING_HORIZONTAL_DIPS = 16;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 14;
 
     private int mTitleOffset;
@@ -184,14 +182,9 @@ public class SlidingTabLayout extends HorizontalScrollView {
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         Utils.setMediumTypeface(textView);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            // If we're running on Honeycomb or newer, then we can use the Theme's
-            // selectableItemBackground to ensure that the View has a pressed state
-            TypedValue outValue = new TypedValue();
-            getContext().getTheme().resolveAttribute(android.R.attr.selectableItemBackground,
-                    outValue, true);
-            textView.setBackgroundResource(outValue.resourceId);
-        }
+        TypedValue outValue = new TypedValue();
+        getContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, outValue, true);
+        textView.setBackgroundResource(outValue.resourceId);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             // If we're running on ICS or newer, enable all-caps to match the Action Bar tab style

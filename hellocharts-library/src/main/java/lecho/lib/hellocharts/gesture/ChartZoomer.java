@@ -1,10 +1,11 @@
 package lecho.lib.hellocharts.gesture;
 
-import lecho.lib.hellocharts.ChartComputator;
-import lecho.lib.hellocharts.model.Viewport;
 import android.content.Context;
 import android.graphics.PointF;
 import android.view.MotionEvent;
+
+import lecho.lib.hellocharts.ChartComputator;
+import lecho.lib.hellocharts.model.Viewport;
 
 /**
  * Encapsulates zooming functionality.

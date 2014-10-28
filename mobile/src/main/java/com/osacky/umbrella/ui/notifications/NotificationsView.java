@@ -20,10 +20,10 @@ import mortar.Mortar;
 
 public class NotificationsView extends LinearLayout {
 
-    @Inject NotificationsScreen.Presenter mPresenter;
+    @Inject protected NotificationsScreen.Presenter mPresenter;
 
-    @InjectView(R.id.time_picker) TimePicker mTimePicker;
-    @InjectView(R.id.toolbar) Toolbar mToolbar;
+    @InjectView(R.id.time_picker) protected TimePicker mTimePicker;
+    @InjectView(R.id.toolbar) protected Toolbar mToolbar;
 
     public NotificationsView(Context context, AttributeSet attrs) {
         super(context, attrs);

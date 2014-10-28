@@ -1,5 +1,7 @@
 package com.osacky.umbrella.core.anim;
 
+import android.support.annotation.AnimRes;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -19,5 +21,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 @Retention(RUNTIME) @Target(TYPE)
 public @interface Transition {
-    int[] value();
+    @AnimRes int[] value();
 }

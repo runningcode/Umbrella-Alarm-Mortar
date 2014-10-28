@@ -1,14 +1,15 @@
 package lecho.lib.hellocharts.view;
 
+import android.content.Context;
+import android.support.v4.view.ViewCompat;
+import android.util.AttributeSet;
+import android.util.Log;
+
 import lecho.lib.hellocharts.BuildConfig;
 import lecho.lib.hellocharts.PreviewChartComputator;
 import lecho.lib.hellocharts.gesture.PreviewChartTouchHandler;
 import lecho.lib.hellocharts.model.ColumnChartData;
 import lecho.lib.hellocharts.renderer.PreviewColumnChartRenderer;
-import android.content.Context;
-import android.support.v4.view.ViewCompat;
-import android.util.AttributeSet;
-import android.util.Log;
 
 /**
  * Preview chart that can be used as overview for other ColumnChart. When you change Viewport of this chart, visible

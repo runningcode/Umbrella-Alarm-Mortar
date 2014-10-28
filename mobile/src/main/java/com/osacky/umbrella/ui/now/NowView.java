@@ -9,16 +9,13 @@ import android.widget.TextView;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.util.Strings;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lecho.lib.hellocharts.model.Axis;
-import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.LineChartView;
@@ -28,12 +25,12 @@ import rx.RetrofitObserver;
 
 public class NowView extends ScrollView {
 
-    @Inject NowScreen.Presenter mPresenter;
+    @Inject protected NowScreen.Presenter mPresenter;
 
-    @InjectView(R.id.current_temp) TextView mCurrentTemp;
-    @InjectView(R.id.text_current_weather) TextView mWeatherText;
-    @InjectView(R.id.attribution) TextView mAttribution;
-    @InjectView(R.id.graph) LineChartView mChartView;
+    @InjectView(R.id.current_temp) protected TextView mCurrentTemp;
+    @InjectView(R.id.text_current_weather) protected TextView mWeatherText;
+    @InjectView(R.id.attribution) protected TextView mAttribution;
+    @InjectView(R.id.graph) protected LineChartView mChartView;
 
     public NowView(Context context, AttributeSet attrs) {
         super(context, attrs);

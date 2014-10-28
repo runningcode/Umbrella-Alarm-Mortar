@@ -1,11 +1,12 @@
 package lecho.lib.hellocharts.animation;
 
-import lecho.lib.hellocharts.DummyChartAnimationListener;
-import lecho.lib.hellocharts.view.PieChartView;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
+
+import lecho.lib.hellocharts.DummyChartAnimationListener;
+import lecho.lib.hellocharts.view.PieChartView;
 
 public class PieChartRotationAnimatorV8 implements PieChartRotationAnimator {
 

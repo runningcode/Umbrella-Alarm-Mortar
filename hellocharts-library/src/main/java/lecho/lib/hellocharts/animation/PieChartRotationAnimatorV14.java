@@ -1,12 +1,13 @@
 package lecho.lib.hellocharts.animation;
 
-import lecho.lib.hellocharts.DummyChartAnimationListener;
-import lecho.lib.hellocharts.view.PieChartView;
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
+
+import lecho.lib.hellocharts.DummyChartAnimationListener;
+import lecho.lib.hellocharts.view.PieChartView;
 
 @SuppressLint("NewApi")
 public class PieChartRotationAnimatorV14 implements PieChartRotationAnimator, AnimatorListener, AnimatorUpdateListener {

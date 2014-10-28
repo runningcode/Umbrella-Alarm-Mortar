@@ -1,14 +1,15 @@
 package lecho.lib.hellocharts.renderer;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+
 import lecho.lib.hellocharts.ChartComputator;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.provider.LineChartDataProvider;
 import lecho.lib.hellocharts.util.Utils;
 import lecho.lib.hellocharts.view.Chart;
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 
 /**
  * Renderer for preview chart based on LineChart. In addition to drawing chart data it also draw current viewport as

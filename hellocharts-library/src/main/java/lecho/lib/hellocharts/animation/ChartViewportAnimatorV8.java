@@ -1,12 +1,13 @@
 package lecho.lib.hellocharts.animation;
 
-import lecho.lib.hellocharts.DummyChartAnimationListener;
-import lecho.lib.hellocharts.model.Viewport;
-import lecho.lib.hellocharts.view.Chart;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
+
+import lecho.lib.hellocharts.DummyChartAnimationListener;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.view.Chart;
 
 public class ChartViewportAnimatorV8 implements ChartViewportAnimator {
 
