@@ -14,7 +14,6 @@ import flow.Parcer;
 
 @Module(
         includes = {
-                // TODO
                 UIModule.class,
                 DataModule.class
         },

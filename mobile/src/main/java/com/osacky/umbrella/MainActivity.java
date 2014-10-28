@@ -28,8 +28,6 @@ public class MainActivity extends ActionBarActivity {
     private MortarActivityScope activityScope;
     private Flow flow;
 
-    private boolean resumed;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,16 +49,6 @@ public class MainActivity extends ActionBarActivity {
         CoreView coreView = ButterKnife.findById(container, R.id.core_layout);
 
         flow = coreView.getFlow();
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
-        resumed = true;
-    }
-
-    @Override protected void onPause() {
-        resumed = false;
-        super.onPause();
     }
 
     @Override

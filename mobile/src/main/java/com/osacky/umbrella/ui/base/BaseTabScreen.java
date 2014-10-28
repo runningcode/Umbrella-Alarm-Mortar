@@ -116,7 +116,9 @@ public class BaseTabScreen extends TransitionScreen {
         }
 
         @Override protected void onExitScope() {
-            mSubscription.unsubscribe();
+            if (mSubscription != null) {
+                mSubscription.unsubscribe();
+            }
             super.onExitScope();
         }
 

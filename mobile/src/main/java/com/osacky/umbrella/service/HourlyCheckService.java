@@ -20,19 +20,17 @@ import rx.RetrofitObserver;
 
 public class HourlyCheckService extends IntentService {
 
-    @Inject NotificationManagerCompat mNotificationManager;
-    @Inject Provider<Location> mLocationProvider;
-    @Inject ForecastWeatherManager mWeatherManager;
-    @Inject Provider<NotificationCompat.Builder> mBuilderProvider;
-    @Inject WeatherToSummary mWeatherToSummary;
-    @Inject SummaryToNotification mSummaryToNotification;
-    @Inject ErrorToNotification mErrorToNotification;
+    @Inject protected NotificationManagerCompat mNotificationManager;
+    @Inject protected Provider<Location> mLocationProvider;
+    @Inject protected ForecastWeatherManager mWeatherManager;
+    @Inject protected Provider<NotificationCompat.Builder> mBuilderProvider;
+    @Inject protected WeatherToSummary mWeatherToSummary;
+    @Inject protected SummaryToNotification mSummaryToNotification;
+    @Inject protected ErrorToNotification mErrorToNotification;
 
     private static final int NOTIF_WEATHER_ID = 0;
     private static final int NOTIF_LOCATION_ERROR_ID = 1;
     private static final int NOTIF_RETROFIT_ERROR_ID = 2;
-
-    private ObjectGraph serviceGraph;
 
     public HourlyCheckService() {
         super(HourlyCheckService.class.getSimpleName());
@@ -40,13 +38,7 @@ public class HourlyCheckService extends IntentService {
 
     @Override public void onCreate() {
         super.onCreate();
-        serviceGraph = UmbrellaApplication.get(this).getObjectGraph().plus(new ServiceModule(this));
-        serviceGraph.inject(this);
-    }
-
-    @Override public void onDestroy() {
-        serviceGraph = null;
-        super.onDestroy();
+        UmbrellaApplication.get(this).getObjectGraph().plus(new ServiceModule(this)).inject(this);
     }
 
     @Override protected void onHandleIntent(Intent intent) {

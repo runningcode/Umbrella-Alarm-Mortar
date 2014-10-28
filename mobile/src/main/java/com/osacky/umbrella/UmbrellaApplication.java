@@ -15,6 +15,7 @@ import mortar.MortarScope;
 import timber.log.Timber;
 
 public class UmbrellaApplication extends Application {
+
     protected MortarScope applicationScope;
 
     @Override

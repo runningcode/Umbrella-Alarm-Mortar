@@ -40,10 +40,6 @@ public class DailyCheckService extends IntentService {
         UmbrellaApplication.get(this).getObjectGraph().plus(new ServiceModule(this)).inject(this);
     }
 
-    @Override public void onDestroy() {
-        super.onDestroy();
-    }
-
     @Override protected void onHandleIntent(Intent intent) {
         mNotificationManager.cancelAll();
         Location lastLocation = mLocationProvider.get();

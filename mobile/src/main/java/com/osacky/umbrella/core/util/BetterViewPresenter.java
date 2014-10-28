@@ -26,7 +26,10 @@ public class BetterViewPresenter<V extends View> extends ViewPresenter<V> {
         Timber.v("isViewStateRestored=%s", isViewStateRestored);
         Timber.v("viewState=%s", viewState);
         if (viewState != null && !isViewStateRestored) {
-            getView().restoreHierarchyState(viewState);
+            try {
+                getView().restoreHierarchyState(viewState);
+            } catch (ClassCastException ignored) {
+            }
             isViewStateRestored = true;
         }
     }

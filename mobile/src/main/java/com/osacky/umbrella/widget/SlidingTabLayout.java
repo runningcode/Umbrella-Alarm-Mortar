@@ -102,7 +102,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         final DisplayMetrics metrics = getResources().getDisplayMetrics();
         mTitleOffset = (int) (TITLE_OFFSET_DIPS * metrics.density);
 
-        mTabStrip = new SlidingTabStrip(context);
+        mTabStrip = new SlidingTabStrip(context, attrs);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 
