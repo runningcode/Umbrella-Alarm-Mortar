@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationManagerCompat;
 
 import com.osacky.umbrella.UmbrellaApplication;
+import com.osacky.umbrella.core.RollingTimberTree;
 import com.osacky.umbrella.data.api.ApiModule;
 import com.osacky.umbrella.data.api.ApiUtils;
 import com.osacky.umbrella.data.prefs.IntPreference;
@@ -73,6 +74,11 @@ public class DataModule {
     @Provides @Singleton
     NotificationManagerCompat provideNotificationManager(UmbrellaApplication application) {
         return NotificationManagerCompat.from(application);
+    }
+
+    @Provides @Singleton
+    RollingTimberTree provideRollingTimberTree() {
+        return new RollingTimberTree();
     }
 
     @Provides @Singleton

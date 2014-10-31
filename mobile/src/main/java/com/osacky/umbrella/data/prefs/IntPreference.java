@@ -2,10 +2,14 @@ package com.osacky.umbrella.data.prefs;
 
 import android.content.SharedPreferences;
 
+import rx.Observable;
+import rx.subjects.BehaviorSubject;
+
 public class IntPreference {
     private final SharedPreferences preferences;
     private final String key;
     private final int defaultValue;
+    private BehaviorSubject<Integer> subject;
 
     public IntPreference(SharedPreferences preferences, String key) {
         this(preferences, key, 0);
@@ -15,6 +19,13 @@ public class IntPreference {
         this.preferences = preferences;
         this.key = key;
         this.defaultValue = defaultValue;
+    }
+
+
+    public Observable<Integer> observe() {
+        if (subject == null)
+            subject = BehaviorSubject.create(get());
+        return subject;
     }
 
     public int get() {

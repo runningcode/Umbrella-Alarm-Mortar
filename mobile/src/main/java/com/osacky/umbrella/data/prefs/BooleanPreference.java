@@ -2,10 +2,14 @@ package com.osacky.umbrella.data.prefs;
 
 import android.content.SharedPreferences;
 
+import rx.Observable;
+import rx.subjects.BehaviorSubject;
+
 public class BooleanPreference {
     private final SharedPreferences preferences;
     private final String key;
     private final boolean defaultValue;
+    private BehaviorSubject<Boolean> subject;
 
     public BooleanPreference(SharedPreferences preferences, String key) {
         this(preferences, key, false);
@@ -15,6 +19,12 @@ public class BooleanPreference {
         this.preferences = preferences;
         this.key = key;
         this.defaultValue = defaultValue;
+    }
+
+    public Observable<Boolean> observe() {
+        if (subject == null)
+            subject = BehaviorSubject.create(get());
+        return subject;
     }
 
     public boolean get() {
@@ -27,6 +37,9 @@ public class BooleanPreference {
 
     public void set(boolean value) {
         preferences.edit().putBoolean(key, value).apply();
+        if (subject != null) {
+            subject.onNext(value);
+        }
     }
 
     public void delete() {

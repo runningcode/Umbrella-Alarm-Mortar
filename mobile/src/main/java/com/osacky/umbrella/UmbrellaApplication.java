@@ -5,9 +5,12 @@ import android.content.Context;
 
 import com.crashlytics.android.Crashlytics;
 import com.osacky.umbrella.core.CrashlyticsTree;
+import com.osacky.umbrella.core.RollingTimberTree;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import dagger.ObjectGraph;
 import mortar.Mortar;
@@ -15,6 +18,8 @@ import mortar.MortarScope;
 import timber.log.Timber;
 
 public class UmbrellaApplication extends Application {
+
+    @Inject RollingTimberTree mRollingTimberTree;
 
     protected MortarScope applicationScope;
 
@@ -32,6 +37,7 @@ public class UmbrellaApplication extends Application {
             Crashlytics.start(this);
             Crashlytics.setString("locale", Locale.getDefault().toString());
             Timber.plant(new CrashlyticsTree());
+            Timber.plant(mRollingTimberTree);
         }
     }
 
