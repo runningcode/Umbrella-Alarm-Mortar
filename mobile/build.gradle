@@ -9,7 +9,7 @@ def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm'Z'", TimeZone.getTimeZone(
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.2"
+    buildToolsVersion "21.1.0"
 
     defaultConfig {
         applicationId "com.osacky.umbrella"
@@ -26,8 +26,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
     buildTypes {
+        debug {
+            multiDexEnabled true
+        }
         release {
-            runProguard false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -50,19 +53,20 @@ dependencies {
     compile 'com.crashlytics.android:crashlytics:1.+'
     compile 'io.reactivex:rxjava:1.0.0-rc.8'
     compile 'io.reactivex:rxandroid:0.22.0'
-    compile 'com.jakewharton:butterknife:5.1.2'
+    compile 'com.jakewharton:butterknife:6.0.0'
     compile 'com.jakewharton.timber:timber:2.4.1'
     compile 'com.squareup.picasso:picasso:2.3.4'
     compile 'com.squareup.flow:flow:0.8'
-    compile 'com.squareup.retrofit:retrofit:1.7.0'
+    compile 'com.squareup.retrofit:retrofit:1.7.1'
     compile 'com.squareup.mortar:mortar:0.16'
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
     compile 'joda-time:joda-time:2.4'
     compile 'com.google.android.gms:play-services:6.1.+'
 
+    debugCompile 'com.android.support:multidex:1.0.+'
     debugCompile 'com.android.support:gridlayout-v7:21.0.0'
-    debugCompile 'com.squareup.retrofit:retrofit-mock:1.7.0'
+    debugCompile 'com.squareup.retrofit:retrofit-mock:1.7.1'
     debugCompile('com.jakewharton.espresso:espresso:1.1-r3') {
         exclude group: 'com.squareup.dagger'
     }
@@ -91,59 +95,5 @@ dependencies {
         exclude module: 'wagon-file'
         exclude module: 'wagon-http-lightweight'
         exclude module: 'wagon-provider-api'
-    }
-}
-
-def toCamelCase(String string) {
-    String result = ""
-    string.findAll("[^\\W]+") { String word ->
-        result += word.capitalize()
-    }
-    return result
-}
-
-afterEvaluate { project ->
-    Configuration runtimeConfiguration = project.configurations.getByName('compile')
-    ResolutionResult resolution = runtimeConfiguration.incoming.resolutionResult
-    // Forces resolve of configuration
-    ModuleVersionIdentifier module = resolution.getAllComponents().find { it.moduleVersion.name.equals("play-services") }.moduleVersion
-
-    String prepareTaskName = "prepare${toCamelCase("${module.group} ${module.name} ${module.version}")}Library"
-    File playServiceRootFolder = project.tasks.find { it.name.equals(prepareTaskName) }.explodedDir
-
-    Task stripPlayServices = project.tasks.create(name: 'stripPlayServices', group: "Strip") {
-        inputs.files new File(playServiceRootFolder, "classes.jar")
-        outputs.dir playServiceRootFolder
-        description 'Strip useless packages from Google Play Services library to avoid reaching dex limit'
-
-        doLast {
-            copy {
-                from(file(new File(playServiceRootFolder, "classes.jar")))
-                into(file(playServiceRootFolder))
-                rename { fileName ->
-                    fileName = "classes_orig.jar"
-                }
-            }
-            tasks.create(name: "stripPlayServices" + module.version, type: Jar) {
-                destinationDir = playServiceRootFolder
-                archiveName = "classes.jar"
-                from(zipTree(new File(playServiceRootFolder, "classes_orig.jar"))) {
-                    exclude "com/google/ads/**"
-                    exclude "com/google/android/gms/analytics/**"
-                    exclude "com/google/android/gms/games/**"
-                    exclude "com/google/android/gms/maps/**"
-                    exclude "com/google/android/gms/panorama/**"
-                    exclude "com/google/android/gms/plus/**"
-                    exclude "com/google/android/gms/drive/**"
-                    exclude "com/google/android/gms/ads/**"
-                    exclude "com/google/android/gms/wallet/**"
-                }
-            }.execute()
-            delete file(new File(playServiceRootFolder, "classes_orig.jar"))
-        }
-    }
-
-    project.tasks.findAll { it.name.startsWith('prepare') && it.name.endsWith('Dependencies') }.each { Task task ->
-        task.dependsOn stripPlayServices
     }
 }

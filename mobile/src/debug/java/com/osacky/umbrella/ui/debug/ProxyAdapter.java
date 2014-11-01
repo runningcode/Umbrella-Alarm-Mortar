@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.osacky.umbrella.core.ui.BindableAdapter;
+import com.osacky.umbrella.widget.BindableAdapter;
 import com.osacky.umbrella.data.prefs.StringPreference;
 
 import static butterknife.ButterKnife.findById;

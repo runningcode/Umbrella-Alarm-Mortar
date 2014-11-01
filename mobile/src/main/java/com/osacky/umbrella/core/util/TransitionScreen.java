@@ -2,7 +2,13 @@ package com.osacky.umbrella.core.util;
 
 import android.support.annotation.AnimRes;
 
+import com.osacky.umbrella.R;
+
 public abstract class TransitionScreen extends Screen {
+
+    private static final int[] DEFAULT_TRANSITION = new int[] {
+            R.anim.empty, R.anim.empty, R.anim.empty, R.anim.empty
+    };
 
     private @AnimRes int[] transitions;
 
@@ -12,6 +18,10 @@ public abstract class TransitionScreen extends Screen {
 
     @AnimRes
     public int[] getTransitions() {
-        return transitions;
+        if (transitions == null) {
+            return DEFAULT_TRANSITION;
+        } else {
+            return transitions;
+        }
     }
 }

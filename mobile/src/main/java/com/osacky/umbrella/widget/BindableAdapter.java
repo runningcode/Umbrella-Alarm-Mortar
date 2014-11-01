@@ -1,4 +1,4 @@
-package com.osacky.umbrella.core.ui;
+package com.osacky.umbrella.widget;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -2,6 +2,7 @@ package com.osacky.umbrella;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.crashlytics.android.Crashlytics;
 import com.osacky.umbrella.core.CrashlyticsTree;
@@ -28,6 +29,7 @@ public class UmbrellaApplication extends Application {
         super.onCreate();
         setup();
         buildObjectGraphAndInject();
+        postSetup();
     }
 
     protected void setup() {
@@ -37,6 +39,11 @@ public class UmbrellaApplication extends Application {
             Crashlytics.start(this);
             Crashlytics.setString("locale", Locale.getDefault().toString());
             Timber.plant(new CrashlyticsTree());
+        }
+    }
+
+    protected void postSetup() {
+        if (!BuildConfig.DEBUG) {
             Timber.plant(mRollingTimberTree);
         }
     }
@@ -63,6 +70,13 @@ public class UmbrellaApplication extends Application {
             return applicationScope;
         }
         return super.getSystemService(name);
+    }
+
+    @Override protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        if (BuildConfig.DEBUG) {
+            MultiDex.install(this);
+        }
     }
 
     public static UmbrellaApplication get(Context context) {
