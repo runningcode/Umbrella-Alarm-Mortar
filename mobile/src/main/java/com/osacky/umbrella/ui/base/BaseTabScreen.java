@@ -15,7 +15,7 @@ import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.api.ForecastWeatherManager;
 import com.osacky.umbrella.data.api.model.RainSummary;
 import com.osacky.umbrella.data.api.model.WeatherResult;
-import com.osacky.umbrella.service.WeatherToSummary;
+import com.osacky.umbrella.service.WeatherToDailySummary;
 import com.osacky.umbrella.ui.notifications.NotificationsScreen;
 
 import javax.inject.Inject;
@@ -71,7 +71,7 @@ public class BaseTabScreen extends TransitionScreen {
                 @Named("tabs") SparseArray<Parcelable> viewState,
                 Provider<Location> locationProvider,
                 ForecastWeatherManager weatherManager,
-                WeatherToSummary weatherToSummary,
+                WeatherToDailySummary weatherToDailySummary,
                 final Flow flow
         ) {
             super(viewState);
@@ -84,7 +84,7 @@ public class BaseTabScreen extends TransitionScreen {
                 return;
             }
             mObservable = weatherManager.get(location.getLatitude(), location.getLongitude());
-            mSubscription = mObservable.map(weatherToSummary)
+            mSubscription = mObservable.map(weatherToDailySummary)
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnNext(new Action1<RainSummary>() {
                         @Override public void call(RainSummary rainSummary) {

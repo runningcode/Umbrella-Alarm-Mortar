@@ -11,10 +11,12 @@ import butterknife.ButterKnife;
 import mortar.Mortar;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
+import rx.Subscription;
 
 public class ForecastView extends RecycleListView {
 
     @Inject protected ForecastScreen.Presenter mPresenter;
+    private Subscription mSubscription;
 
     public ForecastView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -28,8 +30,11 @@ public class ForecastView extends RecycleListView {
         super.onFinishInflate();
         if (isInEditMode()) return;
         ButterKnife.inject(this);
+    }
 
-        mPresenter.getSubscription(new RetrofitObserver<ForecastWeatherSummary>() {
+    @Override protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        mSubscription = mPresenter.getSubscription(new RetrofitObserver<ForecastWeatherSummary>() {
             @Override public void onRetrofitError(RetrofitError e) {
                 setListShown(true);
             }
@@ -43,6 +48,7 @@ public class ForecastView extends RecycleListView {
 
     @Override protected void onDetachedFromWindow() {
         mPresenter.dropView(this);
+        mSubscription.unsubscribe();
         super.onDetachedFromWindow();
     }
 }

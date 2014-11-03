@@ -15,7 +15,7 @@ public class ForecastWeatherManager extends DataManager<WeatherResult, Double> {
 
     @NonNull @Override
     protected Observable<WeatherResult> fetchFromResponseCache(Double key, Double... floats) {
-        return Observable.empty();
+        return getApi().getWeatherFromCache(key, floats[0]);
     }
 
     @NonNull @Override

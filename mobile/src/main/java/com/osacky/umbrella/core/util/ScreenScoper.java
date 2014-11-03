@@ -17,7 +17,6 @@ import flow.Flow;
 import flow.Layouts;
 import mortar.Mortar;
 import mortar.MortarScope;
-import timber.log.Timber;
 
 /**
  * A conductor that can swap subviews within a container view.
@@ -139,7 +138,6 @@ public class ScreenScoper<S extends Screen> implements CanShowScreen<S> {
             SparseArray<Parcelable> state = new SparseArray<>();
             view.saveHierarchyState(state);
             screen.setViewState(state);
-            Timber.i("Storing view state %s", state);
         }
     }
 

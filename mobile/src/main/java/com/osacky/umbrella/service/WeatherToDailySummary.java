@@ -10,12 +10,12 @@ import javax.inject.Singleton;
 import rx.functions.Func1;
 
 @Singleton
-public class WeatherToSummary implements Func1<WeatherResult, RainSummary> {
+public class WeatherToDailySummary implements Func1<WeatherResult, RainSummary> {
 
     private final WeatherGeoCoder mWeatherGeoCoder;
 
     @Inject
-    public WeatherToSummary(WeatherGeoCoder geoCoder) {
+    public WeatherToDailySummary(WeatherGeoCoder geoCoder) {
         mWeatherGeoCoder = geoCoder;
     }
 

@@ -3,6 +3,8 @@ package com.osacky.umbrella.data.api;
 import com.google.gson.Gson;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -20,6 +22,12 @@ public class MockWeatherService implements WeatherService {
     @Override
     public Observable<WeatherResult> getWeather(
             @Path("latitude") double latitude, @Path("longitude") double longitude) {
+        return Observable.just(mGson.fromJson(JSON_MONTREAL, WeatherResult.class))
+                .delay(1, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public Observable<WeatherResult> getWeatherFromCache(@Path("latitude") double latitude, @Path("longitude") double longitude) {
         return Observable.just(mGson.fromJson(JSON_MONTREAL, WeatherResult.class));
     }
 

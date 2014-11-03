@@ -60,6 +60,12 @@ public class IdlingGalleryServiceWrapper implements WeatherService, IdlingResour
         return api.getWeather(latitude, longitude).finallyDo(new IdlingAction());
     }
 
+    @Override
+    public Observable<WeatherResult> getWeatherFromCache(@Path("latitude") double latitude, @Path("longitude") double longitude) {
+        counter.incrementAndGet();
+        return api.getWeatherFromCache(latitude, longitude).finallyDo(new IdlingAction());
+    }
+
     private class IdlingAction implements Action0 {
         @Override public void call() {
             counter.decrementAndGet();

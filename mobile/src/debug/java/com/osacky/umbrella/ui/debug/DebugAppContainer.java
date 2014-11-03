@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -89,7 +90,7 @@ public class DebugAppContainer implements AppContainer {
     private final RestAdapter restAdapter;
     private final MockRestAdapter mockRestAdapter;
 
-    UmbrellaApplication app;
+    private UmbrellaApplication app;
     Activity activity;
 
     @Inject
@@ -646,9 +647,14 @@ public class DebugAppContainer implements AppContainer {
         Timber.v("Setting network endpoint to %s", endpoint);
         networkEndpoint.set(endpoint);
 
-        Intent newApp = new Intent(app, MainActivity.class);
-        newApp.setFlags(FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
-        app.startActivity(newApp);
-        app.rebuildObjectGraphAndInject();
+        activity.finish();
+        new Handler().postDelayed(new Runnable() {
+            @Override public void run() {
+                Intent newApp = new Intent(app, MainActivity.class);
+                newApp.setFlags(FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
+                app.startActivity(newApp);
+                app.rebuildObjectGraphAndInject();
+            }
+        }, 500);
     }
 }

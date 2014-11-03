@@ -14,8 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
-        android:elevation="4dp"
-        app:elevation="4dp"
+        android:popupTheme="@style/AppTheme"
+        app:theme="@style/AppTheme.Dark"
+        android:elevation="@dimen/toolbar_elevation"
+        app:popupTheme="@style/AppTheme"
+        app:elevation="@dimen/toolbar_elevation"
         />
 
     <TextView

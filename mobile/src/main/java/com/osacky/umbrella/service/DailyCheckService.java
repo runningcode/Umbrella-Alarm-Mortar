@@ -24,9 +24,10 @@ public class DailyCheckService extends IntentService {
     @Inject protected Provider<Location> mLocationProvider;
     @Inject protected ForecastWeatherManager mWeatherManager;
     @Inject protected Provider<NotificationCompat.Builder> mBuilderProvider;
-    @Inject protected WeatherToSummary mWeatherToSummary;
+    @Inject protected WeatherToDailySummary mWeatherToDailySummary;
     @Inject protected SummaryToNotification mSummaryToNotification;
     @Inject protected ErrorToNotification mErrorToNotification;
+    @Inject protected WeatherToAlarms mWeatherToAlarms;
 
     private static final int NOTIF_WEATHER_ID = 0;
     private static final int NOTIF_LOCATION_ERROR_ID = 1;
@@ -60,7 +61,8 @@ public class DailyCheckService extends IntentService {
         }
 
         mWeatherManager.get(lastLocation.getLatitude(), lastLocation.getLongitude())
-                .map(mWeatherToSummary)
+                .map(mWeatherToAlarms)
+                .map(mWeatherToDailySummary)
                 .map(mSummaryToNotification)
                 .subscribe(new RetrofitObserver<Notification>() {
                     @Override public void onRetrofitError(RetrofitError e) {

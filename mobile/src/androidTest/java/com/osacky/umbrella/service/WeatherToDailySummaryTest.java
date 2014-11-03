@@ -21,22 +21,22 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = Config.NONE)
-public class WeatherToSummaryTest {
+public class WeatherToDailySummaryTest {
 
     @Mock WeatherGeoCoder mWeatherGeoCoder;
     @Mock Ly mLy;
     @Mock WeatherResult mWeatherResult;
-    private WeatherToSummary mWeatherToSummary;
+    private WeatherToDailySummary mWeatherToDailySummary;
 
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        mWeatherToSummary = new WeatherToSummary(mWeatherGeoCoder);
+        mWeatherToDailySummary = new WeatherToDailySummary(mWeatherGeoCoder);
     }
 
     @Test
     public void testNullWeather() throws Exception {
-        RainSummary summary = mWeatherToSummary.call(null);
+        RainSummary summary = mWeatherToDailySummary.call(null);
         assertThat(summary).isNull();
     }
 
@@ -44,7 +44,7 @@ public class WeatherToSummaryTest {
     public void testNonRainCondition() throws Exception {
         when(mWeatherResult.getHourly()).thenReturn(mLy);
         when(mLy.getIcon()).thenReturn("cloudy");
-        RainSummary summary = mWeatherToSummary.call(mWeatherResult);
+        RainSummary summary = mWeatherToDailySummary.call(mWeatherResult);
         assertThat(summary).isNull();
     }
 
@@ -52,7 +52,7 @@ public class WeatherToSummaryTest {
     public void testWeatherGetsResult() throws Exception {
         when(mWeatherGeoCoder.getCityForLocation(anyFloat(), anyFloat())).thenReturn("Seattle");
         WeatherResult result = new Gson().fromJson(JSON_SEATTLE_FORECAST, WeatherResult.class);
-        RainSummary summary = mWeatherToSummary.call(result);
+        RainSummary summary = mWeatherToDailySummary.call(result);
         assertThat(summary).isNotNull();
         assertThat(summary.getChanceOfRain()).isEqualTo(9);
         assertThat(summary.getCityName()).isEqualTo("Seattle");
