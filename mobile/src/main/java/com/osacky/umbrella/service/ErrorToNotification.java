@@ -40,6 +40,7 @@ public class ErrorToNotification implements Func1<RetrofitError, Notification> {
         PendingIntent pendingIntent = PendingIntent.getService(mContext, 0, intent, 0);
         return mBuilderProvider.get()
                 .setTicker(contentText)
+                .setContentIntent(pendingIntent)
                 .setContentTitle(mContext.getString(R.string.error))
                 .setContentText(contentText)
                 .setSmallIcon(android.R.drawable.ic_dialog_alert)

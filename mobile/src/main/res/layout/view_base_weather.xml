@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         android:popupTheme="@style/AppTheme"
-        android:theme="@style/AppTheme.Dark"
+        app:theme="@style/AppTheme.Dark"
         android:elevation="@dimen/toolbar_elevation"
         app:popupTheme="@style/AppTheme"
         app:elevation="@dimen/toolbar_elevation"
