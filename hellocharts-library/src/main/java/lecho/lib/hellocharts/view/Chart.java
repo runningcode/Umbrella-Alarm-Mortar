@@ -134,14 +134,14 @@ public interface Chart {
 	 * Move/Srcoll viewport to position x,y(that position must be within maximum chart viewport). If possible viewport
 	 * will be centered at this point. Width and height of viewport will not be modified.
 	 * 
-	 * @see #setCurrentViewport(Viewport, boolean);
+	 * @see #setCurrentViewport(lecho.lib.hellocharts.model.Viewport, boolean);
 	 */
 	public void moveTo(float x, float y, boolean isAnimated);
 
 	/**
 	 * Returns current zoom type for this chart.
-	 * 
-	 * @see #setZoomType(ZoomType)
+	 *
+	 * @see #setZoomType(lecho.lib.hellocharts.gesture.ZoomType)
 	 */
 	public ZoomType getZoomType();
 
@@ -153,13 +153,13 @@ public interface Chart {
 
 	/**
 	 * Returns current maximum zoom value.
-	 * 
+	 *
 	 */
 	public float getMaxZoom();
 
 	/**
-	 * Set max zoom value within range (1 - 14). Default maximum zoom is 14.
-	 * 
+	 * Set max zoom value within range (1 - 20). Default maximum zoom is 20.
+	 *
 	 */
 	public void setMaxZoom(float maxZoom);
 
@@ -170,13 +170,13 @@ public interface Chart {
 
 	/**
 	 * Programatically zoom chart to given point(viewport point). Call this method after chart data had been set.
-	 * 
+	 *
 	 * @param x
 	 *            x within chart maximum viewport
 	 * @param y
 	 *            y within chart maximum viewport
 	 * @param zoomLevel
-	 *            value from 1 to maxZoom(default 14). 1 means chart has no zoom, 14 means chart has maximum zoom.
+	 *            value from 1 to maxZoom(default 20). 1 means chart has no zoom, 20 means chart has maximum zoom.
 	 * @param isAnimated
 	 *            set true if zoom should be animated.
 	 */
@@ -184,7 +184,7 @@ public interface Chart {
 
 	/**
 	 * Return true if chart value can be touched.
-	 * 
+	 *
 	 * @see #setValueTouchEnabled(boolean)
 	 */
 	public boolean isValueTouchEnabled();
@@ -195,31 +195,31 @@ public interface Chart {
 	public void setValueTouchEnabled(boolean isValueTouchEnabled);
 
 	/**
-	 * Returns maximum viewport for this chart. Don't modify it directly, use {@link #setMaximumViewport(Viewport)}
+	 * Returns maximum viewport for this chart. Don't modify it directly, use {@link #setMaximumViewport(lecho.lib.hellocharts.model.Viewport)}
 	 * instead.
-	 * 
-	 * @see #setMaximumViewport(Viewport)
+	 *
+	 * @see #setMaximumViewport(lecho.lib.hellocharts.model.Viewport)
 	 */
 	public Viewport getMaximumViewport();
 
 	/**
 	 * Set maximum viewport. If you set bigger maximum viewport data will be more concentrate and there will be more
 	 * empty spaces on sides.
-	 * 
+	 *
 	 * Note. MaxViewport have to be set after chartData has been set.
 	 */
 	public void setMaximumViewport(Viewport maxViewport);
 
 	/**
-	 * Returns current viewport. Don't modify it directly, use {@link #setCurrentViewport(Viewport, boolean)} instead.
-	 * 
-	 * @see #setCurrentViewport(Viewport, boolean)
+	 * Returns current viewport. Don't modify it directly, use {@link #setCurrentViewport(lecho.lib.hellocharts.model.Viewport, boolean)} instead.
+	 *
+	 * @see #setCurrentViewport(lecho.lib.hellocharts.model.Viewport, boolean)
 	 */
 	public Viewport getCurrentViewport();
 
 	/**
 	 * Sets current viewport. If isAnimated is true chart will be animated during viewport changes.
-	 * 
+	 *
 	 * Note. viewport have to be set after chartData has been set.
 	 */
 	public void setCurrentViewport(Viewport targetViewport, boolean isAnimated);
@@ -232,7 +232,7 @@ public interface Chart {
 
 	/**
 	 * Return true if value selection mode is enabled.
-	 * 
+	 *
 	 * @see #setValueSelectionEnabled(boolean)
 	 */
 	public boolean isValueSelectionEnabled();
@@ -254,7 +254,7 @@ public interface Chart {
 	public SelectedValue getSelectedValue();
 
 	/**
-	 * @see #setContainerScrollEnabled(boolean, ContainerScrollType)
+	 * @see #setContainerScrollEnabled(boolean, lecho.lib.hellocharts.gesture.ContainerScrollType)
 	 */
 	public boolean isContainerScrollEnabled();
 
@@ -262,6 +262,7 @@ public interface Chart {
 	 * Set isContainerScrollEnabled to true and containerScrollType to HORIZONTAL or VERTICAL if you are using chart
 	 * within scroll container.
 	 */
-	public void setContainerScrollEnabled(boolean isContainerScrollEnabled, ContainerScrollType containerScrollType);
+	public void setContainerScrollEnabled(boolean isContainerScrollEnabled, ContainerScrollType
+            containerScrollType);
 
 }

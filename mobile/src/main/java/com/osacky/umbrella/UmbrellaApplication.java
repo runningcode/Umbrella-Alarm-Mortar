@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.CrashlyticsListener;
 import com.osacky.umbrella.core.CrashlyticsTree;
 import com.osacky.umbrella.core.RollingTimberTree;
 
@@ -20,7 +21,7 @@ import timber.log.Timber;
 
 public class UmbrellaApplication extends Application {
 
-    @Inject RollingTimberTree mRollingTimberTree;
+    @Inject protected RollingTimberTree mRollingTimberTree;
 
     protected MortarScope applicationScope;
 

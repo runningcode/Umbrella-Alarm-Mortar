@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
+apply plugin: 'hugo'
 
 dependencies {
     compile 'com.android.support:support-v4:21.0.0'
 }
 
-
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.2"
+    buildToolsVersion "21.1.0"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 8
+        minSdkVersion 9
         targetSdkVersion 21
         versionCode 1
         versionName '1.0'

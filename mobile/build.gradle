@@ -39,7 +39,6 @@ android {
             minSdkVersion 21
         }
         slow {
-            minSdkVersion 9
         }
     }
     packagingOptions {

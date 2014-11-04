@@ -98,10 +98,11 @@ public class BubbleChartView extends AbstractChartView implements BubbleChartDat
 	 * Removes empty spaces, top-bottom for portrait orientation and left-right for landscape. This method has to be
 	 * called after view View#onSizeChanged() method is called and chart data is set. This method may be inaccurate.
 	 * 
-	 * @see BubbleChartRenderer#removeMargins()
+	 * @see lecho.lib.hellocharts.renderer.BubbleChartRenderer#removeMargins()
 	 */
 	public void removeMargins() {
 		bubbleChartRenderer.removeMargins();
+		ViewCompat.postInvalidateOnAnimation(this);
 	}
 
 	public interface BubbleChartOnValueTouchListener {

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.view.Chart;
-import lecho.lib.hellocharts.view.PieChartView;
 
 /**
  * Data for PieChart, by default it doesn't have axes.
@@ -157,7 +156,7 @@ public class PieChartData extends AbstractChartData {
 
 	/**
 	 * Set if labels should be drawn inside circle(false) or outside(true). By default false. If you set it to true you
-	 * should also change chart fill ration using {@link PieChartView#setCircleFillRatio(float)}. This flag is used only
+	 * should also change chart fill ration using {@link lecho.lib.hellocharts.view.PieChartView#setCircleFillRatio(float)}. This flag is used only
 	 * if you also set hasLabels or hasLabelsOnlyForSelected flags.
 	 */
 	public void setHasLabelsOutside(boolean hasLabelsOutside) {

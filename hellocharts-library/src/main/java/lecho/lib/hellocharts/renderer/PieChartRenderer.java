@@ -115,7 +115,8 @@ public class PieChartRenderer extends AbstractChartRenderer {
 		if (null != data.getCenterText1Typeface()) {
 			centerCircleText1Paint.setTypeface(data.getCenterText1Typeface());
 		}
-		centerCircleText1Paint.setTextSize(Utils.sp2px(scaledDensity, data.getCenterText1FontSize()));
+		centerCircleText1Paint.setTextSize(Utils.sp2px(scaledDensity,
+                data.getCenterText1FontSize()));
 		centerCircleText1Paint.setColor(data.getCenterText1Color());
 		centerCircleText1Paint.getFontMetricsInt(centerCircleText1FontMetrics);
 
@@ -175,7 +176,7 @@ public class PieChartRenderer extends AbstractChartRenderer {
 	}
 
 	/**
-	 * Draw center circle with text if {@link PieChartData#hasCenterCircle()} is set true.
+	 * Draw center circle with text if {@link lecho.lib.hellocharts.model.PieChartData#hasCenterCircle()} is set true.
 	 */
 	private void drawCenterCircle(Canvas canvas) {
 		final PieChartData data = dataProvider.getPieChartData();

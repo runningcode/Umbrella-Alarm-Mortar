@@ -31,14 +31,6 @@ public class MainActivityTest {
     @Test
     public void testStartAndResume() {
         mController.start().resume();
-        assertThat(mActivity.isRunning()).isTrue();
         mController.pause();
-        assertThat(mActivity.isRunning()).isFalse();
     }
-
-    @Test
-    public void testActivityPresenter() {
-        assertThat(mActivity.getActivity()).isEqualTo(mActivity);
-    }
-
 }

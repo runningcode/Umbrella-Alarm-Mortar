@@ -9,15 +9,19 @@ import android.widget.TextView;
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.util.Strings;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.SimpleValueFormatter;
 import lecho.lib.hellocharts.view.LineChartView;
 import mortar.Mortar;
 import retrofit.RetrofitError;
@@ -62,9 +66,18 @@ public class NowView extends ScrollView {
                     line.setHasPoints(false);
                     line.setColor(resources.getColor(R.color.theme_accent));
                     LineChartData lineChartData = new LineChartData(Arrays.asList(line));
-                    lineChartData.setBaseValue(0);
                     Axis axisX = new Axis();
-                    Axis axisY = new Axis();
+                    axisX.setName("min");
+                    List<AxisValue> yAxisValueList = new ArrayList<>();
+                    yAxisValueList.add(new AxisValue(0));
+                    yAxisValueList.add(new AxisValue(.13f, "Low".toCharArray()));
+                    yAxisValueList.add(new AxisValue(.26f)); //, "Med".toCharArray()));
+                    yAxisValueList.add(new AxisValue(.34f)); //, "High".toCharArray()));
+                    yAxisValueList.add(new AxisValue(2.3f));
+                    Axis axisY = new Axis(yAxisValueList);
+                    axisY.setHasLines(true);
+                    axisY.setFormatter(new SimpleValueFormatter(2));
+
                     lineChartData.setAxisXBottom(axisX);
                     lineChartData.setAxisYLeft(axisY);
                     mChartView.setLineChartData(lineChartData);

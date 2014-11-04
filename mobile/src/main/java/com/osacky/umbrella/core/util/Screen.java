@@ -20,7 +20,7 @@ public abstract class Screen implements Blueprint {
     }
 
     @Override public String getMortarScopeName() {
-        return ObjectUtils.getClass(this).getName();
+        return getName();
     }
 
     public String getName() {

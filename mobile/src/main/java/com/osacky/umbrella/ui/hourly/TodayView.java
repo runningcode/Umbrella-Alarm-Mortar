@@ -15,6 +15,7 @@ import butterknife.InjectView;
 import mortar.Mortar;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
+import rx.Subscription;
 
 public class TodayView extends LinearLayout {
 
@@ -24,6 +25,8 @@ public class TodayView extends LinearLayout {
     @InjectView(R.id.text_current_weather) protected TextView mWeatherText;
     @InjectView(R.id.chance_of_rain) protected TextView mChanceOfRain;
     @InjectView(R.id.attribution) protected TextView mAttribution;
+
+    private Subscription subscription;
 
     public TodayView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -38,7 +41,12 @@ public class TodayView extends LinearLayout {
         ButterKnife.inject(this);
         Strings.addLink(mAttribution, "Forecast", "http://forecast.io/");
 
-        mPresenter.getSubscription(new RetrofitObserver<TodayWeatherSummary>() {
+    }
+
+    @Override protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        subscription = mPresenter.getSubscription(new RetrofitObserver<TodayWeatherSummary>() {
             @Override public void onRetrofitError(RetrofitError e) {
             }
 
@@ -47,7 +55,7 @@ public class TodayView extends LinearLayout {
                         String.format(getContext().getString(R.string.temp_high_low),
                                 (int) rainSummary.getLowTemp(),
                                 (int) rainSummary.getHighTemp()
-                ));
+                        ));
                 mWeatherText.setText(rainSummary.getSummary());
                 mChanceOfRain.setText(String.format(getContext().getString(R.string
                         .chance_of_rain_today), rainSummary.getChanceOfRain()));
@@ -57,7 +65,8 @@ public class TodayView extends LinearLayout {
     }
 
     @Override protected void onDetachedFromWindow() {
-        mPresenter.dropView(this);
         super.onDetachedFromWindow();
+        subscription.unsubscribe();
+        mPresenter.dropView(this);
     }
 }

@@ -6,7 +6,6 @@ import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
 import lecho.lib.hellocharts.BuildConfig;
 import lecho.lib.hellocharts.animation.PieChartRotationAnimator;
@@ -130,8 +129,8 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
 
 	/**
 	 * Returns pie chart rotation, 0 rotation means that 0 degrees is at 3 o'clock. Don't confuse with
-	 * {@link View#getRotation()}.
-	 * 
+	 * {@link android.view.View#getRotation()}.
+	 *
 	 * @return
 	 */
 	public int getChartRotation() {
@@ -139,7 +138,7 @@ public class PieChartView extends AbstractChartView implements PieChartDataProvi
 	}
 
 	/**
-	 * Set pie chart rotation. Don't confuse with {@link View#getRotation()}.
+	 * Set pie chart rotation. Don't confuse with {@link android.view.View#getRotation()}.
 	 * 
 	 * @param rotation
 	 * 

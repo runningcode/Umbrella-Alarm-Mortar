@@ -23,6 +23,8 @@ public class WeatherGeoCoder {
     public String getCityForLocation(float latitude, float longitude) {
         try {
             return mGeocoder.getFromLocation(latitude, longitude, 1).get(0).getLocality();
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         } catch (IOException e) {
             Crashlytics.logException(e);
             return null;

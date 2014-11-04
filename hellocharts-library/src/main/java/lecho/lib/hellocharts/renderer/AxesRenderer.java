@@ -405,8 +405,9 @@ public class AxesRenderer {
 		final Viewport visibleViewport = computator.getVisibleViewport();
 		final Rect contentRect = computator.getContentRect();
 
-		Utils.computeAxisAutoValues(visibleViewport.left, visibleViewport.right, contentRect.width()
-				/ axisLabelWidthTab[position] / 2, axisAutoValuesBufferTab[position]);
+		Utils.computeAxisAutoValues(visibleViewport.left, visibleViewport.right,
+                contentRect.width()
+                / axisLabelWidthTab[position] / 2, axisAutoValuesBufferTab[position]);
 
 		if (axis.hasLines()
 				&& axisLinesDrawBufferTab[position].length < axisAutoValuesBufferTab[position].valuesNumber * 4) {
@@ -575,8 +576,9 @@ public class AxesRenderer {
 		final Viewport visibleViewport = computator.getVisibleViewport();
 		final Rect contentRect = computator.getContentRect();
 
-		Utils.computeAxisAutoValues(visibleViewport.bottom, visibleViewport.top, contentRect.height()
-				/ axisLabelTextAscentTab[position] / 2, axisAutoValuesBufferTab[position]);
+		Utils.computeAxisAutoValues(visibleViewport.bottom, visibleViewport.top,
+                contentRect.height()
+                / axisLabelTextAscentTab[position] / 2, axisAutoValuesBufferTab[position]);
 
 		if (axis.hasLines()
 				&& axisLinesDrawBufferTab[position].length < axisAutoValuesBufferTab[position].valuesNumber * 4) {
