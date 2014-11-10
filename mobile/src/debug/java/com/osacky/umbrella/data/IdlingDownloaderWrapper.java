@@ -42,6 +42,10 @@ public class IdlingDownloaderWrapper implements Downloader, IdlingResource {
         }
     }
 
+    @Override public void shutdown() {
+        downloader.shutdown();
+    }
+
     @Override public String getName() {
         return this.getClass().getName() + hashCode();
     }

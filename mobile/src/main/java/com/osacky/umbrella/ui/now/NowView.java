@@ -3,6 +3,8 @@ package com.osacky.umbrella.ui.now;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -27,10 +29,12 @@ import mortar.Mortar;
 import retrofit.RetrofitError;
 import rx.RetrofitObserver;
 
-public class NowView extends ScrollView {
+public class NowView extends FrameLayout {
 
     @Inject protected NowScreen.Presenter mPresenter;
 
+    @InjectView(android.R.id.progress) protected View mProgress;
+    @InjectView(android.R.id.content) protected View mContent;
     @InjectView(R.id.current_temp) protected TextView mCurrentTemp;
     @InjectView(R.id.text_current_weather) protected TextView mWeatherText;
     @InjectView(R.id.attribution) protected TextView mAttribution;
@@ -85,6 +89,8 @@ public class NowView extends ScrollView {
                 } else {
                     mChartView.setVisibility(GONE);
                 }
+                mContent.setVisibility(VISIBLE);
+                mProgress.setVisibility(GONE);
 
             }
         });

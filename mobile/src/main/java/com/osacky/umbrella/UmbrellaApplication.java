@@ -2,12 +2,14 @@ package com.osacky.umbrella;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.CrashlyticsListener;
 import com.osacky.umbrella.core.CrashlyticsTree;
 import com.osacky.umbrella.core.RollingTimberTree;
+import com.osacky.umbrella.util.Utils;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -36,6 +38,7 @@ public class UmbrellaApplication extends Application {
     protected void setup() {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
+            Utils.enableStrictMode();
         } else {
             Crashlytics.start(this);
             Crashlytics.setString("locale", Locale.getDefault().toString());

@@ -2,7 +2,8 @@ package com.osacky.umbrella.ui.hourly;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.osacky.umbrella.R;
@@ -17,10 +18,12 @@ import retrofit.RetrofitError;
 import rx.RetrofitObserver;
 import rx.Subscription;
 
-public class TodayView extends LinearLayout {
+public class TodayView extends FrameLayout {
 
     @Inject protected TodayScreen.Presenter mPresenter;
 
+    @InjectView(android.R.id.progress) protected View mProgress;
+    @InjectView(android.R.id.content) protected View mContent;
     @InjectView(R.id.current_temp) protected TextView mCurrentTemp;
     @InjectView(R.id.text_current_weather) protected TextView mWeatherText;
     @InjectView(R.id.chance_of_rain) protected TextView mChanceOfRain;
@@ -59,6 +62,8 @@ public class TodayView extends LinearLayout {
                 mWeatherText.setText(rainSummary.getSummary());
                 mChanceOfRain.setText(String.format(getContext().getString(R.string
                         .chance_of_rain_today), rainSummary.getChanceOfRain()));
+                mProgress.setVisibility(GONE);
+                mContent.setVisibility(VISIBLE);
             }
         });
         mPresenter.takeView(this);

@@ -11,7 +11,7 @@ class NowWeatherSummary {
     private final List<PointValue> mData;
     private final boolean mWillRain;
 
-    public NowWeatherSummary(
+    NowWeatherSummary(
             float currentTemp, float feelsLike, CharSequence summary, List<PointValue> data,
             boolean willRain) {
         mCurrentTemp = currentTemp;

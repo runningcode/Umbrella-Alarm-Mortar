@@ -73,4 +73,8 @@ public final class MockDownloader implements Downloader {
     // Grab the image stream and return it.
     return new Response(assetManager.open(imagePath), false);
   }
+
+    @Override public void shutdown() {
+
+    }
 }

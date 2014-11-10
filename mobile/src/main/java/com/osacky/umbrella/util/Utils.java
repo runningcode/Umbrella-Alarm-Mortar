@@ -17,6 +17,8 @@
 package com.osacky.umbrella.util;
 
 import android.graphics.Typeface;
+import android.os.Looper;
+import android.os.StrictMode;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -25,6 +27,8 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import rx.android.observables.Assertions;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
@@ -36,7 +40,6 @@ public final class Utils {
 
     private static SimpleDateFormat sBetterDateFormat;
     private static java.text.DateFormat sBackupDateFormat;
-
 
     public interface OnMeasuredCallback {
         void onMeasured(View view, int width, int height);
@@ -65,12 +68,20 @@ public final class Utils {
         });
     }
 
-    private static boolean hasL() {
-        return SDK_INT >= LOLLIPOP;
+    public static void enableStrictMode() {
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .penaltyDeath()
+                .build());
     }
 
-    private static boolean hasJB_MR2() {
-        return SDK_INT >= JELLY_BEAN_MR2;
+    private static boolean hasL() {
+        return SDK_INT >= LOLLIPOP;
     }
 
     public static void setMediumTypeface(TextView textView) {
@@ -86,7 +97,7 @@ public final class Utils {
     }
 
     public static String formatDate(Date date) {
-        if (hasJB_MR2()) {
+        if (SDK_INT >= JELLY_BEAN_MR2) {
             if (sBetterDateFormat == null) {
                 sBetterDateFormat = new SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.getDefault(), "MMM d"));
             }
@@ -96,6 +107,12 @@ public final class Utils {
                 sBackupDateFormat = java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT);
             }
             return sBackupDateFormat.format(date);
+        }
+    }
+
+    public static void assertUiThread() {
+        if (Looper.getMainLooper() != Looper.myLooper()) {
+            throw new IllegalStateException("This operation must be done from the main UI thread, but was " + Thread.currentThread());
         }
     }
 

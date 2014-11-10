@@ -57,6 +57,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
     }
 
     public void setForecastList(List<Condition> forecastList) {
+        Utils.assertUiThread();
         mForecastList = forecastList;
         notifyDataSetChanged();
     }
