@@ -3,7 +3,7 @@ package com.osacky.umbrella.core.util;
 import android.os.Bundle;
 import android.view.View;
 
-import com.google.common.collect.Lists;
+import com.osacky.umbrella.util.Lists;
 
 import java.util.List;
 

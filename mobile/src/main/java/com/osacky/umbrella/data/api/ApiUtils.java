@@ -33,6 +33,7 @@ public class ApiUtils {
 
         try {
             StatFs statFs = new StatFs(dir.getAbsolutePath());
+            //noinspection deprecation
             long available = ((long) statFs.getBlockCount()) * statFs.getBlockSize();
             // Target 2% of the total space.
             size = available / 50;
