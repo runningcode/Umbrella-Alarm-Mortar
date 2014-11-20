@@ -33,8 +33,8 @@ public class NowView extends FrameLayout {
 
     @Inject protected NowScreen.Presenter mPresenter;
 
-    @InjectView(android.R.id.progress) protected View mProgress;
-    @InjectView(android.R.id.content) protected View mContent;
+    @InjectView(R.id.now_progress) protected View mProgress;
+    @InjectView(R.id.now_content) protected View mContent;
     @InjectView(R.id.current_temp) protected TextView mCurrentTemp;
     @InjectView(R.id.text_current_weather) protected TextView mWeatherText;
     @InjectView(R.id.attribution) protected TextView mAttribution;

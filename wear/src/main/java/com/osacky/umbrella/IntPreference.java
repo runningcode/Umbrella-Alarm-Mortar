@@ -1,4 +1,4 @@
-package com.osacky.umbrella.data.prefs;
+package com.osacky.umbrella;
 
 import android.content.SharedPreferences;
 

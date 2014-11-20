@@ -2,7 +2,9 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/progress"/>
+    <include layout="@layout/progress"
+             android:id="@+id/recycle_progress"
+        />
 
     <FrameLayout
         android:id="@+id/list_container"

@@ -22,8 +22,8 @@ public class TodayView extends FrameLayout {
 
     @Inject protected TodayScreen.Presenter mPresenter;
 
-    @InjectView(android.R.id.progress) protected View mProgress;
-    @InjectView(android.R.id.content) protected View mContent;
+    @InjectView(R.id.today_progress) protected View mProgress;
+    @InjectView(R.id.today_content) protected View mContent;
     @InjectView(R.id.current_temp) protected TextView mCurrentTemp;
     @InjectView(R.id.text_current_weather) protected TextView mWeatherText;
     @InjectView(R.id.chance_of_rain) protected TextView mChanceOfRain;

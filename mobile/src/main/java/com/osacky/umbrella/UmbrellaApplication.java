@@ -2,6 +2,7 @@ package com.osacky.umbrella;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.crashlytics.android.Crashlytics;
 import com.osacky.umbrella.core.CrashlyticsTree;
@@ -35,6 +36,7 @@ public class UmbrellaApplication extends Application {
     protected void setup() {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
+
             Utils.enableStrictMode();
         } else {
             Crashlytics.start(this);
@@ -76,6 +78,7 @@ public class UmbrellaApplication extends Application {
     @Override protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         if (BuildConfig.DEBUG) {
+            MultiDex.install(this);
         }
     }
 

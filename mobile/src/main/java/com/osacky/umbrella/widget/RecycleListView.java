@@ -32,7 +32,7 @@ public class RecycleListView extends FrameLayout {
         inflate(context, R.layout.recycle_list_view, this);
 
         mRecyclerView = (RecyclerView) findViewById(android.R.id.list);
-        mProgress = findViewById(android.R.id.progress);
+        mProgress = findViewById(R.id.recycle_progress);
         mListContainer = findViewById(R.id.list_container);
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

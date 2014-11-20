@@ -1,43 +1,42 @@
-package com.osacky.umbrella.data.prefs;
+package com.osacky.umbrella;
 
 import android.content.SharedPreferences;
 
 import rx.Observable;
 import rx.subjects.BehaviorSubject;
 
-public class IntPreference {
+public class StringPreference {
     private final SharedPreferences preferences;
     private final String key;
-    private final int defaultValue;
-    private BehaviorSubject<Integer> subject;
+    private final String defaultValue;
+    private BehaviorSubject<String> subject;
 
-    public IntPreference(SharedPreferences preferences, String key) {
-        this(preferences, key, 0);
+    public StringPreference(SharedPreferences preferences, String key) {
+        this(preferences, key, null);
     }
 
-    public IntPreference(SharedPreferences preferences, String key, int defaultValue) {
+    public StringPreference(SharedPreferences preferences, String key, String defaultValue) {
         this.preferences = preferences;
         this.key = key;
         this.defaultValue = defaultValue;
     }
 
-
-    public Observable<Integer> observe() {
+    public Observable<String> observe() {
         if (subject == null)
             subject = BehaviorSubject.create(get());
         return subject;
     }
 
-    public int get() {
-        return preferences.getInt(key, defaultValue);
+    public String get() {
+        return preferences.getString(key, defaultValue);
     }
 
     public boolean isSet() {
         return preferences.contains(key);
     }
 
-    public void set(int value) {
-        preferences.edit().putInt(key, value).apply();
+    public void set(String value) {
+        preferences.edit().putString(key, value).apply();
         if (subject != null) {
             subject.onNext(value);
         }

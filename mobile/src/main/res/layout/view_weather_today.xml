@@ -10,10 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     >
 
-    <include layout="@layout/progress"/>
+    <include layout="@layout/progress"
+             android:id="@+id/today_progress"
+        />
 
     <LinearLayout
-        android:id="@android:id/content"
+        android:id="@+id/today_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

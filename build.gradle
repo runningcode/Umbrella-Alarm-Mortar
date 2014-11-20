@@ -3,15 +3,17 @@
 buildscript {
     repositories {
         maven { url 'http://download.crashlytics.com/maven' }
+        maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
         jcenter()
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.14.1'
+        classpath 'com.android.tools.build:gradle:0.14.2'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.1.0'
         classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.12.+'
         classpath 'org.robolectric:robolectric-gradle-plugin:0.13.+'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,5 +25,6 @@ allprojects {
         jcenter()
         mavenLocal()
         maven { url 'http://download.crashlytics.com/maven' }
+        maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
     }
 }
