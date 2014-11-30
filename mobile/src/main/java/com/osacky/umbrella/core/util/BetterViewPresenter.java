@@ -5,7 +5,6 @@ import android.os.Parcelable;
 import android.util.SparseArray;
 import android.view.View;
 
-import mortar.MortarScope;
 import mortar.ViewPresenter;
 import timber.log.Timber;
 
@@ -48,23 +47,5 @@ public class BetterViewPresenter<V extends View> extends ViewPresenter<V> {
         Timber.v("dropView");
         isViewStateRestored = false;
         super.dropView(view);
-    }
-
-    @Override
-    protected void onSave(Bundle outState) {
-        super.onSave(outState);
-        Timber.v("onSave: %s", outState);
-    }
-
-    @Override
-    protected void onEnterScope(MortarScope scope) {
-        super.onEnterScope(scope);
-        Timber.v("onEnterScope");
-    }
-
-    @Override
-    protected void onExitScope() {
-        super.onExitScope();
-        Timber.v("onExitScope");
     }
 }

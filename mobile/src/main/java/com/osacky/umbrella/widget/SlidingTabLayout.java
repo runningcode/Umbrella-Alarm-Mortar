@@ -183,7 +183,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         Utils.setMediumTypeface(textView);
 
         TypedValue outValue = new TypedValue();
-        getContext().getTheme().resolveAttribute(R.attr.selectableItemBackground, outValue, true);
+        context.getTheme().resolveAttribute(R.attr.selectableItemBackground, outValue, true);
         textView.setBackgroundResource(outValue.resourceId);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {

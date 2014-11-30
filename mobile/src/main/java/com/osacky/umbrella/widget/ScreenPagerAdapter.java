@@ -5,7 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.osacky.umbrella.core.util.Screen;
+import com.osacky.umbrella.core.util.Path;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,11 +15,10 @@ import flow.Layouts;
 import mortar.Mortar;
 import mortar.MortarScope;
 
-public class ScreenPagerAdapter<S extends Screen> extends PagerAdapter {
-    private final List<S> mScreens;
+public class ScreenPagerAdapter<S extends Path> extends PagerAdapter {
+    private final List<S> mScreens = new ArrayList<>();
 
     public ScreenPagerAdapter() {
-        mScreens = new ArrayList<>();
     }
 
     @SafeVarargs
@@ -51,10 +50,6 @@ public class ScreenPagerAdapter<S extends Screen> extends PagerAdapter {
     @Override
     public int getCount() {
         return mScreens.size();
-    }
-
-    public final S getItem(int position) {
-        return mScreens.get(position);
     }
 
     @Override

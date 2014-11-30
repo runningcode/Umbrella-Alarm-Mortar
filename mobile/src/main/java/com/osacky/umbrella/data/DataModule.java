@@ -16,6 +16,7 @@ import com.osacky.umbrella.data.api.ApiModule;
 import com.osacky.umbrella.data.api.ApiUtils;
 import com.osacky.umbrella.data.prefs.IntPreference;
 import com.osacky.umbrella.data.prefs.annotations.TimePref;
+import com.osacky.umbrella.data.wearable.WearableModule;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.OkHttpDownloader;
@@ -35,7 +36,7 @@ import static android.content.Context.LOCATION_SERVICE;
 import static android.location.LocationManager.PASSIVE_PROVIDER;
 
 @Module(
-        includes = ApiModule.class,
+        includes = {ApiModule.class, WearableModule.class},
         complete = false,
         library = true
 )

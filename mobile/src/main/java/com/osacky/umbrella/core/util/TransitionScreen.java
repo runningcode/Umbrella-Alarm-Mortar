@@ -4,7 +4,7 @@ import android.support.annotation.AnimRes;
 
 import com.osacky.umbrella.R;
 
-public abstract class TransitionScreen extends Screen {
+public abstract class TransitionScreen extends Path {
 
     private static final int[] DEFAULT_TRANSITION = new int[] {
             R.anim.empty, R.anim.empty, R.anim.empty, R.anim.empty

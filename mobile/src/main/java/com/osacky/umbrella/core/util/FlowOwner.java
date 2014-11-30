@@ -15,7 +15,7 @@ import mortar.ViewPresenter;
 /**
  * Base class for all presenters that manage a {@link flow.Flow}.
  */
-public abstract class FlowOwner<S extends Screen, V extends View & CanShowScreen<S>>
+public abstract class FlowOwner<S extends Path, V extends View & CanShowScreen<S>>
         extends ViewPresenter<V> implements Flow.Listener {
 
     private static final String FLOW_KEY = "FLOW_KEY";

@@ -5,7 +5,7 @@ import android.util.SparseArray;
 
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
-import com.osacky.umbrella.core.util.Screen;
+import com.osacky.umbrella.core.util.Path;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
 
@@ -20,10 +20,10 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
 @Layout(R.layout.view_weather_now)
-public class NowScreen extends Screen {
+public class NowScreen extends Path {
 
     @Override public Object getDaggerModule() {
-        return new Module(mViewState);
+        return new Module(getViewState());
     }
 
     @dagger.Module(

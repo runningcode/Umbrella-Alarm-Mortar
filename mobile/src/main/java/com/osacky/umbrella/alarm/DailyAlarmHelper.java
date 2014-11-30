@@ -26,8 +26,11 @@ public class DailyAlarmHelper {
     private final PendingIntent mPendingIntent;
 
     @Inject
-    DailyAlarmHelper(UmbrellaApplication app, AlarmManager alarmManager, @TimePref IntPreference
-            timePreference) {
+    DailyAlarmHelper(
+            UmbrellaApplication app,
+            AlarmManager alarmManager,
+            @TimePref IntPreference timePreference
+    ) {
         mAlarmManager = alarmManager;
         mTimePreference = timePreference;
         Intent checkIntent = new Intent(app, DailyCheckService.class);

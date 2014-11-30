@@ -34,10 +34,8 @@ public class DataLayerListenerService extends WearableListenerService {
     private static final String START_ACTIVITY_PATH = "/start-activity";
     private static final String DATA_ITEM_RECEIVED_PATH = "/data-item-received";
     public static final String WEATHER_PATH = "/weather";
-    public static final String IMAGE_PATH = "/image";
-    public static final String IMAGE_KEY = "photo";
-    private static final String COUNT_KEY = "count";
-    private static final int MAX_LOG_TAG_LENGTH = 23;
+    public static final String TEMP_KEY = "temp_F";
+    private static final String SUMMARY_KEY = "weather_summary";
     private GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -80,9 +78,10 @@ public class DataLayerListenerService extends WearableListenerService {
                 PutDataMapRequest map = PutDataMapRequest.createFromDataMapItem
                         (DataMapItem.fromDataItem(event.getDataItem()));
                 DataMap dataMap = map.getDataMap();
-                int temp_f = dataMap.getInt("temp_F");
-                String description = dataMap.getString("current_summary");
-                mTempPref.set(temp_f);
+                int temp = dataMap.getInt(TEMP_KEY);
+                String description = dataMap.getString(SUMMARY_KEY);
+                Timber.i("Temp is %d weather is %s", temp, description);
+                mTempPref.set(temp);
                 mDescriptionPref.set(description);
                 // Get the node id of the node that created the data item from the host portion of
                 // the uri.

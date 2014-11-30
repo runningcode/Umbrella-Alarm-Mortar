@@ -1,6 +1,7 @@
 package com.osacky.umbrella.core.presenters;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -50,8 +51,12 @@ public class ConnectedPresenter extends Presenter<HasGoogleApiClient> implements
         }
     }
 
+    @Nullable
     public GoogleApiClient getGoogleApiClient() {
-        return getView().getGoogleApiClient();
+        if (getView() != null) {
+            return getView().getGoogleApiClient();
+        }
+        return null;
     }
 
     private class Registration implements Scoped {

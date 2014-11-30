@@ -7,12 +7,12 @@ import com.osacky.umbrella.util.ObjectUtils;
 
 import mortar.Blueprint;
 
-public abstract class Screen implements Blueprint {
+public abstract class Path implements Blueprint {
 
-    protected SparseArray<Parcelable> mViewState;
+    private SparseArray<Parcelable> mViewState;
 
     @Override public boolean equals(Object o) {
-        return o != null && o instanceof Screen && this.getName().equals(((Screen) o).getName());
+        return o != null && o instanceof Path && this.getName().equals(((Path) o).getName());
     }
 
     @Override public int hashCode() {

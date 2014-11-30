@@ -4,7 +4,7 @@ import android.app.Activity;
 
 import com.osacky.umbrella.UmbrellaModule;
 import com.osacky.umbrella.core.util.FlowOwner;
-import com.osacky.umbrella.core.util.Screen;
+import com.osacky.umbrella.core.util.Path;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
 
 import javax.inject.Inject;
@@ -46,7 +46,7 @@ public class CorePresenter implements Blueprint {
     }
 
     @Singleton
-    public static class Presenter extends FlowOwner<Screen, CoreView> {
+    public static class Presenter extends FlowOwner<Path, CoreView> {
 
         @Inject
         Presenter(Parcer<Object> flowParcer) {
@@ -54,7 +54,7 @@ public class CorePresenter implements Blueprint {
         }
 
         @Override
-        protected Screen getFirstScreen() {
+        protected Path getFirstScreen() {
             return new BaseTabScreen();
         }
     }

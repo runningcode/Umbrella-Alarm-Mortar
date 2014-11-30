@@ -25,7 +25,7 @@ import mortar.MortarScope;
  * @param <S> the type of the screens that serve as a {@link mortar.Blueprint} for subview. Must
  *            be annotated with {@link flow.Layout}, suitable for use with {@link flow.Layouts#createView}.
  */
-public class ScreenScoper<S extends Screen> implements CanShowScreen<S> {
+public class ScreenScoper<S extends Path> implements CanShowScreen<S> {
 
     // Using static view ids to find and replace core layouts
     private final static int contentViewId = Views.generateViewId();

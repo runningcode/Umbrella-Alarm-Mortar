@@ -3,9 +3,6 @@ package com.osacky.umbrella;
 import android.app.Application;
 import android.content.Context;
 
-import javax.inject.Inject;
-
-import rx.Observable;
 import timber.log.Timber;
 
 public class WearableApplication extends Application {

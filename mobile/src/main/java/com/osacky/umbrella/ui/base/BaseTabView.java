@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import com.osacky.umbrella.R;
-import com.osacky.umbrella.core.util.Screen;
+import com.osacky.umbrella.core.util.Path;
 import com.osacky.umbrella.ui.forecast.ForecastScreen;
 import com.osacky.umbrella.ui.hourly.TodayScreen;
 import com.osacky.umbrella.ui.now.NowScreen;
@@ -61,7 +61,7 @@ public class BaseTabView extends LinearLayout {
         mToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
     }
 
-    class WeatherPagerAdapter extends ScreenPagerAdapter<Screen> {
+    class WeatherPagerAdapter extends ScreenPagerAdapter<Path> {
         @Override public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:

@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.osacky.umbrella.R;
@@ -74,10 +73,9 @@ public class NowView extends FrameLayout {
                     axisX.setName("min");
                     List<AxisValue> yAxisValueList = new ArrayList<>();
                     yAxisValueList.add(new AxisValue(0));
-                    yAxisValueList.add(new AxisValue(.13f, "Low".toCharArray()));
-                    yAxisValueList.add(new AxisValue(.26f)); //, "Med".toCharArray()));
-                    yAxisValueList.add(new AxisValue(.34f)); //, "High".toCharArray()));
-                    yAxisValueList.add(new AxisValue(2.3f));
+                    yAxisValueList.add(new AxisValue(.13f, "LOW".toCharArray()));
+                    yAxisValueList.add(new AxisValue(.26f, "MED".toCharArray()));
+                    yAxisValueList.add(new AxisValue(.34f, "HIGH".toCharArray()));
                     Axis axisY = new Axis(yAxisValueList);
                     axisY.setHasLines(true);
                     axisY.setFormatter(new SimpleValueFormatter(2));

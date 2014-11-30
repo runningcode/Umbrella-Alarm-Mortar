@@ -5,7 +5,7 @@ import android.util.SparseArray;
 
 import com.osacky.umbrella.R;
 import com.osacky.umbrella.core.util.BetterViewPresenter;
-import com.osacky.umbrella.core.util.Screen;
+import com.osacky.umbrella.core.util.Path;
 import com.osacky.umbrella.ui.base.BaseTabScreen;
 
 import javax.inject.Inject;
@@ -20,10 +20,10 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 
 @Layout(R.layout.view_weather_forecast)
-public class ForecastScreen extends Screen {
+public class ForecastScreen extends Path {
 
     @Override public Object getDaggerModule() {
-        return new Module(mViewState);
+        return new Module(getViewState());
     }
 
     @dagger.Module(
@@ -53,17 +53,17 @@ public class ForecastScreen extends Screen {
                 SparseArray<Parcelable> viewState,
                 BaseTabScreen.Presenter basePresenter,
                 final WeatherToForecast weatherToForecast,
-                ForecastAdapter forecastAdapter
+                final ForecastAdapter forecastAdapter
         ) {
             super(viewState);
             mForecastAdapter = forecastAdapter;
             mObservable = basePresenter.getObservable()
-                    .map(weatherToForecast)
-                    .doOnNext(new Action1<ForecastWeatherSummary>() {
-                        @Override public void call(ForecastWeatherSummary weatherSummary) {
-                            mForecastAdapter.setForecastList(weatherSummary.getDaily().getData());
-                        }
-                    });
+                    .map(weatherToForecast);
+            mObservable.subscribe(new Action1<ForecastWeatherSummary>() {
+                @Override public void call(ForecastWeatherSummary forecastWeatherSummary) {
+                    mForecastAdapter.setForecastList(forecastWeatherSummary.getDaily().getData());
+                }
+            });
         }
 
         Subscription getSubscription(Observer<ForecastWeatherSummary> observer) {
@@ -74,5 +74,4 @@ public class ForecastScreen extends Screen {
             return mForecastAdapter;
         }
     }
-
 }

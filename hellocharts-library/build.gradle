@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'hugo'
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.android.support:support-v4:21.0.2'
 }
 
 android {
@@ -19,7 +19,6 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName '1.0'
-        applicationId 'lecho.lib.hellocharts'
     }
 
 	lintOptions {

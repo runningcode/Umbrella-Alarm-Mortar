@@ -29,7 +29,7 @@ import flow.Layout;
 public class NotificationsScreen extends TransitionScreen implements HasParent<BaseTabScreen> {
 
     @Override public Object getDaggerModule() {
-        return new Module(mViewState);
+        return new Module(getViewState());
     }
 
     @Override public BaseTabScreen getParent() {

@@ -18,7 +18,6 @@ import com.osacky.umbrella.core.CorePresenter;
 import com.osacky.umbrella.core.CoreView;
 import com.osacky.umbrella.core.presenters.ConnectedPresenter;
 import com.osacky.umbrella.core.presenters.HasGoogleApiClient;
-import com.osacky.umbrella.core.presenters.HasScope;
 import com.osacky.umbrella.ui.AppContainer;
 
 import javax.inject.Inject;
@@ -32,7 +31,8 @@ import mortar.MortarScope;
 import static android.content.Intent.ACTION_MAIN;
 import static android.content.Intent.CATEGORY_LAUNCHER;
 
-public class MainActivity extends ActionBarActivity implements GoogleApiClient.OnConnectionFailedListener, HasGoogleApiClient {
+public class MainActivity extends ActionBarActivity
+        implements GoogleApiClient.OnConnectionFailedListener, HasGoogleApiClient {
 
     // Request code to use when launching the resolution activity
     private static final int REQUEST_RESOLVE_ERROR = 1001;
@@ -155,13 +155,10 @@ public class MainActivity extends ActionBarActivity implements GoogleApiClient.O
                 // There was an error with the resolution intent. Try again.
                 mGoogleApiClient.connect();
             }
-        } else {
+        } if (result.getErrorCode() != ConnectionResult.API_UNAVAILABLE) {
             // Show dialog using GooglePlayServicesUtil.getErrorDialog()
             showErrorDialog(result.getErrorCode());
             mResolvingError = true;
-        }
-        if (result.getErrorCode() == ConnectionResult.API_UNAVAILABLE) {
-            // The Android Wear app is not installed
         }
     }
 
