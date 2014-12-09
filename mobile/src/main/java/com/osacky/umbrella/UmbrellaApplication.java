@@ -2,7 +2,6 @@ package com.osacky.umbrella;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
 
 import com.crashlytics.android.Crashlytics;
 import com.osacky.umbrella.core.CrashlyticsTree;
@@ -73,13 +72,6 @@ public class UmbrellaApplication extends Application {
             return applicationScope;
         }
         return super.getSystemService(name);
-    }
-
-    @Override protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        if (BuildConfig.DEBUG) {
-            MultiDex.install(this);
-        }
     }
 
     public static UmbrellaApplication get(Context context) {

@@ -43,6 +43,7 @@ public class BaseTabView extends LinearLayout {
         mSlidingTabLayout.setDistributeEvenly(
                 getContext().getResources().getBoolean(R.bool.distribute_evenly));
         mViewPager.setAdapter(mAdapter);
+        mViewPager.setOffscreenPageLimit(2);
         mSlidingTabLayout.setViewPager(mViewPager);
         mPresenter.takeView(this);
     }
