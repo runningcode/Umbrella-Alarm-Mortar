@@ -21,6 +21,7 @@ import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.api.ForecastWeatherManager;
 import com.osacky.umbrella.data.api.model.RainSummary;
 import com.osacky.umbrella.data.api.model.WeatherResult;
+import rx.RxUtils;
 import com.osacky.umbrella.service.WeatherToDailySummary;
 import com.osacky.umbrella.ui.notifications.NotificationsScreen;
 
@@ -98,7 +99,7 @@ public class BaseTabScreen extends TransitionScreen {
                 Timber.e("Location was null");
                 return;
             }
-            mObservable = weatherManager.get(location.getLatitude(), location.getLongitude());
+            mObservable = RxUtils.cacheAndReplay(weatherManager.get(location.getLatitude(), location.getLongitude()));
             mSubscription = mObservable.map(new Func1<WeatherResult, WeatherResult>() {
                 @Override public WeatherResult call(WeatherResult weatherResult) {
 //                    weatherResultSubject.onNext(weatherResult);
