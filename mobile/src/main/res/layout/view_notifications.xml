@@ -9,14 +9,11 @@
     >
 
     <android.support.v7.widget.Toolbar
-        android:theme="@style/AppTheme.Dark"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
-        android:popupTheme="@style/AppTheme"
-        app:theme="@style/AppTheme.Dark"
-        android:elevation="@dimen/toolbar_elevation"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/AppTheme"
         app:elevation="@dimen/toolbar_elevation"
         />

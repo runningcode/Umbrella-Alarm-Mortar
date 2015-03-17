@@ -1,5 +1,7 @@
 package com.osacky.umbrella.data.api.model;
 
+import android.support.annotation.Nullable;
+
 public class WeatherResult {
     private float latitude;
     private float longitude;
@@ -22,6 +24,10 @@ public class WeatherResult {
         return currently;
     }
 
+    /**
+     * This can be null sometimes (outside the US)
+     */
+    @Nullable
     public Ly getMinutely() {
         return minutely;
     }

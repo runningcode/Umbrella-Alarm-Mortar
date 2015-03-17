@@ -58,16 +58,24 @@ public class ForecastScreen extends Path {
             super(viewState);
             mForecastAdapter = forecastAdapter;
             mObservable = basePresenter.getObservable()
-                    .map(weatherToForecast).subscribeOn(AndroidSchedulers.mainThread());
-            mObservable.subscribe(new Action1<ForecastWeatherSummary>() {
-                @Override public void call(ForecastWeatherSummary forecastWeatherSummary) {
+                    .map(weatherToForecast);
+            mObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer
+                    <ForecastWeatherSummary>() {
+                @Override public void onCompleted() {
+                }
+
+                @Override public void onError(Throwable e) {
+                }
+
+                @Override public void onNext(ForecastWeatherSummary forecastWeatherSummary) {
                     mForecastAdapter.setForecastList(forecastWeatherSummary.getDaily().getData());
                 }
             });
         }
 
         Subscription getSubscription(Observer<ForecastWeatherSummary> observer) {
-            return mObservable.subscribe(observer);
+            return mObservable.observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
         }
 
         public ForecastAdapter getForecastAdapter() {

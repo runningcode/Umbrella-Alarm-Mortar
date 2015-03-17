@@ -1,5 +1,7 @@
 package com.osacky.umbrella.ui.now;
 
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 import lecho.lib.hellocharts.model.PointValue;
@@ -29,6 +31,7 @@ class NowWeatherSummary {
         return mFeelsLike;
     }
 
+    @Nullable
     public CharSequence getSummary() {
         return mSummary;
     }

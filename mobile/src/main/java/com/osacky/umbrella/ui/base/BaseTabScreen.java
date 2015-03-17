@@ -103,7 +103,10 @@ public class BaseTabScreen extends TransitionScreen {
             mSubscription = mObservable.map(new Func1<WeatherResult, WeatherResult>() {
                 @Override public WeatherResult call(WeatherResult weatherResult) {
 //                    weatherResultSubject.onNext(weatherResult);
-                    new SendDataThread(weatherResult, mConnectedPresenter.getGoogleApiClient()).start();
+                    GoogleApiClient client = mConnectedPresenter.getGoogleApiClient();
+                    if (client != null) {
+                        new SendDataThread(weatherResult, client).start();
+                    }
                     return weatherResult;
                 }
             })
@@ -123,7 +126,6 @@ public class BaseTabScreen extends TransitionScreen {
 
         @Override public void onLoad(Bundle savedInstanceState) {
             super.onLoad(savedInstanceState);
-            restoreViewState();
             getView().setMenu(R.menu.about, new Toolbar.OnMenuItemClickListener() {
                 @Override public boolean onMenuItemClick(MenuItem menuItem) {
                     switch (menuItem.getItemId()) {

@@ -28,10 +28,10 @@ public class IdlingDownloaderWrapper implements Downloader, IdlingResource {
         this.counter = new AtomicInteger(0);
     }
 
-    @Override public Response load(Uri uri, boolean localCacheOnly) throws IOException {
+    @Override public Response load(Uri uri, int networkPolicy) throws IOException {
         counter.incrementAndGet();
         try {
-            Response response = downloader.load(uri, localCacheOnly);
+            Response response = downloader.load(uri, networkPolicy);
             counter.decrementAndGet();
             notifyIdle();
             return response;

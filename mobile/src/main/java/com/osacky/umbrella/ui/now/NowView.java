@@ -18,11 +18,11 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import lecho.lib.hellocharts.formatter.SimpleAxisValueFormatter;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
-import lecho.lib.hellocharts.model.SimpleValueFormatter;
 import lecho.lib.hellocharts.view.LineChartView;
 import mortar.Mortar;
 import retrofit.RetrofitError;
@@ -78,7 +78,7 @@ public class NowView extends FrameLayout {
                     yAxisValueList.add(new AxisValue(.34f, "HIGH".toCharArray()));
                     Axis axisY = new Axis(yAxisValueList);
                     axisY.setHasLines(true);
-                    axisY.setFormatter(new SimpleValueFormatter(2));
+                    axisY.setFormatter(new SimpleAxisValueFormatter(2));
 
                     lineChartData.setAxisXBottom(axisX);
                     lineChartData.setAxisYLeft(axisY);

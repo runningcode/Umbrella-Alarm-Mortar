@@ -16,6 +16,7 @@
 
 package com.osacky.umbrella.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.view.PagerAdapter;
@@ -93,7 +94,22 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     public SlidingTabLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init();
+        mTabStrip = new SlidingTabStrip(context, attrs, defStyle);
+        addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+    }
 
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public SlidingTabLayout(Context context, AttributeSet attrs, int defStyleAttr, int
+            defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+        mTabStrip = new SlidingTabStrip(context, attrs, defStyleAttr, defStyleRes);
+        addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+    }
+
+    private void init() {
         // Disable the Scroll Bar
         setHorizontalScrollBarEnabled(false);
         // Make sure that the Tab Strips fills this View
@@ -101,9 +117,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         final DisplayMetrics metrics = getResources().getDisplayMetrics();
         mTitleOffset = (int) (TITLE_OFFSET_DIPS * metrics.density);
-
-        mTabStrip = new SlidingTabStrip(context, attrs);
-        addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 
     /**

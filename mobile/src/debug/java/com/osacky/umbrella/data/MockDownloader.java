@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.support.v4.util.LruCache;
 
 import com.squareup.picasso.Downloader;
+import com.squareup.picasso.NetworkPolicy;
 
 import java.io.IOException;
 
@@ -34,11 +35,11 @@ public final class MockDownloader implements Downloader {
     this.assetManager = assetManager;
   }
 
-  @Override public Response load(Uri uri, boolean localCacheOnly) throws IOException {
+  @Override public Response load(Uri uri, int networkPolicy) throws IOException {
     if (!"mock".equals(uri.getScheme())) {
       throw new RuntimeException("Attempted to download non-mock image ("
-          + uri
-          + ") using the mock downloader. Mock URLs must use scheme 'mock'.");
+              + uri
+              + ") using the mock downloader. Mock URLs must use scheme 'mock'.");
     }
 
     String imagePath = uri.getPath().substring(1); // Grab only the path sans leading slash.
@@ -52,7 +53,7 @@ public final class MockDownloader implements Downloader {
     }
 
     // If we are not allowed to hit the network and the cache missed return a big fat nothing.
-    if (localCacheOnly) {
+    if (networkPolicy == NetworkPolicy.OFFLINE.ordinal()) {
       return null;
     }
 
@@ -74,7 +75,7 @@ public final class MockDownloader implements Downloader {
     return new Response(assetManager.open(imagePath), false);
   }
 
-    @Override public void shutdown() {
+  @Override public void shutdown() {
 
     }
 }

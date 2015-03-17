@@ -22,13 +22,13 @@ public class MockWeatherService implements WeatherService {
     @Override
     public Observable<WeatherResult> getWeather(
             @Path("latitude") double latitude, @Path("longitude") double longitude) {
-        return Observable.just(mGson.fromJson(JSON_MONTREAL, WeatherResult.class))
+        return Observable.just(mGson.fromJson(JSON_WEATHER_RAIN, WeatherResult.class))
                 .delay(1, TimeUnit.SECONDS);
     }
 
     @Override
     public Observable<WeatherResult> getWeatherFromCache(@Path("latitude") double latitude, @Path("longitude") double longitude) {
-        return Observable.just(mGson.fromJson(JSON_MONTREAL, WeatherResult.class));
+        return Observable.just(mGson.fromJson(JSON_WEATHER_RAIN, WeatherResult.class));
     }
 
     private static final String JSON_MONTREAL = "{\n" +
@@ -1616,3275 +1616,6 @@ public class MockWeatherService implements WeatherService {
             "    }\n" +
             "}";
 
-    private static final String JSON_MEDIUM_RAIN = "{\n" +
-            "    \"latitude\": 28.8072,\n" +
-            "    \"longitude\": -82.55,\n" +
-            "    \"timezone\": \"America/New_York\",\n" +
-            "    \"offset\": -4,\n" +
-            "    \"currently\": {\n" +
-            "        \"time\": 1411948233,\n" +
-            "        \"summary\": \"Light Rain\",\n" +
-            "        \"icon\": \"rain\",\n" +
-            "        \"nearestStormDistance\": 0,\n" +
-            "        \"precipIntensity\": 0.0531,\n" +
-            "        \"precipIntensityError\": 0.0022,\n" +
-            "        \"precipProbability\": 1,\n" +
-            "        \"precipType\": \"rain\",\n" +
-            "        \"temperature\": 74.93,\n" +
-            "        \"apparentTemperature\": 74.93,\n" +
-            "        \"dewPoint\": 71.95,\n" +
-            "        \"humidity\": 0.9,\n" +
-            "        \"windSpeed\": 1.86,\n" +
-            "        \"windBearing\": 59,\n" +
-            "        \"visibility\": 3.15,\n" +
-            "        \"cloudCover\": 1,\n" +
-            "        \"pressure\": 1014.62,\n" +
-            "        \"ozone\": 279.48\n" +
-            "    },\n" +
-            "    \"minutely\": {\n" +
-            "        \"summary\": \"Rain for the hour.\",\n" +
-            "        \"icon\": \"rain\",\n" +
-            "        \"data\": [\n" +
-            "            {\n" +
-            "                \"time\": 1411948200,\n" +
-            "                \"precipIntensity\": 0.0516,\n" +
-            "                \"precipIntensityError\": 0.002,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948260,\n" +
-            "                \"precipIntensity\": 0.0543,\n" +
-            "                \"precipIntensityError\": 0.0024,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948320,\n" +
-            "                \"precipIntensity\": 0.0586,\n" +
-            "                \"precipIntensityError\": 0.0029,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948380,\n" +
-            "                \"precipIntensity\": 0.0593,\n" +
-            "                \"precipIntensityError\": 0.0032,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948440,\n" +
-            "                \"precipIntensity\": 0.0632,\n" +
-            "                \"precipIntensityError\": 0.0035,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948500,\n" +
-            "                \"precipIntensity\": 0.0718,\n" +
-            "                \"precipIntensityError\": 0.0036,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948560,\n" +
-            "                \"precipIntensity\": 0.0757,\n" +
-            "                \"precipIntensityError\": 0.0038,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948620,\n" +
-            "                \"precipIntensity\": 0.08,\n" +
-            "                \"precipIntensityError\": 0.004,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948680,\n" +
-            "                \"precipIntensity\": 0.0793,\n" +
-            "                \"precipIntensityError\": 0.0041,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948740,\n" +
-            "                \"precipIntensity\": 0.0823,\n" +
-            "                \"precipIntensityError\": 0.0041,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948800,\n" +
-            "                \"precipIntensity\": 0.0847,\n" +
-            "                \"precipIntensityError\": 0.004,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948860,\n" +
-            "                \"precipIntensity\": 0.0833,\n" +
-            "                \"precipIntensityError\": 0.0041,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948920,\n" +
-            "                \"precipIntensity\": 0.085,\n" +
-            "                \"precipIntensityError\": 0.0039,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948980,\n" +
-            "                \"precipIntensity\": 0.0859,\n" +
-            "                \"precipIntensityError\": 0.0036,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949040,\n" +
-            "                \"precipIntensity\": 0.0848,\n" +
-            "                \"precipIntensityError\": 0.0037,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949100,\n" +
-            "                \"precipIntensity\": 0.0853,\n" +
-            "                \"precipIntensityError\": 0.0035,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949160,\n" +
-            "                \"precipIntensity\": 0.0844,\n" +
-            "                \"precipIntensityError\": 0.0035,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949220,\n" +
-            "                \"precipIntensity\": 0.0829,\n" +
-            "                \"precipIntensityError\": 0.0036,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949280,\n" +
-            "                \"precipIntensity\": 0.0818,\n" +
-            "                \"precipIntensityError\": 0.0037,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949340,\n" +
-            "                \"precipIntensity\": 0.0802,\n" +
-            "                \"precipIntensityError\": 0.0038,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949400,\n" +
-            "                \"precipIntensity\": 0.0796,\n" +
-            "                \"precipIntensityError\": 0.0038,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949460,\n" +
-            "                \"precipIntensity\": 0.0772,\n" +
-            "                \"precipIntensityError\": 0.0039,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949520,\n" +
-            "                \"precipIntensity\": 0.0768,\n" +
-            "                \"precipIntensityError\": 0.0039,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949580,\n" +
-            "                \"precipIntensity\": 0.0752,\n" +
-            "                \"precipIntensityError\": 0.0039,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949640,\n" +
-            "                \"precipIntensity\": 0.0742,\n" +
-            "                \"precipIntensityError\": 0.0039,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949700,\n" +
-            "                \"precipIntensity\": 0.0731,\n" +
-            "                \"precipIntensityError\": 0.0038,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949760,\n" +
-            "                \"precipIntensity\": 0.0722,\n" +
-            "                \"precipIntensityError\": 0.0037,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949820,\n" +
-            "                \"precipIntensity\": 0.0705,\n" +
-            "                \"precipIntensityError\": 0.0036,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949880,\n" +
-            "                \"precipIntensity\": 0.0703,\n" +
-            "                \"precipIntensityError\": 0.0036,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949940,\n" +
-            "                \"precipIntensity\": 0.0697,\n" +
-            "                \"precipIntensityError\": 0.0036,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950000,\n" +
-            "                \"precipIntensity\": 0.0691,\n" +
-            "                \"precipIntensityError\": 0.0037,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950060,\n" +
-            "                \"precipIntensity\": 0.0685,\n" +
-            "                \"precipIntensityError\": 0.0037,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950120,\n" +
-            "                \"precipIntensity\": 0.0686,\n" +
-            "                \"precipIntensityError\": 0.0038,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950180,\n" +
-            "                \"precipIntensity\": 0.068,\n" +
-            "                \"precipIntensityError\": 0.0038,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950240,\n" +
-            "                \"precipIntensity\": 0.0685,\n" +
-            "                \"precipIntensityError\": 0.004,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950300,\n" +
-            "                \"precipIntensity\": 0.0686,\n" +
-            "                \"precipIntensityError\": 0.0042,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950360,\n" +
-            "                \"precipIntensity\": 0.0683,\n" +
-            "                \"precipIntensityError\": 0.0042,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950420,\n" +
-            "                \"precipIntensity\": 0.0693,\n" +
-            "                \"precipIntensityError\": 0.0047,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950480,\n" +
-            "                \"precipIntensity\": 0.0695,\n" +
-            "                \"precipIntensityError\": 0.0048,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950540,\n" +
-            "                \"precipIntensity\": 0.0697,\n" +
-            "                \"precipIntensityError\": 0.005,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950600,\n" +
-            "                \"precipIntensity\": 0.07,\n" +
-            "                \"precipIntensityError\": 0.0053,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950660,\n" +
-            "                \"precipIntensity\": 0.0711,\n" +
-            "                \"precipIntensityError\": 0.0057,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950720,\n" +
-            "                \"precipIntensity\": 0.0716,\n" +
-            "                \"precipIntensityError\": 0.0059,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950780,\n" +
-            "                \"precipIntensity\": 0.0722,\n" +
-            "                \"precipIntensityError\": 0.0065,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950840,\n" +
-            "                \"precipIntensity\": 0.0738,\n" +
-            "                \"precipIntensityError\": 0.0071,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950900,\n" +
-            "                \"precipIntensity\": 0.075,\n" +
-            "                \"precipIntensityError\": 0.0074,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950960,\n" +
-            "                \"precipIntensity\": 0.075,\n" +
-            "                \"precipIntensityError\": 0.0076,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951020,\n" +
-            "                \"precipIntensity\": 0.079,\n" +
-            "                \"precipIntensityError\": 0.0089,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951080,\n" +
-            "                \"precipIntensity\": 0.0794,\n" +
-            "                \"precipIntensityError\": 0.0092,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951140,\n" +
-            "                \"precipIntensity\": 0.08,\n" +
-            "                \"precipIntensityError\": 0.0095,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951200,\n" +
-            "                \"precipIntensity\": 0.0811,\n" +
-            "                \"precipIntensityError\": 0.01,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951260,\n" +
-            "                \"precipIntensity\": 0.0832,\n" +
-            "                \"precipIntensityError\": 0.0104,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951320,\n" +
-            "                \"precipIntensity\": 0.084,\n" +
-            "                \"precipIntensityError\": 0.0107,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951380,\n" +
-            "                \"precipIntensity\": 0.0864,\n" +
-            "                \"precipIntensityError\": 0.0119,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951440,\n" +
-            "                \"precipIntensity\": 0.0887,\n" +
-            "                \"precipIntensityError\": 0.0125,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951500,\n" +
-            "                \"precipIntensity\": 0.0909,\n" +
-            "                \"precipIntensityError\": 0.013,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951560,\n" +
-            "                \"precipIntensity\": 0.0913,\n" +
-            "                \"precipIntensityError\": 0.0132,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951620,\n" +
-            "                \"precipIntensity\": 0.0988,\n" +
-            "                \"precipIntensityError\": 0.0152,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951680,\n" +
-            "                \"precipIntensity\": 0.0994,\n" +
-            "                \"precipIntensityError\": 0.0156,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951740,\n" +
-            "                \"precipIntensity\": 0.1002,\n" +
-            "                \"precipIntensityError\": 0.0159,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951800,\n" +
-            "                \"precipIntensity\": 0.1018,\n" +
-            "                \"precipIntensityError\": 0.0165,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"hourly\": {\n" +
-            "        \"summary\": \"Rain throughout the day.\",\n" +
-            "        \"icon\": \"rain\",\n" +
-            "        \"data\": [\n" +
-            "            {\n" +
-            "                \"time\": 1411945200,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0551,\n" +
-            "                \"precipProbability\": 0.94,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.51,\n" +
-            "                \"apparentTemperature\": 75.51,\n" +
-            "                \"dewPoint\": 72.52,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 1.75,\n" +
-            "                \"windBearing\": 99,\n" +
-            "                \"visibility\": 1.96,\n" +
-            "                \"cloudCover\": 1,\n" +
-            "                \"pressure\": 1014.67,\n" +
-            "                \"ozone\": 279.3\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948800,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0649,\n" +
-            "                \"precipProbability\": 0.42,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 74.82,\n" +
-            "                \"apparentTemperature\": 74.82,\n" +
-            "                \"dewPoint\": 71.84,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 1.96,\n" +
-            "                \"windBearing\": 53,\n" +
-            "                \"visibility\": 3.37,\n" +
-            "                \"cloudCover\": 1,\n" +
-            "                \"pressure\": 1014.62,\n" +
-            "                \"ozone\": 279.52\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411952400,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0611,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.38,\n" +
-            "                \"apparentTemperature\": 75.38,\n" +
-            "                \"dewPoint\": 72.3,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 2.41,\n" +
-            "                \"windBearing\": 46,\n" +
-            "                \"visibility\": 4.64,\n" +
-            "                \"cloudCover\": 0.99,\n" +
-            "                \"pressure\": 1014.56,\n" +
-            "                \"ozone\": 279.74\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411956000,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0714,\n" +
-            "                \"precipProbability\": 0.88,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.83,\n" +
-            "                \"apparentTemperature\": 75.83,\n" +
-            "                \"dewPoint\": 72.97,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 2.74,\n" +
-            "                \"windBearing\": 42,\n" +
-            "                \"visibility\": 5.39,\n" +
-            "                \"cloudCover\": 0.98,\n" +
-            "                \"pressure\": 1014.53,\n" +
-            "                \"ozone\": 279.95\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411959600,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0575,\n" +
-            "                \"precipProbability\": 0.87,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.96,\n" +
-            "                \"apparentTemperature\": 75.96,\n" +
-            "                \"dewPoint\": 73.14,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 3.45,\n" +
-            "                \"windBearing\": 49,\n" +
-            "                \"visibility\": 5.45,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1014.48,\n" +
-            "                \"ozone\": 280.04\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411963200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0331,\n" +
-            "                \"precipProbability\": 0.62,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.03,\n" +
-            "                \"apparentTemperature\": 76.03,\n" +
-            "                \"dewPoint\": 73.63,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 4.73,\n" +
-            "                \"windBearing\": 59,\n" +
-            "                \"visibility\": 5.46,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1014.29,\n" +
-            "                \"ozone\": 279.96\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411966800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0219,\n" +
-            "                \"precipProbability\": 0.45,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.94,\n" +
-            "                \"apparentTemperature\": 75.94,\n" +
-            "                \"dewPoint\": 73.71,\n" +
-            "                \"humidity\": 0.93,\n" +
-            "                \"windSpeed\": 5.67,\n" +
-            "                \"windBearing\": 67,\n" +
-            "                \"visibility\": 5.49,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1013.92,\n" +
-            "                \"ozone\": 279.76\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411970400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0156,\n" +
-            "                \"precipProbability\": 0.32,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.63,\n" +
-            "                \"apparentTemperature\": 75.63,\n" +
-            "                \"dewPoint\": 73.28,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 6.14,\n" +
-            "                \"windBearing\": 69,\n" +
-            "                \"visibility\": 4.88,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1013.65,\n" +
-            "                \"ozone\": 279.58\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411974000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0147,\n" +
-            "                \"precipProbability\": 0.31,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.46,\n" +
-            "                \"apparentTemperature\": 75.46,\n" +
-            "                \"dewPoint\": 73.43,\n" +
-            "                \"humidity\": 0.93,\n" +
-            "                \"windSpeed\": 6.15,\n" +
-            "                \"windBearing\": 72,\n" +
-            "                \"visibility\": 4.49,\n" +
-            "                \"cloudCover\": 0.94,\n" +
-            "                \"pressure\": 1013.31,\n" +
-            "                \"ozone\": 279.47\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411977600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.017,\n" +
-            "                \"precipProbability\": 0.33,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.36,\n" +
-            "                \"apparentTemperature\": 75.36,\n" +
-            "                \"dewPoint\": 73.36,\n" +
-            "                \"humidity\": 0.94,\n" +
-            "                \"windSpeed\": 6.08,\n" +
-            "                \"windBearing\": 75,\n" +
-            "                \"visibility\": 4.19,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.92,\n" +
-            "                \"ozone\": 279.38\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411981200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0178,\n" +
-            "                \"precipProbability\": 0.33,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.24,\n" +
-            "                \"apparentTemperature\": 75.24,\n" +
-            "                \"dewPoint\": 73.55,\n" +
-            "                \"humidity\": 0.95,\n" +
-            "                \"windSpeed\": 6.07,\n" +
-            "                \"windBearing\": 80,\n" +
-            "                \"visibility\": 3.81,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.64,\n" +
-            "                \"ozone\": 279.3\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411984800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0153,\n" +
-            "                \"precipProbability\": 0.32,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.04,\n" +
-            "                \"apparentTemperature\": 75.04,\n" +
-            "                \"dewPoint\": 73.45,\n" +
-            "                \"humidity\": 0.95,\n" +
-            "                \"windSpeed\": 5.93,\n" +
-            "                \"windBearing\": 85,\n" +
-            "                \"visibility\": 3.45,\n" +
-            "                \"cloudCover\": 0.94,\n" +
-            "                \"pressure\": 1012.62,\n" +
-            "                \"ozone\": 279.29\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411988400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0104,\n" +
-            "                \"precipProbability\": 0.3,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 74.91,\n" +
-            "                \"apparentTemperature\": 74.91,\n" +
-            "                \"dewPoint\": 73.37,\n" +
-            "                \"humidity\": 0.95,\n" +
-            "                \"windSpeed\": 5.81,\n" +
-            "                \"windBearing\": 95,\n" +
-            "                \"visibility\": 3.14,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1012.71,\n" +
-            "                \"ozone\": 279.29\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411992000,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0076,\n" +
-            "                \"precipProbability\": 0.24,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.2,\n" +
-            "                \"apparentTemperature\": 75.2,\n" +
-            "                \"dewPoint\": 73.26,\n" +
-            "                \"humidity\": 0.94,\n" +
-            "                \"windSpeed\": 5.77,\n" +
-            "                \"windBearing\": 104,\n" +
-            "                \"visibility\": 3.51,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1012.79,\n" +
-            "                \"ozone\": 279.21\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411995600,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.007,\n" +
-            "                \"precipProbability\": 0.26,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.55,\n" +
-            "                \"apparentTemperature\": 76.55,\n" +
-            "                \"dewPoint\": 73.79,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 6.34,\n" +
-            "                \"windBearing\": 120,\n" +
-            "                \"visibility\": 4.42,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.87,\n" +
-            "                \"ozone\": 278.94\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411999200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0135,\n" +
-            "                \"precipProbability\": 0.74,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 78.35,\n" +
-            "                \"apparentTemperature\": 78.35,\n" +
-            "                \"dewPoint\": 74.26,\n" +
-            "                \"humidity\": 0.87,\n" +
-            "                \"windSpeed\": 7.13,\n" +
-            "                \"windBearing\": 136,\n" +
-            "                \"visibility\": 6.54,\n" +
-            "                \"cloudCover\": 0.89,\n" +
-            "                \"pressure\": 1012.98,\n" +
-            "                \"ozone\": 278.58\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412002800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0155,\n" +
-            "                \"precipProbability\": 0.81,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 79.82,\n" +
-            "                \"apparentTemperature\": 79.82,\n" +
-            "                \"dewPoint\": 74.02,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 7.15,\n" +
-            "                \"windBearing\": 146,\n" +
-            "                \"visibility\": 8.14,\n" +
-            "                \"cloudCover\": 0.86,\n" +
-            "                \"pressure\": 1013.01,\n" +
-            "                \"ozone\": 278.29\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412006400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0277,\n" +
-            "                \"precipProbability\": 0.87,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.66,\n" +
-            "                \"apparentTemperature\": 85.53,\n" +
-            "                \"dewPoint\": 73.62,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 6.8,\n" +
-            "                \"windBearing\": 163,\n" +
-            "                \"visibility\": 8.69,\n" +
-            "                \"cloudCover\": 0.86,\n" +
-            "                \"pressure\": 1012.92,\n" +
-            "                \"ozone\": 278.17\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412010000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.028,\n" +
-            "                \"precipProbability\": 0.93,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.23,\n" +
-            "                \"apparentTemperature\": 86.16,\n" +
-            "                \"dewPoint\": 72.92,\n" +
-            "                \"humidity\": 0.76,\n" +
-            "                \"windSpeed\": 6.62,\n" +
-            "                \"windBearing\": 178,\n" +
-            "                \"visibility\": 9.06,\n" +
-            "                \"cloudCover\": 0.88,\n" +
-            "                \"pressure\": 1012.74,\n" +
-            "                \"ozone\": 278.12\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412013600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0308,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.63,\n" +
-            "                \"apparentTemperature\": 86.58,\n" +
-            "                \"dewPoint\": 72.53,\n" +
-            "                \"humidity\": 0.74,\n" +
-            "                \"windSpeed\": 6.73,\n" +
-            "                \"windBearing\": 191,\n" +
-            "                \"visibility\": 9.28,\n" +
-            "                \"cloudCover\": 0.9,\n" +
-            "                \"pressure\": 1012.48,\n" +
-            "                \"ozone\": 277.99\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412017200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0368,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.65,\n" +
-            "                \"apparentTemperature\": 86.61,\n" +
-            "                \"dewPoint\": 72.54,\n" +
-            "                \"humidity\": 0.74,\n" +
-            "                \"windSpeed\": 6.74,\n" +
-            "                \"windBearing\": 201,\n" +
-            "                \"visibility\": 9.59,\n" +
-            "                \"cloudCover\": 0.92,\n" +
-            "                \"pressure\": 1012.1,\n" +
-            "                \"ozone\": 277.6\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412020800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0435,\n" +
-            "                \"precipProbability\": 0.98,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.21,\n" +
-            "                \"apparentTemperature\": 86.04,\n" +
-            "                \"dewPoint\": 72.74,\n" +
-            "                \"humidity\": 0.76,\n" +
-            "                \"windSpeed\": 6.57,\n" +
-            "                \"windBearing\": 209,\n" +
-            "                \"visibility\": 9.78,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1011.64,\n" +
-            "                \"ozone\": 277.12\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412024400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0454,\n" +
-            "                \"precipProbability\": 0.93,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.41,\n" +
-            "                \"apparentTemperature\": 84.81,\n" +
-            "                \"dewPoint\": 72.94,\n" +
-            "                \"humidity\": 0.78,\n" +
-            "                \"windSpeed\": 6.54,\n" +
-            "                \"windBearing\": 223,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.98,\n" +
-            "                \"pressure\": 1011.29,\n" +
-            "                \"ozone\": 276.92\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412028000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0386,\n" +
-            "                \"precipProbability\": 0.84,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 79.61,\n" +
-            "                \"apparentTemperature\": 79.61,\n" +
-            "                \"dewPoint\": 73.02,\n" +
-            "                \"humidity\": 0.8,\n" +
-            "                \"windSpeed\": 5.73,\n" +
-            "                \"windBearing\": 225,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.99,\n" +
-            "                \"pressure\": 1011.16,\n" +
-            "                \"ozone\": 277.24\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412031600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0269,\n" +
-            "                \"precipProbability\": 0.72,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 78.7,\n" +
-            "                \"apparentTemperature\": 78.7,\n" +
-            "                \"dewPoint\": 73.15,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 4.55,\n" +
-            "                \"windBearing\": 224,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 1,\n" +
-            "                \"pressure\": 1011.14,\n" +
-            "                \"ozone\": 277.85\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412035200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0176,\n" +
-            "                \"precipProbability\": 0.63,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.94,\n" +
-            "                \"apparentTemperature\": 77.94,\n" +
-            "                \"dewPoint\": 73.23,\n" +
-            "                \"humidity\": 0.85,\n" +
-            "                \"windSpeed\": 3.69,\n" +
-            "                \"windBearing\": 221,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.99,\n" +
-            "                \"pressure\": 1011.16,\n" +
-            "                \"ozone\": 278.37\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412038800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0138,\n" +
-            "                \"precipProbability\": 0.58,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.58,\n" +
-            "                \"apparentTemperature\": 77.58,\n" +
-            "                \"dewPoint\": 73.39,\n" +
-            "                \"humidity\": 0.87,\n" +
-            "                \"windSpeed\": 3.5,\n" +
-            "                \"windBearing\": 216,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1011.23,\n" +
-            "                \"ozone\": 278.61\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412042400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0124,\n" +
-            "                \"precipProbability\": 0.55,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.35,\n" +
-            "                \"apparentTemperature\": 77.35,\n" +
-            "                \"dewPoint\": 73.4,\n" +
-            "                \"humidity\": 0.88,\n" +
-            "                \"windSpeed\": 3.66,\n" +
-            "                \"windBearing\": 208,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.91,\n" +
-            "                \"pressure\": 1011.34,\n" +
-            "                \"ozone\": 278.77\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412046000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0117,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.08,\n" +
-            "                \"apparentTemperature\": 77.08,\n" +
-            "                \"dewPoint\": 73.31,\n" +
-            "                \"humidity\": 0.88,\n" +
-            "                \"windSpeed\": 3.89,\n" +
-            "                \"windBearing\": 203,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.87,\n" +
-            "                \"pressure\": 1011.37,\n" +
-            "                \"ozone\": 279.08\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412049600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0114,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.79,\n" +
-            "                \"apparentTemperature\": 76.79,\n" +
-            "                \"dewPoint\": 73.35,\n" +
-            "                \"humidity\": 0.89,\n" +
-            "                \"windSpeed\": 4,\n" +
-            "                \"windBearing\": 201,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.84,\n" +
-            "                \"pressure\": 1011.22,\n" +
-            "                \"ozone\": 279.74\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412053200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0119,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.54,\n" +
-            "                \"apparentTemperature\": 76.54,\n" +
-            "                \"dewPoint\": 73.33,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 4.05,\n" +
-            "                \"windBearing\": 202,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.8,\n" +
-            "                \"pressure\": 1010.99,\n" +
-            "                \"ozone\": 280.54\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412056800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0118,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.37,\n" +
-            "                \"apparentTemperature\": 76.37,\n" +
-            "                \"dewPoint\": 73.35,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 4.11,\n" +
-            "                \"windBearing\": 205,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.78,\n" +
-            "                \"pressure\": 1010.76,\n" +
-            "                \"ozone\": 281.11\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412060400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0104,\n" +
-            "                \"precipProbability\": 0.5,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.09,\n" +
-            "                \"apparentTemperature\": 76.09,\n" +
-            "                \"dewPoint\": 73.21,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 4.21,\n" +
-            "                \"windBearing\": 211,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.76,\n" +
-            "                \"pressure\": 1010.55,\n" +
-            "                \"ozone\": 281.17\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412064000,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0084,\n" +
-            "                \"precipProbability\": 0.41,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.77,\n" +
-            "                \"apparentTemperature\": 75.77,\n" +
-            "                \"dewPoint\": 73.01,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 4.37,\n" +
-            "                \"windBearing\": 218,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.79,\n" +
-            "                \"pressure\": 1010.34,\n" +
-            "                \"ozone\": 280.99\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412067600,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0067,\n" +
-            "                \"precipProbability\": 0.28,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.61,\n" +
-            "                \"apparentTemperature\": 75.61,\n" +
-            "                \"dewPoint\": 72.92,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 4.53,\n" +
-            "                \"windBearing\": 222,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.79,\n" +
-            "                \"pressure\": 1010.25,\n" +
-            "                \"ozone\": 280.94\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412071200,\n" +
-            "                \"summary\": \"Mostly Cloudy\",\n" +
-            "                \"icon\": \"partly-cloudy-night\",\n" +
-            "                \"precipIntensity\": 0.0034,\n" +
-            "                \"precipProbability\": 0.11,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.47,\n" +
-            "                \"apparentTemperature\": 75.47,\n" +
-            "                \"dewPoint\": 72.91,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 4.34,\n" +
-            "                \"windBearing\": 225,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.73,\n" +
-            "                \"pressure\": 1010.36,\n" +
-            "                \"ozone\": 281.2\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412074800,\n" +
-            "                \"summary\": \"Mostly Cloudy\",\n" +
-            "                \"icon\": \"partly-cloudy-night\",\n" +
-            "                \"precipIntensity\": 0,\n" +
-            "                \"precipProbability\": 0,\n" +
-            "                \"temperature\": 75.44,\n" +
-            "                \"apparentTemperature\": 75.44,\n" +
-            "                \"dewPoint\": 72.94,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 3.95,\n" +
-            "                \"windBearing\": 228,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.64,\n" +
-            "                \"pressure\": 1010.56,\n" +
-            "                \"ozone\": 281.57\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412078400,\n" +
-            "                \"summary\": \"Partly Cloudy\",\n" +
-            "                \"icon\": \"partly-cloudy-day\",\n" +
-            "                \"precipIntensity\": 0.0044,\n" +
-            "                \"precipProbability\": 0.13,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.86,\n" +
-            "                \"apparentTemperature\": 75.86,\n" +
-            "                \"dewPoint\": 73.07,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 3.83,\n" +
-            "                \"windBearing\": 230,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.57,\n" +
-            "                \"pressure\": 1010.77,\n" +
-            "                \"ozone\": 281.84\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412082000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0219,\n" +
-            "                \"precipProbability\": 0.43,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.13,\n" +
-            "                \"apparentTemperature\": 77.13,\n" +
-            "                \"dewPoint\": 73.34,\n" +
-            "                \"humidity\": 0.88,\n" +
-            "                \"windSpeed\": 4.22,\n" +
-            "                \"windBearing\": 232,\n" +
-            "                \"visibility\": 8.27,\n" +
-            "                \"cloudCover\": 0.56,\n" +
-            "                \"pressure\": 1011.11,\n" +
-            "                \"ozone\": 281.94\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412085600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0455,\n" +
-            "                \"precipProbability\": 0.65,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 78.8,\n" +
-            "                \"apparentTemperature\": 78.8,\n" +
-            "                \"dewPoint\": 73.56,\n" +
-            "                \"humidity\": 0.84,\n" +
-            "                \"windSpeed\": 4.84,\n" +
-            "                \"windBearing\": 235,\n" +
-            "                \"visibility\": 5.95,\n" +
-            "                \"cloudCover\": 0.56,\n" +
-            "                \"pressure\": 1011.49,\n" +
-            "                \"ozone\": 281.93\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412089200,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0637,\n" +
-            "                \"precipProbability\": 0.81,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.11,\n" +
-            "                \"apparentTemperature\": 84.57,\n" +
-            "                \"dewPoint\": 73.65,\n" +
-            "                \"humidity\": 0.81,\n" +
-            "                \"windSpeed\": 5.4,\n" +
-            "                \"windBearing\": 238,\n" +
-            "                \"visibility\": 4.67,\n" +
-            "                \"cloudCover\": 0.58,\n" +
-            "                \"pressure\": 1011.68,\n" +
-            "                \"ozone\": 281.69\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412092800,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0731,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.81,\n" +
-            "                \"apparentTemperature\": 85.86,\n" +
-            "                \"dewPoint\": 73.74,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 5.73,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 5.58,\n" +
-            "                \"cloudCover\": 0.62,\n" +
-            "                \"pressure\": 1011.56,\n" +
-            "                \"ozone\": 281.01\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412096400,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0781,\n" +
-            "                \"precipProbability\": 0.83,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.05,\n" +
-            "                \"apparentTemperature\": 86.26,\n" +
-            "                \"dewPoint\": 73.74,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 5.94,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 7.53,\n" +
-            "                \"cloudCover\": 0.67,\n" +
-            "                \"pressure\": 1011.26,\n" +
-            "                \"ozone\": 280.11\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412100000,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0797,\n" +
-            "                \"precipProbability\": 0.8,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.24,\n" +
-            "                \"apparentTemperature\": 86.67,\n" +
-            "                \"dewPoint\": 73.87,\n" +
-            "                \"humidity\": 0.78,\n" +
-            "                \"windSpeed\": 6.17,\n" +
-            "                \"windBearing\": 241,\n" +
-            "                \"visibility\": 8.73,\n" +
-            "                \"cloudCover\": 0.68,\n" +
-            "                \"pressure\": 1010.94,\n" +
-            "                \"ozone\": 279.49\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412103600,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0786,\n" +
-            "                \"precipProbability\": 0.79,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.25,\n" +
-            "                \"apparentTemperature\": 86.7,\n" +
-            "                \"dewPoint\": 73.92,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 6.68,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 8.09,\n" +
-            "                \"cloudCover\": 0.65,\n" +
-            "                \"pressure\": 1010.51,\n" +
-            "                \"ozone\": 279.48\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412107200,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0742,\n" +
-            "                \"precipProbability\": 0.75,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.01,\n" +
-            "                \"apparentTemperature\": 86.29,\n" +
-            "                \"dewPoint\": 73.91,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 7.32,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 6.7,\n" +
-            "                \"cloudCover\": 0.6,\n" +
-            "                \"pressure\": 1010.08,\n" +
-            "                \"ozone\": 279.75\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412110800,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0652,\n" +
-            "                \"precipProbability\": 0.69,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.43,\n" +
-            "                \"apparentTemperature\": 85.2,\n" +
-            "                \"dewPoint\": 73.78,\n" +
-            "                \"humidity\": 0.8,\n" +
-            "                \"windSpeed\": 7.44,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 6.04,\n" +
-            "                \"cloudCover\": 0.54,\n" +
-            "                \"pressure\": 1009.81,\n" +
-            "                \"ozone\": 279.88\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412114400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0474,\n" +
-            "                \"precipProbability\": 0.58,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 79.3,\n" +
-            "                \"apparentTemperature\": 79.3,\n" +
-            "                \"dewPoint\": 73.51,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 6.45,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 7.02,\n" +
-            "                \"cloudCover\": 0.5,\n" +
-            "                \"pressure\": 1009.84,\n" +
-            "                \"ozone\": 279.67\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412118000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0238,\n" +
-            "                \"precipProbability\": 0.41,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.97,\n" +
-            "                \"apparentTemperature\": 77.97,\n" +
-            "                \"dewPoint\": 73.22,\n" +
-            "                \"humidity\": 0.85,\n" +
-            "                \"windSpeed\": 4.94,\n" +
-            "                \"windBearing\": 239,\n" +
-            "                \"visibility\": 8.73,\n" +
-            "                \"cloudCover\": 0.45,\n" +
-            "                \"pressure\": 1010.14,\n" +
-            "                \"ozone\": 279.31\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"daily\": {\n" +
-            "        \"summary\": \"Light rain today through Saturday, with temperatures falling to 76°F on Sunday.\",\n" +
-            "        \"icon\": \"rain\",\n" +
-            "        \"data\": [\n" +
-            "            {\n" +
-            "                \"time\": 1411876800,\n" +
-            "                \"summary\": \"Rain starting in the afternoon.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1411903373,\n" +
-            "                \"sunsetTime\": 1411946476,\n" +
-            "                \"moonPhase\": 0.14,\n" +
-            "                \"precipIntensity\": 0.0264,\n" +
-            "                \"precipIntensityMax\": 0.0714,\n" +
-            "                \"precipIntensityMaxTime\": 1411956000,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 73.73,\n" +
-            "                \"temperatureMinTime\": 1411894800,\n" +
-            "                \"temperatureMax\": 87.88,\n" +
-            "                \"temperatureMaxTime\": 1411934400,\n" +
-            "                \"apparentTemperatureMin\": 73.73,\n" +
-            "                \"apparentTemperatureMinTime\": 1411894800,\n" +
-            "                \"apparentTemperatureMax\": 96.35,\n" +
-            "                \"apparentTemperatureMaxTime\": 1411934400,\n" +
-            "                \"dewPoint\": 73.41,\n" +
-            "                \"humidity\": 0.87,\n" +
-            "                \"windSpeed\": 3.94,\n" +
-            "                \"windBearing\": 62,\n" +
-            "                \"visibility\": 7.51,\n" +
-            "                \"cloudCover\": 0.84,\n" +
-            "                \"pressure\": 1015.31,\n" +
-            "                \"ozone\": 278.05\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411963200,\n" +
-            "                \"summary\": \"Light rain throughout the day.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1411989804,\n" +
-            "                \"sunsetTime\": 1412032804,\n" +
-            "                \"moonPhase\": 0.18,\n" +
-            "                \"precipIntensity\": 0.0218,\n" +
-            "                \"precipIntensityMax\": 0.0454,\n" +
-            "                \"precipIntensityMaxTime\": 1412024400,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 74.91,\n" +
-            "                \"temperatureMinTime\": 1411988400,\n" +
-            "                \"temperatureMax\": 81.65,\n" +
-            "                \"temperatureMaxTime\": 1412017200,\n" +
-            "                \"apparentTemperatureMin\": 74.91,\n" +
-            "                \"apparentTemperatureMinTime\": 1411988400,\n" +
-            "                \"apparentTemperatureMax\": 86.61,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412017200,\n" +
-            "                \"dewPoint\": 73.33,\n" +
-            "                \"humidity\": 0.86,\n" +
-            "                \"windSpeed\": 3.03,\n" +
-            "                \"windBearing\": 146,\n" +
-            "                \"visibility\": 7.25,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.43,\n" +
-            "                \"ozone\": 278.62\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412049600,\n" +
-            "                \"summary\": \"Rain until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412076235,\n" +
-            "                \"sunsetTime\": 1412119132,\n" +
-            "                \"moonPhase\": 0.21,\n" +
-            "                \"precipIntensity\": 0.0302,\n" +
-            "                \"precipIntensityMax\": 0.0797,\n" +
-            "                \"precipIntensityMaxTime\": 1412100000,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 75.44,\n" +
-            "                \"temperatureMinTime\": 1412074800,\n" +
-            "                \"temperatureMax\": 81.25,\n" +
-            "                \"temperatureMaxTime\": 1412103600,\n" +
-            "                \"apparentTemperatureMin\": 75.44,\n" +
-            "                \"apparentTemperatureMinTime\": 1412074800,\n" +
-            "                \"apparentTemperatureMax\": 86.7,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412103600,\n" +
-            "                \"dewPoint\": 73.39,\n" +
-            "                \"humidity\": 0.86,\n" +
-            "                \"windSpeed\": 4.54,\n" +
-            "                \"windBearing\": 229,\n" +
-            "                \"visibility\": 8.68,\n" +
-            "                \"cloudCover\": 0.62,\n" +
-            "                \"pressure\": 1010.78,\n" +
-            "                \"ozone\": 280.35\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412136000,\n" +
-            "                \"summary\": \"Rain until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412162666,\n" +
-            "                \"sunsetTime\": 1412205461,\n" +
-            "                \"moonPhase\": 0.25,\n" +
-            "                \"precipIntensity\": 0.027,\n" +
-            "                \"precipIntensityMax\": 0.1366,\n" +
-            "                \"precipIntensityMaxTime\": 1412175600,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 74.38,\n" +
-            "                \"temperatureMinTime\": 1412157600,\n" +
-            "                \"temperatureMax\": 81.39,\n" +
-            "                \"temperatureMaxTime\": 1412193600,\n" +
-            "                \"apparentTemperatureMin\": 74.38,\n" +
-            "                \"apparentTemperatureMinTime\": 1412157600,\n" +
-            "                \"apparentTemperatureMax\": 87.33,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412193600,\n" +
-            "                \"dewPoint\": 73.51,\n" +
-            "                \"humidity\": 0.86,\n" +
-            "                \"windSpeed\": 2.05,\n" +
-            "                \"windBearing\": 189,\n" +
-            "                \"visibility\": 9.23,\n" +
-            "                \"cloudCover\": 0.5,\n" +
-            "                \"pressure\": 1013.3,\n" +
-            "                \"ozone\": 279.58\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412222400,\n" +
-            "                \"summary\": \"Light rain starting in the afternoon, " +
-            "continuing until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412249097,\n" +
-            "                \"sunsetTime\": 1412291790,\n" +
-            "                \"moonPhase\": 0.29,\n" +
-            "                \"precipIntensity\": 0.0047,\n" +
-            "                \"precipIntensityMax\": 0.0155,\n" +
-            "                \"precipIntensityMaxTime\": 1412287200,\n" +
-            "                \"precipProbability\": 0.56,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 71.87,\n" +
-            "                \"temperatureMinTime\": 1412247600,\n" +
-            "                \"temperatureMax\": 83.04,\n" +
-            "                \"temperatureMaxTime\": 1412276400,\n" +
-            "                \"apparentTemperatureMin\": 71.87,\n" +
-            "                \"apparentTemperatureMinTime\": 1412247600,\n" +
-            "                \"apparentTemperatureMax\": 87.96,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412276400,\n" +
-            "                \"dewPoint\": 70.81,\n" +
-            "                \"humidity\": 0.81,\n" +
-            "                \"windSpeed\": 3.43,\n" +
-            "                \"windBearing\": 100,\n" +
-            "                \"cloudCover\": 0.18,\n" +
-            "                \"pressure\": 1015.57,\n" +
-            "                \"ozone\": 277.31\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412308800,\n" +
-            "                \"summary\": \"Light rain starting in the afternoon, " +
-            "continuing until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412335529,\n" +
-            "                \"sunsetTime\": 1412378119,\n" +
-            "                \"moonPhase\": 0.32,\n" +
-            "                \"precipIntensity\": 0.0055,\n" +
-            "                \"precipIntensityMax\": 0.0146,\n" +
-            "                \"precipIntensityMaxTime\": 1412370000,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 71.64,\n" +
-            "                \"temperatureMinTime\": 1412334000,\n" +
-            "                \"temperatureMax\": 82.4,\n" +
-            "                \"temperatureMaxTime\": 1412359200,\n" +
-            "                \"apparentTemperatureMin\": 71.64,\n" +
-            "                \"apparentTemperatureMinTime\": 1412334000,\n" +
-            "                \"apparentTemperatureMax\": 88.05,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412359200,\n" +
-            "                \"dewPoint\": 70.78,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 2.48,\n" +
-            "                \"windBearing\": 203,\n" +
-            "                \"cloudCover\": 0.09,\n" +
-            "                \"pressure\": 1015.19,\n" +
-            "                \"ozone\": 274.32\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412395200,\n" +
-            "                \"summary\": \"Light rain until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412421961,\n" +
-            "                \"sunsetTime\": 1412464449,\n" +
-            "                \"moonPhase\": 0.36,\n" +
-            "                \"precipIntensity\": 0.0062,\n" +
-            "                \"precipIntensityMax\": 0.0173,\n" +
-            "                \"precipIntensityMaxTime\": 1412445600,\n" +
-            "                \"precipProbability\": 0.93,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 70.53,\n" +
-            "                \"temperatureMinTime\": 1412478000,\n" +
-            "                \"temperatureMax\": 79.98,\n" +
-            "                \"temperatureMaxTime\": 1412445600,\n" +
-            "                \"apparentTemperatureMin\": 70.53,\n" +
-            "                \"apparentTemperatureMinTime\": 1412478000,\n" +
-            "                \"apparentTemperatureMax\": 79.98,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412445600,\n" +
-            "                \"dewPoint\": 69.5,\n" +
-            "                \"humidity\": 0.81,\n" +
-            "                \"windSpeed\": 5.55,\n" +
-            "                \"windBearing\": 288,\n" +
-            "                \"cloudCover\": 0.34,\n" +
-            "                \"pressure\": 1013.5,\n" +
-            "                \"ozone\": 277.09\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412481600,\n" +
-            "                \"summary\": \"Clear throughout the day.\",\n" +
-            "                \"icon\": \"clear-day\",\n" +
-            "                \"sunriseTime\": 1412508393,\n" +
-            "                \"sunsetTime\": 1412550779,\n" +
-            "                \"moonPhase\": 0.4,\n" +
-            "                \"precipIntensity\": 0.002,\n" +
-            "                \"precipIntensityMax\": 0.0033,\n" +
-            "                \"precipIntensityMaxTime\": 1412488800,\n" +
-            "                \"precipProbability\": 0.09,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 62.14,\n" +
-            "                \"temperatureMinTime\": 1412506800,\n" +
-            "                \"temperatureMax\": 76.23,\n" +
-            "                \"temperatureMaxTime\": 1412539200,\n" +
-            "                \"apparentTemperatureMin\": 62.14,\n" +
-            "                \"apparentTemperatureMinTime\": 1412506800,\n" +
-            "                \"apparentTemperatureMax\": 76.23,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412539200,\n" +
-            "                \"dewPoint\": 57.79,\n" +
-            "                \"humidity\": 0.68,\n" +
-            "                \"windSpeed\": 6.54,\n" +
-            "                \"windBearing\": 16,\n" +
-            "                \"cloudCover\": 0,\n" +
-            "                \"pressure\": 1015.3,\n" +
-            "                \"ozone\": 285.54\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"flags\": {\n" +
-            "        \"sources\": [\n" +
-            "            \"nwspa\",\n" +
-            "            \"isd\",\n" +
-            "            \"nearest-precip\",\n" +
-            "            \"sref\",\n" +
-            "            \"rap\",\n" +
-            "            \"nam\",\n" +
-            "            \"fnmoc\",\n" +
-            "            \"rtma\",\n" +
-            "            \"cmc\",\n" +
-            "            \"gfs\",\n" +
-            "            \"madis\",\n" +
-            "            \"lamp\",\n" +
-            "            \"darksky\"\n" +
-            "        ],\n" +
-            "        \"isd-stations\": [\n" +
-            "            \"720655-99999\",\n" +
-            "            \"722014-12818\",\n" +
-            "            \"722014-99999\",\n" +
-            "            \"724737-99999\",\n" +
-            "            \"994082-99999\"\n" +
-            "        ],\n" +
-            "        \"madis-stations\": [\n" +
-            "            \"AU655\",\n" +
-            "            \"AU705\",\n" +
-            "            \"AU749\",\n" +
-            "            \"C6469\",\n" +
-            "            \"C6533\",\n" +
-            "            \"C8067\",\n" +
-            "            \"D1496\",\n" +
-            "            \"D3617\",\n" +
-            "            \"D7271\",\n" +
-            "            \"D7434\",\n" +
-            "            \"E1772\",\n" +
-            "            \"E2340\",\n" +
-            "            \"KBKV\",\n" +
-            "            \"KCGC\",\n" +
-            "            \"KINF\",\n" +
-            "            \"KOCF\"\n" +
-            "        ],\n" +
-            "        \"lamp-stations\": [\n" +
-            "            \"KBKV\",\n" +
-            "            \"KOCF\",\n" +
-            "            \"KVVG\"\n" +
-            "        ],\n" +
-            "        \"darksky-stations\": [\n" +
-            "            \"KTBW\"\n" +
-            "        ],\n" +
-            "        \"units\": \"us\"\n" +
-            "    }\n" +
-            "}";
-
-    private static final String JSON_FLORIDA_FORECAST = "{\n" +
-            "    \"latitude\": 28.8072,\n" +
-            "    \"longitude\": -82.55,\n" +
-            "    \"timezone\": \"America/New_York\",\n" +
-            "    \"offset\": -4,\n" +
-            "    \"currently\": {\n" +
-            "        \"time\": 1411948124,\n" +
-            "        \"summary\": \"Overcast\",\n" +
-            "        \"icon\": \"cloudy\",\n" +
-            "        \"nearestStormDistance\": 0,\n" +
-            "        \"precipIntensity\": 0.0057,\n" +
-            "        \"precipIntensityError\": 0.0037,\n" +
-            "        \"precipProbability\": 0.34,\n" +
-            "        \"precipType\": \"rain\",\n" +
-            "        \"temperature\": 74.95,\n" +
-            "        \"apparentTemperature\": 74.95,\n" +
-            "        \"dewPoint\": 71.97,\n" +
-            "        \"humidity\": 0.9,\n" +
-            "        \"windSpeed\": 1.84,\n" +
-            "        \"windBearing\": 60,\n" +
-            "        \"visibility\": 3.1,\n" +
-            "        \"cloudCover\": 1,\n" +
-            "        \"pressure\": 1014.63,\n" +
-            "        \"ozone\": 279.48\n" +
-            "    },\n" +
-            "    \"minutely\": {\n" +
-            "        \"summary\": \"Light rain starting in 1 min.\",\n" +
-            "        \"icon\": \"rain\",\n" +
-            "        \"data\": [\n" +
-            "            {\n" +
-            "                \"time\": 1411948080,\n" +
-            "                \"precipIntensity\": 0.0049,\n" +
-            "                \"precipIntensityError\": 0.0029,\n" +
-            "                \"precipProbability\": 0.28,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948140,\n" +
-            "                \"precipIntensity\": 0.006,\n" +
-            "                \"precipIntensityError\": 0.004,\n" +
-            "                \"precipProbability\": 0.36,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948200,\n" +
-            "                \"precipIntensity\": 0.0068,\n" +
-            "                \"precipIntensityError\": 0.0043,\n" +
-            "                \"precipProbability\": 0.46,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948260,\n" +
-            "                \"precipIntensity\": 0.0084,\n" +
-            "                \"precipIntensityError\": 0.0053,\n" +
-            "                \"precipProbability\": 0.59,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948320,\n" +
-            "                \"precipIntensity\": 0.0091,\n" +
-            "                \"precipIntensityError\": 0.0056,\n" +
-            "                \"precipProbability\": 0.65,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948380,\n" +
-            "                \"precipIntensity\": 0.0099,\n" +
-            "                \"precipIntensityError\": 0.006,\n" +
-            "                \"precipProbability\": 0.66,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948440,\n" +
-            "                \"precipIntensity\": 0.0116,\n" +
-            "                \"precipIntensityError\": 0.007,\n" +
-            "                \"precipProbability\": 0.67,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948500,\n" +
-            "                \"precipIntensity\": 0.0122,\n" +
-            "                \"precipIntensityError\": 0.0072,\n" +
-            "                \"precipProbability\": 0.69,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948560,\n" +
-            "                \"precipIntensity\": 0.0135,\n" +
-            "                \"precipIntensityError\": 0.0079,\n" +
-            "                \"precipProbability\": 0.68,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948620,\n" +
-            "                \"precipIntensity\": 0.0144,\n" +
-            "                \"precipIntensityError\": 0.0084,\n" +
-            "                \"precipProbability\": 0.68,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948680,\n" +
-            "                \"precipIntensity\": 0.0154,\n" +
-            "                \"precipIntensityError\": 0.0087,\n" +
-            "                \"precipProbability\": 0.68,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948740,\n" +
-            "                \"precipIntensity\": 0.0167,\n" +
-            "                \"precipIntensityError\": 0.0095,\n" +
-            "                \"precipProbability\": 0.68,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948800,\n" +
-            "                \"precipIntensity\": 0.0174,\n" +
-            "                \"precipIntensityError\": 0.0099,\n" +
-            "                \"precipProbability\": 0.67,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948860,\n" +
-            "                \"precipIntensity\": 0.019,\n" +
-            "                \"precipIntensityError\": 0.0106,\n" +
-            "                \"precipProbability\": 0.66,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948920,\n" +
-            "                \"precipIntensity\": 0.0199,\n" +
-            "                \"precipIntensityError\": 0.0112,\n" +
-            "                \"precipProbability\": 0.66,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948980,\n" +
-            "                \"precipIntensity\": 0.0208,\n" +
-            "                \"precipIntensityError\": 0.0116,\n" +
-            "                \"precipProbability\": 0.65,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949040,\n" +
-            "                \"precipIntensity\": 0.0228,\n" +
-            "                \"precipIntensityError\": 0.0125,\n" +
-            "                \"precipProbability\": 0.63,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949100,\n" +
-            "                \"precipIntensity\": 0.0241,\n" +
-            "                \"precipIntensityError\": 0.0133,\n" +
-            "                \"precipProbability\": 0.63,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949160,\n" +
-            "                \"precipIntensity\": 0.0256,\n" +
-            "                \"precipIntensityError\": 0.014,\n" +
-            "                \"precipProbability\": 0.63,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949220,\n" +
-            "                \"precipIntensity\": 0.0271,\n" +
-            "                \"precipIntensityError\": 0.0147,\n" +
-            "                \"precipProbability\": 0.62,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949280,\n" +
-            "                \"precipIntensity\": 0.0289,\n" +
-            "                \"precipIntensityError\": 0.0154,\n" +
-            "                \"precipProbability\": 0.61,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949340,\n" +
-            "                \"precipIntensity\": 0.0304,\n" +
-            "                \"precipIntensityError\": 0.0162,\n" +
-            "                \"precipProbability\": 0.61,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949400,\n" +
-            "                \"precipIntensity\": 0.0317,\n" +
-            "                \"precipIntensityError\": 0.0167,\n" +
-            "                \"precipProbability\": 0.61,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949460,\n" +
-            "                \"precipIntensity\": 0.0336,\n" +
-            "                \"precipIntensityError\": 0.0175,\n" +
-            "                \"precipProbability\": 0.6,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949520,\n" +
-            "                \"precipIntensity\": 0.0353,\n" +
-            "                \"precipIntensityError\": 0.0184,\n" +
-            "                \"precipProbability\": 0.6,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949580,\n" +
-            "                \"precipIntensity\": 0.0359,\n" +
-            "                \"precipIntensityError\": 0.0185,\n" +
-            "                \"precipProbability\": 0.6,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949640,\n" +
-            "                \"precipIntensity\": 0.0379,\n" +
-            "                \"precipIntensityError\": 0.0194,\n" +
-            "                \"precipProbability\": 0.59,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949700,\n" +
-            "                \"precipIntensity\": 0.0391,\n" +
-            "                \"precipIntensityError\": 0.02,\n" +
-            "                \"precipProbability\": 0.59,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949760,\n" +
-            "                \"precipIntensity\": 0.0405,\n" +
-            "                \"precipIntensityError\": 0.0206,\n" +
-            "                \"precipProbability\": 0.58,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949820,\n" +
-            "                \"precipIntensity\": 0.0413,\n" +
-            "                \"precipIntensityError\": 0.0208,\n" +
-            "                \"precipProbability\": 0.58,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949880,\n" +
-            "                \"precipIntensity\": 0.0426,\n" +
-            "                \"precipIntensityError\": 0.0213,\n" +
-            "                \"precipProbability\": 0.57,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411949940,\n" +
-            "                \"precipIntensity\": 0.0436,\n" +
-            "                \"precipIntensityError\": 0.0217,\n" +
-            "                \"precipProbability\": 0.56,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950000,\n" +
-            "                \"precipIntensity\": 0.0444,\n" +
-            "                \"precipIntensityError\": 0.0219,\n" +
-            "                \"precipProbability\": 0.56,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950060,\n" +
-            "                \"precipIntensity\": 0.0454,\n" +
-            "                \"precipIntensityError\": 0.0224,\n" +
-            "                \"precipProbability\": 0.55,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950120,\n" +
-            "                \"precipIntensity\": 0.0463,\n" +
-            "                \"precipIntensityError\": 0.0229,\n" +
-            "                \"precipProbability\": 0.55,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950180,\n" +
-            "                \"precipIntensity\": 0.046,\n" +
-            "                \"precipIntensityError\": 0.0227,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950240,\n" +
-            "                \"precipIntensity\": 0.0473,\n" +
-            "                \"precipIntensityError\": 0.0232,\n" +
-            "                \"precipProbability\": 0.53,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950300,\n" +
-            "                \"precipIntensity\": 0.0476,\n" +
-            "                \"precipIntensityError\": 0.0234,\n" +
-            "                \"precipProbability\": 0.53,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950360,\n" +
-            "                \"precipIntensity\": 0.0487,\n" +
-            "                \"precipIntensityError\": 0.0238,\n" +
-            "                \"precipProbability\": 0.52,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950420,\n" +
-            "                \"precipIntensity\": 0.0488,\n" +
-            "                \"precipIntensityError\": 0.0238,\n" +
-            "                \"precipProbability\": 0.51,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950480,\n" +
-            "                \"precipIntensity\": 0.0494,\n" +
-            "                \"precipIntensityError\": 0.024,\n" +
-            "                \"precipProbability\": 0.5,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950540,\n" +
-            "                \"precipIntensity\": 0.0498,\n" +
-            "                \"precipIntensityError\": 0.0242,\n" +
-            "                \"precipProbability\": 0.49,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950600,\n" +
-            "                \"precipIntensity\": 0.0501,\n" +
-            "                \"precipIntensityError\": 0.0242,\n" +
-            "                \"precipProbability\": 0.48,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950660,\n" +
-            "                \"precipIntensity\": 0.0505,\n" +
-            "                \"precipIntensityError\": 0.0244,\n" +
-            "                \"precipProbability\": 0.48,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950720,\n" +
-            "                \"precipIntensity\": 0.0507,\n" +
-            "                \"precipIntensityError\": 0.0247,\n" +
-            "                \"precipProbability\": 0.47,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950780,\n" +
-            "                \"precipIntensity\": 0.0503,\n" +
-            "                \"precipIntensityError\": 0.0244,\n" +
-            "                \"precipProbability\": 0.46,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950840,\n" +
-            "                \"precipIntensity\": 0.0513,\n" +
-            "                \"precipIntensityError\": 0.0248,\n" +
-            "                \"precipProbability\": 0.45,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950900,\n" +
-            "                \"precipIntensity\": 0.0515,\n" +
-            "                \"precipIntensityError\": 0.0249,\n" +
-            "                \"precipProbability\": 0.44,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411950960,\n" +
-            "                \"precipIntensity\": 0.0522,\n" +
-            "                \"precipIntensityError\": 0.0252,\n" +
-            "                \"precipProbability\": 0.43,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951020,\n" +
-            "                \"precipIntensity\": 0.0523,\n" +
-            "                \"precipIntensityError\": 0.0251,\n" +
-            "                \"precipProbability\": 0.42,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951080,\n" +
-            "                \"precipIntensity\": 0.0528,\n" +
-            "                \"precipIntensityError\": 0.0252,\n" +
-            "                \"precipProbability\": 0.41,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951140,\n" +
-            "                \"precipIntensity\": 0.0531,\n" +
-            "                \"precipIntensityError\": 0.0253,\n" +
-            "                \"precipProbability\": 0.4,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951200,\n" +
-            "                \"precipIntensity\": 0.0536,\n" +
-            "                \"precipIntensityError\": 0.0253,\n" +
-            "                \"precipProbability\": 0.39,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951260,\n" +
-            "                \"precipIntensity\": 0.054,\n" +
-            "                \"precipIntensityError\": 0.0255,\n" +
-            "                \"precipProbability\": 0.39,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951320,\n" +
-            "                \"precipIntensity\": 0.0541,\n" +
-            "                \"precipIntensityError\": 0.0257,\n" +
-            "                \"precipProbability\": 0.38,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951380,\n" +
-            "                \"precipIntensity\": 0.0539,\n" +
-            "                \"precipIntensityError\": 0.0254,\n" +
-            "                \"precipProbability\": 0.37,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951440,\n" +
-            "                \"precipIntensity\": 0.0547,\n" +
-            "                \"precipIntensityError\": 0.0257,\n" +
-            "                \"precipProbability\": 0.36,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951500,\n" +
-            "                \"precipIntensity\": 0.0551,\n" +
-            "                \"precipIntensityError\": 0.0258,\n" +
-            "                \"precipProbability\": 0.35,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951560,\n" +
-            "                \"precipIntensity\": 0.0556,\n" +
-            "                \"precipIntensityError\": 0.026,\n" +
-            "                \"precipProbability\": 0.34,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951620,\n" +
-            "                \"precipIntensity\": 0.0554,\n" +
-            "                \"precipIntensityError\": 0.0258,\n" +
-            "                \"precipProbability\": 0.34,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411951680,\n" +
-            "                \"precipIntensity\": 0.0558,\n" +
-            "                \"precipIntensityError\": 0.026,\n" +
-            "                \"precipProbability\": 0.33,\n" +
-            "                \"precipType\": \"rain\"\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"hourly\": {\n" +
-            "        \"summary\": \"Rain throughout the day.\",\n" +
-            "        \"icon\": \"rain\",\n" +
-            "        \"data\": [\n" +
-            "            {\n" +
-            "                \"time\": 1411945200,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0551,\n" +
-            "                \"precipProbability\": 0.94,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.51,\n" +
-            "                \"apparentTemperature\": 75.51,\n" +
-            "                \"dewPoint\": 72.52,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 1.75,\n" +
-            "                \"windBearing\": 99,\n" +
-            "                \"visibility\": 1.96,\n" +
-            "                \"cloudCover\": 1,\n" +
-            "                \"pressure\": 1014.67,\n" +
-            "                \"ozone\": 279.3\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411948800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0346,\n" +
-            "                \"precipProbability\": 0.42,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 74.82,\n" +
-            "                \"apparentTemperature\": 74.82,\n" +
-            "                \"dewPoint\": 71.84,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 1.96,\n" +
-            "                \"windBearing\": 53,\n" +
-            "                \"visibility\": 3.37,\n" +
-            "                \"cloudCover\": 1,\n" +
-            "                \"pressure\": 1014.62,\n" +
-            "                \"ozone\": 279.52\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411952400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0503,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.38,\n" +
-            "                \"apparentTemperature\": 75.38,\n" +
-            "                \"dewPoint\": 72.3,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 2.41,\n" +
-            "                \"windBearing\": 46,\n" +
-            "                \"visibility\": 4.64,\n" +
-            "                \"cloudCover\": 0.99,\n" +
-            "                \"pressure\": 1014.56,\n" +
-            "                \"ozone\": 279.74\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411956000,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0714,\n" +
-            "                \"precipProbability\": 0.88,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.83,\n" +
-            "                \"apparentTemperature\": 75.83,\n" +
-            "                \"dewPoint\": 72.97,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 2.74,\n" +
-            "                \"windBearing\": 42,\n" +
-            "                \"visibility\": 5.39,\n" +
-            "                \"cloudCover\": 0.98,\n" +
-            "                \"pressure\": 1014.53,\n" +
-            "                \"ozone\": 279.95\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411959600,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0575,\n" +
-            "                \"precipProbability\": 0.87,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.96,\n" +
-            "                \"apparentTemperature\": 75.96,\n" +
-            "                \"dewPoint\": 73.14,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 3.45,\n" +
-            "                \"windBearing\": 49,\n" +
-            "                \"visibility\": 5.45,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1014.48,\n" +
-            "                \"ozone\": 280.04\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411963200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0331,\n" +
-            "                \"precipProbability\": 0.62,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.03,\n" +
-            "                \"apparentTemperature\": 76.03,\n" +
-            "                \"dewPoint\": 73.63,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 4.73,\n" +
-            "                \"windBearing\": 59,\n" +
-            "                \"visibility\": 5.46,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1014.29,\n" +
-            "                \"ozone\": 279.96\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411966800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0219,\n" +
-            "                \"precipProbability\": 0.45,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.94,\n" +
-            "                \"apparentTemperature\": 75.94,\n" +
-            "                \"dewPoint\": 73.71,\n" +
-            "                \"humidity\": 0.93,\n" +
-            "                \"windSpeed\": 5.67,\n" +
-            "                \"windBearing\": 67,\n" +
-            "                \"visibility\": 5.49,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1013.92,\n" +
-            "                \"ozone\": 279.76\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411970400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0156,\n" +
-            "                \"precipProbability\": 0.32,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.63,\n" +
-            "                \"apparentTemperature\": 75.63,\n" +
-            "                \"dewPoint\": 73.28,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 6.14,\n" +
-            "                \"windBearing\": 69,\n" +
-            "                \"visibility\": 4.88,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1013.65,\n" +
-            "                \"ozone\": 279.58\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411974000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0147,\n" +
-            "                \"precipProbability\": 0.31,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.46,\n" +
-            "                \"apparentTemperature\": 75.46,\n" +
-            "                \"dewPoint\": 73.43,\n" +
-            "                \"humidity\": 0.93,\n" +
-            "                \"windSpeed\": 6.15,\n" +
-            "                \"windBearing\": 72,\n" +
-            "                \"visibility\": 4.49,\n" +
-            "                \"cloudCover\": 0.94,\n" +
-            "                \"pressure\": 1013.31,\n" +
-            "                \"ozone\": 279.47\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411977600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.017,\n" +
-            "                \"precipProbability\": 0.33,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.36,\n" +
-            "                \"apparentTemperature\": 75.36,\n" +
-            "                \"dewPoint\": 73.36,\n" +
-            "                \"humidity\": 0.94,\n" +
-            "                \"windSpeed\": 6.08,\n" +
-            "                \"windBearing\": 75,\n" +
-            "                \"visibility\": 4.19,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.92,\n" +
-            "                \"ozone\": 279.38\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411981200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0178,\n" +
-            "                \"precipProbability\": 0.33,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.24,\n" +
-            "                \"apparentTemperature\": 75.24,\n" +
-            "                \"dewPoint\": 73.55,\n" +
-            "                \"humidity\": 0.95,\n" +
-            "                \"windSpeed\": 6.07,\n" +
-            "                \"windBearing\": 80,\n" +
-            "                \"visibility\": 3.81,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.64,\n" +
-            "                \"ozone\": 279.3\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411984800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0153,\n" +
-            "                \"precipProbability\": 0.32,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.04,\n" +
-            "                \"apparentTemperature\": 75.04,\n" +
-            "                \"dewPoint\": 73.45,\n" +
-            "                \"humidity\": 0.95,\n" +
-            "                \"windSpeed\": 5.93,\n" +
-            "                \"windBearing\": 85,\n" +
-            "                \"visibility\": 3.45,\n" +
-            "                \"cloudCover\": 0.94,\n" +
-            "                \"pressure\": 1012.62,\n" +
-            "                \"ozone\": 279.29\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411988400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0104,\n" +
-            "                \"precipProbability\": 0.3,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 74.91,\n" +
-            "                \"apparentTemperature\": 74.91,\n" +
-            "                \"dewPoint\": 73.37,\n" +
-            "                \"humidity\": 0.95,\n" +
-            "                \"windSpeed\": 5.81,\n" +
-            "                \"windBearing\": 95,\n" +
-            "                \"visibility\": 3.14,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1012.71,\n" +
-            "                \"ozone\": 279.29\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411992000,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0076,\n" +
-            "                \"precipProbability\": 0.24,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.2,\n" +
-            "                \"apparentTemperature\": 75.2,\n" +
-            "                \"dewPoint\": 73.26,\n" +
-            "                \"humidity\": 0.94,\n" +
-            "                \"windSpeed\": 5.77,\n" +
-            "                \"windBearing\": 104,\n" +
-            "                \"visibility\": 3.51,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1012.79,\n" +
-            "                \"ozone\": 279.21\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411995600,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.007,\n" +
-            "                \"precipProbability\": 0.26,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.55,\n" +
-            "                \"apparentTemperature\": 76.55,\n" +
-            "                \"dewPoint\": 73.79,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 6.34,\n" +
-            "                \"windBearing\": 120,\n" +
-            "                \"visibility\": 4.42,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.87,\n" +
-            "                \"ozone\": 278.94\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411999200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0135,\n" +
-            "                \"precipProbability\": 0.74,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 78.35,\n" +
-            "                \"apparentTemperature\": 78.35,\n" +
-            "                \"dewPoint\": 74.26,\n" +
-            "                \"humidity\": 0.87,\n" +
-            "                \"windSpeed\": 7.13,\n" +
-            "                \"windBearing\": 136,\n" +
-            "                \"visibility\": 6.54,\n" +
-            "                \"cloudCover\": 0.89,\n" +
-            "                \"pressure\": 1012.98,\n" +
-            "                \"ozone\": 278.58\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412002800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0155,\n" +
-            "                \"precipProbability\": 0.81,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 79.82,\n" +
-            "                \"apparentTemperature\": 79.82,\n" +
-            "                \"dewPoint\": 74.02,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 7.15,\n" +
-            "                \"windBearing\": 146,\n" +
-            "                \"visibility\": 8.14,\n" +
-            "                \"cloudCover\": 0.86,\n" +
-            "                \"pressure\": 1013.01,\n" +
-            "                \"ozone\": 278.29\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412006400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0277,\n" +
-            "                \"precipProbability\": 0.87,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.66,\n" +
-            "                \"apparentTemperature\": 85.53,\n" +
-            "                \"dewPoint\": 73.62,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 6.8,\n" +
-            "                \"windBearing\": 163,\n" +
-            "                \"visibility\": 8.69,\n" +
-            "                \"cloudCover\": 0.86,\n" +
-            "                \"pressure\": 1012.92,\n" +
-            "                \"ozone\": 278.17\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412010000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.028,\n" +
-            "                \"precipProbability\": 0.93,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.23,\n" +
-            "                \"apparentTemperature\": 86.16,\n" +
-            "                \"dewPoint\": 72.92,\n" +
-            "                \"humidity\": 0.76,\n" +
-            "                \"windSpeed\": 6.62,\n" +
-            "                \"windBearing\": 178,\n" +
-            "                \"visibility\": 9.06,\n" +
-            "                \"cloudCover\": 0.88,\n" +
-            "                \"pressure\": 1012.74,\n" +
-            "                \"ozone\": 278.12\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412013600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0308,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.63,\n" +
-            "                \"apparentTemperature\": 86.58,\n" +
-            "                \"dewPoint\": 72.53,\n" +
-            "                \"humidity\": 0.74,\n" +
-            "                \"windSpeed\": 6.73,\n" +
-            "                \"windBearing\": 191,\n" +
-            "                \"visibility\": 9.28,\n" +
-            "                \"cloudCover\": 0.9,\n" +
-            "                \"pressure\": 1012.48,\n" +
-            "                \"ozone\": 277.99\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412017200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0368,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.65,\n" +
-            "                \"apparentTemperature\": 86.61,\n" +
-            "                \"dewPoint\": 72.54,\n" +
-            "                \"humidity\": 0.74,\n" +
-            "                \"windSpeed\": 6.74,\n" +
-            "                \"windBearing\": 201,\n" +
-            "                \"visibility\": 9.59,\n" +
-            "                \"cloudCover\": 0.92,\n" +
-            "                \"pressure\": 1012.1,\n" +
-            "                \"ozone\": 277.6\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412020800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0435,\n" +
-            "                \"precipProbability\": 0.98,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.21,\n" +
-            "                \"apparentTemperature\": 86.04,\n" +
-            "                \"dewPoint\": 72.74,\n" +
-            "                \"humidity\": 0.76,\n" +
-            "                \"windSpeed\": 6.57,\n" +
-            "                \"windBearing\": 209,\n" +
-            "                \"visibility\": 9.78,\n" +
-            "                \"cloudCover\": 0.95,\n" +
-            "                \"pressure\": 1011.64,\n" +
-            "                \"ozone\": 277.12\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412024400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0454,\n" +
-            "                \"precipProbability\": 0.93,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.41,\n" +
-            "                \"apparentTemperature\": 84.81,\n" +
-            "                \"dewPoint\": 72.94,\n" +
-            "                \"humidity\": 0.78,\n" +
-            "                \"windSpeed\": 6.54,\n" +
-            "                \"windBearing\": 223,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.98,\n" +
-            "                \"pressure\": 1011.29,\n" +
-            "                \"ozone\": 276.92\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412028000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0386,\n" +
-            "                \"precipProbability\": 0.84,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 79.61,\n" +
-            "                \"apparentTemperature\": 79.61,\n" +
-            "                \"dewPoint\": 73.02,\n" +
-            "                \"humidity\": 0.8,\n" +
-            "                \"windSpeed\": 5.73,\n" +
-            "                \"windBearing\": 225,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.99,\n" +
-            "                \"pressure\": 1011.16,\n" +
-            "                \"ozone\": 277.24\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412031600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0269,\n" +
-            "                \"precipProbability\": 0.72,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 78.7,\n" +
-            "                \"apparentTemperature\": 78.7,\n" +
-            "                \"dewPoint\": 73.15,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 4.55,\n" +
-            "                \"windBearing\": 224,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 1,\n" +
-            "                \"pressure\": 1011.14,\n" +
-            "                \"ozone\": 277.85\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412035200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0176,\n" +
-            "                \"precipProbability\": 0.63,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.94,\n" +
-            "                \"apparentTemperature\": 77.94,\n" +
-            "                \"dewPoint\": 73.23,\n" +
-            "                \"humidity\": 0.85,\n" +
-            "                \"windSpeed\": 3.69,\n" +
-            "                \"windBearing\": 221,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.99,\n" +
-            "                \"pressure\": 1011.16,\n" +
-            "                \"ozone\": 278.37\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412038800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0138,\n" +
-            "                \"precipProbability\": 0.58,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.58,\n" +
-            "                \"apparentTemperature\": 77.58,\n" +
-            "                \"dewPoint\": 73.39,\n" +
-            "                \"humidity\": 0.87,\n" +
-            "                \"windSpeed\": 3.5,\n" +
-            "                \"windBearing\": 216,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.96,\n" +
-            "                \"pressure\": 1011.23,\n" +
-            "                \"ozone\": 278.61\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412042400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0124,\n" +
-            "                \"precipProbability\": 0.55,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.35,\n" +
-            "                \"apparentTemperature\": 77.35,\n" +
-            "                \"dewPoint\": 73.4,\n" +
-            "                \"humidity\": 0.88,\n" +
-            "                \"windSpeed\": 3.66,\n" +
-            "                \"windBearing\": 208,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.91,\n" +
-            "                \"pressure\": 1011.34,\n" +
-            "                \"ozone\": 278.77\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412046000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0117,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.08,\n" +
-            "                \"apparentTemperature\": 77.08,\n" +
-            "                \"dewPoint\": 73.31,\n" +
-            "                \"humidity\": 0.88,\n" +
-            "                \"windSpeed\": 3.89,\n" +
-            "                \"windBearing\": 203,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.87,\n" +
-            "                \"pressure\": 1011.37,\n" +
-            "                \"ozone\": 279.08\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412049600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0114,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.79,\n" +
-            "                \"apparentTemperature\": 76.79,\n" +
-            "                \"dewPoint\": 73.35,\n" +
-            "                \"humidity\": 0.89,\n" +
-            "                \"windSpeed\": 4,\n" +
-            "                \"windBearing\": 201,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.84,\n" +
-            "                \"pressure\": 1011.22,\n" +
-            "                \"ozone\": 279.74\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412053200,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0119,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.54,\n" +
-            "                \"apparentTemperature\": 76.54,\n" +
-            "                \"dewPoint\": 73.33,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 4.05,\n" +
-            "                \"windBearing\": 202,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.8,\n" +
-            "                \"pressure\": 1010.99,\n" +
-            "                \"ozone\": 280.54\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412056800,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0118,\n" +
-            "                \"precipProbability\": 0.54,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.37,\n" +
-            "                \"apparentTemperature\": 76.37,\n" +
-            "                \"dewPoint\": 73.35,\n" +
-            "                \"humidity\": 0.9,\n" +
-            "                \"windSpeed\": 4.11,\n" +
-            "                \"windBearing\": 205,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.78,\n" +
-            "                \"pressure\": 1010.76,\n" +
-            "                \"ozone\": 281.11\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412060400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0104,\n" +
-            "                \"precipProbability\": 0.5,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 76.09,\n" +
-            "                \"apparentTemperature\": 76.09,\n" +
-            "                \"dewPoint\": 73.21,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 4.21,\n" +
-            "                \"windBearing\": 211,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.76,\n" +
-            "                \"pressure\": 1010.55,\n" +
-            "                \"ozone\": 281.17\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412064000,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0084,\n" +
-            "                \"precipProbability\": 0.41,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.77,\n" +
-            "                \"apparentTemperature\": 75.77,\n" +
-            "                \"dewPoint\": 73.01,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 4.37,\n" +
-            "                \"windBearing\": 218,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.79,\n" +
-            "                \"pressure\": 1010.34,\n" +
-            "                \"ozone\": 280.99\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412067600,\n" +
-            "                \"summary\": \"Drizzle\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0067,\n" +
-            "                \"precipProbability\": 0.28,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.61,\n" +
-            "                \"apparentTemperature\": 75.61,\n" +
-            "                \"dewPoint\": 72.92,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 4.53,\n" +
-            "                \"windBearing\": 222,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.79,\n" +
-            "                \"pressure\": 1010.25,\n" +
-            "                \"ozone\": 280.94\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412071200,\n" +
-            "                \"summary\": \"Mostly Cloudy\",\n" +
-            "                \"icon\": \"partly-cloudy-night\",\n" +
-            "                \"precipIntensity\": 0.0034,\n" +
-            "                \"precipProbability\": 0.11,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.47,\n" +
-            "                \"apparentTemperature\": 75.47,\n" +
-            "                \"dewPoint\": 72.91,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 4.34,\n" +
-            "                \"windBearing\": 225,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.73,\n" +
-            "                \"pressure\": 1010.36,\n" +
-            "                \"ozone\": 281.2\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412074800,\n" +
-            "                \"summary\": \"Mostly Cloudy\",\n" +
-            "                \"icon\": \"partly-cloudy-night\",\n" +
-            "                \"precipIntensity\": 0,\n" +
-            "                \"precipProbability\": 0,\n" +
-            "                \"temperature\": 75.44,\n" +
-            "                \"apparentTemperature\": 75.44,\n" +
-            "                \"dewPoint\": 72.94,\n" +
-            "                \"humidity\": 0.92,\n" +
-            "                \"windSpeed\": 3.95,\n" +
-            "                \"windBearing\": 228,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.64,\n" +
-            "                \"pressure\": 1010.56,\n" +
-            "                \"ozone\": 281.57\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412078400,\n" +
-            "                \"summary\": \"Partly Cloudy\",\n" +
-            "                \"icon\": \"partly-cloudy-day\",\n" +
-            "                \"precipIntensity\": 0.0044,\n" +
-            "                \"precipProbability\": 0.13,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 75.86,\n" +
-            "                \"apparentTemperature\": 75.86,\n" +
-            "                \"dewPoint\": 73.07,\n" +
-            "                \"humidity\": 0.91,\n" +
-            "                \"windSpeed\": 3.83,\n" +
-            "                \"windBearing\": 230,\n" +
-            "                \"visibility\": 10,\n" +
-            "                \"cloudCover\": 0.57,\n" +
-            "                \"pressure\": 1010.77,\n" +
-            "                \"ozone\": 281.84\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412082000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0219,\n" +
-            "                \"precipProbability\": 0.43,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.13,\n" +
-            "                \"apparentTemperature\": 77.13,\n" +
-            "                \"dewPoint\": 73.34,\n" +
-            "                \"humidity\": 0.88,\n" +
-            "                \"windSpeed\": 4.22,\n" +
-            "                \"windBearing\": 232,\n" +
-            "                \"visibility\": 8.27,\n" +
-            "                \"cloudCover\": 0.56,\n" +
-            "                \"pressure\": 1011.11,\n" +
-            "                \"ozone\": 281.94\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412085600,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0455,\n" +
-            "                \"precipProbability\": 0.65,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 78.8,\n" +
-            "                \"apparentTemperature\": 78.8,\n" +
-            "                \"dewPoint\": 73.56,\n" +
-            "                \"humidity\": 0.84,\n" +
-            "                \"windSpeed\": 4.84,\n" +
-            "                \"windBearing\": 235,\n" +
-            "                \"visibility\": 5.95,\n" +
-            "                \"cloudCover\": 0.56,\n" +
-            "                \"pressure\": 1011.49,\n" +
-            "                \"ozone\": 281.93\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412089200,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0637,\n" +
-            "                \"precipProbability\": 0.81,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.11,\n" +
-            "                \"apparentTemperature\": 84.57,\n" +
-            "                \"dewPoint\": 73.65,\n" +
-            "                \"humidity\": 0.81,\n" +
-            "                \"windSpeed\": 5.4,\n" +
-            "                \"windBearing\": 238,\n" +
-            "                \"visibility\": 4.67,\n" +
-            "                \"cloudCover\": 0.58,\n" +
-            "                \"pressure\": 1011.68,\n" +
-            "                \"ozone\": 281.69\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412092800,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0731,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.81,\n" +
-            "                \"apparentTemperature\": 85.86,\n" +
-            "                \"dewPoint\": 73.74,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 5.73,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 5.58,\n" +
-            "                \"cloudCover\": 0.62,\n" +
-            "                \"pressure\": 1011.56,\n" +
-            "                \"ozone\": 281.01\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412096400,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0781,\n" +
-            "                \"precipProbability\": 0.83,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.05,\n" +
-            "                \"apparentTemperature\": 86.26,\n" +
-            "                \"dewPoint\": 73.74,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 5.94,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 7.53,\n" +
-            "                \"cloudCover\": 0.67,\n" +
-            "                \"pressure\": 1011.26,\n" +
-            "                \"ozone\": 280.11\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412100000,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0797,\n" +
-            "                \"precipProbability\": 0.8,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.24,\n" +
-            "                \"apparentTemperature\": 86.67,\n" +
-            "                \"dewPoint\": 73.87,\n" +
-            "                \"humidity\": 0.78,\n" +
-            "                \"windSpeed\": 6.17,\n" +
-            "                \"windBearing\": 241,\n" +
-            "                \"visibility\": 8.73,\n" +
-            "                \"cloudCover\": 0.68,\n" +
-            "                \"pressure\": 1010.94,\n" +
-            "                \"ozone\": 279.49\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412103600,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0786,\n" +
-            "                \"precipProbability\": 0.79,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.25,\n" +
-            "                \"apparentTemperature\": 86.7,\n" +
-            "                \"dewPoint\": 73.92,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 6.68,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 8.09,\n" +
-            "                \"cloudCover\": 0.65,\n" +
-            "                \"pressure\": 1010.51,\n" +
-            "                \"ozone\": 279.48\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412107200,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0742,\n" +
-            "                \"precipProbability\": 0.75,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 81.01,\n" +
-            "                \"apparentTemperature\": 86.29,\n" +
-            "                \"dewPoint\": 73.91,\n" +
-            "                \"humidity\": 0.79,\n" +
-            "                \"windSpeed\": 7.32,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 6.7,\n" +
-            "                \"cloudCover\": 0.6,\n" +
-            "                \"pressure\": 1010.08,\n" +
-            "                \"ozone\": 279.75\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412110800,\n" +
-            "                \"summary\": \"Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0652,\n" +
-            "                \"precipProbability\": 0.69,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 80.43,\n" +
-            "                \"apparentTemperature\": 85.2,\n" +
-            "                \"dewPoint\": 73.78,\n" +
-            "                \"humidity\": 0.8,\n" +
-            "                \"windSpeed\": 7.44,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 6.04,\n" +
-            "                \"cloudCover\": 0.54,\n" +
-            "                \"pressure\": 1009.81,\n" +
-            "                \"ozone\": 279.88\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412114400,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0474,\n" +
-            "                \"precipProbability\": 0.58,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 79.3,\n" +
-            "                \"apparentTemperature\": 79.3,\n" +
-            "                \"dewPoint\": 73.51,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 6.45,\n" +
-            "                \"windBearing\": 240,\n" +
-            "                \"visibility\": 7.02,\n" +
-            "                \"cloudCover\": 0.5,\n" +
-            "                \"pressure\": 1009.84,\n" +
-            "                \"ozone\": 279.67\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412118000,\n" +
-            "                \"summary\": \"Light Rain\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"precipIntensity\": 0.0238,\n" +
-            "                \"precipProbability\": 0.41,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperature\": 77.97,\n" +
-            "                \"apparentTemperature\": 77.97,\n" +
-            "                \"dewPoint\": 73.22,\n" +
-            "                \"humidity\": 0.85,\n" +
-            "                \"windSpeed\": 4.94,\n" +
-            "                \"windBearing\": 239,\n" +
-            "                \"visibility\": 8.73,\n" +
-            "                \"cloudCover\": 0.45,\n" +
-            "                \"pressure\": 1010.14,\n" +
-            "                \"ozone\": 279.31\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"daily\": {\n" +
-            "        \"summary\": \"Light rain today through Saturday, with temperatures falling to 76°F on Sunday.\",\n" +
-            "        \"icon\": \"rain\",\n" +
-            "        \"data\": [\n" +
-            "            {\n" +
-            "                \"time\": 1411876800,\n" +
-            "                \"summary\": \"Rain starting in the afternoon.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1411903373,\n" +
-            "                \"sunsetTime\": 1411946476,\n" +
-            "                \"moonPhase\": 0.14,\n" +
-            "                \"precipIntensity\": 0.0247,\n" +
-            "                \"precipIntensityMax\": 0.0714,\n" +
-            "                \"precipIntensityMaxTime\": 1411956000,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 73.73,\n" +
-            "                \"temperatureMinTime\": 1411894800,\n" +
-            "                \"temperatureMax\": 87.88,\n" +
-            "                \"temperatureMaxTime\": 1411934400,\n" +
-            "                \"apparentTemperatureMin\": 73.73,\n" +
-            "                \"apparentTemperatureMinTime\": 1411894800,\n" +
-            "                \"apparentTemperatureMax\": 96.35,\n" +
-            "                \"apparentTemperatureMaxTime\": 1411934400,\n" +
-            "                \"dewPoint\": 73.41,\n" +
-            "                \"humidity\": 0.87,\n" +
-            "                \"windSpeed\": 3.94,\n" +
-            "                \"windBearing\": 62,\n" +
-            "                \"visibility\": 7.51,\n" +
-            "                \"cloudCover\": 0.84,\n" +
-            "                \"pressure\": 1015.31,\n" +
-            "                \"ozone\": 278.05\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1411963200,\n" +
-            "                \"summary\": \"Light rain throughout the day.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1411989804,\n" +
-            "                \"sunsetTime\": 1412032804,\n" +
-            "                \"moonPhase\": 0.18,\n" +
-            "                \"precipIntensity\": 0.0218,\n" +
-            "                \"precipIntensityMax\": 0.0454,\n" +
-            "                \"precipIntensityMaxTime\": 1412024400,\n" +
-            "                \"precipProbability\": 1,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 74.91,\n" +
-            "                \"temperatureMinTime\": 1411988400,\n" +
-            "                \"temperatureMax\": 81.65,\n" +
-            "                \"temperatureMaxTime\": 1412017200,\n" +
-            "                \"apparentTemperatureMin\": 74.91,\n" +
-            "                \"apparentTemperatureMinTime\": 1411988400,\n" +
-            "                \"apparentTemperatureMax\": 86.61,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412017200,\n" +
-            "                \"dewPoint\": 73.33,\n" +
-            "                \"humidity\": 0.86,\n" +
-            "                \"windSpeed\": 3.03,\n" +
-            "                \"windBearing\": 146,\n" +
-            "                \"visibility\": 7.25,\n" +
-            "                \"cloudCover\": 0.93,\n" +
-            "                \"pressure\": 1012.43,\n" +
-            "                \"ozone\": 278.62\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412049600,\n" +
-            "                \"summary\": \"Rain until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412076235,\n" +
-            "                \"sunsetTime\": 1412119132,\n" +
-            "                \"moonPhase\": 0.21,\n" +
-            "                \"precipIntensity\": 0.0302,\n" +
-            "                \"precipIntensityMax\": 0.0797,\n" +
-            "                \"precipIntensityMaxTime\": 1412100000,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 75.44,\n" +
-            "                \"temperatureMinTime\": 1412074800,\n" +
-            "                \"temperatureMax\": 81.25,\n" +
-            "                \"temperatureMaxTime\": 1412103600,\n" +
-            "                \"apparentTemperatureMin\": 75.44,\n" +
-            "                \"apparentTemperatureMinTime\": 1412074800,\n" +
-            "                \"apparentTemperatureMax\": 86.7,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412103600,\n" +
-            "                \"dewPoint\": 73.39,\n" +
-            "                \"humidity\": 0.86,\n" +
-            "                \"windSpeed\": 4.54,\n" +
-            "                \"windBearing\": 229,\n" +
-            "                \"visibility\": 8.68,\n" +
-            "                \"cloudCover\": 0.62,\n" +
-            "                \"pressure\": 1010.78,\n" +
-            "                \"ozone\": 280.35\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412136000,\n" +
-            "                \"summary\": \"Rain until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412162666,\n" +
-            "                \"sunsetTime\": 1412205461,\n" +
-            "                \"moonPhase\": 0.25,\n" +
-            "                \"precipIntensity\": 0.027,\n" +
-            "                \"precipIntensityMax\": 0.1366,\n" +
-            "                \"precipIntensityMaxTime\": 1412175600,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 74.38,\n" +
-            "                \"temperatureMinTime\": 1412157600,\n" +
-            "                \"temperatureMax\": 81.39,\n" +
-            "                \"temperatureMaxTime\": 1412193600,\n" +
-            "                \"apparentTemperatureMin\": 74.38,\n" +
-            "                \"apparentTemperatureMinTime\": 1412157600,\n" +
-            "                \"apparentTemperatureMax\": 87.33,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412193600,\n" +
-            "                \"dewPoint\": 73.51,\n" +
-            "                \"humidity\": 0.86,\n" +
-            "                \"windSpeed\": 2.05,\n" +
-            "                \"windBearing\": 189,\n" +
-            "                \"visibility\": 9.23,\n" +
-            "                \"cloudCover\": 0.5,\n" +
-            "                \"pressure\": 1013.3,\n" +
-            "                \"ozone\": 279.58\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412222400,\n" +
-            "                \"summary\": \"Light rain starting in the afternoon, " +
-            "continuing until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412249097,\n" +
-            "                \"sunsetTime\": 1412291790,\n" +
-            "                \"moonPhase\": 0.29,\n" +
-            "                \"precipIntensity\": 0.0047,\n" +
-            "                \"precipIntensityMax\": 0.0155,\n" +
-            "                \"precipIntensityMaxTime\": 1412287200,\n" +
-            "                \"precipProbability\": 0.56,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 71.87,\n" +
-            "                \"temperatureMinTime\": 1412247600,\n" +
-            "                \"temperatureMax\": 83.04,\n" +
-            "                \"temperatureMaxTime\": 1412276400,\n" +
-            "                \"apparentTemperatureMin\": 71.87,\n" +
-            "                \"apparentTemperatureMinTime\": 1412247600,\n" +
-            "                \"apparentTemperatureMax\": 87.96,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412276400,\n" +
-            "                \"dewPoint\": 70.81,\n" +
-            "                \"humidity\": 0.81,\n" +
-            "                \"windSpeed\": 3.43,\n" +
-            "                \"windBearing\": 100,\n" +
-            "                \"cloudCover\": 0.18,\n" +
-            "                \"pressure\": 1015.57,\n" +
-            "                \"ozone\": 277.31\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412308800,\n" +
-            "                \"summary\": \"Light rain starting in the afternoon, " +
-            "continuing until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412335529,\n" +
-            "                \"sunsetTime\": 1412378119,\n" +
-            "                \"moonPhase\": 0.32,\n" +
-            "                \"precipIntensity\": 0.0055,\n" +
-            "                \"precipIntensityMax\": 0.0146,\n" +
-            "                \"precipIntensityMaxTime\": 1412370000,\n" +
-            "                \"precipProbability\": 0.85,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 71.64,\n" +
-            "                \"temperatureMinTime\": 1412334000,\n" +
-            "                \"temperatureMax\": 82.4,\n" +
-            "                \"temperatureMaxTime\": 1412359200,\n" +
-            "                \"apparentTemperatureMin\": 71.64,\n" +
-            "                \"apparentTemperatureMinTime\": 1412334000,\n" +
-            "                \"apparentTemperatureMax\": 88.05,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412359200,\n" +
-            "                \"dewPoint\": 70.78,\n" +
-            "                \"humidity\": 0.83,\n" +
-            "                \"windSpeed\": 2.48,\n" +
-            "                \"windBearing\": 203,\n" +
-            "                \"cloudCover\": 0.09,\n" +
-            "                \"pressure\": 1015.19,\n" +
-            "                \"ozone\": 274.32\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412395200,\n" +
-            "                \"summary\": \"Light rain until evening.\",\n" +
-            "                \"icon\": \"rain\",\n" +
-            "                \"sunriseTime\": 1412421961,\n" +
-            "                \"sunsetTime\": 1412464449,\n" +
-            "                \"moonPhase\": 0.36,\n" +
-            "                \"precipIntensity\": 0.0062,\n" +
-            "                \"precipIntensityMax\": 0.0173,\n" +
-            "                \"precipIntensityMaxTime\": 1412445600,\n" +
-            "                \"precipProbability\": 0.93,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 70.53,\n" +
-            "                \"temperatureMinTime\": 1412478000,\n" +
-            "                \"temperatureMax\": 79.98,\n" +
-            "                \"temperatureMaxTime\": 1412445600,\n" +
-            "                \"apparentTemperatureMin\": 70.53,\n" +
-            "                \"apparentTemperatureMinTime\": 1412478000,\n" +
-            "                \"apparentTemperatureMax\": 79.98,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412445600,\n" +
-            "                \"dewPoint\": 69.5,\n" +
-            "                \"humidity\": 0.81,\n" +
-            "                \"windSpeed\": 5.55,\n" +
-            "                \"windBearing\": 288,\n" +
-            "                \"cloudCover\": 0.34,\n" +
-            "                \"pressure\": 1013.5,\n" +
-            "                \"ozone\": 277.09\n" +
-            "            },\n" +
-            "            {\n" +
-            "                \"time\": 1412481600,\n" +
-            "                \"summary\": \"Clear throughout the day.\",\n" +
-            "                \"icon\": \"clear-day\",\n" +
-            "                \"sunriseTime\": 1412508393,\n" +
-            "                \"sunsetTime\": 1412550779,\n" +
-            "                \"moonPhase\": 0.4,\n" +
-            "                \"precipIntensity\": 0.002,\n" +
-            "                \"precipIntensityMax\": 0.0033,\n" +
-            "                \"precipIntensityMaxTime\": 1412488800,\n" +
-            "                \"precipProbability\": 0.09,\n" +
-            "                \"precipType\": \"rain\",\n" +
-            "                \"temperatureMin\": 62.14,\n" +
-            "                \"temperatureMinTime\": 1412506800,\n" +
-            "                \"temperatureMax\": 76.23,\n" +
-            "                \"temperatureMaxTime\": 1412539200,\n" +
-            "                \"apparentTemperatureMin\": 62.14,\n" +
-            "                \"apparentTemperatureMinTime\": 1412506800,\n" +
-            "                \"apparentTemperatureMax\": 76.23,\n" +
-            "                \"apparentTemperatureMaxTime\": 1412539200,\n" +
-            "                \"dewPoint\": 57.79,\n" +
-            "                \"humidity\": 0.68,\n" +
-            "                \"windSpeed\": 6.54,\n" +
-            "                \"windBearing\": 16,\n" +
-            "                \"cloudCover\": 0,\n" +
-            "                \"pressure\": 1015.3,\n" +
-            "                \"ozone\": 285.54\n" +
-            "            }\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"flags\": {\n" +
-            "        \"sources\": [\n" +
-            "            \"nwspa\",\n" +
-            "            \"isd\",\n" +
-            "            \"nearest-precip\",\n" +
-            "            \"sref\",\n" +
-            "            \"rap\",\n" +
-            "            \"nam\",\n" +
-            "            \"fnmoc\",\n" +
-            "            \"rtma\",\n" +
-            "            \"cmc\",\n" +
-            "            \"gfs\",\n" +
-            "            \"madis\",\n" +
-            "            \"lamp\",\n" +
-            "            \"darksky\"\n" +
-            "        ],\n" +
-            "        \"isd-stations\": [\n" +
-            "            \"720655-99999\",\n" +
-            "            \"722014-12818\",\n" +
-            "            \"722014-99999\",\n" +
-            "            \"724737-99999\",\n" +
-            "            \"994082-99999\"\n" +
-            "        ],\n" +
-            "        \"madis-stations\": [\n" +
-            "            \"AU655\",\n" +
-            "            \"AU705\",\n" +
-            "            \"AU749\",\n" +
-            "            \"C6469\",\n" +
-            "            \"C6533\",\n" +
-            "            \"C8067\",\n" +
-            "            \"D1496\",\n" +
-            "            \"D3617\",\n" +
-            "            \"D7271\",\n" +
-            "            \"D7434\",\n" +
-            "            \"E1772\",\n" +
-            "            \"E2340\",\n" +
-            "            \"KBKV\",\n" +
-            "            \"KCGC\",\n" +
-            "            \"KINF\",\n" +
-            "            \"KOCF\"\n" +
-            "        ],\n" +
-            "        \"lamp-stations\": [\n" +
-            "            \"KBKV\",\n" +
-            "            \"KOCF\",\n" +
-            "            \"KVVG\"\n" +
-            "        ],\n" +
-            "        \"darksky-stations\": [\n" +
-            "            \"KTBW\"\n" +
-            "        ],\n" +
-            "        \"units\": \"us\"\n" +
-            "    }\n" +
-            "}";
-
-
     public static final String JSON_SEATTLE_FORECAST = "{\n" +
             "    \"latitude\": 47.609,\n" +
             "    \"longitude\": -122.333,\n" +
@@ -6355,4 +3086,1166 @@ public class MockWeatherService implements WeatherService {
             "        \"units\": \"us\"\n" +
             "    }\n" +
             "}";
+
+
+        public static String JSON_WEATHER_RAIN = "{\n" +
+                "    \"latitude\": 25.671,\n" +
+                "    \"longitude\": -100.31,\n" +
+                "    \"timezone\": \"America/Monterrey\",\n" +
+                "    \"offset\": -6,\n" +
+                "    \"currently\": {\n" +
+                "        \"time\": 1426579615,\n" +
+                "        \"summary\": \"Rain\",\n" +
+                "        \"icon\": \"rain\",\n" +
+                "        \"nearestStormDistance\": 0,\n" +
+                "        \"precipIntensity\": 0.0601,\n" +
+                "        \"precipProbability\": 0.96,\n" +
+                "        \"precipType\": \"rain\",\n" +
+                "        \"temperature\": 55.84,\n" +
+                "        \"apparentTemperature\": 55.84,\n" +
+                "        \"dewPoint\": 54.75,\n" +
+                "        \"humidity\": 0.96,\n" +
+                "        \"windSpeed\": 2.37,\n" +
+                "        \"windBearing\": 281,\n" +
+                "        \"visibility\": 5.03,\n" +
+                "        \"cloudCover\": 1,\n" +
+                "        \"pressure\": 1021.47,\n" +
+                "        \"ozone\": 282.94\n" +
+                "    },\n" +
+                "    \"hourly\": {\n" +
+                "        \"summary\": \"Rain until tomorrow night.\",\n" +
+                "        \"icon\": \"rain\",\n" +
+                "        \"data\": [\n" +
+                "            {\n" +
+                "                \"time\": 1426579200,\n" +
+                "                \"summary\": \"Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0591,\n" +
+                "                \"precipProbability\": 0.95,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 55.85,\n" +
+                "                \"apparentTemperature\": 55.85,\n" +
+                "                \"dewPoint\": 54.83,\n" +
+                "                \"humidity\": 0.96,\n" +
+                "                \"windSpeed\": 2.27,\n" +
+                "                \"windBearing\": 281,\n" +
+                "                \"visibility\": 4.99,\n" +
+                "                \"cloudCover\": 1,\n" +
+                "                \"pressure\": 1021.61,\n" +
+                "                \"ozone\": 282.87\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426582800,\n" +
+                "                \"summary\": \"Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.068,\n" +
+                "                \"precipProbability\": 1,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 55.8,\n" +
+                "                \"apparentTemperature\": 55.8,\n" +
+                "                \"dewPoint\": 54.11,\n" +
+                "                \"humidity\": 0.94,\n" +
+                "                \"windSpeed\": 3.12,\n" +
+                "                \"windBearing\": 277,\n" +
+                "                \"visibility\": 5.32,\n" +
+                "                \"cloudCover\": 0.99,\n" +
+                "                \"pressure\": 1020.47,\n" +
+                "                \"ozone\": 283.47\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426586400,\n" +
+                "                \"summary\": \"Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0578,\n" +
+                "                \"precipProbability\": 0.97,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 55.62,\n" +
+                "                \"apparentTemperature\": 55.62,\n" +
+                "                \"dewPoint\": 53.56,\n" +
+                "                \"humidity\": 0.93,\n" +
+                "                \"windSpeed\": 3.18,\n" +
+                "                \"windBearing\": 277,\n" +
+                "                \"visibility\": 5.69,\n" +
+                "                \"cloudCover\": 0.99,\n" +
+                "                \"pressure\": 1020.07,\n" +
+                "                \"ozone\": 284.78\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426590000,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0423,\n" +
+                "                \"precipProbability\": 0.93,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 55.39,\n" +
+                "                \"apparentTemperature\": 55.39,\n" +
+                "                \"dewPoint\": 53.01,\n" +
+                "                \"humidity\": 0.92,\n" +
+                "                \"windSpeed\": 2.66,\n" +
+                "                \"windBearing\": 268,\n" +
+                "                \"visibility\": 6.43,\n" +
+                "                \"cloudCover\": 0.98,\n" +
+                "                \"pressure\": 1019.79,\n" +
+                "                \"ozone\": 286.34\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426593600,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0363,\n" +
+                "                \"precipProbability\": 0.89,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 55.57,\n" +
+                "                \"apparentTemperature\": 55.57,\n" +
+                "                \"dewPoint\": 53.15,\n" +
+                "                \"humidity\": 0.92,\n" +
+                "                \"windSpeed\": 1.8,\n" +
+                "                \"windBearing\": 220,\n" +
+                "                \"visibility\": 6.66,\n" +
+                "                \"cloudCover\": 0.96,\n" +
+                "                \"pressure\": 1019.76,\n" +
+                "                \"ozone\": 287.57\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426597200,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0265,\n" +
+                "                \"precipProbability\": 0.83,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 56.61,\n" +
+                "                \"apparentTemperature\": 56.61,\n" +
+                "                \"dewPoint\": 53.68,\n" +
+                "                \"humidity\": 0.9,\n" +
+                "                \"windSpeed\": 2.19,\n" +
+                "                \"windBearing\": 177,\n" +
+                "                \"visibility\": 7.04,\n" +
+                "                \"cloudCover\": 0.9,\n" +
+                "                \"pressure\": 1020.2,\n" +
+                "                \"ozone\": 287.8\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426600800,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.019,\n" +
+                "                \"precipProbability\": 0.8,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 58.35,\n" +
+                "                \"apparentTemperature\": 58.35,\n" +
+                "                \"dewPoint\": 54.76,\n" +
+                "                \"humidity\": 0.88,\n" +
+                "                \"windSpeed\": 2.91,\n" +
+                "                \"windBearing\": 142,\n" +
+                "                \"visibility\": 7.54,\n" +
+                "                \"cloudCover\": 0.84,\n" +
+                "                \"pressure\": 1020.8,\n" +
+                "                \"ozone\": 287.7\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426604400,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0228,\n" +
+                "                \"precipProbability\": 0.84,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 60.13,\n" +
+                "                \"apparentTemperature\": 60.13,\n" +
+                "                \"dewPoint\": 56.3,\n" +
+                "                \"humidity\": 0.87,\n" +
+                "                \"windSpeed\": 4.03,\n" +
+                "                \"windBearing\": 136,\n" +
+                "                \"visibility\": 7.71,\n" +
+                "                \"cloudCover\": 0.81,\n" +
+                "                \"pressure\": 1021.18,\n" +
+                "                \"ozone\": 288.73\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426608000,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0204,\n" +
+                "                \"precipProbability\": 0.82,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 61.13,\n" +
+                "                \"apparentTemperature\": 61.13,\n" +
+                "                \"dewPoint\": 56.91,\n" +
+                "                \"humidity\": 0.86,\n" +
+                "                \"windSpeed\": 4.31,\n" +
+                "                \"windBearing\": 130,\n" +
+                "                \"visibility\": 7.78,\n" +
+                "                \"cloudCover\": 0.85,\n" +
+                "                \"pressure\": 1021.11,\n" +
+                "                \"ozone\": 292.29\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426611600,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0234,\n" +
+                "                \"precipProbability\": 0.83,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 62.39,\n" +
+                "                \"apparentTemperature\": 62.39,\n" +
+                "                \"dewPoint\": 57.75,\n" +
+                "                \"humidity\": 0.85,\n" +
+                "                \"windSpeed\": 5.37,\n" +
+                "                \"windBearing\": 119,\n" +
+                "                \"visibility\": 7.78,\n" +
+                "                \"cloudCover\": 0.93,\n" +
+                "                \"pressure\": 1020.76,\n" +
+                "                \"ozone\": 296.99\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426615200,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0419,\n" +
+                "                \"precipProbability\": 0.85,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 62.33,\n" +
+                "                \"apparentTemperature\": 62.33,\n" +
+                "                \"dewPoint\": 57.72,\n" +
+                "                \"humidity\": 0.85,\n" +
+                "                \"windSpeed\": 5.47,\n" +
+                "                \"windBearing\": 118,\n" +
+                "                \"visibility\": 7.49,\n" +
+                "                \"cloudCover\": 0.98,\n" +
+                "                \"pressure\": 1020.17,\n" +
+                "                \"ozone\": 300.15\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426618800,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0257,\n" +
+                "                \"precipProbability\": 0.85,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 63.58,\n" +
+                "                \"apparentTemperature\": 63.58,\n" +
+                "                \"dewPoint\": 58.54,\n" +
+                "                \"humidity\": 0.84,\n" +
+                "                \"windSpeed\": 6.03,\n" +
+                "                \"windBearing\": 111,\n" +
+                "                \"visibility\": 7.71,\n" +
+                "                \"cloudCover\": 0.98,\n" +
+                "                \"pressure\": 1019.18,\n" +
+                "                \"ozone\": 300.56\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426622400,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0209,\n" +
+                "                \"precipProbability\": 0.85,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 64.97,\n" +
+                "                \"apparentTemperature\": 64.97,\n" +
+                "                \"dewPoint\": 59.05,\n" +
+                "                \"humidity\": 0.81,\n" +
+                "                \"windSpeed\": 6.82,\n" +
+                "                \"windBearing\": 107,\n" +
+                "                \"visibility\": 7.93,\n" +
+                "                \"cloudCover\": 0.95,\n" +
+                "                \"pressure\": 1017.96,\n" +
+                "                \"ozone\": 299.43\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426626000,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0174,\n" +
+                "                \"precipProbability\": 0.77,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 65.72,\n" +
+                "                \"apparentTemperature\": 65.72,\n" +
+                "                \"dewPoint\": 59.58,\n" +
+                "                \"humidity\": 0.81,\n" +
+                "                \"windSpeed\": 7.43,\n" +
+                "                \"windBearing\": 107,\n" +
+                "                \"visibility\": 8.22,\n" +
+                "                \"cloudCover\": 0.93,\n" +
+                "                \"pressure\": 1017.01,\n" +
+                "                \"ozone\": 297.7\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426629600,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0205,\n" +
+                "                \"precipProbability\": 0.83,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 64.88,\n" +
+                "                \"apparentTemperature\": 64.88,\n" +
+                "                \"dewPoint\": 59.37,\n" +
+                "                \"humidity\": 0.82,\n" +
+                "                \"windSpeed\": 7.87,\n" +
+                "                \"windBearing\": 113,\n" +
+                "                \"visibility\": 7.67,\n" +
+                "                \"cloudCover\": 0.93,\n" +
+                "                \"pressure\": 1016.52,\n" +
+                "                \"ozone\": 295.31\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426633200,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0248,\n" +
+                "                \"precipProbability\": 0.81,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 63.85,\n" +
+                "                \"apparentTemperature\": 63.85,\n" +
+                "                \"dewPoint\": 59.2,\n" +
+                "                \"humidity\": 0.85,\n" +
+                "                \"windSpeed\": 7.92,\n" +
+                "                \"windBearing\": 117,\n" +
+                "                \"visibility\": 7.34,\n" +
+                "                \"cloudCover\": 0.92,\n" +
+                "                \"pressure\": 1016.3,\n" +
+                "                \"ozone\": 292.32\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426636800,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0285,\n" +
+                "                \"precipProbability\": 0.78,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 62.78,\n" +
+                "                \"apparentTemperature\": 62.78,\n" +
+                "                \"dewPoint\": 59.1,\n" +
+                "                \"humidity\": 0.88,\n" +
+                "                \"windSpeed\": 7.64,\n" +
+                "                \"windBearing\": 117,\n" +
+                "                \"visibility\": 7.05,\n" +
+                "                \"cloudCover\": 0.9,\n" +
+                "                \"pressure\": 1016.28,\n" +
+                "                \"ozone\": 289.92\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426640400,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0232,\n" +
+                "                \"precipProbability\": 0.63,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 62.35,\n" +
+                "                \"apparentTemperature\": 62.35,\n" +
+                "                \"dewPoint\": 59.26,\n" +
+                "                \"humidity\": 0.9,\n" +
+                "                \"windSpeed\": 7.07,\n" +
+                "                \"windBearing\": 120,\n" +
+                "                \"visibility\": 7.67,\n" +
+                "                \"cloudCover\": 0.88,\n" +
+                "                \"pressure\": 1016.55,\n" +
+                "                \"ozone\": 288.63\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426644000,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0161,\n" +
+                "                \"precipProbability\": 0.44,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 61.87,\n" +
+                "                \"apparentTemperature\": 61.87,\n" +
+                "                \"dewPoint\": 59.43,\n" +
+                "                \"humidity\": 0.92,\n" +
+                "                \"windSpeed\": 6.65,\n" +
+                "                \"windBearing\": 123,\n" +
+                "                \"visibility\": 8.52,\n" +
+                "                \"cloudCover\": 0.86,\n" +
+                "                \"pressure\": 1017.05,\n" +
+                "                \"ozone\": 287.93\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426647600,\n" +
+                "                \"summary\": \"Light Rain\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0104,\n" +
+                "                \"precipProbability\": 0.31,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 61.29,\n" +
+                "                \"apparentTemperature\": 61.29,\n" +
+                "                \"dewPoint\": 59.35,\n" +
+                "                \"humidity\": 0.93,\n" +
+                "                \"windSpeed\": 6.24,\n" +
+                "                \"windBearing\": 126,\n" +
+                "                \"visibility\": 9.27,\n" +
+                "                \"cloudCover\": 0.8,\n" +
+                "                \"pressure\": 1017.45,\n" +
+                "                \"ozone\": 287.4\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426651200,\n" +
+                "                \"summary\": \"Drizzle\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.008,\n" +
+                "                \"precipProbability\": 0.22,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 60.55,\n" +
+                "                \"apparentTemperature\": 60.55,\n" +
+                "                \"dewPoint\": 58.82,\n" +
+                "                \"humidity\": 0.94,\n" +
+                "                \"windSpeed\": 5.92,\n" +
+                "                \"windBearing\": 127,\n" +
+                "                \"visibility\": 9.67,\n" +
+                "                \"cloudCover\": 0.71,\n" +
+                "                \"pressure\": 1017.71,\n" +
+                "                \"ozone\": 286.98\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426654800,\n" +
+                "                \"summary\": \"Drizzle\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0066,\n" +
+                "                \"precipProbability\": 0.15,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 59.8,\n" +
+                "                \"apparentTemperature\": 59.8,\n" +
+                "                \"dewPoint\": 58.11,\n" +
+                "                \"humidity\": 0.94,\n" +
+                "                \"windSpeed\": 5.14,\n" +
+                "                \"windBearing\": 131,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.6,\n" +
+                "                \"pressure\": 1017.87,\n" +
+                "                \"ozone\": 286.74\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426658400,\n" +
+                "                \"summary\": \"Drizzle\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"precipIntensity\": 0.0063,\n" +
+                "                \"precipProbability\": 0.15,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 59.49,\n" +
+                "                \"apparentTemperature\": 59.49,\n" +
+                "                \"dewPoint\": 57.71,\n" +
+                "                \"humidity\": 0.94,\n" +
+                "                \"windSpeed\": 4.68,\n" +
+                "                \"windBearing\": 132,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.56,\n" +
+                "                \"pressure\": 1017.8,\n" +
+                "                \"ozone\": 286.41\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426662000,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0.0049,\n" +
+                "                \"precipProbability\": 0.09,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 59.32,\n" +
+                "                \"apparentTemperature\": 59.32,\n" +
+                "                \"dewPoint\": 57.48,\n" +
+                "                \"humidity\": 0.94,\n" +
+                "                \"windSpeed\": 3.99,\n" +
+                "                \"windBearing\": 136,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.61,\n" +
+                "                \"pressure\": 1017.34,\n" +
+                "                \"ozone\": 285.86\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426665600,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0.003,\n" +
+                "                \"precipProbability\": 0.02,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 59.27,\n" +
+                "                \"apparentTemperature\": 59.27,\n" +
+                "                \"dewPoint\": 57.32,\n" +
+                "                \"humidity\": 0.93,\n" +
+                "                \"windSpeed\": 3.26,\n" +
+                "                \"windBearing\": 141,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.71,\n" +
+                "                \"pressure\": 1016.67,\n" +
+                "                \"ozone\": 285.22\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426669200,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 59.23,\n" +
+                "                \"apparentTemperature\": 59.23,\n" +
+                "                \"dewPoint\": 57.16,\n" +
+                "                \"humidity\": 0.93,\n" +
+                "                \"windSpeed\": 2.66,\n" +
+                "                \"windBearing\": 148,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.77,\n" +
+                "                \"pressure\": 1016.14,\n" +
+                "                \"ozone\": 284.66\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426672800,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 59.06,\n" +
+                "                \"apparentTemperature\": 59.06,\n" +
+                "                \"dewPoint\": 56.88,\n" +
+                "                \"humidity\": 0.92,\n" +
+                "                \"windSpeed\": 2.24,\n" +
+                "                \"windBearing\": 156,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.74,\n" +
+                "                \"pressure\": 1015.9,\n" +
+                "                \"ozone\": 284.18\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426676400,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 58.93,\n" +
+                "                \"apparentTemperature\": 58.93,\n" +
+                "                \"dewPoint\": 56.6,\n" +
+                "                \"humidity\": 0.92,\n" +
+                "                \"windSpeed\": 1.96,\n" +
+                "                \"windBearing\": 165,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.66,\n" +
+                "                \"pressure\": 1015.83,\n" +
+                "                \"ozone\": 283.78\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426680000,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 59.22,\n" +
+                "                \"apparentTemperature\": 59.22,\n" +
+                "                \"dewPoint\": 56.59,\n" +
+                "                \"humidity\": 0.91,\n" +
+                "                \"windSpeed\": 1.69,\n" +
+                "                \"windBearing\": 169,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.62,\n" +
+                "                \"pressure\": 1015.94,\n" +
+                "                \"ozone\": 283.54\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426683600,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 60.12,\n" +
+                "                \"apparentTemperature\": 60.12,\n" +
+                "                \"dewPoint\": 56.98,\n" +
+                "                \"humidity\": 0.89,\n" +
+                "                \"windSpeed\": 1.23,\n" +
+                "                \"windBearing\": 161,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.64,\n" +
+                "                \"pressure\": 1016.39,\n" +
+                "                \"ozone\": 283.52\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426687200,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 61.53,\n" +
+                "                \"apparentTemperature\": 61.53,\n" +
+                "                \"dewPoint\": 57.68,\n" +
+                "                \"humidity\": 0.87,\n" +
+                "                \"windSpeed\": 0.74,\n" +
+                "                \"windBearing\": 124,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.69,\n" +
+                "                \"pressure\": 1017.01,\n" +
+                "                \"ozone\": 283.66\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426690800,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 63.35,\n" +
+                "                \"apparentTemperature\": 63.35,\n" +
+                "                \"dewPoint\": 58.52,\n" +
+                "                \"humidity\": 0.84,\n" +
+                "                \"windSpeed\": 1.01,\n" +
+                "                \"windBearing\": 92,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.74,\n" +
+                "                \"pressure\": 1017.32,\n" +
+                "                \"ozone\": 283.94\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426694400,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 65.67,\n" +
+                "                \"apparentTemperature\": 65.67,\n" +
+                "                \"dewPoint\": 59.4,\n" +
+                "                \"humidity\": 0.8,\n" +
+                "                \"windSpeed\": 1.69,\n" +
+                "                \"windBearing\": 88,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.77,\n" +
+                "                \"pressure\": 1017.09,\n" +
+                "                \"ozone\": 284.51\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426698000,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0016,\n" +
+                "                \"precipProbability\": 0.01,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 68.24,\n" +
+                "                \"apparentTemperature\": 68.24,\n" +
+                "                \"dewPoint\": 60.17,\n" +
+                "                \"humidity\": 0.75,\n" +
+                "                \"windSpeed\": 2.56,\n" +
+                "                \"windBearing\": 93,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.8,\n" +
+                "                \"pressure\": 1016.56,\n" +
+                "                \"ozone\": 285.21\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426701600,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0021,\n" +
+                "                \"precipProbability\": 0.03,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 70.37,\n" +
+                "                \"apparentTemperature\": 70.37,\n" +
+                "                \"dewPoint\": 60.68,\n" +
+                "                \"humidity\": 0.71,\n" +
+                "                \"windSpeed\": 3.39,\n" +
+                "                \"windBearing\": 97,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.8,\n" +
+                "                \"pressure\": 1015.88,\n" +
+                "                \"ozone\": 285.55\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426705200,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0025,\n" +
+                "                \"precipProbability\": 0.03,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 71.96,\n" +
+                "                \"apparentTemperature\": 71.96,\n" +
+                "                \"dewPoint\": 60.93,\n" +
+                "                \"humidity\": 0.68,\n" +
+                "                \"windSpeed\": 4.07,\n" +
+                "                \"windBearing\": 99,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.77,\n" +
+                "                \"pressure\": 1014.97,\n" +
+                "                \"ozone\": 285.24\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426708800,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0027,\n" +
+                "                \"precipProbability\": 0.04,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 73.19,\n" +
+                "                \"apparentTemperature\": 73.19,\n" +
+                "                \"dewPoint\": 61.06,\n" +
+                "                \"humidity\": 0.66,\n" +
+                "                \"windSpeed\": 4.69,\n" +
+                "                \"windBearing\": 101,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.71,\n" +
+                "                \"pressure\": 1013.91,\n" +
+                "                \"ozone\": 284.57\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426712400,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0027,\n" +
+                "                \"precipProbability\": 0.04,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 73.8,\n" +
+                "                \"apparentTemperature\": 73.8,\n" +
+                "                \"dewPoint\": 61.21,\n" +
+                "                \"humidity\": 0.65,\n" +
+                "                \"windSpeed\": 5.22,\n" +
+                "                \"windBearing\": 104,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.69,\n" +
+                "                \"pressure\": 1013.08,\n" +
+                "                \"ozone\": 283.86\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426716000,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0026,\n" +
+                "                \"precipProbability\": 0.03,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 73.57,\n" +
+                "                \"apparentTemperature\": 73.57,\n" +
+                "                \"dewPoint\": 61.44,\n" +
+                "                \"humidity\": 0.66,\n" +
+                "                \"windSpeed\": 5.78,\n" +
+                "                \"windBearing\": 108,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.74,\n" +
+                "                \"pressure\": 1012.58,\n" +
+                "                \"ozone\": 283.13\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426719600,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0022,\n" +
+                "                \"precipProbability\": 0.03,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 72.72,\n" +
+                "                \"apparentTemperature\": 72.72,\n" +
+                "                \"dewPoint\": 61.69,\n" +
+                "                \"humidity\": 0.68,\n" +
+                "                \"windSpeed\": 6.33,\n" +
+                "                \"windBearing\": 112,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.81,\n" +
+                "                \"pressure\": 1012.29,\n" +
+                "                \"ozone\": 282.38\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426723200,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"precipIntensity\": 0.0018,\n" +
+                "                \"precipProbability\": 0.02,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 71.5,\n" +
+                "                \"apparentTemperature\": 71.5,\n" +
+                "                \"dewPoint\": 61.86,\n" +
+                "                \"humidity\": 0.72,\n" +
+                "                \"windSpeed\": 6.59,\n" +
+                "                \"windBearing\": 116,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.85,\n" +
+                "                \"pressure\": 1012.28,\n" +
+                "                \"ozone\": 281.84\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426726800,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0.0012,\n" +
+                "                \"precipProbability\": 0.01,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperature\": 69.7,\n" +
+                "                \"apparentTemperature\": 69.7,\n" +
+                "                \"dewPoint\": 61.92,\n" +
+                "                \"humidity\": 0.76,\n" +
+                "                \"windSpeed\": 6.15,\n" +
+                "                \"windBearing\": 122,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.81,\n" +
+                "                \"pressure\": 1012.72,\n" +
+                "                \"ozone\": 281.66\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426730400,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 67.49,\n" +
+                "                \"apparentTemperature\": 67.49,\n" +
+                "                \"dewPoint\": 61.77,\n" +
+                "                \"humidity\": 0.82,\n" +
+                "                \"windSpeed\": 5.46,\n" +
+                "                \"windBearing\": 133,\n" +
+                "                \"visibility\": 9.99,\n" +
+                "                \"cloudCover\": 0.74,\n" +
+                "                \"pressure\": 1013.47,\n" +
+                "                \"ozone\": 281.7\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426734000,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 65.61,\n" +
+                "                \"apparentTemperature\": 65.61,\n" +
+                "                \"dewPoint\": 61.27,\n" +
+                "                \"humidity\": 0.86,\n" +
+                "                \"windSpeed\": 4.96,\n" +
+                "                \"windBearing\": 143,\n" +
+                "                \"visibility\": 9.99,\n" +
+                "                \"cloudCover\": 0.7,\n" +
+                "                \"pressure\": 1014.09,\n" +
+                "                \"ozone\": 281.82\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426737600,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 64.43,\n" +
+                "                \"apparentTemperature\": 64.43,\n" +
+                "                \"dewPoint\": 60.41,\n" +
+                "                \"humidity\": 0.87,\n" +
+                "                \"windSpeed\": 4.68,\n" +
+                "                \"windBearing\": 148,\n" +
+                "                \"visibility\": 9.99,\n" +
+                "                \"cloudCover\": 0.72,\n" +
+                "                \"pressure\": 1014.35,\n" +
+                "                \"ozone\": 282.06\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426741200,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 63.75,\n" +
+                "                \"apparentTemperature\": 63.75,\n" +
+                "                \"dewPoint\": 59.47,\n" +
+                "                \"humidity\": 0.86,\n" +
+                "                \"windSpeed\": 4.4,\n" +
+                "                \"windBearing\": 150,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.76,\n" +
+                "                \"pressure\": 1014.4,\n" +
+                "                \"ozone\": 282.39\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426744800,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 63.24,\n" +
+                "                \"apparentTemperature\": 63.24,\n" +
+                "                \"dewPoint\": 58.72,\n" +
+                "                \"humidity\": 0.85,\n" +
+                "                \"windSpeed\": 4.1,\n" +
+                "                \"windBearing\": 152,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.78,\n" +
+                "                \"pressure\": 1014.27,\n" +
+                "                \"ozone\": 282.52\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426748400,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 62.56,\n" +
+                "                \"apparentTemperature\": 62.56,\n" +
+                "                \"dewPoint\": 58.04,\n" +
+                "                \"humidity\": 0.85,\n" +
+                "                \"windSpeed\": 3.72,\n" +
+                "                \"windBearing\": 155,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.77,\n" +
+                "                \"pressure\": 1013.88,\n" +
+                "                \"ozone\": 282.27\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426752000,\n" +
+                "                \"summary\": \"Mostly Cloudy\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperature\": 61.86,\n" +
+                "                \"apparentTemperature\": 61.86,\n" +
+                "                \"dewPoint\": 57.37,\n" +
+                "                \"humidity\": 0.85,\n" +
+                "                \"windSpeed\": 3.34,\n" +
+                "                \"windBearing\": 158,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.75,\n" +
+                "                \"pressure\": 1013.36,\n" +
+                "                \"ozone\": 281.81\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    },\n" +
+                "    \"daily\": {\n" +
+                "        \"summary\": \"Light rain throughout the week, with temperatures rising " +
+                "to 80°F on Monday.\",\n" +
+                "        \"icon\": \"rain\",\n" +
+                "        \"data\": [\n" +
+                "            {\n" +
+                "                \"time\": 1426572000,\n" +
+                "                \"summary\": \"Rain throughout the day.\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"sunriseTime\": 1426596592,\n" +
+                "                \"sunsetTime\": 1426639922,\n" +
+                "                \"moonPhase\": 0.9,\n" +
+                "                \"precipIntensity\": 0.0293,\n" +
+                "                \"precipIntensityMax\": 0.068,\n" +
+                "                \"precipIntensityMaxTime\": 1426582800,\n" +
+                "                \"precipProbability\": 1,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperatureMin\": 55.39,\n" +
+                "                \"temperatureMinTime\": 1426590000,\n" +
+                "                \"temperatureMax\": 65.72,\n" +
+                "                \"temperatureMaxTime\": 1426626000,\n" +
+                "                \"apparentTemperatureMin\": 55.39,\n" +
+                "                \"apparentTemperatureMinTime\": 1426590000,\n" +
+                "                \"apparentTemperatureMax\": 65.72,\n" +
+                "                \"apparentTemperatureMaxTime\": 1426626000,\n" +
+                "                \"dewPoint\": 57.09,\n" +
+                "                \"humidity\": 0.89,\n" +
+                "                \"windSpeed\": 3.47,\n" +
+                "                \"windBearing\": 124,\n" +
+                "                \"visibility\": 7.15,\n" +
+                "                \"cloudCover\": 0.9,\n" +
+                "                \"pressure\": 1019.14,\n" +
+                "                \"ozone\": 289.82\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426658400,\n" +
+                "                \"summary\": \"Mostly cloudy throughout the day.\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"sunriseTime\": 1426682929,\n" +
+                "                \"sunsetTime\": 1426726350,\n" +
+                "                \"moonPhase\": 0.94,\n" +
+                "                \"precipIntensity\": 0.0017,\n" +
+                "                \"precipIntensityMax\": 0.0063,\n" +
+                "                \"precipIntensityMaxTime\": 1426658400,\n" +
+                "                \"precipProbability\": 0.15,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperatureMin\": 58.93,\n" +
+                "                \"temperatureMinTime\": 1426676400,\n" +
+                "                \"temperatureMax\": 73.8,\n" +
+                "                \"temperatureMaxTime\": 1426712400,\n" +
+                "                \"apparentTemperatureMin\": 58.93,\n" +
+                "                \"apparentTemperatureMinTime\": 1426676400,\n" +
+                "                \"apparentTemperatureMax\": 73.8,\n" +
+                "                \"apparentTemperatureMaxTime\": 1426712400,\n" +
+                "                \"dewPoint\": 59.42,\n" +
+                "                \"humidity\": 0.82,\n" +
+                "                \"windSpeed\": 3.48,\n" +
+                "                \"windBearing\": 124,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.73,\n" +
+                "                \"pressure\": 1015.17,\n" +
+                "                \"ozone\": 283.78\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426744800,\n" +
+                "                \"summary\": \"Mostly cloudy throughout the day.\",\n" +
+                "                \"icon\": \"partly-cloudy-day\",\n" +
+                "                \"sunriseTime\": 1426769265,\n" +
+                "                \"sunsetTime\": 1426812777,\n" +
+                "                \"moonPhase\": 0.98,\n" +
+                "                \"precipIntensity\": 0.0012,\n" +
+                "                \"precipIntensityMax\": 0.0057,\n" +
+                "                \"precipIntensityMaxTime\": 1426798800,\n" +
+                "                \"precipProbability\": 0.09,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperatureMin\": 60.42,\n" +
+                "                \"temperatureMinTime\": 1426762800,\n" +
+                "                \"temperatureMax\": 78.44,\n" +
+                "                \"temperatureMaxTime\": 1426802400,\n" +
+                "                \"apparentTemperatureMin\": 60.42,\n" +
+                "                \"apparentTemperatureMinTime\": 1426762800,\n" +
+                "                \"apparentTemperatureMax\": 78.44,\n" +
+                "                \"apparentTemperatureMaxTime\": 1426802400,\n" +
+                "                \"dewPoint\": 60.29,\n" +
+                "                \"humidity\": 0.74,\n" +
+                "                \"windSpeed\": 3.73,\n" +
+                "                \"windBearing\": 122,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.6,\n" +
+                "                \"pressure\": 1012.32,\n" +
+                "                \"ozone\": 278.09\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426831200,\n" +
+                "                \"summary\": \"Rain starting in the afternoon.\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"sunriseTime\": 1426855601,\n" +
+                "                \"sunsetTime\": 1426899204,\n" +
+                "                \"moonPhase\": 0.02,\n" +
+                "                \"precipIntensity\": 0.0118,\n" +
+                "                \"precipIntensityMax\": 0.0345,\n" +
+                "                \"precipIntensityMaxTime\": 1426914000,\n" +
+                "                \"precipProbability\": 1,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperatureMin\": 64.99,\n" +
+                "                \"temperatureMinTime\": 1426849200,\n" +
+                "                \"temperatureMax\": 77.39,\n" +
+                "                \"temperatureMaxTime\": 1426881600,\n" +
+                "                \"apparentTemperatureMin\": 64.99,\n" +
+                "                \"apparentTemperatureMinTime\": 1426849200,\n" +
+                "                \"apparentTemperatureMax\": 77.39,\n" +
+                "                \"apparentTemperatureMaxTime\": 1426881600,\n" +
+                "                \"dewPoint\": 62.55,\n" +
+                "                \"humidity\": 0.77,\n" +
+                "                \"windSpeed\": 1.9,\n" +
+                "                \"windBearing\": 121,\n" +
+                "                \"visibility\": 10,\n" +
+                "                \"cloudCover\": 0.96,\n" +
+                "                \"pressure\": 1013.41,\n" +
+                "                \"ozone\": 268.71\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1426917600,\n" +
+                "                \"summary\": \"Rain until evening.\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"sunriseTime\": 1426941936,\n" +
+                "                \"sunsetTime\": 1426985631,\n" +
+                "                \"moonPhase\": 0.05,\n" +
+                "                \"precipIntensity\": 0.0388,\n" +
+                "                \"precipIntensityMax\": 0.0601,\n" +
+                "                \"precipIntensityMaxTime\": 1426946400,\n" +
+                "                \"precipProbability\": 1,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperatureMin\": 64.01,\n" +
+                "                \"temperatureMinTime\": 1426935600,\n" +
+                "                \"temperatureMax\": 75.96,\n" +
+                "                \"temperatureMaxTime\": 1426971600,\n" +
+                "                \"apparentTemperatureMin\": 64.01,\n" +
+                "                \"apparentTemperatureMinTime\": 1426935600,\n" +
+                "                \"apparentTemperatureMax\": 75.96,\n" +
+                "                \"apparentTemperatureMaxTime\": 1426971600,\n" +
+                "                \"dewPoint\": 62.08,\n" +
+                "                \"humidity\": 0.8,\n" +
+                "                \"windSpeed\": 0.58,\n" +
+                "                \"windBearing\": 79,\n" +
+                "                \"cloudCover\": 0.45,\n" +
+                "                \"pressure\": 1014.83,\n" +
+                "                \"ozone\": 270.31\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1427004000,\n" +
+                "                \"summary\": \"Mostly cloudy in the morning.\",\n" +
+                "                \"icon\": \"partly-cloudy-night\",\n" +
+                "                \"sunriseTime\": 1427028272,\n" +
+                "                \"sunsetTime\": 1427072058,\n" +
+                "                \"moonPhase\": 0.09,\n" +
+                "                \"precipIntensity\": 0.0009,\n" +
+                "                \"precipIntensityMax\": 0.0025,\n" +
+                "                \"precipIntensityMaxTime\": 1427058000,\n" +
+                "                \"precipProbability\": 0.03,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperatureMin\": 59.39,\n" +
+                "                \"temperatureMinTime\": 1427022000,\n" +
+                "                \"temperatureMax\": 77.18,\n" +
+                "                \"temperatureMaxTime\": 1427058000,\n" +
+                "                \"apparentTemperatureMin\": 59.39,\n" +
+                "                \"apparentTemperatureMinTime\": 1427022000,\n" +
+                "                \"apparentTemperatureMax\": 77.18,\n" +
+                "                \"apparentTemperatureMaxTime\": 1427058000,\n" +
+                "                \"dewPoint\": 59.7,\n" +
+                "                \"humidity\": 0.77,\n" +
+                "                \"windSpeed\": 1.45,\n" +
+                "                \"windBearing\": 59,\n" +
+                "                \"cloudCover\": 0.28,\n" +
+                "                \"pressure\": 1016.73,\n" +
+                "                \"ozone\": 268.66\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1427090400,\n" +
+                "                \"summary\": \"Clear throughout the day.\",\n" +
+                "                \"icon\": \"clear-day\",\n" +
+                "                \"sunriseTime\": 1427114608,\n" +
+                "                \"sunsetTime\": 1427158484,\n" +
+                "                \"moonPhase\": 0.13,\n" +
+                "                \"precipIntensity\": 0,\n" +
+                "                \"precipIntensityMax\": 0,\n" +
+                "                \"precipProbability\": 0,\n" +
+                "                \"temperatureMin\": 58.36,\n" +
+                "                \"temperatureMinTime\": 1427108400,\n" +
+                "                \"temperatureMax\": 80.14,\n" +
+                "                \"temperatureMaxTime\": 1427144400,\n" +
+                "                \"apparentTemperatureMin\": 58.36,\n" +
+                "                \"apparentTemperatureMinTime\": 1427108400,\n" +
+                "                \"apparentTemperatureMax\": 80.31,\n" +
+                "                \"apparentTemperatureMaxTime\": 1427144400,\n" +
+                "                \"dewPoint\": 56.33,\n" +
+                "                \"humidity\": 0.67,\n" +
+                "                \"windSpeed\": 1.44,\n" +
+                "                \"windBearing\": 69,\n" +
+                "                \"cloudCover\": 0,\n" +
+                "                \"pressure\": 1017.03,\n" +
+                "                \"ozone\": 271.03\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"time\": 1427176800,\n" +
+                "                \"summary\": \"Light rain until afternoon.\",\n" +
+                "                \"icon\": \"rain\",\n" +
+                "                \"sunriseTime\": 1427200943,\n" +
+                "                \"sunsetTime\": 1427244911,\n" +
+                "                \"moonPhase\": 0.16,\n" +
+                "                \"precipIntensity\": 0.003,\n" +
+                "                \"precipIntensityMax\": 0.0103,\n" +
+                "                \"precipIntensityMaxTime\": 1427209200,\n" +
+                "                \"precipProbability\": 0.7,\n" +
+                "                \"precipType\": \"rain\",\n" +
+                "                \"temperatureMin\": 59.44,\n" +
+                "                \"temperatureMinTime\": 1427191200,\n" +
+                "                \"temperatureMax\": 69.47,\n" +
+                "                \"temperatureMaxTime\": 1427230800,\n" +
+                "                \"apparentTemperatureMin\": 59.44,\n" +
+                "                \"apparentTemperatureMinTime\": 1427191200,\n" +
+                "                \"apparentTemperatureMax\": 69.47,\n" +
+                "                \"apparentTemperatureMaxTime\": 1427230800,\n" +
+                "                \"dewPoint\": 57.55,\n" +
+                "                \"humidity\": 0.81,\n" +
+                "                \"windSpeed\": 5.09,\n" +
+                "                \"windBearing\": 78,\n" +
+                "                \"cloudCover\": 0.53,\n" +
+                "                \"pressure\": 1022.73,\n" +
+                "                \"ozone\": 272.78\n" +
+                "            }\n" +
+                "        ]\n" +
+                "    },\n" +
+                "    \"flags\": {\n" +
+                "        \"sources\": [\n" +
+                "            \"nwspa\",\n" +
+                "            \"isd\",\n" +
+                "            \"nearest-precip\",\n" +
+                "            \"fnmoc\",\n" +
+                "            \"sref\",\n" +
+                "            \"rtma\",\n" +
+                "            \"rap\",\n" +
+                "            \"nam\",\n" +
+                "            \"cmc\",\n" +
+                "            \"gfs\",\n" +
+                "            \"madis\"\n" +
+                "        ],\n" +
+                "        \"isd-stations\": [\n" +
+                "            \"763900-99999\",\n" +
+                "            \"763930-99999\",\n" +
+                "            \"763940-99999\",\n" +
+                "            \"763943-99999\",\n" +
+                "            \"763944-99999\"\n" +
+                "        ],\n" +
+                "        \"madis-stations\": [\n" +
+                "            \"D0029\",\n" +
+                "            \"D9577\",\n" +
+                "            \"MMAN\",\n" +
+                "            \"MMMY\"\n" +
+                "        ],\n" +
+                "        \"units\": \"us\"\n" +
+                "    }\n" +
+                "}";
 }

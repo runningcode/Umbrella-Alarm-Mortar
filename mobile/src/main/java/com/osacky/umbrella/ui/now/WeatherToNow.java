@@ -4,6 +4,7 @@ import com.osacky.umbrella.data.api.model.Condition;
 import com.osacky.umbrella.data.api.model.WeatherResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
             return null;
         }
         boolean willRain = false;
-        List<Condition> data = weatherResult.getMinutely().getData();
+        List<Condition> data = weatherResult.getMinutely() != null ? weatherResult.getMinutely().getData() : Collections.<Condition>emptyList();
         List<PointValue> pointValues = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             float intensity = data.get(i).getPrecipIntensity();
@@ -35,7 +36,7 @@ public class WeatherToNow implements Func1<WeatherResult, NowWeatherSummary> {
         return new NowWeatherSummary(
                 weatherResult.getCurrently().getTemperature(),
                 weatherResult.getCurrently().getApparentTemperature(),
-                weatherResult.getMinutely().getSummary(),
+                weatherResult.getMinutely() != null ? weatherResult.getMinutely().getSummary() : null,
                 pointValues,
                 willRain);
     }
