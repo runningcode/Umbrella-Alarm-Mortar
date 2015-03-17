@@ -9,8 +9,6 @@ import mortar.Blueprint;
 
 public abstract class Path implements Blueprint {
 
-    private SparseArray<Parcelable> mViewState;
-
     @Override public boolean equals(Object o) {
         return o != null && o instanceof Path && this.getName().equals(((Path) o).getName());
     }
@@ -25,13 +23,5 @@ public abstract class Path implements Blueprint {
 
     public String getName() {
         return ObjectUtils.getClass(this).getName();
-    }
-
-    protected SparseArray<Parcelable> getViewState() {
-        return mViewState;
-    }
-
-    public void setViewState(SparseArray<Parcelable> viewState) {
-        this.mViewState = viewState;
     }
 }

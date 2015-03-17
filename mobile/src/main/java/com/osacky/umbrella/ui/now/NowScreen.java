@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 
 import dagger.Provides;
 import flow.Layout;
+import mortar.ViewPresenter;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -23,7 +24,7 @@ import rx.android.schedulers.AndroidSchedulers;
 public class NowScreen extends Path {
 
     @Override public Object getDaggerModule() {
-        return new Module(getViewState());
+        return new Module();
     }
 
     @dagger.Module(
@@ -31,30 +32,19 @@ public class NowScreen extends Path {
             addsTo = BaseTabScreen.Module.class
     )
     static class Module {
-        private final SparseArray<Parcelable> viewState;
-
-        public Module(SparseArray<Parcelable> viewState) {
-            this.viewState = viewState;
-        }
-
-        @Provides SparseArray<Parcelable> providesViewState() {
-            return viewState;
-        }
     }
 
     @Singleton
-    public static class Presenter extends BetterViewPresenter<NowView> {
+    public static class Presenter extends ViewPresenter<NowView> {
 
         private final Observable<WeatherResult> mObservable;
         private final WeatherToNow mWeatherToNow;
 
         @Inject
         public Presenter(
-                SparseArray<Parcelable> viewState,
                 BaseTabScreen.Presenter basePresenter,
                 WeatherToNow weatherToNow
         ) {
-            super(viewState);
             mObservable = basePresenter.getObservable();
             mWeatherToNow = weatherToNow;
         }

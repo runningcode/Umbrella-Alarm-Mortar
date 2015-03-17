@@ -94,6 +94,9 @@ public class MainActivity extends ActionBarActivity
             parentScope.destroyChild(activityScope);
             activityScope = null;
         }
+        mGoogleApiClient.disconnect();
+        mGoogleApiClient.unregisterConnectionFailedListener(this);
+        mGoogleApiClient = null;
         super.onDestroy();
     }
 

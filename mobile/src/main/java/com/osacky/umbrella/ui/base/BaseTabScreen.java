@@ -21,6 +21,8 @@ import com.osacky.umbrella.core.util.TransitionScreen;
 import com.osacky.umbrella.data.api.ForecastWeatherManager;
 import com.osacky.umbrella.data.api.model.RainSummary;
 import com.osacky.umbrella.data.api.model.WeatherResult;
+
+import mortar.ViewPresenter;
 import rx.RxUtils;
 import com.osacky.umbrella.service.WeatherToDailySummary;
 import com.osacky.umbrella.ui.notifications.NotificationsScreen;
@@ -49,7 +51,7 @@ import timber.log.Timber;
 public class BaseTabScreen extends TransitionScreen {
 
     @Override public Object getDaggerModule() {
-        return new Module(getViewState());
+        return new Module();
     }
 
     @dagger.Module(
@@ -58,19 +60,10 @@ public class BaseTabScreen extends TransitionScreen {
             library = true
     )
     public static class Module {
-        private final SparseArray<Parcelable> viewState;
-
-        public Module(SparseArray<Parcelable> viewState) {
-            this.viewState = viewState;
-        }
-
-        @Provides @Named("tabs") SparseArray<Parcelable> providesViewState() {
-            return viewState;
-        }
     }
 
     @Singleton
-    public static class Presenter extends BetterViewPresenter<BaseTabView> {
+    public static class Presenter extends ViewPresenter<BaseTabView> {
 
         private final Flow mFlow;
         private final Observable<WeatherResult> mObservable;
@@ -81,7 +74,6 @@ public class BaseTabScreen extends TransitionScreen {
 
         @Inject
         public Presenter(
-                @Named("tabs") SparseArray<Parcelable> viewState,
                 Provider<Location> locationProvider,
                 ForecastWeatherManager weatherManager,
                 WeatherToDailySummary weatherToDailySummary,
@@ -89,7 +81,6 @@ public class BaseTabScreen extends TransitionScreen {
                 ConnectedPresenter connectedPresenter,
                 final BehaviorSubject<WeatherResult> weatherResultSubject
         ) {
-            super(viewState);
             mFlow = flow;
             Location location = locationProvider.get();
             mConnectedPresenter = connectedPresenter;

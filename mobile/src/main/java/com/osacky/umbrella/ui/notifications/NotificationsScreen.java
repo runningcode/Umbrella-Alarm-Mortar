@@ -23,13 +23,14 @@ import dagger.Provides;
 import flow.Flow;
 import flow.HasParent;
 import flow.Layout;
+import mortar.ViewPresenter;
 
 @Layout(R.layout.view_notifications)
 @Transition({R.anim.slide_in_right, R.anim.slide_out_left, R.anim.slide_in_left, R.anim.slide_out_right})
 public class NotificationsScreen extends TransitionScreen implements HasParent<BaseTabScreen> {
 
     @Override public Object getDaggerModule() {
-        return new Module(getViewState());
+        return new Module();
     }
 
     @Override public BaseTabScreen getParent() {
@@ -41,19 +42,10 @@ public class NotificationsScreen extends TransitionScreen implements HasParent<B
             addsTo = CorePresenter.Module.class
     )
     static class Module {
-        private final SparseArray<Parcelable> viewState;
-
-        public Module(SparseArray<Parcelable> viewState) {
-            this.viewState = viewState;
-        }
-
-        @Provides SparseArray<Parcelable> providesViewState() {
-            return viewState;
-        }
     }
 
     @Singleton
-    public static class Presenter extends BetterViewPresenter<NotificationsView> {
+    public static class Presenter extends ViewPresenter<NotificationsView> {
 
         private final Flow mFlow;
         private final IntPreference mTimePreference;
@@ -61,12 +53,10 @@ public class NotificationsScreen extends TransitionScreen implements HasParent<B
 
         @Inject
         public Presenter(
-                SparseArray<Parcelable> viewState,
                 Flow flow,
                 @TimePref IntPreference timePreference,
                 DailyAlarmHelper dailyAlarmHelper
         ) {
-            super(viewState);
             mFlow = flow;
             mTimePreference = timePreference;
             mDailyAlarmHelper = dailyAlarmHelper;

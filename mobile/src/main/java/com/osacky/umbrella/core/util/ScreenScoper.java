@@ -49,7 +49,6 @@ public class ScreenScoper<S extends Path> implements CanShowScreen<S> {
         final View oldChild = getContentView();
 
         if (destroyOldScope(newScreen, oldChild)) {
-            storeViewState(oldChild, oldScreen);
             final View newChild = createNewChildView(newScreen, contentViewId);
 
             Transitions.AnimPair transitions = null;
@@ -127,18 +126,6 @@ public class ScreenScoper<S extends Path> implements CanShowScreen<S> {
         View newChild = Layouts.createView(childContext, screen);
         newChild.setId(viewId);
         return newChild;
-    }
-
-    /**
-     * Store view hierarchy state into a Screen that will be pushed into
-     * the backstack of Flow
-     */
-    protected void storeViewState(View view, S screen) {
-        if (screen != null) {
-            SparseArray<Parcelable> state = new SparseArray<>();
-            view.saveHierarchyState(state);
-            screen.setViewState(state);
-        }
     }
 
     /**

@@ -98,31 +98,7 @@ public class DataModule {
     }
 
     static OkHttpClient createOkHttpClient(UmbrellaApplication app) {
-        OkHttpClient client = new OkHttpClient();
-        new CreateDiskCacheTask(client, app).execute();
-        return client;
-    }
-
-    static class CreateDiskCacheTask extends AsyncTask<Void, Void, Void> {
-
-        private final OkHttpClient mClient;
-        private final UmbrellaApplication mApplication;
-
-        CreateDiskCacheTask(OkHttpClient client, UmbrellaApplication application) {
-            mClient = client;
-            mApplication = application;
-        }
-
-        @Override protected Void doInBackground(Void... params) {
-            // Install an HTTP cache in the application cache directory.
-            try {
-                File cacheDir = ApiUtils.createDefaultCacheDir(mApplication);
-                Cache cache = new Cache(cacheDir, ApiUtils.calculateDiskCacheSize(cacheDir));
-                mClient.setCache(cache);
-            } catch (IOException e) {
-                Timber.e(e, "Unable to install disk cache.");
-            }
-            return null;
-        }
+        File cacheDir = ApiUtils.createDefaultCacheDir(app);
+        return new OkHttpClient().setCache(new Cache(cacheDir, ApiUtils.calculateDiskCacheSize(cacheDir)));
     }
 }
